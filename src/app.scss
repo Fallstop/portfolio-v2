@@ -1,0 +1,58 @@
+@use "./variables.scss" as *;
+
+// Supports weights 100-900
+@import "@fontsource-variable/work-sans";
+
+@mixin body-font {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue",sans-serif;
+}
+@mixin heading-font {
+    font-family: 'Work Sans Variable', sans-serif;
+}
+
+body {
+    @include body-font;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: $text-color;
+    background-color: $background-color;
+    margin: 0;
+
+    // Firefox
+	scrollbar-color: #fff $background-color;
+	scrollbar-width: thin;
+	
+	// Webkit
+	&::-webkit-scrollbar {
+		width: 10px;
+		height: 5px;
+		&-track {
+			background-color: $background-color;
+		}
+		&-thumb {
+			background-color: $accent-color;
+			border-radius: 10px;
+		}
+	}
+}
+
+*, html {
+
+    scroll-behavior: smooth;
+}
+
+
+h1, h2, h3, h4, h5, h6 {
+    @include heading-font;
+    line-height: 1.2;
+    margin: 0 0 1rem;
+}
+h1 {
+    font-weight: 900;
+}
+h2 {
+    font-weight: 700;
+}
+h3, h4, h5, h6 {
+    font-weight: 400;
+}
