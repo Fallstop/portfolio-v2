@@ -18,6 +18,12 @@ body {
     background-color: $background-color;
     margin: 0;
 
+}
+
+*, html {
+
+    scroll-behavior: smooth;
+
     // Firefox
 	scrollbar-color: #fff $background-color;
 	scrollbar-width: thin;
@@ -34,11 +40,7 @@ body {
 			border-radius: 10px;
 		}
 	}
-}
 
-*, html {
-
-    scroll-behavior: smooth;
 }
 
 
