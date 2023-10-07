@@ -10,7 +10,7 @@
     @use "../variables.scss" as *;
     .name-title {
         font-size: 25rem;
-        margin: 0 -5rem -5rem 0;
+        box-sizing: border-box;
         padding: 0;
         line-height: 1;
         // background: linear-gradient(-45deg, $primary-color, $tint-color, $secondary-color, $accent-color);
@@ -23,7 +23,7 @@
         :global(svg) {
             width: 100%;
         }
-        width: 100%;
+        width: 130%;
 
     }
 
