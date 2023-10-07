@@ -9,7 +9,6 @@
 <style lang="scss">
     @use "../variables.scss" as *;
     .name-title {
-        font-size: 25rem;
         box-sizing: border-box;
         padding: 0;
         line-height: 1;
@@ -23,7 +22,8 @@
         :global(svg) {
             width: 100%;
         }
-        width: 130%;
+        width: 110%;
+        height: 100%;
 
     }
 
