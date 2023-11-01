@@ -3,13 +3,6 @@
 // Supports weights 100-900
 @import "@fontsource-variable/work-sans";
 
-@mixin body-font {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue",sans-serif;
-}
-@mixin heading-font {
-    font-family: 'Work Sans Variable', sans-serif;
-}
-
 body {
     @include body-font;
     font-size: 1rem;

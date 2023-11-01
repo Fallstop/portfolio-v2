@@ -10,3 +10,13 @@ $primary-color: #451952;
 $tint-color: #662549;
 $secondary-color: #AE445A;
 $accent-color: #F39F5A;
+
+@mixin body-font {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue",sans-serif;
+}
+@mixin heading-font {
+    font-family: 'Work Sans Variable', sans-serif;
+}
+@mixin mono-font {
+    font-family: "Fira Code", Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+}

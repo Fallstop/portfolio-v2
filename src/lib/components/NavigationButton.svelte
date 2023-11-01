@@ -25,13 +25,16 @@
 
 <style lang="scss">
     a {
+        pointer-events: all;
         text-decoration: none;
+        user-select: none;
         .navigation-button {
             color: $text-color;
             padding: 1rem;
             font-size: 3rem;
             border: 1px solid $text-color;
             box-shadow: 0 0 0 0 black;
+            background-color: rgba(255,255,255, 0.5);
             transition: all 250ms ease-in-out;
             &:hover {
                 background-color: $tint-color;

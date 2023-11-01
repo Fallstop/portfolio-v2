@@ -36,7 +36,7 @@
     {/if}
 
     {#if firstLoad}
-        <img in:fly={{y: 100, duration: 500}} src="/assets/photos/OnlyBelowChinSMALLL.webp" class="headshot-photo" alt="Personal Headshot"/>
+        <img in:fly={{y: 100, duration: 500}} src="/assets/photos/OnlyBelowChinProfileTransparent.webp" class="headshot-photo" alt="Personal Headshot"/>
     {/if}
 </div>
 
@@ -74,6 +74,7 @@
             justify-content: center;
             align-items: left;
             height: 100vh;
+            pointer-events: none;
         }
 
         .staggered-buttons {
