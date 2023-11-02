@@ -1,5 +1,6 @@
 import type { Post } from '$lib/types';
 import { json } from '@sveltejs/kit'
+import DefaultThumbnail from "/src/projects/default-thumbnail.webp";
 
 function generateSummary(content: string): string {
     return content
@@ -9,13 +10,25 @@ async function getProjects() {
 	let posts: Post[] = []
 
 	const paths = import.meta.glob('/src/projects/**/*.md', { eager: true });
+	const thumbnailPaths = import.meta.glob('/src/projects/**/thumbnail.webp', { eager: true });
 
 	for (const path in paths) {
 		const file: any = paths[path]
 		const slug = `/projects/${path.split('/').at(-1)?.replace('.md', '')}`
 		if (file && typeof file === 'object' && 'metadata' in file && slug) {
 			const metadata = file.metadata as Omit<Post, 'slug'>
-			const post = { ...metadata, slug, path, summary: generateSummary(file.content)} satisfies Post
+
+			// Get the thumbnail
+			let thumbnail = DefaultThumbnail;
+			for (const thumbnailPath in thumbnailPaths) {
+				if (thumbnailPath.includes(slug)) {
+					thumbnail = thumbnailPath;
+					break;
+				}
+			}
+			console.log(thumbnail)
+		
+			const post = { ...metadata, thumbnail, slug, path, summary: generateSummary(file.content)} satisfies Post
 			posts.push(post)
 		} else if (!('metadata' in file)) {
             console.log("WARNING: No metadata found in", path)

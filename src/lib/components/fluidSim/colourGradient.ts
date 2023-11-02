@@ -11,8 +11,8 @@ export function generateColor(): RGBColour {
     // let hueRanges = [[0.68,0.82],[0.93,0.97]];
     let hueRanges: ColourRange[] = [{
         minHue: 0.68,
-        maxHue: 0.82,
-        chance: 0.6
+        maxHue: 0.78,
+        chance: 0.8
     }, {
         minHue: 0.93,
         maxHue: 0.97,

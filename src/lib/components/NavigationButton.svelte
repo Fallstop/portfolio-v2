@@ -9,13 +9,14 @@
         | "/contact"
         | "/home";
     export let title: string;
+    export let primary = false;
 
     import { page } from "$app/stores";
     $: activePage = $page.url.pathname == pageSlug;
 </script>
 
 <a href={activePage ? "/" : pageSlug}>
-    <div class="navigation-button">
+    <div class="navigation-button" class:primary>
         <svelte:component this={activePage ? Home : icon} size="0.9em" />
         <span class="button-title">
             {activePage ? "Home" : title}
@@ -31,7 +32,7 @@
         .navigation-button {
             color: $text-color;
             padding: 1rem;
-            font-size: 3rem;
+            font-size: 2.5rem;
             border: 1px solid $text-color;
             box-shadow: 0 0 0 0 black;
             background-color: rgba(255,255,255, 0.5);
@@ -54,6 +55,13 @@
 
             @media screen and (max-width: $mobile-breakpoint) {
                 font-size: 2rem;
+            }
+            &.primary {
+                @media (hover: none) {
+                    background-color: $secondary-color;
+                    color: $background-color;
+                    border-color: transparent;
+                }
             }
 
         }

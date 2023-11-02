@@ -5,8 +5,13 @@
 
     import {fly} from "svelte/transition";
     import { onMount } from "svelte";
+    import FluidCanvas from "$lib/components/fluidSim/FluidCanvas.svelte";
 
     let firstLoad = false;
+
+    
+    let actions = { randomSplats: () => {}, captureScreenShot: () => {} };
+    let fluidFPS: number = 1;
 
     onMount(()=>{
         firstLoad = true;
@@ -26,6 +31,7 @@
                     pageSlug="/projects"
                     title="Projects"
                     icon={Code2}
+                    primary
                 />
                 <NavigationButton pageSlug="/about" title="About" icon={User} />
                 <NavigationButton pageSlug="/skills" title="Skills" icon={Sword} />
@@ -38,6 +44,8 @@
     {#if firstLoad}
         <img in:fly={{y: 100, duration: 500}} src="/assets/photos/OnlyBelowChinProfileTransparent.webp" class="headshot-photo" alt="Personal Headshot"/>
     {/if}
+    <div class="fps-counter">{Math.round(fluidFPS).toString().padStart(3,"0")} FPS</div>
+    <FluidCanvas bind:actions bind:FPS={fluidFPS}/>
 </div>
 
 <style lang="scss">
@@ -69,6 +77,11 @@
             right: calc(-1 * (100vw - 100%));
             bottom: 0;
             z-index: -1;
+
+            @media screen and (max-width: $tablet-breakpoint) {
+                height: 15vh;
+                
+            }
         }
         .content-container {
             margin: 5rem 5rem 5rem 0;
@@ -76,12 +89,30 @@
                 margin: 0;
             }
         }
+        .fps-counter {
+            position: absolute;
+            top: 0;
+            right: 0;
+            color: white;
+            font-size: 2rem;
+            padding: 0.5rem;
+            background-color: rgba(0,0,0,0.5);
+            pointer-events: none;
+            user-select: none;
+            @include mono-font;
+            @media screen and (max-width: $mobile-breakpoint) {
+                font-size: 1rem;
+                padding: 0.2rem
+            }
+        }
+
+
         .navigation-container {
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: left;
-            height: 100%;
+            height: min(100%, 100vh);
             pointer-events: none;
             .staggered-buttons {
                 display: grid;

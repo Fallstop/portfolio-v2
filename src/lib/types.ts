@@ -5,4 +5,5 @@ export type Post = {
 	date: string
 	summary: string
 	path: string
+	thumbnail: string
 }

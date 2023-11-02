@@ -2,16 +2,12 @@
     import Name from "$lib/assets/svg/Name.svelte"
     import FluidCanvas from "$lib/components/fluidSim/FluidCanvas.svelte";
 
-    let actions = { randomSplats: () => {}, captureScreenShot: () => {} };
-    let fluidFPS: number = 1;
 </script>
 <!-- <h1 class="name-title">{fluidFPS?.toPrecision(3)}</h1> -->
 <div class="name-title" title="Jasper M-W">
     <Name/>
-    <FluidCanvas bind:actions bind:FPS={fluidFPS}/>
 
 </div>
-<div class="fps-counter">{Math.round(fluidFPS).toString().padStart(3,"0")} FPS</div>
 <style lang="scss">
     @use "../variables.scss" as *;
     .name-title {
@@ -36,22 +32,6 @@
             padding: 2rem;
         }
 
-    }
-    .fps-counter {
-        position: absolute;
-        top: 0;
-        right: 0;
-        color: white;
-        font-size: 2rem;
-        padding: 0.5rem;
-        background-color: rgba(0,0,0,0.5);
-        pointer-events: none;
-        user-select: none;
-        @include mono-font;
-        @media screen and (max-width: $mobile-breakpoint) {
-            font-size: 1rem;
-            padding: 0.2rem
-        }
     }
 
 </style>

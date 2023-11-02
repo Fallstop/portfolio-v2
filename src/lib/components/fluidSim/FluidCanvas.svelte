@@ -15,7 +15,7 @@
 	export let SPLAT_RADIUS = 1;
 	export let SPLAT_FORCE = 500;
 	export let SHADING = true;
-	export let COLORFUL = false;
+	export let COLORFUL = true;
 	export let COLOR_UPDATE_SPEED = 10;
 	export let PAUSED = false;
 	export let BACK_COLOR = { r: 255, g: 255, b: 255 };
@@ -1060,12 +1060,13 @@
 		colorUpdateTimer = 0.0;
 		update();
 	});
-</script>
 
+
+</script>
 <canvas
 	bind:this={canvas}
-
 />
+<div class="canvas-overlay"></div>
 
 <svelte:window
 	on:mouseup={() => (pointers[0].down = false)}
@@ -1119,13 +1120,18 @@
 />
 
 <style>
-	canvas {
+	canvas,.canvas-overlay {
         overflow: hidden;
         position: absolute;
         top: 0;
         left: 0;
         width: 100vw;
         height: 100%;
-        z-index: -2;
+        z-index: -10;
+	}
+	.canvas-overlay {
+		bottom: 0;
+		height: 100%;
+		background: linear-gradient(180deg, rgba(0, 0, 0, 0) 95%, rgb(255, 255, 255) 100%);
 	}
 </style>
