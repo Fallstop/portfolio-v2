@@ -30,8 +30,18 @@
 	export let SUNRAYS_RESOLUTION = 196;
 	export let SUNRAYS_WEIGHT = 1.0;
 
+	export let INTERACTIVE = true;
+
     export let FPS = 1;
 
+	$: disableInteractive(INTERACTIVE);
+	function disableInteractive(interactive: boolean) {
+		if (interactive) return;
+		PAUSED = false;
+		pointers.forEach((p) => {
+			p.down = false;
+		});
+	}
 
     const textureURL = "/assets/fluidSim/LDR_LLL1_0.png";
 
@@ -1069,8 +1079,10 @@
 <div class="canvas-overlay"></div>
 
 <svelte:window
-	on:mouseup={() => (pointers[0].down = false)}
+	on:mouseup={() => (INTERACTIVE && (pointers[0].down = false))}
 	on:touchend={(e) => {
+		if (!INTERACTIVE) return;
+
 		const touches = e.changedTouches;
 		for (let i = 0; i < touches.length; i++) {
 			const pointer = pointers.find((p) => p.id == touches[i].identifier);
@@ -1079,10 +1091,12 @@
 		}
 	}}
 	on:keydown={(e) => {
+		if (!INTERACTIVE) return;
 		if (e.code === 'KeyP') PAUSED = !PAUSED;
 		if (e.key === ' ') splatStack.push(Math.trunc(Math.random() * 20) + 5);
 	}}
     	on:mousedown={(e) => {
+			if (!INTERACTIVE) return;
             const posX = scaleByPixelRatio(e.offsetX);
             const posY = scaleByPixelRatio(e.offsetY);
             let pointer = pointers.find((p) => p.id == -1);
@@ -1090,6 +1104,8 @@
             updatePointerDownData(pointer, -1, posX, posY);
         }}
         on:mousemove={(e) => {
+			if (!INTERACTIVE) return;
+		
             const pointer = pointers[0];
             if (!pointer.down) return;
             const posX = scaleByPixelRatio(e.offsetX);
@@ -1097,6 +1113,8 @@
             updatePointerMoveData(pointer, posX, posY);
         }}
         on:touchstart={(e) => {
+			if (!INTERACTIVE) return;
+
             e.preventDefault();
             const touches = e.targetTouches;
             while (touches.length >= pointers.length) pointers.push(createPointer());
@@ -1107,6 +1125,8 @@
             }
         }}
         on:touchmove={(e) => {
+			if (!INTERACTIVE) return;
+
             e.preventDefault();
             const touches = e.targetTouches;
             for (let i = 0; i < touches.length; i++) {

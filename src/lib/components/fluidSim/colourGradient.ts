@@ -36,7 +36,6 @@ export function generateColor(): RGBColour {
     c.r *= scale;
     c.g *= scale;
     c.b *= scale;
-    console.log(c)
     return c;
     // return {
     //     r: 0.02,

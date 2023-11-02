@@ -1,11 +1,11 @@
 <script lang="ts">
-    import "../app.scss";
-    import { Code2, User, Sword, Mail } from "lucide-svelte";
-    import NavigationButton from "$lib/components/NavigationButton.svelte";
-
     import {fly} from "svelte/transition";
     import { onMount } from "svelte";
     import FluidCanvas from "$lib/components/fluidSim/FluidCanvas.svelte";
+    import StaggeredButtons from "$lib/components/navigation/StaggeredButtons.svelte";
+    import "../app.scss";
+    import { ENABLE_FLUID_SIM, FLUID_SIM_INTERACTIVE, NAVIGATION_CONFIG, NavigationOption } from "$lib/components/layout/layoutDataStore";
+
 
     let firstLoad = false;
 
@@ -25,27 +25,19 @@
     </div>
     {#if firstLoad}
         <div class="navigation-container" in:fly={{x: 100, duration: 500}}>
-            <div class="staggered-buttons" >
-                <div class="empty" />
-                <NavigationButton
-                    pageSlug="/projects"
-                    title="Projects"
-                    icon={Code2}
-                    primary
-                />
-                <NavigationButton pageSlug="/about" title="About" icon={User} />
-                <NavigationButton pageSlug="/skills" title="Skills" icon={Sword} />
-                <NavigationButton pageSlug="/contact" title="Contact" icon={Mail} />
-                <div class="empty"/>
-            </div>
+            {#if $NAVIGATION_CONFIG == NavigationOption.Staggered}
+                <StaggeredButtons/>
+            {/if}
         </div>
     {/if}
 
     {#if firstLoad}
         <img in:fly={{y: 100, duration: 500}} src="/assets/photos/OnlyBelowChinProfileTransparent.webp" class="headshot-photo" alt="Personal Headshot"/>
     {/if}
-    <div class="fps-counter">{Math.round(fluidFPS).toString().padStart(3,"0")} FPS</div>
-    <FluidCanvas bind:actions bind:FPS={fluidFPS}/>
+    {#if $ENABLE_FLUID_SIM}
+        <div class="fps-counter">{Math.round(fluidFPS).toString().padStart(3,"0")} FPS</div>
+        <FluidCanvas bind:actions bind:FPS={fluidFPS} INTERACTIVE={$FLUID_SIM_INTERACTIVE}/>
+    {/if}
 </div>
 
 <style lang="scss">
@@ -114,41 +106,10 @@
             align-items: left;
             height: min(100%, 100vh);
             pointer-events: none;
-            .staggered-buttons {
-                display: grid;
-                grid-template-columns: 1fr 1fr 1fr;
-                grid-template-rows: 1fr 1fr;
-                grid-gap: 2rem;
-                padding: 2rem 0;
-            }
             @media screen and (max-width: $tablet-breakpoint) {
                 height: auto;
                 justify-content: start;
-                .staggered-buttons {
-                    grid-template-columns: 1fr 1fr;
-                    grid-template-rows: 1fr 1fr 1fr;
-                    grid-gap: 1rem;
-                    padding: 0 2rem 2rem 2rem;
-                    .empty {
-                        // Not needed in column layout
-                        display: none;
-                    }
-                }
-            }
-
-            @media screen and (max-width: $mobile-breakpoint) {
-                .staggered-buttons {
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: center;
-                    padding: 0 2rem 2rem 2rem;
-                    .empty {
-                        // Not needed in column layout
-                        display: none;
-                    }
-                }
             }
         }
-
     }
 </style>

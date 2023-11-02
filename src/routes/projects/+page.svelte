@@ -1,32 +1,35 @@
 <script lang="ts">
+    import PrimaryLayout from "$lib/components/layout/PrimaryLayout.svelte";
     export let data: import("./$types").PageData;
 </script>
 
-<div class="project-container">
-    <h1>Projects</h1>
-    <ul class="project-list">
-        {#each data.posts as post}
-            <a href={post.slug} class="post-wrapper">
-                <div
-                    class="background"
-                    style="--thumbnail-link: url({post.thumbnail}"
-                />
-                <li class="post">
-                    <div class="post-metadata">
-                        <h2 class="header">
-                            <span>{post.title}</span>
-                            <span class="date">{post.date}</span>
-                        </h2>
-                        <p class="description">{post.description}</p>
-                    </div>
-                </li>
-            </a>
-        {/each}
-    </ul>
-</div>
+<PrimaryLayout fluid_sim_background>
+    <div class="project-container">
+        <h1>Projects</h1>
+        <ul class="project-list">
+            {#each data.posts as post}
+                <a href={post.slug} class="post-wrapper">
+                    <div
+                        class="background"
+                        style="--thumbnail-link: url({post.thumbnail}"
+                    />
+                    <li class="post">
+                        <div class="post-metadata">
+                            <h2 class="header">
+                                <span>{post.title}</span>
+                                <span class="date">{post.date}</span>
+                            </h2>
+                            <p class="description">{post.description}</p>
+                        </div>
+                    </li>
+                </a>
+            {/each}
+        </ul>
+    </div>
+</PrimaryLayout>
 
 <style lang="scss">
-    @use "../../app.scss" as *;
+    @use "../../variables.scss" as *;
     @use "sass:color";
     @use "sass:math";
     $max-projects: 100;
@@ -97,6 +100,7 @@
                     z-index: -1;
                     transition: all 250ms ease-in-out;
                     filter: brightness(0.7);
+                    transform: scale(1.1);
 
                     &::after {
                         background-image: var(--thumbnail-link);
@@ -147,8 +151,8 @@
 
                 &:hover {
                     .background {
+                        transform: scale(1);
 
-                        transform: scale(1.1);
                         &::after {
                             filter: grayscale(0%);
                             opacity: 1;

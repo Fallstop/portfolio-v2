@@ -1,4 +1,7 @@
 <script lang="ts">
+    import PrimaryLayout from '$lib/components/layout/PrimaryLayout.svelte';
+    import { NavigationOption } from '$lib/components/layout/layoutDataStore.js';
+
 
 	export let data
 </script>
@@ -10,15 +13,19 @@
 	<meta property="og:title" content={data.meta.title} />
 </svelte:head>
 
-<article>
-  <!-- Title -->
-	<hgroup>
-		<h1>{data.meta.title}</h1>
-		<p>Published at {data.meta.date}</p>
-	</hgroup>
+<PrimaryLayout navigation_option={NavigationOption.Blog}>
+	<article>
+		<!-- Title -->
+		  <hgroup>
+			  <h1>{data.meta.title}</h1>
+			  <p>Published at {data.meta.date}</p>
+		  </hgroup>
+	  
+		<!-- Post -->
+		  <div class="prose">
+			  <svelte:component this={data.content} />
+		  </div>
+	  </article>
+	  
+</PrimaryLayout>
 
-  <!-- Post -->
-	<div class="prose">
-		<svelte:component this={data.content} />
-	</div>
-</article>
