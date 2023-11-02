@@ -51,6 +51,11 @@
             span {
                 margin-left: 0.3em;
             }
+
+            @media screen and (max-width: $mobile-breakpoint) {
+                font-size: 1rem;
+            }
+
         }
         &:nth-child(2n) .navigation-button {
             &:hover {

@@ -11,6 +11,10 @@ $tint-color: #662549;
 $secondary-color: #AE445A;
 $accent-color: #F39F5A;
 
+$mobile-breakpoint: 600px;
+$tablet-breakpoint: 1200px;
+
+
 @mixin body-font {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue",sans-serif;
 }

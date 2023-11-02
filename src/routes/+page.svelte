@@ -31,6 +31,11 @@
         width: 110%;
         height: 100%;
 
+        @media screen and (max-width: $tablet-breakpoint) {
+            width: 100%;
+            padding: 2rem 2rem 0 2rem;
+        }
+
     }
     .fps-counter {
         position: absolute;
@@ -41,6 +46,10 @@
         padding: 0.5rem;
         background-color: rgba(0,0,0,0.5);
         @include mono-font;
+        @media screen and (max-width: $mobile-breakpoint) {
+            font-size: 1rem;
+            padding: 0.2rem
+        }
     }
 
 </style>

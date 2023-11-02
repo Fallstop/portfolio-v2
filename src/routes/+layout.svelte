@@ -21,7 +21,7 @@
     {#if firstLoad}
         <div class="navigation-container" in:fly={{x: 100, duration: 500}}>
             <div class="staggered-buttons" >
-                <div />
+                <div class="empty" />
                 <NavigationButton
                     pageSlug="/projects"
                     title="Projects"
@@ -30,7 +30,7 @@
                 <NavigationButton pageSlug="/about" title="About" icon={User} />
                 <NavigationButton pageSlug="/skills" title="Skills" icon={Sword} />
                 <NavigationButton pageSlug="/contact" title="Contact" icon={Mail} />
-                <div />
+                <div class="empty"/>
             </div>
         </div>
     {/if}
@@ -48,6 +48,11 @@
         color: $text-color;
         display: grid;
         grid-template-columns: 60% 40%;
+
+        @media screen and (max-width: $tablet-breakpoint) {
+            grid-template-columns: 1fr;
+            padding: 0;
+        }
 
         ::selection {
             background: $text-color; /* WebKit/Blink Browsers */
@@ -67,6 +72,9 @@
         }
         .content-container {
             margin: 5rem 5rem 5rem 0;
+            @media screen and (max-width: $tablet-breakpoint) {
+                margin: 0;
+            }
         }
         .navigation-container {
             display: flex;
@@ -75,14 +83,37 @@
             align-items: left;
             height: 100vh;
             pointer-events: none;
+            .staggered-buttons {
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr;
+                grid-template-rows: 1fr 1fr;
+                grid-gap: 2rem;
+                padding: 2rem 0;
+            }
+            @media screen and (max-width: $tablet-breakpoint) {
+                height: auto;
+                justify-content: start;
+                .staggered-buttons {
+                    grid-template-columns: 1fr 1fr;
+                    grid-template-rows: 1fr 1fr 1fr;
+                    grid-gap: 1rem;
+                    padding: 0 2rem 2rem 2rem;
+                }
+            }
+
+            @media screen and (max-width: $mobile-breakpoint) {
+                .staggered-buttons {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    padding: 0 2rem 2rem 2rem;
+                    .empty {
+                        // Not needed in column layout
+                        display: none;
+                    }
+                }
+            }
         }
 
-        .staggered-buttons {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            grid-template-rows: 1fr 1fr;
-            grid-gap: 2rem;
-            padding: 2rem 0;
-        }
     }
 </style>
