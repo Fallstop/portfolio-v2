@@ -43,7 +43,7 @@
 <style lang="scss">
     .landing-container {
         padding: 0 calc(5rem - (100vw - 100%)) 0 5rem;
-        min-height: 100vh;
+        min-height: 100%;
 
         color: $text-color;
         display: grid;
@@ -81,7 +81,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: left;
-            height: 100vh;
+            height: 100%;
             pointer-events: none;
             .staggered-buttons {
                 display: grid;
@@ -98,6 +98,10 @@
                     grid-template-rows: 1fr 1fr 1fr;
                     grid-gap: 1rem;
                     padding: 0 2rem 2rem 2rem;
+                    .empty {
+                        // Not needed in column layout
+                        display: none;
+                    }
                 }
             }
 

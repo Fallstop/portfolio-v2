@@ -33,7 +33,7 @@
 
         @media screen and (max-width: $tablet-breakpoint) {
             width: 100%;
-            padding: 2rem 2rem 0 2rem;
+            padding: 2rem;
         }
 
     }
@@ -45,6 +45,8 @@
         font-size: 2rem;
         padding: 0.5rem;
         background-color: rgba(0,0,0,0.5);
+        pointer-events: none;
+        user-select: none;
         @include mono-font;
         @media screen and (max-width: $mobile-breakpoint) {
             font-size: 1rem;

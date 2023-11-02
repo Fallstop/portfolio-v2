@@ -53,7 +53,7 @@
             }
 
             @media screen and (max-width: $mobile-breakpoint) {
-                font-size: 1rem;
+                font-size: 2rem;
             }
 
         }
