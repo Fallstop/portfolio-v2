@@ -3,6 +3,7 @@
 	import * as shaders from './fluidShader';
     import { generateColor } from './colourGradient';
     import { hashCode, normalizeColor, scaleByPixelRatio, wrap } from './util';
+    import { fade } from 'svelte/transition';
 
 	export let SIM_RESOLUTION = 32;
 	export let DYE_RESOLUTION = 512;
@@ -1074,6 +1075,7 @@
 
 </script>
 <canvas
+	out:fade={{ duration: 500}}
 	bind:this={canvas}
 />
 <div class="canvas-overlay"></div>

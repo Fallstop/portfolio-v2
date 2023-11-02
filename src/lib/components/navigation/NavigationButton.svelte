@@ -53,8 +53,11 @@
                 margin-left: 0.3em;
             }
 
-            @media screen and (max-width: $mobile-breakpoint) {
+            @media screen and (max-width: $tablet-breakpoint) {
                 font-size: 2rem;
+            }
+            @media screen and (max-width: $mobile-breakpoint) {
+                font-size: 1.2rem;
             }
             &.primary {
                 @media (hover: none) {

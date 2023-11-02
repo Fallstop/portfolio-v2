@@ -170,6 +170,14 @@
                     }
                 }
             }
+
+            // @media screen and (max-width: $tablet-breakpoint) {
+            //     a {
+            //         flex-basis: 50%;
+            //         max-width: 100vw;
+            //     }
+                
+            // }
         }
     }
 </style>

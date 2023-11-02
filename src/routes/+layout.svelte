@@ -2,7 +2,7 @@
     import {fly} from "svelte/transition";
     import { onMount } from "svelte";
     import FluidCanvas from "$lib/components/fluidSim/FluidCanvas.svelte";
-    import StaggeredButtons from "$lib/components/navigation/StaggeredButtons.svelte";
+    import NavigationLayout from "$lib/components/navigation/NavigationLayout.svelte";
     import "../app.scss";
     import { ENABLE_FLUID_SIM, FLUID_SIM_INTERACTIVE, NAVIGATION_CONFIG, NavigationOption } from "$lib/components/layout/layoutDataStore";
 
@@ -19,19 +19,21 @@
 
 </script>
 
-<div class="landing-container">
+<div class="landing-container" class:blog={ $NAVIGATION_CONFIG == NavigationOption.Blog}>
     <div class="content-container">
         <slot/>
     </div>
     {#if firstLoad}
         <div class="navigation-container" in:fly={{x: 100, duration: 500}}>
             {#if $NAVIGATION_CONFIG == NavigationOption.Staggered}
-                <StaggeredButtons/>
+                <NavigationLayout direction="staggered"/>
+            {:else if $NAVIGATION_CONFIG == NavigationOption.Blog}
+                <NavigationLayout direction="column"/>
             {/if}
         </div>
     {/if}
 
-    {#if firstLoad}
+    {#if firstLoad && $NAVIGATION_CONFIG == NavigationOption.Staggered}
         <img in:fly={{y: 100, duration: 500}} src="/assets/photos/OnlyBelowChinProfileTransparent.webp" class="headshot-photo" alt="Personal Headshot"/>
     {/if}
     {#if $ENABLE_FLUID_SIM}
@@ -48,20 +50,30 @@
         color: $text-color;
         display: grid;
         grid-template-columns: 60% 40%;
+        &.blog {
+            grid-template-columns: 80% 20%;
+            max-width: 1200px;
+            margin: auto;
+        }
 
         @media screen and (max-width: $tablet-breakpoint) {
             grid-template-columns: 1fr;
             padding: 0;
+            &.blog {
+                display: flex;
+                flex-direction: column-reverse;
+                
+            }
         }
 
-        ::selection {
-            background: $text-color; /* WebKit/Blink Browsers */
-            color: $background-color;
-            -webkit-text-fill-color: $background-color;
-        }
-        ::-moz-selection {
-            background: #000; /* Gecko Browsers */
-        }
+        // ::selection {
+        //     background: $text-color; /* WebKit/Blink Browsers */
+        //     color: $background-color;
+        //     -webkit-text-fill-color: $background-color;
+        // }
+        // ::-moz-selection {
+        //     background: #000; /* Gecko Browsers */
+        // }
 
         .headshot-photo {
             height: 35vh;
@@ -72,7 +84,9 @@
 
             @media screen and (max-width: $tablet-breakpoint) {
                 height: 15vh;
-                
+            }
+            @media screen and (max-width: $mobile-breakpoint) {
+                display: none;
             }
         }
         .content-container {
