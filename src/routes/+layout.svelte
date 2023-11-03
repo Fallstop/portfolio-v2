@@ -5,6 +5,7 @@
     import NavigationLayout from "$lib/components/navigation/NavigationLayout.svelte";
     import "../app.scss";
     import { ENABLE_FLUID_SIM, FLUID_SIM_INTERACTIVE, NAVIGATION_CONFIG, NavigationOption } from "$lib/components/layout/layoutDataStore";
+    import { dev } from "$app/environment";
 
 
     let firstLoad = false;
@@ -35,7 +36,9 @@
         <img in:fly={{y: 100, duration: 500}} src="/assets/photos/OnlyBelowChinProfileTransparent.webp" class="headshot-photo" alt="Personal Headshot"/>
     {/if}
     {#if $ENABLE_FLUID_SIM}
-        <div class="fps-counter">{Math.round(fluidFPS).toString().padStart(3,"0")} FPS</div>
+        {#if dev}
+            <div class="fps-counter">{Math.round(fluidFPS).toString().padStart(3,"0")} FPS</div>
+        {/if}
         <FluidCanvas bind:actions bind:FPS={fluidFPS} INTERACTIVE={$FLUID_SIM_INTERACTIVE}/>
     {/if}
 </div>
