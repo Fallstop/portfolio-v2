@@ -19,19 +19,19 @@
 
 </script>
 
-<div class="landing-container" class:blog={ $NAVIGATION_CONFIG == NavigationOption.Blog}>
+<div class="landing-container" class:blog={ $NAVIGATION_CONFIG == NavigationOption.Blog} class:reverse-mobile={$NAVIGATION_CONFIG == NavigationOption.Midpoint ||$NAVIGATION_CONFIG == NavigationOption.Blog}>
     <div class="content-container">
         <slot/>
     </div>
     {#if firstLoad}
-        <div class="navigation-container" in:fly={{x: 100, duration: 500}}>
-            {#if $NAVIGATION_CONFIG == NavigationOption.Staggered || $NAVIGATION_CONFIG == NavigationOption.Blog}
+        <div class="navigation-container" in:fly={{x: 100, duration: 500}} draggable="true">
+            {#if $NAVIGATION_CONFIG !== NavigationOption.Disabled}
                 <NavigationLayout direction={$NAVIGATION_CONFIG}/>
             {/if}
         </div>
     {/if}
 
-    {#if firstLoad && $NAVIGATION_CONFIG == NavigationOption.Staggered}
+    {#if firstLoad && $NAVIGATION_CONFIG == NavigationOption.Home}
         <img in:fly={{y: 100, duration: 500}} src="/assets/photos/OnlyBelowChinProfileTransparent.webp" class="headshot-photo" alt="Personal Headshot"/>
     {/if}
     {#if $ENABLE_FLUID_SIM}
@@ -50,14 +50,14 @@
         grid-template-columns: 60% 40%;
         &.blog {
             grid-template-columns: 80% 20%;
-            max-width: 1200px;
+            max-width: $blog-size;
             margin: auto;
         }
 
         @media screen and (max-width: $tablet-breakpoint) {
             grid-template-columns: 1fr;
             padding: 0;
-            &.blog {
+            &.reverse-mobile {
                 display: flex;
                 flex-direction: column-reverse;
                 
@@ -79,6 +79,7 @@
             right: calc(-1 * (100vw - 100%));
             bottom: 0;
             z-index: -1;
+            user-select: none;
 
             @media screen and (max-width: $tablet-breakpoint) {
                 height: 15vh;
@@ -121,6 +122,7 @@
                 height: auto;
                 justify-content: start;
             }
+            -webkit-user-drag: none;
         }
     }
 </style>

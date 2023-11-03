@@ -6,14 +6,17 @@
     import { NavigationOption } from "../layout/layoutDataStore";
 
     export let direction: NavigationOption;
+
+    $: staggeredButtons = direction === NavigationOption.Home || direction === NavigationOption.Midpoint;
 </script>
 
 <div
     class="desktop-container"
-    class:staggered-buttons={direction === NavigationOption.Staggered}
+    class:staggered-buttons={staggeredButtons}
     class:column={direction === NavigationOption.Blog}
+    class:desktop-only={direction === NavigationOption.Blog || direction === NavigationOption.Midpoint}
 >
-    {#if direction === NavigationOption.Staggered}
+    {#if staggeredButtons}
         <div class="empty" />
     {/if}
     {#each pages as { pageSlug, title, icon, primary } (direction+pageSlug)}
@@ -25,11 +28,11 @@
             <NavigationButton {pageSlug} {title} {icon} {primary} />
         </div>
     {/each}
-    {#if direction === NavigationOption.Staggered}
+    {#if staggeredButtons}
         <div class="empty" />
     {/if}
 </div>
-{#if direction === NavigationOption.Blog}
+{#if direction === NavigationOption.Blog || direction === NavigationOption.Midpoint}
     <div class="mobile-container">
         <NavigationButton
             pageSlug={promotedPage.pageSlug}
@@ -41,13 +44,18 @@
 {/if}
 
 <style lang="scss">
+    @use "../../../variables.scss" as *;
     .desktop-container {
-        grid-gap: 2rem;
+        $gap: 2rem;
+        grid-gap: $gap;
+
         &.staggered-buttons {
+            $number-of-columns: 3;
+            $column-size: calc(calc(33% - #{$gap}) + calc(#{$gap} / #{$number-of-columns}) );
             display: grid;
-            grid-template-columns: 33% 33% 33%;
+            grid-template-columns: $column-size $column-size $column-size;
             grid-template-rows: 50% 50%;
-            padding: 2rem 0;
+            // padding: 2rem 0;
         }
         &.column {
             display: flex;
@@ -60,8 +68,8 @@
 
             &.staggered-buttons {
                 grid-template-columns: 50% 50%;
-                grid-template-rows: 33% 33% 33%;
-                padding: 0 2rem 2rem 2rem;
+                grid-template-rows: 50% 50%;
+                padding: 2rem;
                 .empty {
                     // Not needed in column layout
                     display: none;
@@ -83,7 +91,7 @@
                     display: none;
                 }
             }
-            &.column {
+            &.desktop-only {
                 display: none;
             }
         }

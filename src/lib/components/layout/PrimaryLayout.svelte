@@ -4,7 +4,7 @@
 
     export let fluid_sim_background: boolean = true;
     export let fluid_sim_interactive: boolean = false;
-    export let navigation_option: NavigationOption = NavigationOption.Staggered;
+    export let navigation_option: NavigationOption = NavigationOption.Home;
 
     onMount(()=>{
         ENABLE_FLUID_SIM.set(fluid_sim_background);

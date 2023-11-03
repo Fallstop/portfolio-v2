@@ -4,6 +4,7 @@
     import { generateColor } from './colourGradient';
     import { hashCode, normalizeColor, scaleByPixelRatio, wrap } from './util';
     import { fade } from 'svelte/transition';
+    import InteractiveMouse from './InteractiveMouse.svelte';
 
 	export let SIM_RESOLUTION = 32;
 	export let DYE_RESOLUTION = 512;
@@ -1078,7 +1079,11 @@
 	out:fade={{ duration: 500}}
 	bind:this={canvas}
 />
+{#if INTERACTIVE}
+	<InteractiveMouse/>
+{/if}
 <div class="canvas-overlay"></div>
+
 
 <svelte:window
 	on:mouseup={() => (INTERACTIVE && (pointers[0].down = false))}

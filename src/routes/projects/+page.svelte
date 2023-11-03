@@ -1,11 +1,12 @@
 <script lang="ts">
     import PrimaryLayout from "$lib/components/layout/PrimaryLayout.svelte";
+    import { NavigationOption } from "$lib/components/layout/layoutDataStore";
     export let data: import("./$types").PageData;
 </script>
 
-<PrimaryLayout fluid_sim_background>
+<PrimaryLayout fluid_sim_background navigation_option={NavigationOption.Midpoint}>
     <div class="project-container">
-        <h1>Projects</h1>
+        <h1 class="page-header">Projects</h1>
         <ul class="project-list">
             {#each data.posts as post}
                 <a href={post.slug} class="post-wrapper">
@@ -15,9 +16,10 @@
                     />
                     <li class="post">
                         <div class="post-metadata">
+                            <span class="date mobile-date">{post.date}</span>
                             <h2 class="header">
                                 <span>{post.title}</span>
-                                <span class="date">{post.date}</span>
+                                <span class="date desktop-date">{post.date}</span>
                             </h2>
                             <p class="description">{post.description}</p>
                         </div>
@@ -44,7 +46,9 @@
             flex-direction: row;
             align-items: stretch;
             width: 100%;
+            max-width: 100vw;
             gap: 2rem;
+            box-sizing: border-box;
             a {
                 text-decoration: none;
                 flex-grow: 1;
@@ -84,12 +88,43 @@
                         font-size: 1.2rem;
                         color: $accent-color;
                         @include body-font;
+
+                        &.mobile-date {
+                            display: none;
+                            vertical-align: top;
+                        }
                     }
                     .description {
                         font-size: 1.2rem;
                         color: $dark-text-color;
                         margin: 0.5rem 0;
                     }
+                    @media screen and (max-width: $tablet-breakpoint) {
+                        .date {
+                            &.desktop-date {
+                                display: none;
+                            }
+                            &.mobile-date {
+                                display: block;
+                            }
+
+                        }
+                        .header {
+                            font-size: 1.5rem;
+
+                        }
+                        .description {
+                            font-size: 1rem;
+                        }
+                    }
+                    @media screen and (max-width: $mobile-breakpoint) {
+                        .header {
+                            white-space: unset;
+
+                        }
+                        
+                    }
+
                 }
                 .background {
                     position: absolute;
@@ -170,14 +205,24 @@
                     }
                 }
             }
-
-            // @media screen and (max-width: $tablet-breakpoint) {
-            //     a {
-            //         flex-basis: 50%;
-            //         max-width: 100vw;
-            //     }
-                
-            // }
         }
+        @media screen and (max-width: $tablet-breakpoint) {
+                padding: 1rem;
+                .project-list {
+                    gap: 1rem;
+                }
+            }
+            @media screen and (max-width: $mobile-breakpoint) {
+                padding: 0.5rem;
+                .project-list {
+                    gap: 0.5rem;
+                    flex-direction: column;
+                    a {
+                        width: 100%;
+                    }
+                }
+                
+            }
+
     }
 </style>

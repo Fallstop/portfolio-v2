@@ -18,6 +18,8 @@ $mobile-breakpoint: 600px;
 $tablet-breakpoint: 1200px;
 $chonk-breakpoint: 2000px;
 
+$blog-size: $tablet-breakpoint;
+
 
 @mixin body-font {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue",sans-serif;
@@ -27,4 +29,12 @@ $chonk-breakpoint: 2000px;
 }
 @mixin mono-font {
     font-family: "Fira Code", Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+}
+
+@function repeat($character, $n){
+    $c:"";
+    @for $i from 1 through $n {
+        $c: $c + $character;
+    }
+    @return $c;
 }
