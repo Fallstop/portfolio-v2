@@ -28,12 +28,12 @@ A new type of shell based off [nu-shell](https://github.com/nushell/nushell) tha
 +.<++ +[->- --<]> ----- -.<++ ++[-> ++++< ]>+.< """
 
 Executing: cowsay why
- _____
+ _____ 
 < why >
- -----
+ ----- 
         \   ^__^
          \  (oo)\_______
-            (__)\       )\/\
+            (__)\       )\/\\/
                 ||----w |
                 ||     ||
 ```

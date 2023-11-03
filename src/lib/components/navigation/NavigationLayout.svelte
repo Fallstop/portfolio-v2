@@ -1,52 +1,52 @@
 <script lang="ts">
+    import { receive, send } from "$lib/utilities/sendTransition";
+    import { flip } from "svelte/animate";
     import NavigationButton from "./NavigationButton.svelte";
-    import { Code2, User, Sword, Mail } from "lucide-svelte";
+    import { pages, promotedPage } from "./pages";
+    import { NavigationOption } from "../layout/layoutDataStore";
 
-    export let direction: "staggered" | "column";
+    export let direction: NavigationOption;
 </script>
 
 <div
     class="desktop-container"
-    class:staggered-buttons={direction === "staggered"}
-    class:column={direction === "column"}
+    class:staggered-buttons={direction === NavigationOption.Staggered}
+    class:column={direction === NavigationOption.Blog}
 >
-    {#if direction === "staggered"}
+    {#if direction === NavigationOption.Staggered}
         <div class="empty" />
     {/if}
-    <NavigationButton
-        pageSlug="/projects"
-        title="Projects"
-        icon={Code2}
-        primary
-    />
-    <NavigationButton pageSlug="/about" title="About" icon={User} />
-    <NavigationButton pageSlug="/skills" title="Skills" icon={Sword} />
-    <NavigationButton pageSlug="/contact" title="Contact" icon={Mail} />
-    {#if direction === "staggered"}
+    {#each pages as { pageSlug, title, icon, primary } (direction+pageSlug)}
+        <div class="animation-container"
+            in:send={{ key: pageSlug}}
+            out:receive={{ key: pageSlug }}
+            animate:flip
+        >
+            <NavigationButton {pageSlug} {title} {icon} {primary} />
+        </div>
+    {/each}
+    {#if direction === NavigationOption.Staggered}
         <div class="empty" />
     {/if}
 </div>
-{#if direction === "column"}
-<div
-    class="mobile-container">
-    <NavigationButton
-        pageSlug="/projects"
-        title="More Projects"
-        icon={Code2}
-        primary
-    />
-</div>
+{#if direction === NavigationOption.Blog}
+    <div class="mobile-container">
+        <NavigationButton
+            pageSlug={promotedPage.pageSlug}
+            title={promotedPage.title}
+            icon={promotedPage.icon}
+            primary={promotedPage.primary}
+        />
+    </div>
 {/if}
-    
-
 
 <style lang="scss">
     .desktop-container {
         grid-gap: 2rem;
         &.staggered-buttons {
             display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            grid-template-rows: 1fr 1fr;
+            grid-template-columns: 33% 33% 33%;
+            grid-template-rows: 50% 50%;
             padding: 2rem 0;
         }
         &.column {
@@ -59,8 +59,8 @@
             grid-gap: 1rem;
 
             &.staggered-buttons {
-                grid-template-columns: 1fr 1fr;
-                grid-template-rows: 1fr 1fr 1fr;
+                grid-template-columns: 50% 50%;
+                grid-template-rows: 33% 33% 33%;
                 padding: 0 2rem 2rem 2rem;
                 .empty {
                     // Not needed in column layout
@@ -86,6 +86,9 @@
             &.column {
                 display: none;
             }
+        }
+        .animation-container {
+            height: 100%;
         }
     }
     .mobile-container {

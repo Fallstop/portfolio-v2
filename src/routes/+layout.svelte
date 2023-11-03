@@ -25,10 +25,8 @@
     </div>
     {#if firstLoad}
         <div class="navigation-container" in:fly={{x: 100, duration: 500}}>
-            {#if $NAVIGATION_CONFIG == NavigationOption.Staggered}
-                <NavigationLayout direction="staggered"/>
-            {:else if $NAVIGATION_CONFIG == NavigationOption.Blog}
-                <NavigationLayout direction="column"/>
+            {#if $NAVIGATION_CONFIG == NavigationOption.Staggered || $NAVIGATION_CONFIG == NavigationOption.Blog}
+                <NavigationLayout direction={$NAVIGATION_CONFIG}/>
             {/if}
         </div>
     {/if}
@@ -117,7 +115,6 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
-            align-items: left;
             height: min(100%, 100vh);
             pointer-events: none;
             @media screen and (max-width: $tablet-breakpoint) {

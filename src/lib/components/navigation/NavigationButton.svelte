@@ -12,10 +12,12 @@
     export let primary = false;
 
     import { page } from "$app/stores";
+    import { receive, send } from "$lib/utilities/sendTransition";
+    import { flip } from "svelte/animate";
     $: activePage = $page.url.pathname == pageSlug;
 </script>
 
-<a href={activePage ? "/" : pageSlug}>
+<a href={activePage ? "/" : pageSlug} >
     <div class="navigation-button" class:primary>
         <svelte:component this={activePage ? Home : icon} size="0.9em" />
         <span class="button-title">
@@ -29,10 +31,14 @@
         pointer-events: all;
         text-decoration: none;
         user-select: none;
+        // display:block;
+        
         .navigation-button {
+            height: 100%;
+            box-sizing: border-box;
             color: $text-color;
-            padding: 1rem;
-            font-size: 2.5rem;
+            padding: 0.8rem;
+            font-size: 2rem;
             border: 1px solid $text-color;
             box-shadow: 0 0 0 0 black;
             background-color: rgba(255,255,255, 0.5);
@@ -58,6 +64,10 @@
             }
             @media screen and (max-width: $mobile-breakpoint) {
                 font-size: 1.2rem;
+            }
+            @media screen and (min-width: $chonk-breakpoint) {
+                padding: 1rem;
+                font-size: 2.5rem;
             }
             &.primary {
                 @media (hover: none) {
