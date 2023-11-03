@@ -10,7 +10,7 @@ async function getProjects() {
 	let posts: Post[] = []
 
 	const paths = import.meta.glob('/src/projects/**/*.md', { eager: true });
-	const thumbnailPaths = import.meta.glob('/src/projects/**/thumbnail.webp', { eager: true });
+	const thumbnailPaths = import.meta.glob('/src/projects/**/thumbnail.webp?url', { eager: true });
 
 	for (const path in paths) {
 		const file: any = paths[path]
