@@ -1,5 +1,4 @@
 ---
-slug: "/projects/physioboard-apc-reader"
 date: "2022-01-16"
 title: "NZ Physioboard APC Reader"
 description: "React library to scan user-uploaded PDF's locally for QR codes."

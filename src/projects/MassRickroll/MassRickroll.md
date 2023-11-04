@@ -1,5 +1,4 @@
 ---
-slug: "/projects/mass-rickroll"
 date: "2021-08-05"
 title: "Mass Rickroll"
 description: "A group rickroll experience like no other."

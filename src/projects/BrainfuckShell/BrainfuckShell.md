@@ -1,5 +1,4 @@
 ---
-slug: "/projects/brainfuck-shell"
 date: "2021-05-10"
 title: "Brainfuck Shell"
 description: "Brainfuck Shell: Interpret your commands as brainfuck because you most definitely want that"

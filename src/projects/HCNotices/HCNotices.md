@@ -1,5 +1,4 @@
 ---
-slug: "/projects/hc-notices"
 date: "2021-04-22"
 title: "HC Notices"
 description: "Unofficial Huanui College daily notices reader, because your eyes matter."
@@ -17,7 +16,7 @@ description: "Unofficial Huanui College daily notices reader, because your eyes 
 
 ## Framework
 
-This static "webapp" is built in [Svelte](https://svelte.dev/), and leans of my previous [HC Api Gateway](/projects/hc-tools). This is my first time using Svelte, and it has been great, like most of my other sites, it exports directly to static to be hosted on Cloudflare's CDN for free.
+This static "webapp" is built in [Svelte](https://svelte.dev/), and leans of my previous [HC Api Gateway](/projects/HCTools). This is my first time using Svelte, and it has been great, like most of my other sites, it exports directly to static to be hosted on Cloudflare's CDN for free.
 
 ## Why
 My school, Huanui College has a really bad habit of putting everything into google calendars. Which means that every student needs to read the notices everyday in an experience roughly resembling this:

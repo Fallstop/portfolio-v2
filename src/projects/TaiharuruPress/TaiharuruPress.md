@@ -1,5 +1,4 @@
 ---
-slug: "/projects/taiharuru-press"
 date: "2021-04-21"
 title: "Taiharuru Press Website"
 description: "Taiharuru Press Website - Speedrunning a high proformance horzontaly scalible JAM stack website."

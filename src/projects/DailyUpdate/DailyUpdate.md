@@ -1,5 +1,4 @@
 ---
-slug: "/projects/daily-update"
 date: "2021-09-07"
 title: "Daily Update"
 description: "Find out when the daily update is and watch it live."

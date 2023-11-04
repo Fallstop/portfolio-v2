@@ -1,5 +1,4 @@
 ---
-slug: "/projects/times-of-interest"
 date: "2021-09-01"
 title: "Times Of Interest"
 description: "Govhack Entry that visualizes the all the COVID-19 locations of interest in a intuitive timeline/map combo."

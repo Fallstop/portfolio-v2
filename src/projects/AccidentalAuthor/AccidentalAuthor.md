@@ -1,5 +1,4 @@
 ---
-slug: "/projects/accidental-author"
 date: "2021-05-22"
 title: "Accidental Author"
 description: "What if I just, publish a book full with 391 pages worth of 'E', but then it got accepted?"

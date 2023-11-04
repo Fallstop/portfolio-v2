@@ -10,6 +10,7 @@ export async function load({ params }) {
 			meta: post.metadata
 		}
 	} catch (e) {
+		console.log(`Could not find ${params.slug}`, e)
 		throw error(404, `Could not find ${params.slug}`)
 	}
 }

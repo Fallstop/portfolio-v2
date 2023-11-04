@@ -1,0 +1,46 @@
+import { json, type RequestEvent } from "@sveltejs/kit"
+
+import fs from 'fs';
+import path from 'path';
+
+export const prerender = true;
+
+const thumbnailPaths = import.meta.glob('/src/projects/**/thumbnail.webp', {
+	eager: true,
+    as: "url"
+});
+
+const projectIDs = Object.keys(thumbnailPaths).map((path: string) => path.split('/').at(-2));
+
+export function entries() {
+    console.log("Entries:", projectIDs)
+    return projectIDs.map((id: string) => ({ projectID: id  }));
+}
+
+export async function GET({ params, fetch }: RequestEvent) {
+	let { projectID } = params;
+	if (!projectID) {
+		return json({ error: "No project ID provided" }, { status: 400 });
+	}
+
+    let url = Object.keys(thumbnailPaths).find((path: string) => path.includes(projectID));
+    if (!url) {
+        console.log("WARNING: No thumbnail found for project", projectID);
+        return json({ error: "No thumbnail found" }, { status: 404 });
+    }
+
+	const thumbnailRequestPath = `.${url}`;
+    const thumbnailFile = fs.readFileSync(thumbnailRequestPath);
+
+    // if (thumbnailRequest.status !== 200) {
+    //     console.log("WARNING: Thumbnail request returned status", url, thumbnailRequest.status);
+    //     // return json({ error: "No thumbnail found" }, { status: 404 });
+    // }
+
+	return new Response(thumbnailFile, {
+        headers: {
+            'Content-Type': 'image/webp',
+            'Content-Length': thumbnailFile.length.toString()
+        }
+    });
+}

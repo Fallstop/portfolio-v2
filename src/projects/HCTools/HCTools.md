@@ -1,5 +1,4 @@
 ---
-slug: "/projects/hc-tools"
 date: "2021-04-04"
 title: "HC API Tools"
 description: "Simple to use API Gateway to access the mess of Huanui Collage Public data with ease."
@@ -10,7 +9,7 @@ description: "Simple to use API Gateway to access the mess of Huanui Collage Pub
 
 ## Links
  - Github: [HC-API-Tools](https://github.com/Fallstop/HC-API-Tools)
- - Example Use Case: [HCNotices](/projects/hc-notices)
+ - Example Use Case: [HCNotices](/projects/HCNotices)
 
 
 # Why this is a thing

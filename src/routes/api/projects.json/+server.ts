@@ -13,12 +13,13 @@ async function getProjects() {
 	const thumbnailPaths = import.meta.glob('/src/projects/**/thumbnail.webp', {
 		 eager: true,
 		 import: 'default',
-		 query: { url: true },
+		 as: 'url',
 		});
 
 	for (const path in paths) {
 		const file: any = paths[path]
-		const slug = `/projects/${path.split('/').at(-1)?.replace('.md', '')}`
+		const projectID = path.split('/').at(-1)?.replace('.md', '');
+		const slug = `/projects/${projectID}`;
 		if (file && typeof file === 'object' && 'metadata' in file && slug) {
 			const metadata = file.metadata as Omit<Post, 'slug'>
 
@@ -26,7 +27,7 @@ async function getProjects() {
 			let thumbnail = DefaultThumbnail;
 			for (const thumbnailPath in thumbnailPaths) {
 				if (thumbnailPath.includes(slug)) {
-					thumbnail = thumbnailPath;
+					thumbnail = `/api/projects/${projectID}/thumbnail.webp`;
 					break;
 				}
 			}

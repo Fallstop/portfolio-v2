@@ -1,5 +1,4 @@
 ---
-slug: "/projects/gsheet-bells"
 date: "2020-05-01"
 title: "G-Sheet Bells"
 description: "Development of an IOT (Internet of Things) Bell Controller using Google Sheets to improve the experience for Students and Teachers"
