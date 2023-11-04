@@ -16,10 +16,9 @@
                     />
                     <li class="post">
                         <div class="post-metadata">
-                            <span class="date mobile-date">{post.date}</span>
+                            <span class="date">{post.date}</span>
                             <h2 class="header">
-                                <span>{post.title}</span>
-                                <span class="date desktop-date">{post.date}</span>
+                                {post.title}
                             </h2>
                             <p class="description">{post.description}</p>
                         </div>
@@ -53,10 +52,9 @@
                 text-decoration: none;
                 flex-grow: 1;
                 flex-shrink: 1;
-                min-width: 100px;
+                min-width: 200px;
                 display: table;
                 width: 1%;
-                border: 1px solid $text-color;
                 position: relative;
                 aspect-ratio: 16/9;
                 overflow: hidden;
@@ -77,15 +75,15 @@
                     }
                     .header {
                         font-size: 2rem;
-                        font-weight: bold;
-                        text-decoration: none;
                         color: $dark-text-color;
                         white-space: nowrap;
+
                         margin: 0;
 
                     }
                     .date {
                         font-size: 1.2rem;
+                        font-weight: bold;
                         color: $accent-color;
                         @include body-font;
 
@@ -99,16 +97,12 @@
                         color: $dark-text-color;
                         margin: 0.5rem 0;
                     }
-                    @media screen and (max-width: $tablet-breakpoint) {
-                        .date {
-                            &.desktop-date {
-                                display: none;
-                            }
-                            &.mobile-date {
-                                display: block;
-                            }
-
+                    @media screen and (min-width: $chonk-breakpoint) {
+                        .header {
+                            margin-right: 1em;
                         }
+                    }
+                    @media screen and (max-width: $tablet-breakpoint) {
                         .header {
                             font-size: 1.5rem;
 
@@ -120,9 +114,7 @@
                     @media screen and (max-width: $mobile-breakpoint) {
                         .header {
                             white-space: unset;
-
                         }
-                        
                     }
 
                 }

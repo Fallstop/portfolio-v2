@@ -6,7 +6,7 @@ import path from 'path';
 export const prerender = true;
 
 const thumbnailPaths = import.meta.glob('/src/projects/**/thumbnail.webp', {
-	eager: true,
+    eager: true,
     as: "url"
 });
 
@@ -14,14 +14,14 @@ const projectIDs = Object.keys(thumbnailPaths).map((path: string) => path.split(
 
 export function entries() {
     console.log("Entries:", projectIDs)
-    return projectIDs.map((id: string) => ({ projectID: id  }));
+    return projectIDs.map((id) => ({ projectID: id }));
 }
 
 export async function GET({ params, fetch }: RequestEvent) {
-	let { projectID } = params;
-	if (!projectID) {
-		return json({ error: "No project ID provided" }, { status: 400 });
-	}
+    let { projectID } = params;
+    if (!projectID) {
+        return json({ error: "No project ID provided" }, { status: 400 });
+    }
 
     let url = Object.keys(thumbnailPaths).find((path: string) => path.includes(projectID));
     if (!url) {
@@ -29,7 +29,7 @@ export async function GET({ params, fetch }: RequestEvent) {
         return json({ error: "No thumbnail found" }, { status: 404 });
     }
 
-	const thumbnailRequestPath = `.${url}`;
+    const thumbnailRequestPath = `.${url}`;
     const thumbnailFile = fs.readFileSync(thumbnailRequestPath);
 
     // if (thumbnailRequest.status !== 200) {
@@ -37,7 +37,7 @@ export async function GET({ params, fetch }: RequestEvent) {
     //     // return json({ error: "No thumbnail found" }, { status: 404 });
     // }
 
-	return new Response(thumbnailFile, {
+    return new Response(thumbnailFile, {
         headers: {
             'Content-Type': 'image/webp',
             'Content-Length': thumbnailFile.length.toString()

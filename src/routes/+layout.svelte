@@ -1,45 +1,74 @@
 <script lang="ts">
-    import {fly} from "svelte/transition";
+    import { fly } from "svelte/transition";
     import { onMount } from "svelte";
-    import FluidCanvas from "$lib/components/fluidSim/FluidCanvas.svelte";
     import NavigationLayout from "$lib/components/navigation/NavigationLayout.svelte";
     import "../app.scss";
-    import { ENABLE_FLUID_SIM, FLUID_SIM_INTERACTIVE, NAVIGATION_CONFIG, NavigationOption } from "$lib/components/layout/layoutDataStore";
+    import {
+        ENABLE_FLUID_SIM,
+        FLUID_SIM_INTERACTIVE,
+        NAVIGATION_CONFIG,
+        NavigationOption,
+    } from "$lib/components/layout/layoutDataStore";
     import { dev } from "$app/environment";
 
+    import Lazy from "$lib/components/utilities/Lazy.svelte";
 
     let firstLoad = false;
 
-    
     let actions = { randomSplats: () => {}, captureScreenShot: () => {} };
     let fluidFPS: number = 1;
 
-    onMount(()=>{
+    onMount(() => {
         firstLoad = true;
     });
-
 </script>
 
-<div class="landing-container" class:blog={ $NAVIGATION_CONFIG == NavigationOption.Blog} class:reverse-mobile={$NAVIGATION_CONFIG == NavigationOption.Midpoint ||$NAVIGATION_CONFIG == NavigationOption.Blog}>
+<div
+    class="landing-container"
+    class:blog={$NAVIGATION_CONFIG == NavigationOption.Blog}
+    class:reverse-mobile={$NAVIGATION_CONFIG == NavigationOption.Midpoint ||
+        $NAVIGATION_CONFIG == NavigationOption.Blog}
+>
     <div class="content-container">
-        <slot/>
+        <slot />
     </div>
     {#if firstLoad}
-        <div class="navigation-container" in:fly={{x: 100, duration: 500}} draggable="true">
+        <div
+            class="navigation-container"
+            in:fly={{ x: 100, duration: 500 }}
+            draggable="true"
+        >
             {#if $NAVIGATION_CONFIG !== NavigationOption.Disabled}
-                <NavigationLayout direction={$NAVIGATION_CONFIG}/>
+                <NavigationLayout direction={$NAVIGATION_CONFIG} />
             {/if}
         </div>
     {/if}
 
     {#if firstLoad && $NAVIGATION_CONFIG == NavigationOption.Home}
-        <img in:fly={{y: 100, duration: 500}} src="/assets/photos/OnlyBelowChinProfileTransparent.webp" class="headshot-photo" alt="Personal Headshot"/>
+        <img
+            in:fly={{ y: 100, duration: 500 }}
+            src="/assets/photos/OnlyBelowChinProfileTransparent.webp"
+            class="headshot-photo"
+            alt="Personal Headshot"
+        />
     {/if}
     {#if $ENABLE_FLUID_SIM}
         {#if dev}
-            <div class="fps-counter">{Math.round(fluidFPS).toString().padStart(3,"0")} FPS</div>
+            <div class="fps-counter">
+                {Math.round(fluidFPS).toString().padStart(3, "0")} FPS
+            </div>
         {/if}
-        <FluidCanvas bind:actions bind:FPS={fluidFPS} INTERACTIVE={$FLUID_SIM_INTERACTIVE}/>
+        <Lazy
+            this={() => import("$lib/components/fluidSim/FluidCanvas.svelte")}
+        >
+            <svelte:fragment slot="component" let:Component={FluidCanvas}>
+                <FluidCanvas
+                    bind:actions
+                    bind:FPS={fluidFPS}
+                    INTERACTIVE={$FLUID_SIM_INTERACTIVE}
+                />
+            </svelte:fragment>
+        </Lazy>
     {/if}
 </div>
 
@@ -63,7 +92,6 @@
             &.reverse-mobile {
                 display: flex;
                 flex-direction: column-reverse;
-                
             }
         }
 
@@ -104,16 +132,15 @@
             color: white;
             font-size: 2rem;
             padding: 0.5rem;
-            background-color: rgba(0,0,0,0.5);
+            background-color: rgba(0, 0, 0, 0.5);
             pointer-events: none;
             user-select: none;
             @include mono-font;
             @media screen and (max-width: $mobile-breakpoint) {
                 font-size: 1rem;
-                padding: 0.2rem
+                padding: 0.2rem;
             }
         }
-
 
         .navigation-container {
             display: flex;
