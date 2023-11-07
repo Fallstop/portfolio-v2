@@ -3,8 +3,14 @@ date: "2022-05-17"
 title: "Spicy r/place"
 description: "Why manually place tiles, when you can automate it?"
 ---
+<script>
+  import MarkdownLink from "$md/MarkdownLink.svelte";
+</script>
+
+
 > Authored by [Nathan Hare](https://laspruca.nz) in collbateration with Taine Reader and I
 
+<MarkdownLink href="https://www.reddit.com/r/place/comments/twk1rb/rplace_2022_complete_timelapse/">r/place timelapse</MarkdownLink>
 
 This year, on April Fools, reddit unleashed r/place 2 (electric boogaloo). This presented an opportunity for us at [QRL](https://questionable.org.nz/) to step in and have a crack at printing our mark on the canvas.
 

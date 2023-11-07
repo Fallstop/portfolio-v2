@@ -3,19 +3,28 @@ date: "2022-01-16"
 title: "NZ Physioboard APC Reader"
 description: "React library to scan user-uploaded PDF's locally for QR codes."
 ---
-**Automatically extracting info from certificates**
+<script>
+  import MarkdownLink from "$md/MarkdownLink.svelte";
+  import ProConTable from "$md/ProConTable.svelte";
+  import { FileText } from "lucide-svelte";
+</script>
 
-#### Links
- - Github: [openhealthnz-credentials/physioboard-apc-reader](https://github.com/openhealthnz-credentials/physioboard-apc-reader)
- - NPM: [physioboard-apc-reader](https://www.npmjs.com/package/@openhealthnz-credentials/physioboard-apc-reader)
- - Demo: [Svelte Demo](https://physioboard-apc-reader.pages.dev/) ([server source](https://github.com/openhealthnz-credentials/physioboard-apc-reader/blob/main/lambda-service/index.js)) ([client source](https://github.com/openhealthnz-credentials/physioboard-apc-reader/tree/main/demo-site))
- - [Sample PDFs](https://github.com/openhealthnz-credentials/physioboard-apc-reader/tree/main/samples)
- - Sponsor: [Provida](https://www.provida.nz/)
 
+<MarkdownLink href="https://github.com/openhealthnz-credentials/physioboard-apc-reader">openhealthnz-credentials/physioboard-apc-reader</MarkdownLink>
+<MarkdownLink href="https://www.npmjs.com/package/@openhealthnz-credentials/physioboard-apc-reader">physioboard-apc-reader</MarkdownLink>
+<MarkdownLink href="https://provida.nz">Provida</MarkdownLink>
+### Demo
+<MarkdownLink href="https://physioboard-apc-reader.pages.dev/">Svelte Demo</MarkdownLink>
+<MarkdownLink href="https://github.com/openhealthnz-credentials/physioboard-apc-reader/blob/main/lambda-service/index.js">Server Source</MarkdownLink>
+<MarkdownLink href="https://github.com/openhealthnz-credentials/physioboard-apc-reader/tree/main/demo-site">Client Source</MarkdownLink>
+<MarkdownLink href="https://github.com/openhealthnz-credentials/physioboard-apc-reader/tree/main/samples" icon={FileText} color="#592d82">Sample PDFs</MarkdownLink>
+
+
+## Automatically extracting info from certificates
 
 At it's core, it's a typescript library that can read selected fields from the Annual Practising Certificate (PDF document) issued by the Physiotherapy Board. This is a tiny library, but this parser is a proof of concept for a future library that would have wide support for many different medical certificates.
 
-### Physiotherapy Board APC Analysis
+#### Physiotherapy Board APC Analysis
 
 The certificate is a common PDF v1.7, produced off a template with text boxes pasted in at the right places using the official Adobe SDK.
 Interestingly, the template only has the dynamic text as "text", while the rest seems to just be SVG's. This makes it much simpler to extract text using the PDF standard, as this is what a PDF Text Extractor library sees:
@@ -26,23 +35,32 @@ With OCR, all the text would be detected, and might require cropping to just the
 
 Another interesting part is that it uses the Adobe protection, with AES-256. This means that in its PDF form, it would need a relatively new version of PDF.js to work.
 
-### OCR vs PDF Text Extraction
+#### OCR vs PDF Text Extraction
 
 There are two choices when wanting to extract info from a Certificate, OCR or PDF Text extraction.
 
-**OCR**
- - Pros:
-   - Works for both an scan or the original PDF
- - Cons:
-   - Less reliable for character recognition, especially with non-ascii characters
-   - Includes all text on the PDF, not just the relevant text
+## OCR
+<ProConTable>
+<ul slot="pros">
+<li>Works for both an scan or the original PDF</li>
+</ul>
+<ul slot="cons">
+<li>Less reliable for character recognition, especially with non-ascii characters</li>
+<li>Includes all text on the PDF, not just the relevant text</li>
+</ul>
+</ProConTable>
 
-**PDF Text Extraction**
- - Pros:
-   - No chance of non-ascii characters preventing scanning
-   - Includes all text on the PDF, not just the relevant text
- - Cons:
-   - **Only** works with the original PDF
+## PDF Text Extraction
+<ProConTable>
+  <ul slot="pros">
+    <li>No chance of non-ascii characters preventing scanning</li>
+    <li>Includes all text on the PDF, not just the relevant text</li>
+  </ul>
+  <ul slot="cons">
+    <li><b>Only</b> works with the original PDF</li>
+  </ul>
+</ProConTable>
+  
 
 ### Implementation
 

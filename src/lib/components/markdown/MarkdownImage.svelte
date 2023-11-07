@@ -1,12 +1,13 @@
 <script lang="ts">
     export let alt = "";
     // If the alt includes a size, it will be in the format "blah blah:size"
-    let altSizeText = alt.split(":").at(-1);
-    let altText = alt.split(":").slice(0,-1).join(":");
+    let hasSize = alt.includes(":");
+    let altSizeText = hasSize ? alt.split(":").at(-1) : "";
+    let altText = hasSize ? alt.split(":").slice(0,-1).join(":"): alt;
     
     const sizeOptions = ["raw","small","medium","large","full"]
 
-    let size = sizeOptions.includes(altSizeText) ? altSizeText : "medium";
+    let size = sizeOptions.includes(altSizeText || "") ? altSizeText : "medium";
 
 </script>
 <img {...$$restProps} class="{size}" alt={altText} title={altText}>

@@ -3,12 +3,21 @@ date: "2021-12-15"
 title: "React QR Scanner"
 description: "React library to scan user-uploaded PDF's locally for QR codes."
 ---
-#### Links
- - Github: [openhealthnz-credentials/pdf-image-qr-scanner](https://github.com/openhealthnz-credentials/pdf-image-qr-scanner)
- - NPM: [pdf-image-qr-scanner](https://www.npmjs.com/package/@openhealthnz-credentials/pdf-image-qr-scanner)
- - [Svelte Web Demo](https://svelte-pdf-image-scanner.fallstop.workers.dev/): [source code](https://github.com/openhealthnz-credentials/pdf-image-qr-scanner/blob/main/examples/svelte)
- - [React Web Demo](https://react-pdf-image-qr-scanner.pages.dev/): [source code](https://github.com/openhealthnz-credentials/pdf-image-qr-scanner/blob/main/examples/react)
- - Sponsor: [Provida](https://www.provida.nz/)
+
+<script>
+  import MarkdownLink from "$md/MarkdownLink.svelte";
+</script>
+
+<MarkdownLink href="https://github.com/openhealthnz-credentials/pdf-image-qr-scanner">openhealthnz-credentials/pdf-image-qr-scanner</MarkdownLink>
+<MarkdownLink href="https://www.npmjs.com/package/@openhealthnz-credentials/pdf-image-qr-scanner">pdf-image-qr-scanner</MarkdownLink>
+<MarkdownLink href="https://provida.nz">Provida</MarkdownLink>
+
+### Demos
+<MarkdownLink href="https://svelte-pdf-image-scanner.fallstop.workers.dev/">Svelte Demo</MarkdownLink>
+<MarkdownLink href="https://github.com/openhealthnz-credentials/pdf-image-qr-scanner/blob/main/examples/svelte">Svelte Source</MarkdownLink>
+<MarkdownLink href="https://react-pdf-image-qr-scanner.pages.dev/">React Demo</MarkdownLink>
+<MarkdownLink href="https://github.com/openhealthnz-credentials/pdf-image-qr-scanner/blob/main/examples/react">React Source</MarkdownLink>
+
 
 ### Library to scan user-uploaded PDF's locally for QR codes.
 

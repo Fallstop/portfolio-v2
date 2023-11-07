@@ -1,4 +1,5 @@
-import { error } from '@sveltejs/kit'
+import { error } from '@sveltejs/kit';
+export const prerender = false;
 
 export async function load({ params }) {
     console.log(params.slug)

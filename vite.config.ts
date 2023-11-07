@@ -7,7 +7,6 @@ export default defineConfig({
     // imagetools(),
     sveltekit()
   ],
-
   css: {
     preprocessorOptions: {
       scss: {
