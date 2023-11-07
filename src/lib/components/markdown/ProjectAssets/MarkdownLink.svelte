@@ -26,13 +26,18 @@
         
         padding: 0.5rem;
         background-color: var(--brand-color);
+        box-shadow: 0 0 0 rgba(0, 0, 0, 0.5);
+        transition: box-shadow 0.2s ease-in-out;
 
         :global(svg) {
-            height: 1em;
+            height: 1.3em;
+            max-width: 1.3em;
             display: inline;
-            vertical-align: middle;
+            vertical-align: text-top;
+        }
 
-
+        &:hover {
+            box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.5);
         }
 }
 </style>

@@ -17,7 +17,7 @@ interface AvailablePage {
     primary: boolean;
 }
 
-export type PageSlug = "/projects" | "/about" | "/skills" | "/contact" | "/home";
+export type PageSlug = "/projects" | "/about" | "/resume" | "/contact" | "/home";
 
 export const promotedPage: AvailablePage = {
     pageSlug: "/projects",
@@ -35,8 +35,8 @@ export const pages: AvailablePage[] = [
         primary: false
     },
     {
-        pageSlug: "/skills",
-        title: "Skills",
+        pageSlug: "/resume",
+        title: "Resume",
         icon: Sword,
         primary: false
     },

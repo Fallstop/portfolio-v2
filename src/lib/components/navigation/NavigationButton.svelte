@@ -2,18 +2,14 @@
     import type { Icon } from "lucide-svelte";
     import { Home } from "lucide-svelte";
     export let icon: typeof Home;
-    export let pageSlug:
-        | "/projects"
-        | "/about"
-        | "/skills"
-        | "/contact"
-        | "/home";
+    export let pageSlug: PageSlug;
     export let title: string;
     export let primary = false;
 
     import { page } from "$app/stores";
     import { receive, send } from "$lib/utilities/sendTransition";
     import { flip } from "svelte/animate";
+    import type { PageSlug } from "./pages";
     $: activePage = $page.url.pathname == pageSlug;
 </script>
 

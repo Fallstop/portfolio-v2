@@ -1,9 +1,9 @@
 <script context="module" lang="ts">
-    import MarkdownImage from "./MarkdownImage.svelte";
+    import MarkdownMedia from "./MarkdownMedia.svelte";
     import "./markdown.scss";
     import "./prism-nord.scss";
 
 
-    export {MarkdownImage as img};
+    export {MarkdownMedia as img};
 </script>
 <slot/>

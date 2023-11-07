@@ -4,24 +4,24 @@ title: "True Random"
 description: "Simple to use API Gateway to access the mess of Huanui Collage Public data with ease."
 ---
 <script lang="ts">
-    import TwitchStream from "$lib/components/markdown/ProjectAssets/TwitchStream.svelte"
+    import TwitchStream from "$md/TwitchStream.svelte";
+    import MarkdownLink from "$md/MarkdownLink.svelte";
 </script>
 
 *The most powerful and secure random number tool you could ever want.*
 
-> #### Produced for the [Terrible Ideas Hackathon](https://terriblehack.nz/)
-
-
 > #### **TEAM (Subset of [QRL's](https://qrl.nz/) group)**: Me, [Nathan](https://www.laspruca.nz/), [Jacob](https://jacobtread.github.io/), and Taine
 
-> #### **Website**: [TrueRandom.ml](https://truerandom.ml/)
+
+<MarkdownLink href="https://tr.host.qrl.nz/" color="#0c60ce">TrueRandom Website</MarkdownLink>
+<MarkdownLink href="https://terriblehack.com/">Produced for the Terrible Ideas Hackathon</MarkdownLink>
 
 
 Today's random number algorithms are too boring and fast. That's why we used a massive robotic arm that uses ODrive controllers to precisely roll a dice and read the result.
 
 ### The robot in action
+![The Robot:large](./preview.mp4)
 
-> [Twitch Stream](https://www.twitch.tv/truerandomqrl)
 
 We also set up a twitch stream for a more interactive random number generation experience, the channel is [True Random QRL](https://twitch.tv/truerandomqrl) and should be running 24/7. Just run `!roll` in chat to see your random number being generated and read in realtime (+stream delay).
 

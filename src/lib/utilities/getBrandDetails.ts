@@ -6,6 +6,7 @@ import Twitch from "$lib/components/ExtraIcons/Twitch.svelte";
 import { Github, Twitter, Youtube, Facebook, Instagram, Linkedin, Globe } from "lucide-svelte";
 import Fallstop from "$lib/components/ExtraIcons/Fallstop.svelte";
 import Provida from "$lib/components/ExtraIcons/Provida.svelte";
+import TerribleHack from "$lib/components/ExtraIcons/TerribleHack.svelte";
 
 export function extractDomain(url: string) {
     return (new URL(url)).hostname;
@@ -108,4 +109,10 @@ export const brandingDetails: Record<string,BrandData> = {
         icon: Provida,
         color: "#388a94",
     },
+    "terriblehack.com": {
+        name: "Terrible Idea's Hackathon",
+        domain: "terriblehack.com",
+        icon: TerribleHack,
+        color: "#333",
+    }
 }

@@ -4,12 +4,14 @@
     export let alt = "";
     const {size, altText} = parseSettings(alt);
 </script>
-
-<img {...$$restProps} class={size} alt={altText} title={altText} />
+<!-- svelte-ignore a11y-media-has-caption -->
+<video {...$$restProps} controls class="{size}" aria-describedby={altText} title={altText}>
+    Your browser does not support the video tag.
+</video>
 
 <style lang="scss">
     @use "./mediaSizes.scss" as *;
-    img {
+    video {
         @include media-sizes;
     }
 </style>
