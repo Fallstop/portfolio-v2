@@ -1,5 +1,9 @@
+<script lang="ts">
+    export let channelName: string;
+</script>
+
 <style>
-    #twitchStreamWrapper {
+    .twitchStreamWrapper {
         display: flex;
         flex-direction: row;
         align-content: stretch;
@@ -7,25 +11,25 @@
     }
 
     @media (max-width: 700px) {
-        #twitchStreamWrapper {
+        .twitchStreamWrapper {
             flex-direction: column;
         }
-        #twitchStreamChat {
+        .twitchStreamChat {
             height:400px;
             width:100%
         }
     }
 
-    #twitchStreamVideo {
+    .twitchStreamVideo {
         position: relative;
         width: 100%;
         padding-bottom: 56.25%;
     }
 </style>
 
-<div id="twitchStreamWrapper">
-    <div id=twitchStreamVideo>
-        <iframe src="https://player.twitch.tv/?channel=truerandomqrl&parent=localhost&parent=jmw.nz&muted=true" frameborder="0" allowfullscreen="true" scrolling="no" width="100%" height="100%" style="position: absolute"></iframe>
+<div class="twitchStreamWrapper">
+    <div class=twitchStreamVideo>
+        <iframe src="https://player.twitch.tv/?channel={channelName}&parent=localhost&parent=jmw.nz&muted=true" frameborder="0" allowfullscreen="true" scrolling="no" width="100%" height="100%" style="position: absolute"></iframe>
     </div>
-    <iframe id="twitchStreamChat" src="https://www.twitch.tv/embed/truerandomqrl/chat?parent=localhost&parent=jmw.nz" width="350"></iframe>
+    <iframe class="twitchStreamChat" src="https://www.twitch.tv/embed/{channelName}/chat?parent=localhost&parent=jmw.nz" width="350"></iframe>
 </div>

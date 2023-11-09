@@ -2,13 +2,19 @@
 date: "2022-05-17"
 title: "Spicy r/place"
 description: "Why manually place tiles, when you can automate it?"
+authors:
+ - Nathan Hare
+ - Jasper M-W
+ - Taine Reader
+collaborators:
+ - Nathan Hare
+ - Jasper M-W
+ - Taine Reader
 ---
 <script>
   import MarkdownLink from "$md/MarkdownLink.svelte";
 </script>
 
-
-> Authored by [Nathan Hare](https://laspruca.nz) in collbateration with Taine Reader and I
 
 <MarkdownLink href="https://www.reddit.com/r/place/comments/twk1rb/rplace_2022_complete_timelapse/">r/place timelapse</MarkdownLink>
 

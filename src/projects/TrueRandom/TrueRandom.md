@@ -2,6 +2,11 @@
 date: "2021-06-04"
 title: "True Random"
 description: "Simple to use API Gateway to access the mess of Huanui Collage Public data with ease."
+collaborators:
+    - Jasper M-W
+    - Nathan Hare
+    - Jacob Read
+    - Taine Reader
 ---
 <script lang="ts">
     import TwitchStream from "$md/TwitchStream.svelte";
@@ -9,8 +14,6 @@ description: "Simple to use API Gateway to access the mess of Huanui Collage Pub
 </script>
 
 *The most powerful and secure random number tool you could ever want.*
-
-> #### **TEAM (Subset of [QRL's](https://qrl.nz/) group)**: Me, [Nathan](https://www.laspruca.nz/), [Jacob](https://jacobtread.github.io/), and Taine
 
 
 <MarkdownLink href="https://tr.host.qrl.nz/" color="#0c60ce">TrueRandom Website</MarkdownLink>
@@ -25,7 +28,7 @@ Today's random number algorithms are too boring and fast. That's why we used a m
 
 We also set up a twitch stream for a more interactive random number generation experience, the channel is [True Random QRL](https://twitch.tv/truerandomqrl) and should be running 24/7. Just run `!roll` in chat to see your random number being generated and read in realtime (+stream delay).
 
-<TwitchStream/>
+<TwitchStream channelName="truerandomqrl"/>
 
 We plan of keeping the stream up until roughly 2021-07-22 or later, because we can't just dedicate resources for it forever, so if the stream is down by the time you get here that is why.
 

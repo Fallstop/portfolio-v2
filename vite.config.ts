@@ -1,11 +1,15 @@
 import { sveltekit } from "@sveltejs/kit/vite";
 import { defineConfig } from "vite";
-import{ imagetools }from'vite-imagetools';
+import{ imagetools } from './imageToolPlugin';
+import {interceptDirectives, resolveThumbnailConfigs} from "./imageToolsParamTransform";
 
 export default defineConfig({
   plugins: [
-    // imagetools(),
-    sveltekit()
+    sveltekit(),
+    imagetools({
+      resolveConfigs: resolveThumbnailConfigs(),
+      extendDirectives: interceptDirectives()
+    })
   ],
   css: {
     preprocessorOptions: {

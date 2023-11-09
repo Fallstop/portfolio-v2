@@ -1,4 +1,4 @@
-export const sizeOptions = ["raw", "small", "medium", "large", "full"];
+export const sizeOptions = ["raw", "none", "small", "medium", "large", "full"];
 
 export function parseSettings(settings: string) {
     // If the alt includes a size, it will be in the format "blah blah:size"

@@ -47,7 +47,7 @@
     {#if firstLoad && $NAVIGATION_CONFIG == NavigationOption.Home}
         <img
             in:fly={{ y: 100, duration: 500 }}
-            src="/assets/photos/OnlyBelowChinProfileTransparent.webp"
+            src="/assets/photos/OnlyBelowChinMasked.webp"
             class="headshot-photo"
             alt="Personal Headshot"
         />

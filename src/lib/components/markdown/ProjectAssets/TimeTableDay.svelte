@@ -11,7 +11,7 @@
             let data = await request.json();
             
             if (data["isSchoolDay"]) {
-                text = "Day " + data["dayNumber"];
+                text = "Day " + data["currentDay"];
             } else if (!data["isSchoolDay"]) {
                 text = "Not a school day"
             }

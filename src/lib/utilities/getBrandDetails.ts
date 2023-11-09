@@ -3,7 +3,7 @@ import Discord from "$lib/components/ExtraIcons/Discord.svelte";
 import Reddit from "$lib/components/ExtraIcons/Reddit.svelte";
 import Twitch from "$lib/components/ExtraIcons/Twitch.svelte";
 
-import { Github, Twitter, Youtube, Facebook, Instagram, Linkedin, Globe } from "lucide-svelte";
+import { Github, Twitter, Youtube, Facebook, Instagram, Linkedin, Globe, Landmark } from "lucide-svelte";
 import Fallstop from "$lib/components/ExtraIcons/Fallstop.svelte";
 import Provida from "$lib/components/ExtraIcons/Provida.svelte";
 import TerribleHack from "$lib/components/ExtraIcons/TerribleHack.svelte";
@@ -101,7 +101,7 @@ export const brandingDetails: Record<string,BrandData> = {
         name: "JMW",
         domain: "jmw.nz",
         icon: Fallstop,
-        color: "#89219a",
+        color: "#451952",
     },
     "provida.nz": {
         name: "Provida",
@@ -114,5 +114,11 @@ export const brandingDetails: Record<string,BrandData> = {
         domain: "terriblehack.com",
         icon: TerribleHack,
         color: "#333",
+    },
+    "govhack.org": {
+        name: "GovHack",
+        domain: "govhack.org",
+        icon: Landmark,
+        color: "#ca1e56"
     }
 }

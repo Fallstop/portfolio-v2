@@ -2,11 +2,15 @@
 date: "2021-09-07"
 title: "Daily Update"
 description: "Find out when the daily update is and watch it live."
+collaborators:
+ - Jasper M-W
+ - Zac M-W
 ---
 
 <script>
   import MarkdownLink from "$md/MarkdownLink.svelte";
 </script>
+
 <MarkdownLink href="https://github.com/Fallstop/CovidAnnouncementTimer">Frontend</MarkdownLink>
 <MarkdownLink href="https://github.com/Fallstop/CovidAnnouncmentBackend">Backend</MarkdownLink>
 <MarkdownLink href="https://dailyupdate.nz">dailyupdate.nz</MarkdownLink>

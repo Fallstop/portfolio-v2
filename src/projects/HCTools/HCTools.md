@@ -5,11 +5,13 @@ description: "Simple to use API Gateway to access the mess of Huanui Collage Pub
 ---
 <script lang="ts">
     import TimeTableDay from "$lib/components/markdown/ProjectAssets/TimeTableDay.svelte"
+    import MarkdownLink from "$md/MarkdownLink.svelte";
 </script>
-
-## Links
- - Github: [HC-API-Tools](https://github.com/Fallstop/HC-API-Tools)
- - Example Use Case: [HCNotices](/projects/HCNotices)
+    
+<MarkdownLink href="https://github.com/Fallstop/HC-API-Tools">Fallstop/HC-API-Tools</MarkdownLink>
+<MarkdownLink href="https://hctools.jmw.nz/">Swagger API Docs</MarkdownLink>
+<MarkdownLink href="https://hcnotices.jmw.nz/">HCNotices Example</MarkdownLink>
+<MarkdownLink href="https://sites.google.com/hc.school.nz/student-portal/home">Student Portal Example</MarkdownLink>
 
 
 # Why this is a thing
@@ -109,4 +111,4 @@ Here is some overly obtuse example code:
 
 ## Is it currently working?
 
-Well, lets test it out by finding the current Timetable Day:<TimeTableDay/>
+Well, lets test it out by finding the current Timetable Day: <TimeTableDay/>

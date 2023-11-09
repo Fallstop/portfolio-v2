@@ -1,6 +1,8 @@
 <script lang="ts">
 	import PrimaryLayout from "$lib/components/layout/PrimaryLayout.svelte";
 	import { NavigationOption } from "$lib/components/layout/layoutDataStore.js";
+    import AuthorsSection from "$lib/components/markdown/AuthorsSection.svelte";
+    import CollaboratorSection from "$lib/components/markdown/CollaboratorSection.svelte";
 
 	export let data;
 </script>
@@ -21,13 +23,7 @@
 		<hgroup>
 			<h1>{data.meta.title}</h1>
 			<p>
-				{#if data.meta.authors}
-				By
-				{/if}
-				{#each data.meta.authors ?? [] as author}
-					{author}
-					{#if author !== data.meta.authors[data.meta.authors.length - 1]}, {/if}
-				{/each}
+				<AuthorsSection authors={data.meta.authors} /> | 
 				Published at {data.meta.date}</p>
 		</hgroup>
 
@@ -35,6 +31,8 @@
 		<div class="prose">
 			<svelte:component this={data.content} />
 		</div>
+
+		<CollaboratorSection collaborators={data.meta.collaborators} />
 	</article>
 </PrimaryLayout>
 

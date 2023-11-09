@@ -1,17 +1,23 @@
 ---
 date: "2021-09-01"
-title: "Times Of Interest"
+title: "Toi: Times Of Interest"
 description: "Govhack Entry that visualizes the all the COVID-19 locations of interest in a intuitive timeline/map combo."
+collaborators:
+ - Jasper M-W
+ - Nathan Hare
+ - Jacob Read
+ - Taine Reader
+ - Dan Burns
 ---
 
-![NodeJs:raw](https://img.shields.io/badge/Powered%20By-Svelte-f7311b?style=for-the-badge)
-![LINES OF CODE:raw](https://img.shields.io/tokei/lines/github/Questionable-Research-Labs/Govhack-2021?style=for-the-badge)
-![LICENSE:raw](https://img.shields.io/github/license/Questionable-Research-Labs/Govhack-2021?style=for-the-badge)
-![Website Status:raw](https://img.shields.io/website?down_message=offline&label=Status&style=for-the-badge&up_message=online&url=https%3A%2F%2Ftoi.qrl.nz)
+<script>
+  import MarkdownLink from "$md/MarkdownLink.svelte";
+  import YoutubeEmbed from "$md/YoutubeEmbed.svelte";
+</script>
 
-# [Toi](https://toi.qrl.nz) 
 
-##### Times of interest
+<MarkdownLink href="https://2021.hackerspace.govhack.org/projects/toi">Govhack Project Page</MarkdownLink>
+<MarkdownLink href="https://toi.qrl.nz">toi.qrl.nz</MarkdownLink>
 
 
 Toi (pronounced "toy") is a tool that lets you visualize the all the COVID-19 locations of interest and outlined by the New Zealand Ministry of Health, and allows you to filter by name and by time.
@@ -25,10 +31,15 @@ Toi (pronounced "toy") is a tool that lets you visualize the all the COVID-19 lo
 - Intuitive map interface
 
 
+<YoutubeEmbed videoID="C14ecNV1Ts8"/>
+
 ### Toi Source Code
 
- - Primary Frontend Repo at [Questionable-Research-Labs/GovHack-2021](https://github.com/Questionable-Research-Labs/GovHack-2021)
- - Backend is available at [Questionable-Research-Labs/Govhack2021-backend](https://github.com/Questionable-Research-Labs/Govhack2021-backend)
+#### Frontend Repo:
+<MarkdownLink href="https://github.com/Questionable-Research-Labs/GovHack-2021">Questionable-Research-Labs/GovHack-2021</MarkdownLink>
+
+#### Backend Repo
+<MarkdownLink href="https://github.com/Questionable-Research-Labs/Govhack2021-backend">Questionable-Research-Labs/Govhack2021-backend</MarkdownLink>
 
 
 ### What is Toi?

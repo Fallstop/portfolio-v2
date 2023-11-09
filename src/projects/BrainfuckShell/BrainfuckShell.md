@@ -3,16 +3,14 @@ date: "2021-05-10"
 title: "Brainfuck Shell"
 description: "Brainfuck Shell: Interpret your commands as brainfuck because you most definitely want that"
 ---
+<script lang="ts">
+    import MarkdownLink from "$md/MarkdownLink.svelte";
+</script>
 
 ### Brainfuck Shell: Interpret your commands as brainfuck because you most definitely want that.
 
-<br/>
-
-> #### [Github: https://github.com/Fallstop/brainfuck-shell](https://github.com/Fallstop/brainfuck-shell)
-
-<br/>
-
-[![Get it from the Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-black.svg)](https://snapcraft.io/brainfuck-shell)
+[![Get it from the Snap Store:small](https://snapcraft.io/static/images/badges/en/snap-store-black.svg)](https://snapcraft.io/brainfuck-shell)
+<MarkdownLink href="https://github.com/Fallstop/brainfuck-shell">Fallstop/brainfuck-shell</MarkdownLink>
 
 
 A new type of shell based off [nu-shell](https://github.com/nushell/nushell) that takes your commands in brainfuck.
