@@ -30,7 +30,8 @@ description: "Simple to use API Gateway to access the mess of Huanui Collage Pub
 ![](./CovidPhotos/Exploritory/)
 
 ## Final Result
-![](./CovidPhotos/Exploritory/)
+![:full](./CovidPhotos/FinalResult/)
+![](./CovidPhotos/Mockups/)
 
 # Exam Portfolio
 

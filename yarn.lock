@@ -1261,6 +1261,11 @@ svelte-hmr@^0.15.3:
   resolved "https://registry.npmjs.org/svelte-hmr/-/svelte-hmr-0.15.3.tgz"
   integrity sha512-41snaPswvSf8TJUhlkoJBekRrABDXDMdpNpT2tfHIv4JuhgvHqLMhEPGtaQn0BmbNSTkuz2Ed20DF2eHw0SmBQ==
 
+svelte-lightbox@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/svelte-lightbox/-/svelte-lightbox-1.1.2.tgz#4c433638d9b47fd8769a20b16b4be76e2b7f28d8"
+  integrity sha512-zOvLq+z1TI5V2/U2myUL6m+oHATum8dV9wNnzBe+cCUGpP79OqRwoRu6Y9T9F9jomc/wiy4SomvL7RGnsXN81g==
+
 svelte-preprocess@^5.0.4:
   version "5.0.4"
   resolved "https://registry.npmjs.org/svelte-preprocess/-/svelte-preprocess-5.0.4.tgz"

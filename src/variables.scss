@@ -23,8 +23,11 @@ $mobile-breakpoint: 600px;
 $tablet-breakpoint: 1200px;
 $chonk-breakpoint: 2000px;
 
-$blog-size: $tablet-breakpoint;
+$layout-content-margin: 5rem;
 
+$blog-size: $tablet-breakpoint;
+$blog-content-percent: 80%;
+$max-blog-space-available: calc($blog-size * ($blog-content-percent / 100%) - $layout-content-margin);
 
 @mixin body-font {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue",sans-serif;

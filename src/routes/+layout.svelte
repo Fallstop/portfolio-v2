@@ -81,7 +81,7 @@
         display: grid;
         grid-template-columns: 60% 40%;
         &.blog {
-            grid-template-columns: 80% 20%;
+            grid-template-columns: $blog-content-percent calc(100% - $blog-content-percent);
             max-width: $blog-size;
             margin: auto;
         }
