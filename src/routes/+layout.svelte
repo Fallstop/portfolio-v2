@@ -1,6 +1,6 @@
 <script lang="ts">
     import { fly } from "svelte/transition";
-    import { onMount } from "svelte";
+    import { onMount, setContext } from "svelte";
     import NavigationLayout from "$lib/components/navigation/NavigationLayout.svelte";
     import "../app.scss";
     import {
@@ -8,15 +8,25 @@
         FLUID_SIM_INTERACTIVE,
         NAVIGATION_CONFIG,
         NavigationOption,
+        PERSONAL_HEADSHOT,
+        fluidSimFunctions,
+        type FluidSimFunctions,
     } from "$lib/components/layout/layoutDataStore";
     import { dev } from "$app/environment";
 
     import Lazy from "$lib/components/utilities/Lazy.svelte";
+    import { fluidSimContextKey } from "$lib/components/fluidSim/util";
 
     let firstLoad = false;
 
-    let actions = { randomSplats: () => {}, captureScreenShot: () => {} };
     let fluidFPS: number = 1;
+
+    let fluidCanvas: any | null;
+
+    function fluidCanvasLoaded(e: CustomEvent<FluidSimFunctions>) {
+        console.log("Canvas Loaded",e)
+        fluidSimFunctions.set(e.detail);
+    }
 
     onMount(() => {
         firstLoad = true;
@@ -44,7 +54,7 @@
         </div>
     {/if}
 
-    {#if firstLoad && $NAVIGATION_CONFIG == NavigationOption.Home}
+    {#if $PERSONAL_HEADSHOT}
         <img
             in:fly={{ y: 100, duration: 500 }}
             src="/assets/photos/OnlyBelowChinMasked.webp"
@@ -63,8 +73,9 @@
         >
             <svelte:fragment slot="component" let:Component={FluidCanvas}>
                 <FluidCanvas
-                    bind:actions
+                    bind:this={fluidCanvas}
                     bind:FPS={fluidFPS}
+                    on:loaded={fluidCanvasLoaded}
                     INTERACTIVE={$FLUID_SIM_INTERACTIVE}
                 />
             </svelte:fragment>

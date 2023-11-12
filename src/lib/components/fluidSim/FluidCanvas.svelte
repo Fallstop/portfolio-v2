@@ -1,10 +1,11 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
+	import { createEventDispatcher, onMount, setContext } from 'svelte';
 	import * as shaders from './fluidShader';
     import { generateColor } from './colourGradient';
-    import { hashCode, normalizeColor, scaleByPixelRatio, wrap } from './util';
+    import { fluidSimContextKey, hashCode, normalizeColor, scaleByPixelRatio } from './util';
     import { fade } from 'svelte/transition';
     import InteractiveMouse from './InteractiveMouse.svelte';
+    import { wrap } from '$lib/utilities/math';
 
 	export let SIM_RESOLUTION = 32;
 	export let DYE_RESOLUTION = 512;
@@ -32,9 +33,12 @@
 	export let SUNRAYS_RESOLUTION = 196;
 	export let SUNRAYS_WEIGHT = 1.0;
 
+
 	export let INTERACTIVE = true;
 
     export let FPS = 1;
+
+	let eventDispatch = createEventDispatcher();
 
 	$: disableInteractive(INTERACTIVE);
 	function disableInteractive(interactive: boolean) {
@@ -47,9 +51,6 @@
 
     const textureURL = "/assets/fluidSim/LDR_LLL1_0.png";
 
-	// a bit hackish, these actions are used by the knobby controls component
-	export let actions;
-	Object.assign(actions, { randomSplats, captureScreenshot });
 
 	// should work similarly to dat.gui's onFinishChange hook
 	$: SIM_RESOLUTION,
@@ -144,7 +145,7 @@
     });
 
 
-	function captureScreenshot() {
+	export function captureScreenshot() {
 		const res = getResolution(CAPTURE_RESOLUTION);
 		const target = createFBO(
 			res.width,
@@ -175,7 +176,7 @@
 		return texture;
 	}
 
-	function normalizeTexture(texture, width, height) {
+	function normalizeTexture(texture: Float32Array, width: number, height: number) {
 		const result = new Uint8Array(texture.length);
 		let id = 0;
 		for (let i = height - 1; i >= 0; i--) {
@@ -191,7 +192,7 @@
 		return result;
 	}
 
-	const clamp01 = (input) => Math.min(Math.max(input, 0), 1);
+	const clamp01 = (input: number) => Math.min(Math.max(input, 0), 1);
 
 	function textureToCanvas(texture, width, height) {
 		const captureCanvas = document.createElement('canvas');
@@ -206,7 +207,7 @@
 		return captureCanvas;
 	}
 
-	function downloadURI(filename, uri) {
+	function downloadURI(filename: string, uri: string) {
 		const link = document.createElement('a');
 		link.download = filename;
 		link.href = uri;
@@ -860,13 +861,24 @@
 		}
 	}
 
-	function splatPointer(pointer: PointerInfo) {
+	export function splatPointer(pointer: PointerInfo) {
 		const dx = pointer.deltaX * SPLAT_FORCE;
 		const dy = pointer.deltaY * SPLAT_FORCE;
 		splat(pointer.texcoordX, pointer.texcoordY, dx, dy, pointer.color);
 	}
 
-	function multipleSplats(amount) {
+	export function splatPoint(x: number, y: number, dx: number, dy: number, color: RGBColour | undefined) {
+		let xRelative = scaleByPixelRatio(x) / canvas.width;
+		let yRelative = 1 - scaleByPixelRatio(y) / canvas.height;
+		let colorChosen = color ?? generateColor();
+		colorChosen.r*=10;
+		colorChosen.g*=10;
+		colorChosen.b*=10;
+		console.log(xRelative, yRelative, dx, dy, colorChosen)
+		splat(xRelative, yRelative, dx, dy, colorChosen);
+	}
+
+	function multipleSplats(amount: number) {
 		for (let i = 0; i < amount; i++) {
 			const color = generateColor();
 			color.r *= 10.0;
@@ -880,7 +892,7 @@
 		}
 	}
 
-	function randomSplats() {
+	export function randomSplats() {
 		splatStack.push(Math.trunc(Math.random() * 20) + 5);
 	}
 
@@ -965,6 +977,12 @@
 	let colorUpdateTimer: number;
 
 	let blit: ((target: any, clear?: boolean) => void);
+
+	setContext(fluidSimContextKey, {
+		randomSplats,
+		splatPointer,
+		captureScreenshot
+	});
 
 	onMount(() => {
 		resizeCanvas();
@@ -1068,6 +1086,14 @@
 		updateKeywords();
 		initFramebuffers();
 		multipleSplats(Math.trunc(Math.random() * 20) + 5);
+
+		eventDispatch("loaded",{
+			randomSplats,
+			splatPointer,
+			captureScreenshot,
+			multipleSplats,
+			splatPoint
+		})
 
 		lastUpdateTime = Date.now();
 		colorUpdateTimer = 0.0;

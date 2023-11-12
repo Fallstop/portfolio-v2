@@ -1,16 +1,11 @@
+export const fluidSimContextKey = "fluidSimContext";
+
+
 export const normalizeColor = (input: RGBColour) => ({
     r: input.r / 255,
     g: input.g / 255,
     b: input.b / 255
 });
-
-export function wrap(value: number, min: number, max: number) {
-    const range = max - min;
-    if (range == 0) return min;
-    return ((value - min) % range) + min;
-}
-
-
 
 export function scaleByPixelRatio(input: number) {
     return Math.floor(input * (window.devicePixelRatio || 1) * 0.5);

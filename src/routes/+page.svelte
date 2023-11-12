@@ -7,7 +7,7 @@
 <svelte:head>
     <title>Jasper M-W Portfolio</title>
 </svelte:head>
-<PrimaryLayout fluid_sim_background fluid_sim_interactive>
+<PrimaryLayout fluid_sim_background fluid_sim_interactive personal_headshot>
     <div class="name-title" title="Jasper M-W">
         <Name/>
     </div>    
