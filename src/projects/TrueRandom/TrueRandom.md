@@ -7,6 +7,7 @@ collaborators:
     - Nathan Hare
     - Jacob Read
     - Taine Reader
+highlight: true
 ---
 <script lang="ts">
     import TwitchStream from "$md/TwitchStream.svelte";

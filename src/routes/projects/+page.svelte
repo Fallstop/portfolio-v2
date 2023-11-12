@@ -1,29 +1,19 @@
 <script lang="ts">
+    import ProjectThumbnail from "$lib/components/ProjectThumbnail.svelte";
     import PrimaryLayout from "$lib/components/layout/PrimaryLayout.svelte";
     import { NavigationOption } from "$lib/components/layout/layoutDataStore";
     export let data: import("./$types").PageData;
 </script>
 
-<PrimaryLayout fluid_sim_background navigation_option={NavigationOption.Midpoint}>
+<PrimaryLayout
+    fluid_sim_background
+    navigation_option={NavigationOption.Midpoint}
+>
     <div class="project-container">
         <h1 class="page-header">Projects</h1>
         <ul class="project-list">
             {#each data.posts as post}
-                <a href={post.slug} class="post-wrapper">
-                    <div
-                        class="background"
-                        style="--thumbnail-link: url({post.thumbnail}"
-                    />
-                    <li class="post">
-                        <div class="post-metadata">
-                            <span class="date">{post.date}</span>
-                            <h2 class="header">
-                                {post.title}
-                            </h2>
-                            <p class="description">{post.description}</p>
-                        </div>
-                    </li>
-                </a>
+                <ProjectThumbnail {post} />
             {/each}
         </ul>
     </div>
@@ -48,173 +38,19 @@
             max-width: 100vw;
             gap: 2rem;
             box-sizing: border-box;
-            a {
-                text-decoration: none;
-                flex-grow: 1;
-                flex-shrink: 1;
-                min-width: 200px;
-                display: table;
-                width: 1%;
-                position: relative;
-                aspect-ratio: 16/9;
-                overflow: hidden;
-                border-radius: 1rem;
-
-                .post {
-                    display: table-cell;
-                    vertical-align: bottom;
-                    .post-metadata {
-                        $feather-size: 3rem;
-                        padding: calc($feather-size/2 + 1rem) 1rem 1rem 1rem;
-                        // Gradient fading from transparent to black in padding
-                        background: linear-gradient(
-                            transparent,
-                            color.adjust($dark-background-color, $alpha: -0.5)
-                                $feather-size
-                        );
-                    }
-                    .header {
-                        font-size: 2rem;
-                        color: $dark-text-color;
-                        white-space: nowrap;
-
-                        margin: 0;
-
-                    }
-                    .date {
-                        font-size: 1.2rem;
-                        font-weight: bold;
-                        color: $accent-color;
-                        @include body-font;
-
-                        &.mobile-date {
-                            display: none;
-                            vertical-align: top;
-                        }
-                    }
-                    .description {
-                        font-size: 1.2rem;
-                        color: $dark-text-color;
-                        margin: 0.5rem 0;
-                    }
-                    @media screen and (min-width: $chonk-breakpoint) {
-                        .header {
-                            margin-right: 1em;
-                        }
-                    }
-                    @media screen and (max-width: $tablet-breakpoint) {
-                        .header {
-                            font-size: 1.5rem;
-
-                        }
-                        .description {
-                            font-size: 1rem;
-                        }
-                    }
-                    @media screen and (max-width: $mobile-breakpoint) {
-                        .header {
-                            white-space: unset;
-                        }
-                    }
-
-                }
-                .background {
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    width: 100%;
-                    height: 100%;
-                    z-index: -1;
-                    transition: all 250ms ease-in-out;
-                    filter: brightness(0.7);
-                    transform: scale(1.1);
-
-                    &::after {
-                        background-image: var(--thumbnail-link);
-                        background-size: cover;
-                        background-position: center;
-                        background-repeat: no-repeat;
-                        position: absolute;
-                        top: 0;
-                        left: 0;
-                        width: 100%;
-                        height: 100%;
-                        opacity: 0.7;
-                        content: "";
-                        filter: grayscale(50%);
-                        transition: all 250ms ease-in-out;
-
-                    }
-                    &::before {
-                        position: absolute;
-                        content: "";
-                        top: 0;
-                        left: 0;
-                        width: 100%;
-                        height: 100%;
-                        background: linear-gradient(
-                            -45deg,
-                            $primary-color,
-                            $tint-color,
-                            $secondary-color,
-                            $accent-color
-                        );
-                        background-size: 400% 400%;
-                        animation: gradient 10s ease infinite;
-                        @keyframes gradient {
-                            0% {
-                                background-position: 0% 50%;
-                            }
-                            50% {
-                                background-position: 100% 50%;
-                            }
-                            100% {
-                                background-position: 0% 50%;
-                            }
-                        }
-                    }
-                }
-
-
-                &:hover {
-                    .background {
-                        transform: scale(1);
-
-                        &::after {
-                            filter: grayscale(0%);
-                            opacity: 1;
-                        }
-                    }
-                }
-            }
-            @for $i from 1 through 100 {
-                .post-wrapper:nth-of-type(#{$i}) {
-                    .background {
-                        &::before {
-                            $time-delay: random() * math.$pi + s;
-                            animation-delay: calc($time-delay * -1);
-                        }
-                    }
-                }
-            }
         }
         @media screen and (max-width: $tablet-breakpoint) {
-                padding: 1rem;
-                .project-list {
-                    gap: 1rem;
-                }
+            padding: 1rem;
+            .project-list {
+                gap: 1rem;
             }
-            @media screen and (max-width: $mobile-breakpoint) {
-                padding: 0.5rem;
-                .project-list {
-                    gap: 0.5rem;
-                    flex-direction: column;
-                    a {
-                        width: 100%;
-                    }
-                }
-                
+        }
+        @media screen and (max-width: $mobile-breakpoint) {
+            padding: 0.5rem;
+            .project-list {
+                gap: 0.5rem;
+                flex-direction: column;
             }
-
+        }
     }
 </style>

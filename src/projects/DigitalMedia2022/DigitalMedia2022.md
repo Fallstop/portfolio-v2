@@ -2,6 +2,7 @@
 date: "2022-10-31"
 title: "Digital Media 2022"
 description: "Simple to use API Gateway to access the mess of Huanui Collage Public data with ease."
+highlight: true
 ---
 
 <script>

@@ -6,6 +6,7 @@ const additionalOrgs = ["Questionable-Research-Labs", "zui-nz", "openhealthnz-cr
 
 export interface GithubStats {
     totalRepoCount: number;
+    lastUpdatedAboutDetails: Date | null;
 }
 
 export async function getGithubStats(): Promise<GithubStats> {
@@ -15,6 +16,7 @@ export async function getGithubStats(): Promise<GithubStats> {
         console.log("No github token provided, skipping github stats")
         return {
             totalRepoCount,
+            lastUpdatedAboutDetails: null,
         }
     }
 
@@ -32,9 +34,21 @@ export async function getGithubStats(): Promise<GithubStats> {
         return octokit.request("GET /orgs/{org}", { org }).then(getRepoCount);
     });
 
-    await Promise.all([personalUser, ...orgs]);
+    let lastUpdatedAboutDetails: Date | null = null;
+
+    const commitsList = octokit.request("GET /repos/{owner}/{repo}/commits", {
+        owner: "fallstop",
+        repo: "portfolio-v2",
+    }).then((response) => {
+        const aboutInfo = response.data;
+        const authorDate = aboutInfo[0].commit.author?.date;
+        lastUpdatedAboutDetails = authorDate ? new Date(authorDate) : null;
+    });
+
+    await Promise.all([personalUser, commitsList, ...orgs]);
 
     return {
         totalRepoCount,
+        lastUpdatedAboutDetails
     }
 }

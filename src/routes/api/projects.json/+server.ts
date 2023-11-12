@@ -33,7 +33,7 @@ async function getProjects() {
 			}
 			console.log(thumbnail)
 		
-			const post = { ...metadata, thumbnail, slug, path, summary: generateSummary(file.content)} satisfies Post
+			const post = { ...metadata, highlight: metadata.highlight || false, thumbnail, slug, path, summary: generateSummary(file.content)} satisfies Post
 			posts.push(post)
 		} else if (!('metadata' in file)) {
             console.log("WARNING: No metadata found in", path)

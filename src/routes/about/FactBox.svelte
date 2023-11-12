@@ -50,6 +50,9 @@
         border-radius: 1rem;
         box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
         cursor: pointer;
+
+        transition: background-color 0.2s ease-in-out;
+
         .key {
             font-weight: bold;
             color: var(--color-primary);
@@ -59,6 +62,10 @@
         }
         .value {
             color: var(--color-text);
+        }
+
+        &:hover {
+            background-color: adjust($background-color, $alpha: -0.8);
         }
     }
 </style>

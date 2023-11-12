@@ -10,6 +10,15 @@ body {
     color: $text-color;
     background-color: $background-color;
     margin: 0;
+
+    --headshot-height: 35vh;
+    @media screen and (max-width: $tablet-breakpoint) {
+        --headshot-height: 15vh;
+    }
+    @media screen and (max-width: $mobile-breakpoint) {
+        --headshot-height: 0;
+    }
+
 }
 html,body {
     height: 100%;
@@ -36,6 +45,14 @@ html,body {
 		}
 	}
 
+}
+
+.large-scrollbar {
+    scrollbar-width: auto;
+    &::-webkit-scrollbar {
+        width: 20px;
+        height: 10px;
+    }
 }
 
 

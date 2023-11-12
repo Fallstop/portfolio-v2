@@ -8,6 +8,7 @@ collaborators:
  - Jacob Read
  - Taine Reader
  - Dan Burns
+highlight: true
 ---
 
 <script>

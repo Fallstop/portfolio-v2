@@ -91,6 +91,8 @@
         color: $text-color;
         display: grid;
         grid-template-columns: 60% 40%;
+
+        position: relative;
         &.blog {
             grid-template-columns: $blog-content-percent calc(100% - $blog-content-percent);
             max-width: $blog-size;
@@ -116,19 +118,12 @@
         // }
 
         .headshot-photo {
-            height: 35vh;
-            position: fixed;
+            height: var(--headshot-height);
+            position: absolute;
             right: calc(-1 * (100vw - 100%));
             bottom: 0;
             z-index: -1;
             user-select: none;
-
-            @media screen and (max-width: $tablet-breakpoint) {
-                height: 15vh;
-            }
-            @media screen and (max-width: $mobile-breakpoint) {
-                display: none;
-            }
         }
         .content-container {
             margin: 5rem 5rem 5rem 0;
