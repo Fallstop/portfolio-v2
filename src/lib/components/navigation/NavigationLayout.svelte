@@ -2,7 +2,7 @@
     import { receive, send } from "$lib/utilities/sendTransition";
     import { flip } from "svelte/animate";
     import NavigationButton from "./NavigationButton.svelte";
-    import { pages, promotedPage } from "./pages";
+    import { homePage, pages, promotedPage } from "./pages";
     import { NavigationOption } from "../layout/layoutDataStore";
 
     export let direction: NavigationOption;
@@ -32,16 +32,23 @@
         <div class="empty" />
     {/if}
 </div>
-{#if direction === NavigationOption.Blog || direction === NavigationOption.Midpoint}
-    <div class="mobile-container">
+<div class="mobile-container">
+    {#if direction === NavigationOption.Blog}
         <NavigationButton
             pageSlug={promotedPage.pageSlug}
             title={promotedPage.title}
             icon={promotedPage.icon}
             primary={promotedPage.primary}
         />
-    </div>
-{/if}
+    {:else if direction===NavigationOption.Midpoint}
+        <NavigationButton
+            pageSlug={homePage.pageSlug}
+            title={homePage.title}
+            icon={homePage.icon}
+            primary={homePage.primary}
+        />
+    {/if}
+</div>
 
 <style lang="scss">
     @use "../../../variables.scss" as *;

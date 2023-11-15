@@ -99,10 +99,6 @@
         @media screen and (max-width: $mobile-breakpoint) {
             padding-left: 0.5rem;
             padding-right: 0.5rem;
-            .project-list {
-                gap: 0.5rem;
-                flex-direction: column;
-            }
         }
         padding-bottom: calc(var(--headshot-height) + 2rem);
     }
@@ -120,6 +116,23 @@
     .project-marquee-container {
         position: relative;
         overflow: hidden;
+
+        mask-image: linear-gradient(
+                90deg,
+                rgba(255, 255, 255, 1) 0%,
+                rgba(255, 255, 255, 0) calc(0% + 1em),
+                rgba(255, 255, 255, 0) calc(100% - 1em),
+                rgba(255, 255, 255, 1) 100%
+            );
+        -webkit-mask-image: linear-gradient(
+                90deg,
+                rgba(255, 255, 255, 0) 0%,
+                rgba(255, 255, 255, 1) calc(0% + 1em),
+                rgba(255, 255, 255, 1) calc(100% - 1em),
+                rgba(255, 255, 255, 0) 100%
+            );
+
+
         .project-marquee-inner {
             display: flex;
             scroll-snap-type: x mandatory;
@@ -138,7 +151,7 @@
             gap: 1rem;
             margin-top: 1rem;
             // animation: tilesMarquee 5s linear infinite forwards;
-            width: calc(100% + 2em);
+            // width: calc(100% + 2em);
 
             padding: 1rem;
 
@@ -160,6 +173,11 @@
                 font-weight: bold;
                 text-align: center;
                 text-transform: uppercase;
+                transition: all 0.2s ease-in-out;
+                &:hover {
+                    border-color: $text-color;
+                    color: $text-color;
+                }
             }
         }
 
@@ -176,15 +194,15 @@
             position: absolute;
             top: 0;
             left: 0;
-            width: calc(100% + 2em);
+            width: 100%;
             height: 100%;
-            background: linear-gradient(
-                90deg,
-                rgba(255, 255, 255, 1) 0%,
-                rgba(255, 255, 255, 0) calc(0% + 1em),
-                rgba(255, 255, 255, 0) calc(100% - 1em),
-                rgba(255, 255, 255, 1) 100%
-            );
+            // background: linear-gradient(
+            //     90deg,
+            //     rgba(255, 255, 255, 1) 0%,
+            //     rgba(255, 255, 255, 0) calc(0% + 1em),
+            //     rgba(255, 255, 255, 0) calc(100% - 1em),
+            //     rgba(255, 255, 255, 1) 100%
+            // );
             pointer-events: none;
         }
     }

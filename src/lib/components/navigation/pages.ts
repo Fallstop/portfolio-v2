@@ -1,4 +1,4 @@
-import { Code2, User, Sword, Mail } from "lucide-svelte";
+import { Code2, User, Sword, Mail, Home } from "lucide-svelte";
 
 // <NavigationButton
 // pageSlug="/projects"
@@ -17,12 +17,19 @@ interface AvailablePage {
     primary: boolean;
 }
 
-export type PageSlug = "/projects" | "/about" | "/resume" | "/contact" | "/home";
+export type PageSlug = "/projects" | "/about" | "/resume" | "/contact" | "/";
 
 export const promotedPage: AvailablePage = {
     pageSlug: "/projects",
     title: "Projects",
     icon: Code2,
+    primary: true
+}
+
+export const homePage: AvailablePage = {
+    pageSlug: "/",
+    title: "Home",
+    icon: Home,
     primary: true
 }
 

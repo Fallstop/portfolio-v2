@@ -1,7 +1,6 @@
 <script lang="ts">
     import type { Icon } from "lucide-svelte";
-    import { Home } from "lucide-svelte";
-    export let icon: typeof Home;
+    export let icon: typeof homePage.icon;
     export let pageSlug: PageSlug;
     export let title: string;
     export let primary = false;
@@ -9,15 +8,15 @@
     import { page } from "$app/stores";
     import { receive, send } from "$lib/utilities/sendTransition";
     import { flip } from "svelte/animate";
-    import type { PageSlug } from "./pages";
+    import { homePage, type PageSlug } from "./pages";
     $: activePage = $page.url.pathname == pageSlug;
 </script>
 
-<a href={activePage ? "/" : pageSlug} >
+<a href={activePage ? homePage.pageSlug : pageSlug} >
     <div class="navigation-button" class:primary>
-        <svelte:component this={activePage ? Home : icon} size="0.9em" />
+        <svelte:component this={activePage ? homePage.icon : icon} size="0.9em" />
         <span class="button-title">
-            {activePage ? "Home" : title}
+            {activePage ? homePage.title : title}
         </span>
     </div>
 </a>
