@@ -11,6 +11,7 @@
         PERSONAL_HEADSHOT,
         fluidSimFunctions,
         type FluidSimFunctions,
+        SPLASH_BACKGROUND_ON_PRINT,
     } from "$lib/components/layout/layoutDataStore";
     import { dev } from "$app/environment";
 
@@ -77,6 +78,7 @@
                     bind:FPS={fluidFPS}
                     on:loaded={fluidCanvasLoaded}
                     INTERACTIVE={$FLUID_SIM_INTERACTIVE}
+                    SPLASH_ON_PRINT={$SPLASH_BACKGROUND_ON_PRINT}
                 />
             </svelte:fragment>
         </Lazy>
@@ -108,6 +110,10 @@
             }
         }
 
+        @media print {
+            padding: $print-page-padding;
+        }
+
         // ::selection {
         //     background: $text-color; /* WebKit/Blink Browsers */
         //     color: $background-color;
@@ -119,15 +125,24 @@
 
         .headshot-photo {
             height: var(--headshot-height);
-            position: absolute;
+            position: fixed;
             right: calc(-1 * (100vw - 100%));
             bottom: 0;
-            z-index: -1;
+            z-index: -2;
             user-select: none;
+
+            filter: drop-shadow(0 0 5rem #fff) drop-shadow(0 0 5rem #fff) drop-shadow(0 0 5rem #fff);
+
+            @media print {
+                height: calc($print-page-padding - 1rem);
+            }
         }
         .content-container {
             margin: 5rem 5rem 5rem 0;
             @media screen and (max-width: $tablet-breakpoint) {
+                margin: 0;
+            }
+            @media print {
                 margin: 0;
             }
         }
@@ -159,6 +174,12 @@
                 justify-content: start;
             }
             -webkit-user-drag: none;
+        }
+        @media print {
+            grid-template-columns: 100% 0;
+            .navigation-container {
+                display: none
+            }
         }
     }
 </style>

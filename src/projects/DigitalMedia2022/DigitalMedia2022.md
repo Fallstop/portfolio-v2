@@ -1,7 +1,7 @@
 ---
 date: "2022-10-31"
 title: "Digital Media 2022"
-description: "Simple to use API Gateway to access the mess of Huanui Collage Public data with ease."
+description: "A photography and design portfolio for my AS Digital Media exam."
 highlight: true
 ---
 

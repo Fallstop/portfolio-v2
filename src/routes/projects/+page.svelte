@@ -1,20 +1,29 @@
 <script lang="ts">
-    import ProjectThumbnail from "$lib/components/ProjectThumbnail.svelte";
+    import ProjectThumbnails from "$lib/components/projects/ProjectThumbnails.svelte";
     import PrimaryLayout from "$lib/components/layout/PrimaryLayout.svelte";
     import { NavigationOption } from "$lib/components/layout/layoutDataStore";
+    import ProjectSearch from "$lib/components/projects/ProjectSearch.svelte";
+    import type { Post } from "$lib/types";
+    import type { Readable } from "svelte/store";
+    import { receive, send } from "$lib/utilities/sendTransition";
+    import { flip } from "svelte/animate";
     export let data: import("./$types").PageData;
+
+    let projectSearchResult: Readable<Post[]>;
 </script>
 
 <PrimaryLayout
     fluid_sim_background
     navigation_option={NavigationOption.Midpoint}
+    personal_headshot
 >
     <div class="project-container">
         <h1 class="page-header">Projects</h1>
+        <ProjectSearch projectList={data.posts} bind:searchResult={projectSearchResult} />
         <ul class="project-list">
-            {#each data.posts as post}
-                <ProjectThumbnail {post} />
-            {/each}
+            {#if $projectSearchResult}
+                <ProjectThumbnails posts={$projectSearchResult}/>
+            {/if}
         </ul>
     </div>
 </PrimaryLayout>

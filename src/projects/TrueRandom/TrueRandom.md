@@ -1,7 +1,7 @@
 ---
 date: "2021-06-04"
 title: "True Random"
-description: "Simple to use API Gateway to access the mess of Huanui Collage Public data with ease."
+description: "Using a massive robotic arm to violently roll dice."
 collaborators:
     - Jasper M-W
     - Nathan Hare

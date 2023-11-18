@@ -1,23 +1,36 @@
 <script lang="ts">
     import type { Post } from "$lib/types";
-    export let post: Post;
+    import { receive, send } from "$lib/utilities/sendTransition";
+    import { flip } from "svelte/animate";
+    export let posts: Post[];
 </script>
 
-<a href={post.slug} class="post-wrapper">
-    <div class="background" style="--thumbnail-link: url({post.thumbnail}" />
-    <li class="post">
-        <div class="post-metadata">
-            <span class="date">{post.date}</span>
-            <h2 class="header">
-                {post.title}
-            </h2>
-            <p class="description">{post.description}</p>
-        </div>
-    </li>
-</a>
+{#each posts as post (post.slug)}
+    <a
+        href={post.slug}
+        class="post-wrapper"
+        in:send={{ key: post.slug}}
+        out:receive={{ key: post.slug }}
+        animate:flip={{duration: 200}}
+    >
+        <div
+            class="background"
+            style="--thumbnail-link: url({post.thumbnail}"
+        />
+        <li class="post">
+            <div class="post-metadata">
+                <span class="date">{post.date}</span>
+                <h2 class="header">
+                    {post.title}
+                </h2>
+                <p class="description">{post.description}</p>
+            </div>
+        </li>
+    </a>
+{/each}
 
 <style lang="scss">
-    @use "../../variables.scss" as *;
+    @use "../../../variables.scss" as *;
     @use "sass:color";
     @use "sass:math";
 
@@ -33,7 +46,13 @@
         overflow: hidden;
         border-radius: 1rem;
 
+        page-break-inside: avoid;
+        break-inside: avoid;
+
         overflow: hidden;
+
+        print-color-adjust: exact !important;
+        -webkit-print-color-adjust: exact !important;
 
         .post {
             display: table-cell;
@@ -112,7 +131,6 @@
                 filter: grayscale(50%);
                 transition: all 250ms ease-in-out;
                 transform: scale(1.1);
-
             }
             &::before {
                 position: absolute;
@@ -147,14 +165,13 @@
                 $time-delay: random() * math.$pi + s;
                 animation-delay: calc($time-delay * -1);
                 transform: scale(1.1);
-        
             }
-
         }
 
         &:hover {
             .background {
-                &::before,&::after {
+                &::before,
+                &::after {
                     transform: scale(1);
                 }
                 &::after {

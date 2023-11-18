@@ -49,3 +49,8 @@ $max-blog-space-available: calc($blog-size * ($blog-content-percent / 100%) - $l
     }
     @return $c;
 }
+@function repeat-with-join($string, $separator, $n) {
+    @return repeat($string + $separator,$n - 1) + $string;
+}
+
+$print-page-padding: 5rem;

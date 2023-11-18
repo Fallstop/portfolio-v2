@@ -38,6 +38,10 @@
 
     export let FPS = 1;
 
+	export let SPLASH_ON_PRINT = false;
+
+	const MAX_STEP_SIZE=0.016666;
+
 	let eventDispatch = createEventDispatcher();
 
 	$: disableInteractive(INTERACTIVE);
@@ -627,7 +631,7 @@
 	function calcDeltaTime() {
 		const now = Date.now();
 		let dt = (now - lastUpdateTime) / 1000;
-		dt = Math.min(dt, 0.016666);
+		dt = Math.min(dt, MAX_STEP_SIZE);
 		lastUpdateTime = now;
 		return dt;
 	}
@@ -1109,7 +1113,6 @@
 {#if INTERACTIVE}
 	<InteractiveMouse/>
 {/if}
-<div class="canvas-overlay"></div>
 
 
 <svelte:window
@@ -1125,67 +1128,106 @@
 		}
 	}}
 	on:keydown={(e) => {
-		if (!INTERACTIVE) return;
-		if (e.code === 'KeyP') PAUSED = !PAUSED;
-		if (e.key === ' ') splatStack.push(Math.trunc(Math.random() * 20) + 5);
+		if (e.code === 'KeyP' && !e.ctrlKey) PAUSED = !PAUSED;
+
+		if (INTERACTIVE) {
+			if (e.key === ' ') splatStack.push(Math.trunc(Math.random() * 20) + 5);
+		}
+		if (SPLASH_ON_PRINT) {
+			if (e.ctrlKey && e.key=="p") {
+				console.log("Intercepting Print")
+				let startTime = new Date();
+				splatStack.push(Math.trunc(Math.random() * 20) + 5)
+
+				// Apply Splats to canvas
+				update();
+
+				PAUSED = true;
+				
+				// Splats are just blobs without physics, run a few sim steps to get the "marbling" texture
+				for (let i = 0; i < 6*60; i++) {
+					step(MAX_STEP_SIZE/2)
+				}
+				console.log("Print preprocessing complete")
+				let processingTimeMs = (+new Date() - +startTime);
+				console.log(`Time to complete: ${processingTimeMs}ms`)
+			}
+		}
 	}}
-    	on:mousedown={(e) => {
-			if (!INTERACTIVE) return;
-            const posX = scaleByPixelRatio(e.offsetX);
-            const posY = scaleByPixelRatio(e.offsetY);
-            let pointer = pointers.find((p) => p.id == -1);
-            if (pointer == null) pointer = createPointer();
-            updatePointerDownData(pointer, -1, posX, posY);
-        }}
-        on:mousemove={(e) => {
-			if (!INTERACTIVE) return;
-		
-            const pointer = pointers[0];
-            if (!pointer.down) return;
-            const posX = scaleByPixelRatio(e.offsetX);
-            const posY = scaleByPixelRatio(e.offsetY);
-            updatePointerMoveData(pointer, posX, posY);
-        }}
-        on:touchstart={(e) => {
-			if (!INTERACTIVE) return;
+	on:mousedown={(e) => {
+		if (!INTERACTIVE) return;
+		const posX = scaleByPixelRatio(e.offsetX);
+		const posY = scaleByPixelRatio(e.offsetY);
+		let pointer = pointers.find((p) => p.id == -1);
+		if (pointer == null) pointer = createPointer();
+		updatePointerDownData(pointer, -1, posX, posY);
+	}}
+	on:mousemove={(e) => {
+		if (!INTERACTIVE) return;
+	
+		const pointer = pointers[0];
+		if (!pointer.down) return;
+		const posX = scaleByPixelRatio(e.offsetX);
+		const posY = scaleByPixelRatio(e.offsetY);
+		updatePointerMoveData(pointer, posX, posY);
+	}}
+	on:touchstart={(e) => {
+		if (!INTERACTIVE) return;
 
-            e.preventDefault();
-            const touches = e.targetTouches;
-            while (touches.length >= pointers.length) pointers.push(createPointer());
-            for (let i = 0; i < touches.length; i++) {
-                const posX = scaleByPixelRatio(touches[i].pageX);
-                const posY = scaleByPixelRatio(touches[i].pageY);
-                updatePointerDownData(pointers[i + 1], touches[i].identifier, posX, posY);
-            }
-        }}
-        on:touchmove={(e) => {
-			if (!INTERACTIVE) return;
+		e.preventDefault();
+		const touches = e.targetTouches;
+		while (touches.length >= pointers.length) pointers.push(createPointer());
+		for (let i = 0; i < touches.length; i++) {
+			const posX = scaleByPixelRatio(touches[i].pageX);
+			const posY = scaleByPixelRatio(touches[i].pageY);
+			updatePointerDownData(pointers[i + 1], touches[i].identifier, posX, posY);
+		}
+	}}
+	on:touchmove={(e) => {
+		if (!INTERACTIVE) return;
 
-            e.preventDefault();
-            const touches = e.targetTouches;
-            for (let i = 0; i < touches.length; i++) {
-                const pointer = pointers[i + 1];
-                if (!pointer.down) continue;
-                const posX = scaleByPixelRatio(touches[i].pageX);
-                const posY = scaleByPixelRatio(touches[i].pageY);
-                updatePointerMoveData(pointer, posX, posY);
-            }
-        }}
+		e.preventDefault();
+		const touches = e.targetTouches;
+		for (let i = 0; i < touches.length; i++) {
+			const pointer = pointers[i + 1];
+			if (!pointer.down) continue;
+			const posX = scaleByPixelRatio(touches[i].pageX);
+			const posY = scaleByPixelRatio(touches[i].pageY);
+			updatePointerMoveData(pointer, posX, posY);
+		}
+	}}
 />
+<div class="canvas-overlay"></div>
 
-<style>
+<style lang="scss">
+	@use "../../../variables.scss" as *;
+
 	canvas,.canvas-overlay {
         overflow: hidden;
-        position: absolute;
+        position: fixed;
         top: 0;
         left: 0;
         width: 100%;
-        height: 100%;
+        height: 100vw;
         z-index: -10;
 	}
 	.canvas-overlay {
-		bottom: 0;
-		height: 100%;
-		background: linear-gradient(180deg, rgba(0, 0, 0, 0) 95%, rgb(255, 255, 255) 100%);
+		// @media print {
+		// 	background: radial-gradient(
+		// 		eclipse,
+		// 		red calc(100% - ),
+		// 		blue 100%
+		// 	);
+		// }
+		
+		$padding-ratio: 0.5;
+
+		// width: calc(100% - ($print-page-padding * $padding-ratio * 2));
+        // height: calc(100vw - ($print-page-padding * $padding-ratio * 2));
+		// border: solid calc($print-page-padding * $padding-ratio) white;
+		// box-sizing: content-box;
+		// filter: blur($print-page-padding * $padding-ratio * 0.5);
+		box-shadow: #{repeat-with-join("inset 0 0 "+$print-page-padding+" white", ", ", 10)};
+		// background: black;
 	}
 </style>

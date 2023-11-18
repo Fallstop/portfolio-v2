@@ -1,7 +1,7 @@
 ---
 date: "2021-05-22"
 title: "Accidental Author"
-description: "What if I just, publish a book full with 391 pages worth of 'E', but then it got accepted?"
+description: "I may have published a book with 391 pages of repeated 'E's."
 ---
 
 # The first book

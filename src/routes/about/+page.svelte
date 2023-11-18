@@ -2,10 +2,11 @@
     import PrimaryLayout from "$lib/components/layout/PrimaryLayout.svelte";
 
     import { NavigationOption } from "$lib/components/layout/layoutDataStore";
-    import { getAge } from "./getPersonalDetails";
+    import { birthdate } from "./getPersonalDetails";
     import FactBox from "./FactBox.svelte";
-    import { formatDate } from "$lib/utilities/dates";
-    import ProjectThumbnail from "$lib/components/ProjectThumbnail.svelte";
+    import { formatDate, getYearsFrom } from "$lib/utilities/dates";
+    import ProjectThumbnails from "$lib/components/projects/ProjectThumbnails.svelte";
+    import MoreProjectsThumbnail from "$lib/components/projects/MoreProjectsThumbnail.svelte";
 
     export let data: import("./$types").PageData;
 </script>
@@ -18,7 +19,7 @@
     <div class="content">
         <h1>Kia ora, I'm Jasper M-W.</h1>
         <h3>
-            I'm a high schooler at Huanui College, who's spent the last 3 years
+            I'm a high schooler at Huanui College, who's spent the last {getYearsFrom("2019")} years
             building random projects in my spare time.
         </h3>
         <p>
@@ -32,7 +33,7 @@
                 title="Unusable CV Booster"
                 description="I'm the 2023 Head Boy of Huanui College"
             />
-            <FactBox title="Age" description={getAge().toString()} />
+            <FactBox title="Age" description={getYearsFrom(birthdate).toString()} />
             {#if Math.random() > 0.9}
                 <FactBox
                     title="Current Location"
@@ -57,7 +58,7 @@
                 title="Favourite Programming Language"
                 description="Rust"
             />
-            <FactBox title="Severs in basement" description="5" />
+            <FactBox title="Servers in basement" description="5" />
             <FactBox title="Camera" description="Sony a 7II" />
             <FactBox title="BrainF*ck Interpreters Developed" description="8" />
             <FactBox
@@ -71,15 +72,11 @@
             <FactBox title="Books Published" description="1" />
         </div>
 
-        <h2>Projects</h2>
+        <h2>Highlighted Projects</h2>
         <div class="project-marquee-container">
             <div class="project-marquee-inner large-scrollbar">
-                {#each data.postsHighlighted as post}
-                    <ProjectThumbnail {post} />
-                {/each}
-                <a href="/projects" class="more-projects">
-                    <span class="more-header">More Projects</span>
-                </a>
+                <ProjectThumbnails posts={data.postsHighlighted} />
+                <MoreProjectsThumbnail />
             </div>
             <div class="mask-overlay" />
         </div>
@@ -92,6 +89,7 @@
         @media screen and (max-width: $tablet-breakpoint) {
             padding-left: 1rem;
             padding-right: 1rem;
+            padding-bottom: calc(var(--headshot-height) + 2rem);
             .project-list {
                 gap: 1rem;
             }
@@ -100,7 +98,6 @@
             padding-left: 0.5rem;
             padding-right: 0.5rem;
         }
-        padding-bottom: calc(var(--headshot-height) + 2rem);
     }
     h1 {
         font-size: 3rem;
@@ -111,7 +108,7 @@
         flex-direction: row;
         flex-wrap: wrap;
         gap: 1rem;
-        margin-top: 1rem;
+        padding: 1rem 0;
     }
     .project-marquee-container {
         position: relative;
@@ -143,13 +140,10 @@
                 scroll-snap-align: center;
                 aspect-ratio: unset;
                 max-width: 60vw;
-                :global(.post) {
-                }
             }
 
             flex-direction: row;
             gap: 1rem;
-            margin-top: 1rem;
             // animation: tilesMarquee 5s linear infinite forwards;
             // width: calc(100% + 2em);
 
@@ -157,28 +151,6 @@
 
             overflow-x: scroll;
 
-            .more-projects {
-                
-                text-decoration: none;
-                flex-grow: 1;
-                flex-shrink: 1;
-                min-width: 200px;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                border: 4px dashed $mid-tone;
-                border-radius: 1rem;
-                color: $mid-tone;
-                font-size: 2rem;
-                font-weight: bold;
-                text-align: center;
-                text-transform: uppercase;
-                transition: all 0.2s ease-in-out;
-                &:hover {
-                    border-color: $text-color;
-                    color: $text-color;
-                }
-            }
         }
 
         @keyframes tilesMarquee {
@@ -205,5 +177,9 @@
             // );
             pointer-events: none;
         }
+    }
+
+    h2 {
+        margin-top: 1rem;
     }
 </style>
