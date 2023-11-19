@@ -1,14 +1,5 @@
 import { Code2, User, Sword, Mail, Home } from "lucide-svelte";
 
-// <NavigationButton
-// pageSlug="/projects"
-// title="Projects"
-// icon={Code2}
-// primary
-// />
-// <NavigationButton pageSlug="/about" title="About" icon={User} />
-// <NavigationButton pageSlug="/skills" title="Skills" icon={Sword} />
-// <NavigationButton pageSlug="/contact" title="Contact" icon={Mail} />
 
 interface AvailablePage {
     pageSlug: PageSlug;

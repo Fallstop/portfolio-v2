@@ -107,6 +107,7 @@
             &.reverse-mobile {
                 display: flex;
                 flex-direction: column-reverse;
+                justify-content: start;
             }
         }
 

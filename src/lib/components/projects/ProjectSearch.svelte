@@ -1,20 +1,26 @@
 <script lang="ts">
     import type { Post } from "$lib/types";
     import { derived, writable, type Readable } from "svelte/store";
+    import Fuse from "fuse.js";
 
     export let projectList: Post[];
+
+    const fuse = new Fuse(projectList, {
+        keys: [
+            "title",
+            "description",
+            "date",
+        ]
+    });
 
 
     let textSearch = writable("");
 
     export const searchResult: Readable<Post[]> = derived(textSearch,(textSearch)=>{
         let filteredResult = projectList;
-
+        // Start with fuzzy search
         if (textSearch) {
-            filteredResult = filteredResult.filter((x: Post)=>{
-                let textBlurb = x.date+x.description+x.title+x.summary;
-                return textBlurb.toLowerCase().includes(textSearch.toLowerCase())
-            });
+            filteredResult = fuse.search(textSearch).map((result) => result.item);
         }
 
         return filteredResult

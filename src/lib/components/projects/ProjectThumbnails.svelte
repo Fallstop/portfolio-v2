@@ -2,6 +2,7 @@
     import type { Post } from "$lib/types";
     import { receive, send } from "$lib/utilities/sendTransition";
     import { flip } from "svelte/animate";
+    import { fade } from "svelte/transition";
     export let posts: Post[];
 </script>
 
@@ -10,9 +11,11 @@
         href={post.slug}
         class="post-wrapper"
         in:send={{ key: post.slug}}
-        out:receive={{ key: post.slug }}
         animate:flip={{duration: 200}}
     >
+    <!-- 
+        
+         -->
         <div
             class="background"
             style="--thumbnail-link: url({post.thumbnail}"

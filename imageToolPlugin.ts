@@ -1,24 +1,26 @@
-import { basename, extname } from 'node:path'
-import { Plugin, ResolvedConfig } from 'vite'
+import path, { basename, extname } from 'node:path'
+import type { Plugin, ResolvedConfig } from 'vite'
 import {
     applyTransforms,
     builtins,
     builtinOutputFormats,
     extractEntries,
-    generateImageID,
     generateTransforms,
     getMetadata,
-    loadImage,
     parseURL,
     urlFormat,
     resolveConfigs,
     type Logger,
     type OutputFormat,
     type ProcessedImageMetadata,
-    type TransformFactory
+    type TransformFactory,
+    type ImageConfig
 } from 'imagetools-core'
 import { createFilter, dataToEsm } from '@rollup/pluginutils'
 import type { Metadata, Sharp } from 'sharp'
+import { stat } from 'node:fs/promises'
+import { createHash } from 'node:crypto'
+import sharp from 'sharp'
 
 const defaultOptions: VitePluginOptions = {
     include: /^[^?]+\.(avif|gif|heif|jpeg|jpg|png|tiff|webp)(\?.*)?$/,
@@ -60,7 +62,7 @@ export function imagetools(userOptions: Partial<VitePluginOptions> = {}): Plugin
             let lazyImg: Sharp
             const lazyLoadImage = () => {
                 if (lazyImg) return lazyImg
-                return (lazyImg = loadImage(decodeURIComponent(srcURL.pathname)))
+                return (lazyImg = sharp(decodeURIComponent(srcURL.pathname)))
             }
 
             let lazyMetadata: Metadata
@@ -118,7 +120,7 @@ export function imagetools(userOptions: Partial<VitePluginOptions> = {}): Plugin
                 const { image, metadata } = await applyTransforms(transforms, img.clone(), pluginOptions.removeMetadata)
 
                 if (viteConfig.command === 'serve') {
-                    const id = generateImageID(srcURL, config)
+                    const id = await generateImageID(srcURL, config, image)
                     generatedImages.set(id, image)
                     metadata.src = basePath + id
                 } else {
@@ -149,12 +151,12 @@ export function imagetools(userOptions: Partial<VitePluginOptions> = {}): Plugin
 
             const esmSettings = {
                 namedExports: pluginOptions.namedExports ?? viteConfig.json?.namedExports ?? true,
-                compact: !!viteConfig.build.minify ?? false,
+                compact: !!viteConfig.build.minify,
                 preferConst: true
             };
 
             const output = await outputFormat(outputMetadatas) as any[];
-            return dataToEsm(output,esmSettings)
+            return dataToEsm(output, esmSettings)
         },
 
         configureServer(server) {
@@ -184,6 +186,28 @@ export function imagetools(userOptions: Partial<VitePluginOptions> = {}): Plugin
 
 export const createBasePath = (base?: string) => {
     return (base?.replace(/\/$/, '') || '') + '/@imagetools/'
+}
+
+export async function generateImageID(url: URL, config: ImageConfig, originalImage: Sharp) {
+    if (url.host) {
+        const baseURL = new URL(url.origin + url.pathname)
+        const buffer = await originalImage.toBuffer()
+        return hash([baseURL.href, JSON.stringify(config), buffer])
+    }
+
+    // baseURL isn't a valid URL, but just a string used for an identifier
+    // use a relative path in the local case so that it's consistent across machines
+    const baseURL = new URL(url.protocol + path.relative(process.cwd(), url.pathname))
+    const { mtime } = await stat(path.resolve(process.cwd(), url.pathname))
+    return hash([baseURL.href, JSON.stringify(config), mtime.getTime().toString()])
+}
+
+function hash(keyParts: Array<string | NodeJS.ArrayBufferView>) {
+    let hash = createHash('sha1')
+    for (const keyPart of keyParts) {
+        hash = hash.update(keyPart)
+    }
+    return hash.digest('hex')
 }
 
 type MaybePromise<T> = T | Promise<T>

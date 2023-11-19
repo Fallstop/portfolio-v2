@@ -1154,6 +1154,9 @@
 			}
 		}
 	}}
+	on:afterprint={() => {
+		PAUSED = false;
+	}}
 	on:mousedown={(e) => {
 		if (!INTERACTIVE) return;
 		const posX = scaleByPixelRatio(e.offsetX);
@@ -1208,7 +1211,7 @@
         top: 0;
         left: 0;
         width: 100%;
-        height: 100vw;
+        height: 100vh;
         z-index: -10;
 	}
 	.canvas-overlay {
@@ -1227,7 +1230,15 @@
 		// border: solid calc($print-page-padding * $padding-ratio) white;
 		// box-sizing: content-box;
 		// filter: blur($print-page-padding * $padding-ratio * 0.5);
-		box-shadow: #{repeat-with-join("inset 0 0 "+$print-page-padding+" white", ", ", 10)};
+
+		@media print {
+			box-shadow: #{repeat-with-join("inset 0 0 "+$print-page-padding+" white", ", ", 10)};
+		}
 		// background: black;
+	}
+	canvas {
+		@media print {
+			opacity: 0.5;
+		}
 	}
 </style>
