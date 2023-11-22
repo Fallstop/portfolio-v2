@@ -2,6 +2,7 @@
 date: "2021-05-10"
 title: "Brainfuck Shell"
 description: "Brainfuck Shell: Interpret your commands as brainfuck because you most definitely want that"
+tags: ["software", "brainfuck"]
 ---
 <script lang="ts">
     import MarkdownLink from "$md/MarkdownLink.svelte";

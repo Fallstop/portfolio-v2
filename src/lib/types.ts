@@ -7,4 +7,5 @@ export type Post = {
 	path: string
 	thumbnail: string
 	highlight: boolean
+	tags: string[]
 }

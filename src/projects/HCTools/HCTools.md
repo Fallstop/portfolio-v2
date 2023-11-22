@@ -2,6 +2,7 @@
 date: "2021-04-04"
 title: "HC API Tools"
 description: "Simple to use API Gateway to access the mess of Huanui Collage Public data with ease."
+tags: ["software", "typescript", "Huanui College"]
 ---
 <script lang="ts">
     import TimeTableDay from "$lib/components/markdown/ProjectAssets/TimeTableDay.svelte"

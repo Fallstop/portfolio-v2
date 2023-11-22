@@ -9,6 +9,7 @@ collaborators:
  - Taine Reader
  - Dan Burns
 highlight: true
+tags: ["software", "svelte", "covid", "govhack", "48 Hours"]
 ---
 
 <script>

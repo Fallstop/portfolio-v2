@@ -22,6 +22,7 @@ collaborators:
  - Glyn Fleming Bone
  - Mitchell Foster
  - Jasper M-W
+tags: ["art", "film"]
 ---
 
 <!-- [Watch Here! ... actually please don't.<br><br> -->

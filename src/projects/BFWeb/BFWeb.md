@@ -8,6 +8,7 @@ collaborators:
     - Jasper M-W
     - Nathan Hare
     - Jacob Read
+tags: ["software", "Terrible Ideas", "48 Hours, "brainfuck"]
 ---
 <script lang="ts">
     import MarkdownLink from "$md/MarkdownLink.svelte";

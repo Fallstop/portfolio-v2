@@ -1,6 +1,10 @@
 <script lang="ts">
     import { fluidSimFunctions } from "./layout/layoutDataStore";
 
+    export let size: "small" | "medium" | "large" = "medium";
+    export let highlighted: boolean = false;
+    export let title: string | null = null;
+
     function onClick(e: MouseEvent) {
         // Create a "splat" in the fluid sim,
         // in the direction of the delta between the mouse and center of button
@@ -37,7 +41,7 @@
     }
 </script>
 
-<div class="fact-box" on:click={onClick}>
+<div class="fact-box {size}" on:click={onClick} on:click class:highlighted {title}>
     <slot />
 </div>
 
@@ -59,7 +63,18 @@
 
 
         &:hover {
-            background-color: adjust($background-color, $alpha: -0.8);
+            background-color: adjust($primary-color, $alpha: -0.8);
+        }
+
+        &.small {
+            padding: 0.25rem 0.5rem;
+        }
+        &.large {
+            padding: 2rem;
+        }
+        &.highlighted {
+            background-color: adjust($primary-color, $alpha: -0.3);
+            color: white;
         }
     }
 </style>
