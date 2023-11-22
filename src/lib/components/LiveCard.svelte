@@ -5,11 +5,29 @@
     export let highlighted: boolean = false;
     export let title: string | null = null;
 
-    function onClick(e: MouseEvent) {
+    function onClick(e: PointerEvent) {
         // Create a "splat" in the fluid sim,
         // in the direction of the delta between the mouse and center of button
         if ($fluidSimFunctions) {
-            console.log("splatting with", e);
+            const movementScaler = 100;
+
+            if (e.detail === 0) {
+                // Keyboard event detected!
+                // Splat from center
+                let rect = (e.target as HTMLElement).getBoundingClientRect();
+            
+                let xCenter = (rect.left + rect.right) / 2;
+                let yCenter = (rect.top + rect.bottom) / 2;
+
+                let xDirection = 2 * (Math.random() - 0.5) * movementScaler;
+                let yDirection = 2 * (Math.random() - 0.5) * movementScaler;
+
+                $fluidSimFunctions.splatPoint(xCenter, yCenter, xDirection, yDirection, undefined);
+                return;
+            } 
+
+            // Mouse event, base splat for mouse position
+
             let x = e.clientX;
             let y = e.clientY;
 
@@ -19,13 +37,12 @@
             
             let xRatio = (x - rect.left) / rect.width - 0.5;
             let yRatio = 0.5 - (y - rect.top) / rect.height;
-            console.log("Rations", xRatio, yRatio, e.target);
 
             // Scale ratio using a quadratic function
             // https://www.desmos.com/calculator/n5okufbbxh
 
             let minRatio = 0.1;
-            let movementScaler = 100;
+            
             let xScaled =
                 (Math.pow(xRatio, 2) + minRatio) *
                 Math.sign(xRatio) *
@@ -41,9 +58,9 @@
     }
 </script>
 
-<div class="fact-box {size}" on:click={onClick} on:click class:highlighted {title}>
+<button class="fact-box {size}" on:click={onClick} on:click class:highlighted {title}>
     <slot />
-</div>
+</button>
 
 <style lang="scss">
     @use "../../variables.scss" as *;
@@ -60,6 +77,10 @@
         break-inside: avoid;
         
         transition: background-color 0.2s ease-in-out;
+
+        border: none;
+        display: block;
+        text-align: left;
 
 
         &:hover {
