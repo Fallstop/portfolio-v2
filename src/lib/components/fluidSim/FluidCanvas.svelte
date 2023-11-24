@@ -1128,7 +1128,12 @@
 		}
 	}}
 	on:keydown={(e) => {
-		if (e.code === 'KeyP' && !e.ctrlKey) PAUSED = !PAUSED;
+		if (e.code === 'KeyP' && !e.ctrlKey) {
+			// We don't want to to trigger on Input elements
+			const tagName = e.target?.tagName?.toUpperCase();
+			if (tagName === 'INPUT' || tagName === 'TEXTAREA') return;	
+			PAUSED = !PAUSED
+		};
 
 		if (INTERACTIVE) {
 			if (e.key === ' ') splatStack.push(Math.trunc(Math.random() * 20) + 5);

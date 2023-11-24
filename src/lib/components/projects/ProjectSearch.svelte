@@ -63,9 +63,9 @@
     <input bind:value={$textSearch} placeholder="Search" />
     <div class="tag-selector">
         {#each allTags as tag}
-        <LiveCard size="small" on:click={()=>{toggleTag(tag)}} highlighted={$selectedTag === tag} title={`${allTagReferences[tag]}`}>
-            {tag}
-        </LiveCard>
+            <LiveCard tabbable size="small" on:click={()=>{toggleTag(tag)}} highlighted={$selectedTag === tag} title={`${allTagReferences[tag]}`}>
+                {tag}
+            </LiveCard>
         {/each}
     </div>
 </div>

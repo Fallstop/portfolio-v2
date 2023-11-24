@@ -1,7 +1,8 @@
 <script lang="ts">
     import { fluidSimFunctions } from "./layout/layoutDataStore";
 
-    export let size: "small" | "medium" | "large" = "medium";
+    export let size: "small" | "medium" | "large" | "wrap" = "medium";
+    export let tabbable: boolean = false;
     export let highlighted: boolean = false;
     export let title: string | null = null;
 
@@ -58,7 +59,7 @@
     }
 </script>
 
-<button class="fact-box {size}" on:click={onClick} on:click class:highlighted {title}>
+<button class="fact-box {size}" on:click={onClick} on:click class:highlighted {title} type="button" tabindex={tabbable ? 0 : -1}>
     <slot />
 </button>
 
@@ -69,7 +70,7 @@
     .fact-box {
         background-color: adjust($background-color, $alpha: -0.2);
         padding: 1rem;
-        border-radius: 1rem;
+        border-radius: $border-radius;
         box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
         cursor: pointer;
 
@@ -96,6 +97,10 @@
         &.highlighted {
             background-color: adjust($primary-color, $alpha: -0.3);
             color: white;
+        }
+        &.wrap {
+            padding: 0;
+            display: inline-block;
         }
     }
 </style>

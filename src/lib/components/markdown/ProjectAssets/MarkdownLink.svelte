@@ -29,12 +29,7 @@
         box-shadow: 0 0 0 rgba(0, 0, 0, 0.5);
         transition: box-shadow 0.2s ease-in-out;
 
-        :global(svg) {
-            height: 1.3em;
-            max-width: 1.3em;
-            display: inline;
-            vertical-align: text-top;
-        }
+        @include icon-inline;
 
         &:hover {
             box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.5);

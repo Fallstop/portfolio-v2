@@ -31,6 +31,7 @@ $blog-size: $tablet-breakpoint;
 $blog-content-percent: 80%;
 $max-blog-space-available: calc($blog-size * ($blog-content-percent / 100%) - $layout-content-margin);
 
+$border-radius: 0.5rem;
 
 @mixin body-font {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue",sans-serif;
@@ -54,3 +55,13 @@ $max-blog-space-available: calc($blog-size * ($blog-content-percent / 100%) - $l
 }
 
 $print-page-padding: 5rem;
+
+@mixin icon-inline {
+    :global(svg) {
+        height: 1.3em;
+        max-width: 1.3em;
+        display: inline;
+        vertical-align: text-top;
+    }
+
+}

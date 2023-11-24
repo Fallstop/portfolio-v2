@@ -3,6 +3,7 @@
 </a>
 
 <style lang="scss">
+    @use "../../../variables.scss" as *;
     .more-projects {
         text-decoration: none;
         flex-grow: 1;
@@ -12,7 +13,7 @@
         justify-content: center;
         align-items: center;
         border: 4px dashed $mid-tone;
-        border-radius: 1rem;
+        border-radius: $border-radius;
         color: $mid-tone;
         font-size: 2rem;
         font-weight: bold;

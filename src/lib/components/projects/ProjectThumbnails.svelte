@@ -47,7 +47,7 @@
         position: relative;
         aspect-ratio: 16/9;
         overflow: hidden;
-        border-radius: 1rem;
+        border-radius: $border-radius;
 
         page-break-inside: avoid;
         break-inside: avoid;

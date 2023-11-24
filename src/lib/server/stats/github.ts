@@ -1,6 +1,6 @@
 import { Octokit } from "@octokit/core";
 import type { Endpoints } from "@octokit/types";
-const githubToken = import.meta.env.VITE_GITHUB_AUTH_TOKEN || "";
+import { GITHUB_AUTH_TOKEN } from "../env";
 
 const additionalOrgs = ["Questionable-Research-Labs", "zui-nz", "openhealthnz-credentials"]
 
@@ -12,7 +12,7 @@ export interface GithubStats {
 export async function getGithubStats(): Promise<GithubStats> {
     let totalRepoCount = 0;
 
-    if (!githubToken) {
+    if (!GITHUB_AUTH_TOKEN) {
         console.log("No github token provided, skipping github stats")
         return {
             totalRepoCount,
@@ -20,7 +20,7 @@ export async function getGithubStats(): Promise<GithubStats> {
         }
     }
 
-    const octokit = new Octokit({ auth: githubToken });
+    const octokit = new Octokit({ auth: GITHUB_AUTH_TOKEN });
 
     const getRepoCount = (response: { data: Endpoints["GET /user" | "GET /orgs/{org}"]["response"]["data"]; }) => {
         const orgInfo = response.data;
