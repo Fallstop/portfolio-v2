@@ -10,12 +10,12 @@
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch"
   },
   "devDependencies": {
+    "@discordjs/builders": "^1.7.0",
     "@octokit/core": "^5.0.1",
     "@octokit/types": "^12.3.0",
     "@sveltejs/adapter-cloudflare": "^2.3.3",
     "@sveltejs/kit": "^1.27.6",
     "@types/node": "^20.9.2",
-    "discord.js": "^14.14.1",
     "dotenv": "^16.3.1",
     "fuse.js": "^7.0.0",
     "imagetools-core": "^6.0.0",

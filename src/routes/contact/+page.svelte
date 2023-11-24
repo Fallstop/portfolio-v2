@@ -14,22 +14,24 @@
 >
     <h1>Send me a message!</h1>
     <form method="post" use:enhance>
-        <div class="form-inside">
-            <label for="name">Name</label>
-            <LiveCard size="wrap">
-                <input type="text" id="name" name="name" />
-            </LiveCard>
-        </div>
-        <div class="form-inside">
-            <label for="email">Email</label>
-            <LiveCard size="wrap">
-                <input type="email" id="email" name="email" />
-            </LiveCard>
+        <div class="form-row">
+            <div class="form-inside">
+                <label for="name">Name</label>
+                <LiveCard size="wrap">
+                    <input required type="text" id="name" name="name" placeholder="Something close to a name here"/>
+                </LiveCard>
+            </div>
+            <div class="form-inside">
+                <label for="email">Email</label>
+                <LiveCard size="wrap">
+                    <input required type="email" id="email" name="email" placeholder="Mail of the E variant"/>
+                </LiveCard>
+            </div>
         </div>
         <div class="form-inside">
             <label for="message">Message</label>
             <LiveCard size="wrap">
-                <textarea id="message" name="message"></textarea>
+                <textarea required id="message" name="message" placeholder="Interesting message here..."></textarea>
             </LiveCard>
         </div>
         <div class="form-inside">
@@ -49,7 +51,16 @@
         flex-direction: column;
         gap: 1rem;
 
+        .form-row {
+            display: flex;
+            flex-direction: row;
+            gap: 1rem;
+            width: 100%;
+            flex-grow: 1;
+        }
+
         .form-inside {
+            width: 100%;
             display: flex;
             flex-direction: column;
             gap: 0.5rem;
@@ -66,6 +77,7 @@
             textarea {
                 resize: vertical;
                 min-height: 6rem;
+                @include body-font;
             }
             .submit-button {
                 background-color: $primary-color;

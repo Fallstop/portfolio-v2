@@ -1,11 +1,10 @@
-import { json, type Actions, fail } from '@sveltejs/kit';
-import { EmbedBuilder, WebhookClient } from 'discord.js';
+import { type Actions, fail } from '@sveltejs/kit';
 import { DISCORD_WEBHOOK } from '$lib/server/env.js';
-import { accentColor, primaryColor } from '$lib/utilities/colour';
-
+import { accentColor, hexColourToNumber, primaryColor } from '$lib/utilities/colour';
+import { EmbedBuilder } from "@discordjs/builders";
 
 export const actions: Actions = {
-	default: async ({request, getClientAddress}) => {
+	default: async ({request, getClientAddress, fetch}) => {
         const formData = await request.formData();
         const { name, email, message } = Object.fromEntries(formData.entries());
         const IP = getClientAddress();
@@ -19,8 +18,6 @@ export const actions: Actions = {
             return fail(500, { error: "No Discord webhook found." });
         }
         
-        const webhookClient = new WebhookClient({url: DISCORD_WEBHOOK});
-
         // I am very lazy.
         const messageEmbed = new EmbedBuilder()
             .setTitle("New Contact Form Submission")
@@ -29,11 +26,19 @@ export const actions: Actions = {
                 { name: 'Email', value: email, inline: true },
                 { name: 'Message', value: message },
             )
-            .setColor(accentColor)
+            .setColor(hexColourToNumber(accentColor))
             .setTimestamp()
             .setFooter({ text: `IP Address ${IP}`});
 
-        await webhookClient.send({ embeds: [messageEmbed]});
+        fetch(DISCORD_WEBHOOK, {
+            method: "POST",
+            body: JSON.stringify({
+                embeds: [messageEmbed.toJSON()]
+            }),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
 
         return { success: true}
 	}
