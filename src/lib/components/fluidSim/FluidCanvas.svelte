@@ -872,6 +872,10 @@
 	}
 
 	export function splatPoint(x: number, y: number, dx: number, dy: number, color: RGBColour | undefined) {
+		if (!canvas) { 
+			return;
+		}
+
 		let xRelative = scaleByPixelRatio(x) / canvas.width;
 		let yRelative = 1 - scaleByPixelRatio(y) / canvas.height;
 		let colorChosen = color ?? generateColor();
@@ -1182,7 +1186,6 @@
 	on:touchstart={(e) => {
 		if (!INTERACTIVE) return;
 
-		e.preventDefault();
 		const touches = e.targetTouches;
 		while (touches.length >= pointers.length) pointers.push(createPointer());
 		for (let i = 0; i < touches.length; i++) {
@@ -1194,7 +1197,6 @@
 	on:touchmove={(e) => {
 		if (!INTERACTIVE) return;
 
-		e.preventDefault();
 		const touches = e.targetTouches;
 		for (let i = 0; i < touches.length; i++) {
 			const pointer = pointers[i + 1];

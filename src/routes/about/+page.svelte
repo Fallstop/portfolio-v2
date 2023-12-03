@@ -17,7 +17,7 @@
     personal_headshot
 >
     <div class="content">
-        <h1>Kia ora, I'm Jasper M-W.</h1>
+        <h1 class="page-header"><div>Kia ora,</div> <div>I'm Jasper M-W.</div></h1>
         <h3>
             I'm a high schooler at Huanui College, who's spent the last {getYearsFrom("2019")} years
             building random projects in my spare time.
@@ -99,10 +99,7 @@
             padding-right: 0.5rem;
         }
     }
-    h1 {
-        font-size: 3rem;
-        margin-bottom: 0.5rem;
-    }
+
     .fact-container {
         display: flex;
         flex-direction: row;

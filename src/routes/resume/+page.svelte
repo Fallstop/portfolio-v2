@@ -16,7 +16,7 @@
 >
 
 <div class="content">
-    <h1>Jasper Miller-Waugh</h1>
+    <h1 class="page-header">Jasper Miller-Waugh</h1>
     <p>
         I'm a year-13 student about to start computer-systems engineering at University of Auckland.
     </p>

@@ -139,13 +139,19 @@
             }
         }
         .content-container {
-            margin: 5rem 5rem 5rem 0;
-            @media screen and (max-width: $tablet-breakpoint) {
-                margin: 0;
-            }
+            padding: 5rem 5rem 5rem 0;
+
             @media print {
                 margin: 0;
+                padding: 0;
             }
+            @media screen and (max-width: $mobile-breakpoint) {
+                padding: 0.5rem;
+            }
+            @media screen and (max-width: $tablet-breakpoint) {   
+                padding: 1rem;
+            }
+
         }
         .fps-counter {
             position: absolute;

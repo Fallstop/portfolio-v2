@@ -19,10 +19,13 @@
 >
     <div class="project-container">
         <h1 class="page-header">Projects</h1>
-        <ProjectSearch projectList={data.posts} bind:searchResult={projectSearchResult} />
+        <ProjectSearch
+            projectList={data.posts}
+            bind:searchResult={projectSearchResult}
+        />
         <ul class="project-list">
             {#if $projectSearchResult}
-                <ProjectThumbnails posts={$projectSearchResult}/>
+                <ProjectThumbnails posts={$projectSearchResult} />
             {/if}
         </ul>
     </div>
@@ -34,32 +37,25 @@
     @use "sass:math";
     $max-projects: 100;
 
-    .project-container {
-        .project-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            flex-wrap: wrap;
-            flex-direction: row;
-            align-items: stretch;
-            width: 100%;
-            max-width: 100vw;
-            gap: 2rem;
-            box-sizing: border-box;
-        }
+    .project-container .project-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        align-items: stretch;
+        width: 100%;
+        max-width: 100vw;
+        gap: 2rem;
+        box-sizing: border-box;
+
         @media screen and (max-width: $tablet-breakpoint) {
-            padding: 1rem;
-            .project-list {
-                gap: 1rem;
-            }
+            gap: 1rem;
         }
         @media screen and (max-width: $mobile-breakpoint) {
-            padding: 0.5rem;
-            .project-list {
-                gap: 0.5rem;
-                flex-direction: column;
-            }
+            gap: 0.5rem;
+            flex-direction: column;
         }
     }
 </style>

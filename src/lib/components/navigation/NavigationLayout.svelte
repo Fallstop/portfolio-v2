@@ -20,12 +20,8 @@
         <div class="empty" />
     {/if}
     {#each pages as { pageSlug, title, icon, primary } (direction+pageSlug)}
-        <div class="animation-container"
-            in:send={{ key: pageSlug}}
-            out:receive={{ key: pageSlug }}
-            animate:flip
-        >
-            <NavigationButton {pageSlug} {title} {icon} {primary} />
+        <div class="animation-container">
+            <NavigationButton {pageSlug} {title} {icon} primary={false} />
         </div>
     {/each}
     {#if staggeredButtons}

@@ -6,14 +6,15 @@
     export let primary = false;
 
     import { page } from "$app/stores";
-    import { receive, send } from "$lib/utilities/sendTransition";
-    import { flip } from "svelte/animate";
     import { homePage, type PageSlug } from "./pages";
+    import { liveCardEffect } from "$lib/effects/liveCardEffect";
+
     $: activePage = $page.url.pathname == pageSlug;
+
 </script>
 
-<a href={activePage ? homePage.pageSlug : pageSlug} >
-    <div class="navigation-button" class:primary>
+<a href={activePage ? homePage.pageSlug : pageSlug} use:liveCardEffect={{movementScaler: 300}}>
+    <div class="navigation-button" class:primary={primary || activePage}>
         <svelte:component this={activePage ? homePage.icon : icon} size="0.9em" />
         <span class="button-title">
             {activePage ? homePage.title : title}
