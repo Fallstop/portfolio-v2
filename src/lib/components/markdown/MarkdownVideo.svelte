@@ -5,7 +5,7 @@
     const {size, altText} = parseSettings(alt);
 </script>
 <!-- svelte-ignore a11y-media-has-caption -->
-<video {...$$restProps} controls class="{size}" aria-describedby={altText} title={altText}>
+<video {...$$restProps} controls class="{size} border" aria-describedby={altText} title={altText}>
     Your browser does not support the video tag.
 </video>
 

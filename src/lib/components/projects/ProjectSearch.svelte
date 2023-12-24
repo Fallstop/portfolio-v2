@@ -4,6 +4,7 @@
     import Fuse from "fuse.js";
     import LiveCard from "../LiveCard.svelte";
     import { normaliseCase, toProperCase } from "$lib/utilities/string";
+    import { tagCase } from "./tags";
 
     export let projectList: Post[];
 
@@ -64,7 +65,7 @@
     <div class="tag-selector">
         {#each allTags as tag}
             <LiveCard tabbable size="small" on:click={()=>{toggleTag(tag)}} highlighted={$selectedTag === tag} title={`${allTagReferences[tag]}`}>
-                {tag}
+                {tagCase(tag)}
             </LiveCard>
         {/each}
     </div>

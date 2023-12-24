@@ -1,20 +1,20 @@
 ---
 date: "2021-05-10"
-title: "Brainfuck Shell"
-description: "Brainfuck Shell: Interpret your commands as brainfuck because you most definitely want that"
-tags: ["software", "brainfuck"]
+title: "Brainf*ck Shell"
+description: "Brainf*ck Shell: Interpret your commands as brainf*ck because you most definitely want that"
+tags: ["software", "brainf*ck"]
 ---
 <script lang="ts">
     import MarkdownLink from "$md/MarkdownLink.svelte";
 </script>
 
-### Brainfuck Shell: Interpret your commands as brainfuck because you most definitely want that.
+### Brainf*ck Shell: Interpret your commands as brainfuck because you most definitely want that.
 
 [![Get it from the Snap Store:small](https://snapcraft.io/static/images/badges/en/snap-store-black.svg)](https://snapcraft.io/brainfuck-shell)
 <MarkdownLink href="https://github.com/Fallstop/brainfuck-shell">Fallstop/brainfuck-shell</MarkdownLink>
 
 
-A new type of shell based off [nu-shell](https://github.com/nushell/nushell) that takes your commands in brainfuck.
+A new type of shell based off [nu-shell](https://github.com/nushell/nushell) that takes your commands in brainf*ck.
 
 ## Example:
 
@@ -38,7 +38,7 @@ Executing: cowsay why
 
 ## Learning more
 
-Other than the brainfuck part, the rest of this is just forked from [nu-shell](https://github.com/nushell/nushell), so send love over there and find more about configuration commands for the shell.
+Other than the brainf*ck part, the rest of this is just forked from [nu-shell](https://github.com/nushell/nushell), so send love over there and find more about configuration commands for the shell.
 
 ## About the interpreter
 
@@ -60,7 +60,7 @@ Snap does not support allot of platforms, so you can install from source as well
 
 You need make sure you have installed [rustup](https://rustup.rs/) and the latest stable compiler via `rustup install stable`):
 
-To build Brainfuck-Shell, you will need to use the **latest stable (1.47 or later)** version of the compiler.
+To build Brainf*ck-Shell, you will need to use the **latest stable (1.47 or later)** version of the compiler.
 
 Required dependencies:
 
@@ -69,7 +69,7 @@ Required dependencies:
 
 Optional dependencies:
 
--   To use Brainfuck-Shell with all possible optional features enabled, you'll also need the following:
+-   To use Brainf*ck-Shell with all possible optional features enabled, you'll also need the following:
     -   On Linux (on Debian/Ubuntu): `apt install libxcb-composite0-dev libx11-dev`
 
 And clone the repository,
