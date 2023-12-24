@@ -1,5 +1,5 @@
 ---
-date: "2023-07-12"
+date: "2023-03-12"
 title: "Needy Appliances"
 description: "Control your emotionally needy appliances with AI voice controls."
 tags: ["software", "hardware", "48 Hours", "Terrible Ideas"]
@@ -13,21 +13,99 @@ collaborators:
 
 <script lang="ts">
     import MarkdownLink from "$md/MarkdownLink.svelte";
+    import FancyQuote from "$md/FancyQuote.svelte";
+    import HighlightedBlock from "$md/HighlightedBlock.svelte";
+    import ProConTable from "$md/ProConTable.svelte";
+    import RedactedText from "$md/RedactedText.svelte";
 </script>
 
-<MarkdownLink href="https://signalquo.qrl.nz/" color="#434f91">Signal Quo Website</MarkdownLink>
-<MarkdownLink href="https://github.com/Questionable-Research-Labs/sq-comms.git">Questionable-Research-Labs/sq-comms</MarkdownLink>
+<MarkdownLink href="https://github.com/Questionable-Research-Labs/needy-appliances.git">Questionable-Research-Labs/needy-appliances</MarkdownLink>
 
-Signal Quo is an prototype built by Somewhat Questionable. Our team claimed a first-place finish at [Grapple23](https://ymcachch.org.nz/grapple/), a week-long engineering competition, held in [YMCA’s 4C Centre](https://4c.nz/) in Christchurch, New Zealand.
+For the March 2023 Terrible Ideas Hackathon, we built an emotional needy kitchen! Over the 48-Hours, we gave a range of appliances a life of their own.
 
-The prompt was to build something that would improve life on Mars. During the week, we developed a secondary emergency communication network for a Mars colony. Consisting of a main hub, personal transmitters, and environmental monitoring devices, Signal Quo is designed to operate during even severe Martian dust storms. The system utilizes long range (LoRa) technology, and incorporates a novel HopTrace protocol that records each signal's path, enabling geolocation for nodes in distress.
+## Microwave
+For the Microwave, we took away it's physical controls, and bolted on a microphone. From now on, you can only control it by convincing a self-absorbed GPT-4 agent to turn on the Microwave. It'll listen to your requests, and if you call it *Master* while using only the *finest* of manners, it'll send the command to run the microwave. It also displays the conversation history on an IPad above the microwave, and will happily insult you through the speaker system.
 
-## Our Vision
-Imagine invaluable human life thriving amidst the daunting Martian duststorms, fortified by a resilient communication system - that's the futureSignal Quo aspires to facilitate.
 
-Out of this vision, the Signal Quo system was born - a mesh network acting as a secondary communication system for Martian colonists, featuring a main hub, personal transmitters, and environmental monitoring modules. All these devices are designed to function meticulously even during severe dust storms, making every EVA safer and more efficient.
+<ProConTable>
+    <ul slot="pros">
+        <li>Will refuse to microwave anything that might damage the microwave</li>
+        <li>Encourages ethical microwaving, no hamsters allowed</li>
+        <li>Handsfree operation</li>
+    </ul>
+    <ul slot="cons">
+        <li>The microwave actively despises you, and is incredibly lazy</li>
+        <li>You have to submit to your new master, the Microwave, before use</li>
+        <li>If you are too rude for it at any point, it will refuse to serve you for the remainder of your conversation</li>
+    </ul>
+</ProConTable>
 
-## How It Works
-Our system utilises the Low Range (LoRa) technology for its radio communication protocol - not using the internet-expanded LoRaWAN version but the raw LoRa radio, focusing on creating a network directly serving the specific needs of a Mars colony.
+## Kettle
+<FancyQuote>
+    A watched pot never boils.
+    <span slot="author">Fundamental Law of Physics</span>
+</FancyQuote>
 
-Our mesh network consists of nodes that connect and work together to expand communication coverage. Each node powers our novel HopTrace protocol which accurately captures and records all the communication hops, allowing geolocation of devices several hops away from the main hub.
+We added facial recognition to the pot, so every time you look at it, it turns off. When you look away, it turns back on. Awful.
+
+<HighlightedBlock style="warning">
+    <span slot="header">Unfortunate Sideffect</span>
+    If you leave the kettle on, it will never turn itself off.
+    Every time you check it, it will be off, and it will turn on when you leave the room.
+    <br/>
+    It has a desire for Arson, be warned.
+</HighlightedBlock>
+
+
+<ProConTable>
+    <ul slot="pros">
+        <li>Reminds you to not sit and stare at the kettle while it boils</li>
+        <li>Excellent tool for committing arson</li>
+    </ul>
+    <ul slot="cons">
+        <li>You can't be in the same room as the kettle if you want it to boil</li>
+        <li>It won't turn off when it's finished boiling</li>
+    </ul>
+</ProConTable>
+
+## Toaster
+
+The Toaster works similarly to the Microwave, but instead it insulting you, you have to insult it for it to toast your bread.
+
+<ProConTable>
+    <ul slot="pros">
+        <li>Handsfree operation</li>
+        <li>Practice your insults</li>
+    </ul>
+    <ul slot="cons">
+        <li>You feel like a horrible person while using it</li>
+        <li>The robots will come for you first when the AI takeover happens</li>
+    </ul>
+</ProConTable>
+
+
+## Knife Block A
+This knife block experiences pain. It will scream if you try to use it to store your knifes, you monster.
+
+<ProConTable>
+    <ul slot="pros">
+        <li>Practice M<RedactedText length={3}/>er in your kitchen!</li>
+    </ul>
+    <ul slot="cons">
+        <li>Jumpscare on every use</li>
+        <li>The robots will come for you first when the AI takeover happens</li>
+    </ul>
+</ProConTable>
+
+## Knife Block B
+This knife block experiences fear. It'll run away from you if you approach, usually falling off the table and onto your feet.
+
+<ProConTable>
+    <ul slot="pros">
+        <li>Improve your skills stabbing a moving target</li>
+    </ul>
+    <ul slot="cons">
+        <li>Might fall off the table with all the knifes</li>
+        <li>The robots will come for you first when the AI takeover happens</li>
+    </ul>
+</ProConTable>
