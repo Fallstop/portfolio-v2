@@ -153,7 +153,7 @@ Description
 
 
 
-![Flash Monotron 300CS:small](./FlashMonotron300CS.png)
+![Flash Monotron 300CS:small:borderless](./FlashMonotron300CS.png)
 
 
 
@@ -171,7 +171,7 @@ Description
 *   Cheapest one I could find         
 
 
-![I didn't know bell controllers could get this bad:small](./DynamicFullyAutomatic.png)
+![I didn't know bell controllers could get this bad:small:borderless](./DynamicFullyAutomatic.png)
 
 
 ## Options somewhat close to my solution
@@ -196,7 +196,7 @@ Description
 ![This is the highest resolution release they have](./InnovationWirelessInterface.png)
 
 
-![Innovation Wireless Controller definitely has wires](./InervationWirelessController.png)
+![Innovation Wireless Controller definitely has wires:borderless](./InervationWirelessController.png)
 
 
 

@@ -30,7 +30,7 @@ collaborators:
 Electroencephalography or EEG henceforth, is a method of measuring brain activity. It works by measuring the voltage between two points on the skull, typically using electrodes, probes henceforth. This is the technology that you might recognize from the sci-fi brain to computer interfaces or from a sleep lab. This fundamentally works by picking up on the electrical signals from different parts of your brain which can be used to determine the rough state of that area of the brain.
 
 ## Analog to Digital Converters
-![An analog signal being converted into a digital signal:small](./graphics/Analog2Digital.svg)
+![An analog signal being converted into a digital signal:small:borderless](./graphics/Analog2Digital.svg)
 
 One major component of EEG is the process of converting the analog data captured by the probes into digital signals that can be handled by the brain. Computers work using a binary system to represent data, high voltage or low voltage, the voltage points are discrete. The values coming from the brain are continuous. Therefore, some process must occur to turn analog voltage levels into digital values. These devices can be found in many different products, including but not limited to: Modern Voltmeters, Oscilloscopes, and Digital Cameras. We will call these converters A->D for shorthand. An everyday example of this is the old AM (Analog) vs the newer FM (Digital) Radios, you might have noticed that AM gets more noisy and quieter as you get further from the station (In this case, the Brain), while FM stays just as clear and loud as long as it plays.
 
@@ -54,7 +54,7 @@ That's where we encountered our problem, we're broke students who can't afford a
 ### Industry Standard
 The industry has thus far been restricted to enterprise/research use cases, which means that they just bite the bullet and spend whatever it costs to get the headset they need. This means that they have a direct line from the probe to an A->D converter on the controller board.
 
-![A whole bunch of probes directly connected to A2D converters:small](./graphics/IndustryStandard.svg)
+![A whole bunch of probes directly connected to A2D converters:small:borderless](./graphics/IndustryStandard.svg)
 
 <ProConTable>
     <ul slot="pros">
@@ -71,7 +71,7 @@ The industry has thus far been restricted to enterprise/research use cases, whic
 ### DIY Microcontroller Method
 This is the alternative method. It uses amplifiers connected to general purpose microcontrollers and their embedded analog inputs, for one or two channels. The most common microcontroller of choice is the arduino uno or similar. These aren’t designed to be scientific devices, but rather as an introduction to EEG and can do basic detection.
 
-![A single probe connected to Amp, running into a A2D converter:medium](./graphics/DIYSingleChannel.svg)
+![A single probe connected to Amp, running into a A2D converter:medium:borderless](./graphics/DIYSingleChannel.svg)
 
 
 <ProConTable>
@@ -94,7 +94,7 @@ We considered these two approaches to accomplish this:
 ### Many Probes to Many Multiplexer channels to One A->D
 This is the simplest way to increase the number of probes. Each probe is mapped directly to its own channel on the multiplexer. This does not add much complexity to the design, but it increases the ratio of probes to A->D converters to a maximum of 16:1.
 
-![One probe at a time being routed through the multiplexer:small](./graphics/MultiplexSignal.svg)
+![One probe at a time being routed through the multiplexer:small:borderless](./graphics/MultiplexSignal.svg)
 
 <ProConTable>
     <ul slot="pros">
@@ -110,7 +110,7 @@ This is the simplest way to increase the number of probes. Each probe is mapped 
 ### Many Probes to Many Amplifiers to some Multiplexers Channels to One A->D
 This is the more complicated solution, but with a vastly increased theoretical limit. Instead of using the multiplexer to switch between the inputs, it is possible to use it in reverse as a “demultiplexer”, and use it to switch amplifiers located directly on the probes. This allows a grid layout to select one probe out of many, which means that instead of the other method’s 1:1 multiplexer channel to probe ratio, the multiplexer channel count can be calculated with f(x)→⌈2x⌉, and x is the probe count.
 
-![All probes at a time being routed with two multiplexers:medium](./graphics/MultiplexPower.svg)
+![All probes at a time being routed with two multiplexers:medium:borderless](./graphics/MultiplexPower.svg)
 
 
 <ProConTable>
@@ -132,7 +132,7 @@ This is the more complicated solution, but with a vastly increased theoretical l
 ## PicoScope Streaming
 All the data is gathered from the Picoscope using the amazing open source pico-sdk crate from Meaty Solutions. It’s a set of high-level, high performance, and gapless bindings and wrappers that’s driver and platform agnostic. We built in a startup CLI to find the picoscope, set speed, voltages and channels, and the sdk configures and sets up the Picoscope which then starts sending data every ~100ms to an event listener. This allows us to simply create a new thread to start the data processing.
 
-![The Picoscope we were using](./photos/Picoscope2207_transparent.png)
+![The Picoscope we were using:borderless](./photos/Picoscope2207_transparent.png)
 
 ## PicoScope Streaming
 
@@ -143,7 +143,7 @@ Currently all we have is an stream of raw data points which we need to do 3 oper
     - Block together the sync pulse data points, and throw out any out of place
     - Create vector of center of Sync pulses
 
-    ![](./graphics/DataProcessing1.svg)
+    ![:borderless](./graphics/DataProcessing1.svg)
  - Use synchronisation pulses to estimate where the center of the virtual channel locations are going to be
     - Find the difference between the last sync pulse next sync pulse
     - Use difference to create a vector of pointers to virtual channels
@@ -152,7 +152,7 @@ Currently all we have is an stream of raw data points which we need to do 3 oper
     - Take a mean or mode depending on the data range.
 Once processed, the state mutex is unlocked and the vector of virtual channels (map of channel id’s to f64 data points) is moved over, and the thread terminates.
     
-![](./graphics/DataProcessing2.svg)
+![:borderless](./graphics/DataProcessing2.svg)
 
 
 

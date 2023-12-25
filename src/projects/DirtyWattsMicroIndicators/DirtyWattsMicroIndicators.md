@@ -64,7 +64,7 @@ The New Zealand power grid is in constant flux, the power demand skyrockets in t
 
 With these devices, you can target your power usage to more renewable power and reduce your carbon footprint. If the Micro-Indicator light is blood-red, you might want to delay high load power draws, like charging your electric car, running the dishwasher, or drying your clothes. It gives you an intuitive sense of how strained the power grid is right now, and the best to time to load everything up.
 
-![:large](./Graphics/DirtyWatts%20Data%20Sources.svg)
+![:large:borderless](./Graphics/DirtyWatts%20Data%20Sources.svg)
 
 ## Micro-Indicator Framework
 
@@ -73,7 +73,7 @@ The codebase is designed so that anyone can download it, and automatically get l
 
 <MarkdownLink href="https://github.com/Questionable-Research-Labs/DirtyWatts/tree/main">Questionable-Research-Labs/DirtyWatts</MarkdownLink>
 
-![](./Graphics/DirtyWatts%20Framework.svg)
+![:borderless](./Graphics/DirtyWatts%20Framework.svg)
 
 # Micro-Indicator Arsenal
 ## Base Electronics
@@ -107,29 +107,29 @@ Unfortunately, we can't display every part of the power grid on one light, but w
 Now, it's a year later and the project has collected over 110,000 data points of how the power-grid behaves throughout all seasons. The original algorithm was showing it's weaknesses, so I set out to develop a new and more representative colour scale.
 
 ### CO2e Emissions by Power Source
-![:large](./Graphs/Co2eEmissionsTransparent.png)
+![:large:borderless](./Graphs/Co2eEmissionsTransparent.png)
 
 In the end, I developed two closely linked metrics that can capture the climate impact of the grid, and then couldn't decide on which one to use for two full months.
 
 ### Cumulative CO2e Emissions
 The total CO2e being released by New Zealand's grid at this moment, in Tonnes/hour. Heavily influenced by the current power output of the grid, making it cycle on a daily basis. It shows how "strained" the power-grid currently is.
 
-![:large](./Graphs/Co2eTotalBar.png)
+![:large:borderless](./Graphs/Co2eTotalBar.png)
 
 ## CO2e Intensity
 The amount of extra CO2e emitted by the grid if you turned on an appliance, in gCO2e/kwh. Heavily influenced by sources of power and the operational status of power-plants, meaning it has much longer cycles than the Cumulative Output.
 
-![:large](./Graphs/Co2eIntensityBar.png)
+![:large:borderless](./Graphs/Co2eIntensityBar.png)
 
 I made both options available for developers, but I went with the Cumulative CO2e Output by default because of its daily cycles, which is more informative for telling a user *when* during the day to charge their car, rather than screaming at them to not charge it for a week straight.
 For display on the micro-indicators, the last step is to translate the metric onto a green to red colour scale, which I developed in the Oklab perceptually uniform colour-space with a set luminosity across the entire scale.
 
-![](./Graphs/ColourScale.png)
+![:borderless](./Graphs/ColourScale.png)
 
 # Micro-Indicator Tutorial
 
 I've compiled a comprehensive guide on how to build and program the base Micro-Indicator device, designed for someone with minimal electronic knowledge to follow along. It goes right from the start of choosing parts, to setting up software, to configuring the device. I built the tutorial because I'm always on the hunt for new rewarding projects that I can help teach people with. Building a Micro-Indicator starts out straight-forward with the foundation device, and then can be taken to any direction as further development.
 
-![](./Graphics/DirtyWatts%20Guide%20Processs.svg)
+![:borderless](./Graphics/DirtyWatts%20Guide%20Processs.svg)
 
 <MarkdownLink href="https://wiki.dirtywatts.nz/">DirtyWatts Wiki</MarkdownLink>

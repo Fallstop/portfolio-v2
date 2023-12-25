@@ -6,7 +6,7 @@
         object-fit: cover;
     }
 
-    &.border:not(.raw) {
+    &:not(.raw):not(.borderless) {
         border-radius: $border-radius;
         box-shadow: 0 0 $border-radius rgba(0, 0, 0, 0.5);
     }

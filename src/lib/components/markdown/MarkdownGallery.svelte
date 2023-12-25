@@ -13,7 +13,7 @@
 
     export let src: object = {};
     export let alt = "";
-    const { size, altText } = parseSettings(alt);
+    const { classes, altText } = parseSettings(alt);
 
     let imagesData: [ProcessedImageMetadata, ProcessedImageMetadata][];
     $: imagesData = Object.values(src).map((x) => x.default);
@@ -54,7 +54,7 @@
         style: `--active-image-height: ${activeImageHeight}px; --active-image-width: ${activeImageWidth}px;`
     } }} -->
 
-    <div class="image-gallery {size}" slot="thumbnail">
+    <div class="image-gallery {classes}" slot="thumbnail">
         {#each galleryData as imageMetadata}
             {@const { id, small, large } = imageMetadata}
             <GalleryThumbnail {id}>
