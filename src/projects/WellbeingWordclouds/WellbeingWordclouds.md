@@ -1,6 +1,7 @@
 ---
 date: "2023-11-10"
 title: "Wellbeing Wordclouds"
+subtitle: "Automatically turning student responses into wordclouds that share love."
 description: "Govhack 2023 Entry - Media bias detection using the power of AI"
 collaborators:
  - Jasper M-W

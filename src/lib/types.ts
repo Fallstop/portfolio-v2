@@ -1,5 +1,6 @@
 export type Post = {
 	title: string
+	subtitle?: string
 	slug: string
 	description: string
 	date: string
@@ -8,4 +9,6 @@ export type Post = {
 	thumbnail: string
 	highlight: boolean
 	tags: string[]
+	authors: string[]
+	collaborators: string[]
 }
