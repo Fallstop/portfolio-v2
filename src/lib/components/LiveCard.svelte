@@ -1,14 +1,17 @@
 <script lang="ts">
     import { liveCardEffect } from "$lib/effects/liveCardEffect";
+    import { fluidSimFunctions } from "./layout/layoutDataStore";
 
-    export let size: "small" | "medium" | "large" | "wrap" = "medium";
+    export let hidden: "hidden-mobile" | "hidden" | "visible" = "visible";
+    export let size: "small" | "medium" | "large" | "wrap" | "wrap grow" = "medium";
     export let style: "normal" | "error" = "normal";
     export let tabbable: boolean = false;
     export let highlighted: boolean = false;
     export let title: string | null = null;
+    $: clickable = !!$fluidSimFunctions;
 </script>
 
-<button class="fact-box {size} {style}" use:liveCardEffect on:click class:highlighted {title} type="button" tabindex={tabbable ? 0 : -1}>
+<button class="fact-box {size} {style} {hidden}" class:clickable={clickable} use:liveCardEffect on:click class:highlighted {title} type="button" tabindex={tabbable && clickable ? 0 : -1}>
     <slot />
 </button>
 
@@ -21,7 +24,10 @@
         padding: 1rem;
         border-radius: $border-radius;
         box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
-        cursor: pointer;
+        cursor: initial;
+        &.clickable {
+            cursor: pointer;
+        }
 
         page-break-inside: avoid;
         break-inside: avoid;
@@ -50,7 +56,21 @@
         &.wrap {
             padding: 0;
             display: inline-block;
+            &.grow {
+                width: 100%;
+            }
         }
+
+        &.hidden {
+            display: none;
+        }
+
+        @media screen and (max-width: $tablet-breakpoint) {
+            &.hidden-mobile {
+                display: none;
+            }
+        }
+        
 
 
         &.error {
