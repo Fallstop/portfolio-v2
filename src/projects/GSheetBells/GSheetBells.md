@@ -1,7 +1,7 @@
 ---
 date: "2020-05-01"
 title: "G-Sheet Bells"
-description: "Development of an IOT (Internet of Things) Bell Controller using Google Sheets to improve the experience for Students and Teachers"
+description: "Development of an IOT Bell Controller using Google Sheets."
 tags: ["software", "hardware", "python", "Huanui College", "Science Fair"]
 ---
 
