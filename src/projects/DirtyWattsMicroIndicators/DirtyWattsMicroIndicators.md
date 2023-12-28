@@ -79,7 +79,7 @@ The codebase is designed so that anyone can download it, and automatically get l
 ## Base Electronics
 The leanest and cheapest Micro-Indicator there is. It consists of just two components, a wifi-enabled microcontroller and some RGB lights.
 
-![](./DevicePhotos/BaseElectronics/)
+![:full](./DevicePhotos/BaseElectronics/)
 
 ## Smart Socket
 Did you know that, inside many standard smart-sockets, is the same family of chips that DirtyWatts was designed for? This smart plug is from Bunnings, which I took the cover off, soldered to the debug pins, and flashed with DirtyWatts firmware! It'll automatically turn the power on-and-off when the CO2e Emissions exceeds its threshold.

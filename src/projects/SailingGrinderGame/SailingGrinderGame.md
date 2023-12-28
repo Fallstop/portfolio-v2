@@ -11,7 +11,7 @@ tags: ["software", "hardware", "svelte", "rust"]
   import MarkdownLink from "$md/MarkdownLink.svelte";
 </script>
 
-<MarkdownLink href="https://github.com/Fallstop/naut-grinder.git">Fallstop/naut-grinder</MarkdownLink>
+<MarkdownLink href="https://github.com/Fallstop/naut-grinder">Fallstop/naut-grinder</MarkdownLink>
 
 A short deadline project developed for the Naut, a local E-Boat company, to use in an upcoming Festival. It had to be portable, reliable, and incredibly adjustable for changes on-the-day.
 

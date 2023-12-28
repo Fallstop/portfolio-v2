@@ -18,7 +18,7 @@ tags: ["software", "hardware", "C/C++", "48 Hours", "Terrible Ideas"]
 </script>
 
 
-<MarkdownLink href="https://github.com/Questionable-Research-Labs/lounge-gate.git">Questionable-Research-Labs/lounge-gate</MarkdownLink>
+<MarkdownLink href="https://github.com/Questionable-Research-Labs/lounge-gate">Questionable-Research-Labs/lounge-gate</MarkdownLink>
 
 ## Building a Motorised Couch
 For the December 2023 Terrible Ideas Hackathon, my teams aimed for a long attempted project, building a motorised couch. A few teams had attempted building their own over the years, each attempt accumulating more nessacery parts before fading.

@@ -9,7 +9,7 @@ collaborators:
  - Leya Stow
  - Carolyn
 highlight: true
-tags: ["software", "svelte", "rust", "python", "govhack", "48 Hours", "environmental"]
+tags: ["software", "svelte", "python", "govhack", "48 Hours"]
 ---
 
 <script>
@@ -18,22 +18,31 @@ tags: ["software", "svelte", "rust", "python", "govhack", "48 Hours", "environme
 </script>
 
 
-<MarkdownLink href="https://2022.hackerspace.govhack.org/projects/dirty_watts">Govhack Project Page</MarkdownLink>
-<MarkdownLink href="https://dirtywatts.nz">dirtywatts.nz</MarkdownLink>
-<MarkdownLink href="https://github.com/Questionable-Research-Labs/DirtyWatts">Questionable-Research-Labs/DirtyWatts</MarkdownLink>
-<MarkdownLink href="https://www.youtube.com/watch?v=wvJlPGGfMgM">Presentation Video</MarkdownLink>
 
-Every year, there is a data science competition called GovHack. GovHack is all about taking open government data in the form of obscure spreadsheets and esoteric documents and using that data to build something useful for the public. It's a Hackathon, meaning teams only have 48 hours to build and film a proposal. For my fifth year competing in 2022, my team built, filmed, and released DirtyWatts.nz, a live breakdown of New Zealand's power grid. It has a dashboard breaking down the sources of electricity, showing if the power was coming from Hydro, Gas, Coal, etc. It also included a map of New Zealand, showing all the points where power as flowing in and out of the gird backbone.
 
-<YoutubeEmbed videoID="wvJlPGGfMgM"/>
+<MarkdownLink href="https://2023.hackerspace.govhack.org/projects/biaslenz">TODO Govhack Project</MarkdownLink>
+<MarkdownLink href="https://biaslenz.qrl.nz/">biaslenz.qrl.nz</MarkdownLink>
+<MarkdownLink href="https://github.com/Questionable-Research-Labs/govhack-23">Questionable-Research-Labs/govhack-23</MarkdownLink>
+<!-- <MarkdownLink href="https://www.youtube.com/watch?v=wvJlPGGfMgM">Presentation Video</MarkdownLink>
+<YoutubeEmbed videoID="wvJlPGGfMgM"/> -->
 
-## Website
+![:borderless:small](./logo-text.svg)
 
+Have you ever seen a truly awful photo of a politician in a newspaper? Next to the confident stance of the opposing party? The photography used in our media is the first thing we see, and can bias our opinions before we've even read the article. BiasLenz scans photography from New Zealand's biggest media organisations, looking for a political stance in their portrait photography.
 
 ## Data Scrapper
+BiasLenz get's it's data from two places:
+ - RSS Feeds from each organisation, scraping the headline photo from the page
+ - Google Images search for images hosted on each news site with the politician
 
-## Data Sources
+Once it has the dataset of images, it cleans up and labels the dataset:
+ - Deduplicating using a crop-resistant hash
+ - Identifying all faces in the pictures, and cropping to them
+ - Matching those cropped faces to the headshots on the parliament website
 
-## Govhack Awards
+## Sentiment Analysis
+Using the `schibsted/facial_expression_classifier` AI model, BiasLenz determines the sentiment of the photo. Here's the most positive, and most negative photos it found in the dataset:
 
-## Project Continue
+![](./bias/)
+
+<MarkdownLink href="https://huggingface.co/spaces/schibsted/facial_expression_classifier">https://huggingface.co/spaces/schibsted/facial_expression_classifier</MarkdownLink>

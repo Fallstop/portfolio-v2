@@ -19,7 +19,7 @@ collaborators:
     import RedactedText from "$md/RedactedText.svelte";
 </script>
 
-<MarkdownLink href="https://github.com/Questionable-Research-Labs/needy-appliances.git">Questionable-Research-Labs/needy-appliances</MarkdownLink>
+<MarkdownLink href="https://github.com/Questionable-Research-Labs/needy-appliances">Questionable-Research-Labs/needy-appliances</MarkdownLink>
 
 For the March 2023 Terrible Ideas Hackathon, we built an emotional needy kitchen! Over the 48-Hours, we gave a range of appliances a life of their own.
 

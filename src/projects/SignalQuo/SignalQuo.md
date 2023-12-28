@@ -19,7 +19,7 @@ collaborators:
 </script>
 
 <MarkdownLink href="https://signalquo.qrl.nz/" color="#434f91">Signal Quo Website</MarkdownLink>
-<MarkdownLink href="https://github.com/Questionable-Research-Labs/sq-comms.git">Questionable-Research-Labs/sq-comms</MarkdownLink>
+<MarkdownLink href="https://github.com/Questionable-Research-Labs/sq-comms">Questionable-Research-Labs/sq-comms</MarkdownLink>
 
 Signal Quo is an prototype built by Somewhat Questionable. Our team claimed a first-place finish at [Grapple23](https://ymcachch.org.nz/grapple/), a week-long engineering competition, held in [YMCA’s 4C Centre](https://4c.nz/) in Christchurch, New Zealand.
 
