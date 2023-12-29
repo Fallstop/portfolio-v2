@@ -21,7 +21,10 @@
 	<article>
 		<!-- Title -->
 		<hgroup>
-			<h1>{data.meta.title}</h1>
+			<h1 class="article-title">{data.meta.title}</h1>
+			{#if data.meta.subtitle}
+				<span class="subtitle">{data.meta.subtitle}</span>
+			{/if}
 			<p>
 				<AuthorsSection authors={data.meta.authors} /> | 
 				Published at {data.meta.date}</p>
@@ -38,6 +41,20 @@
 
 <style lang="scss">
 	@use "../../../variables.scss" as *;
+
+	hgroup {
+		margin-bottom: 2rem;
+
+		.article-title {
+			margin: 0;
+		}
+		.subtitle {
+			font-size: 1.5rem;
+			font-weight: 300;
+			color: $hint-color;
+		}
+	}
+
 	@media screen and (max-width: $tablet-breakpoint) {
 		article {
 			padding: 1.5rem 1rem;

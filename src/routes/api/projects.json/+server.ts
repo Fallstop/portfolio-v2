@@ -20,6 +20,7 @@ async function getProjects() {
 		const file: any = paths[path]
 		const projectID = path.split('/').at(-1)?.replace('.md', '');
 		const slug = `/projects/${projectID}`;
+
 		if (file && typeof file === 'object' && 'metadata' in file && slug) {
 			const metadata = file.metadata as Omit<Post, 'slug'>
 

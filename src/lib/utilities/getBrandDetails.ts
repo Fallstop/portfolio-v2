@@ -7,9 +7,14 @@ import { Github, Twitter, Youtube, Facebook, Instagram, Linkedin, Globe, Landmar
 import Fallstop from "$lib/components/ExtraIcons/Fallstop.svelte";
 import Provida from "$lib/components/ExtraIcons/Provida.svelte";
 import TerribleHack from "$lib/components/ExtraIcons/TerribleHack.svelte";
+import HuggingFace from "$lib/components/ExtraIcons/HuggingFace.svelte";
 
 export function extractDomain(url: string) {
-    return (new URL(url)).hostname;
+    try {
+        return (new URL(url)).hostname;
+    } catch {
+        return "jmw.nz"
+    }
 }
 
 interface BrandData {
@@ -58,6 +63,12 @@ export const brandingDetails: Record<string,BrandData> = {
     "youtube.com": {
         name: "YouTube",
         domain: "youtube.com",
+        icon: Youtube,
+        color: "#ff0000",
+    },
+    "youtu.be": {
+        name: "YouTube",
+        domain: "youtu.be",
         icon: Youtube,
         color: "#ff0000",
     },
@@ -120,5 +131,11 @@ export const brandingDetails: Record<string,BrandData> = {
         domain: "govhack.org",
         icon: Landmark,
         color: "#ca1e56"
+    },
+    "huggingface.co": {
+        name: "Hugging Face",
+        domain: "huggingface.co",
+        icon: HuggingFace,
+        color: "#FF9D00"
     }
 }

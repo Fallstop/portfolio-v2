@@ -1,6 +1,7 @@
 ---
 date: "2021-06-04"
 title: "True Random"
+subtitle: "The most powerful and secure random number tool you could ever want."
 description: "Using a massive robotic arm to violently roll dice."
 collaborators:
     - Jasper M-W
@@ -14,8 +15,6 @@ tags: ["software", "hardware", "python", "48 Hours", "Terrible Ideas"]
     import TwitchStream from "$md/TwitchStream.svelte";
     import MarkdownLink from "$md/MarkdownLink.svelte";
 </script>
-
-*The most powerful and secure random number tool you could ever want.*
 
 
 <MarkdownLink href="https://tr.host.qrl.nz/" color="#0c60ce">TrueRandom Website</MarkdownLink>

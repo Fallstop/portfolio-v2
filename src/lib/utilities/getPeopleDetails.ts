@@ -23,7 +23,7 @@ export function getPersonDetails(name: string): PeopleDetails {
 export const AuthorDetails: PeopleDetails[] = [
     {
         name: "Jasper M-W",
-        homepage: "https://jmw.nz/",
+        homepage: "https://jmw.nz/about",
     },
     {
         name: "Nathan Hare",

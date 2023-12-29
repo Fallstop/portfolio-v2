@@ -1,8 +1,8 @@
 ---
 date: "2020-05-01"
 title: "G-Sheet Bells"
-description: "Development of an IOT (Internet of Things) Bell Controller using Google Sheets to improve the experience for Students and Teachers"
-tags: ["software", "hardware", "python", "Huanui College"]
+description: "Development of an IOT Bell Controller using Google Sheets."
+tags: ["software", "hardware", "python", "Huanui College", "Science Fair"]
 ---
 
 <script>
@@ -153,7 +153,7 @@ Description
 
 
 
-![Flash Monotron 300CS:small](./FlashMonotron300CS.png)
+![Flash Monotron 300CS:small:borderless](./FlashMonotron300CS.png)
 
 
 
@@ -171,7 +171,7 @@ Description
 *   Cheapest one I could find         
 
 
-![I didn't know bell controllers could get this bad:small](./DynamicFullyAutomatic.png)
+![I didn't know bell controllers could get this bad:small:borderless](./DynamicFullyAutomatic.png)
 
 
 ## Options somewhat close to my solution
@@ -196,7 +196,7 @@ Description
 ![This is the highest resolution release they have](./InnovationWirelessInterface.png)
 
 
-![Innovation Wireless Controller definitely has wires](./InervationWirelessController.png)
+![Innovation Wireless Controller definitely has wires:borderless](./InervationWirelessController.png)
 
 
 

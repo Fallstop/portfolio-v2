@@ -1,18 +1,28 @@
-export const sizeOptions = ["raw", "none", "small", "medium", "large", "full"];
+export const sizeOptions = ["raw", "none", "small", "medium", "large", "full"]
+export const classOptions = [...sizeOptions, "borderless"];
 
 export function parseSettings(settings: string) {
-    // If the alt includes a size, it will be in the format "blah blah:size"
+    let classes = [];
 
-    let hasSize = settings.includes(":");
-    let altSizeText = hasSize ? settings.split(":").at(-1) : "";
-    let altText = hasSize ? settings.split(":").slice(0, -1).join(":") : settings;
+    // If the alt includes a class, it will be in the format "blah blah:size"
+    for (let match of settings.matchAll(/\:([a-zA-Z]{3,})/g)) {
+        let option = match[1]?.toLowerCase();
+        if (classOptions.includes(option || "")) {
+            classes.push(option);
+        }
+    }
 
+    let altTextMatch = settings.match(/^[^:]*/);
+    let altText = altTextMatch ? altTextMatch[0] : "";
 
-    let size = sizeOptions.includes(altSizeText || "") ? altSizeText : "medium";
+    if (!classes.some((a)=>sizeOptions.includes(a))) {
+        // Default size class
+        classes.push("medium")
+    }
 
     return {
         altText,
-        size
+        classes: classes.join(" ")
     }
 
 }
