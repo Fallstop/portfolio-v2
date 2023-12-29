@@ -28,11 +28,11 @@ The admin page can be opened on any nearby device connected to the management ho
 
 
 ## Project Structure
-### [Svelte Display](./svelte-display)
+### [Svelte Display](https://github.com/Fallstop/naut-grinder/tree/main/svelte-display)
 This is a embedded web app that displays the game state and allows the user to interact with the game. It is built using [Sveltekit](https://kit.svelte.dev/).
 It connects to the game server using websockets, and has a remote management page.
 
-### [GPIO Server](./gpio-server/)
+### [GPIO Server](https://github.com/Fallstop/naut-grinder/tree/main/gpio-server)
 This is a server that runs on the Raspberry Pi and relays the state of the pages to the embedded Page. Written in rust, it also acts as a communication relay between remote admin pages an the embedded Page.
 
 ## Hardware Diagram
