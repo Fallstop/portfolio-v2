@@ -13,6 +13,7 @@ collaborators:
 
 <script lang="ts">
     import MarkdownLink from "$md/MarkdownLink.svelte";
+    import YoutubeEmbed from "$md/YoutubeEmbed.svelte";
     import FancyQuote from "$md/FancyQuote.svelte";
     import HighlightedBlock from "$md/HighlightedBlock.svelte";
     import ProConTable from "$md/ProConTable.svelte";
@@ -21,7 +22,11 @@ collaborators:
 
 <MarkdownLink href="https://github.com/Questionable-Research-Labs/needy-appliances">Questionable-Research-Labs/needy-appliances</MarkdownLink>
 
+
 For the March 2023 Terrible Ideas Hackathon, we built an emotional needy kitchen! Over the 48-Hours, we gave a range of appliances a life of their own.
+
+## Terrible Ideas Short
+<YoutubeEmbed shortMode videoID="XGskjGUyzsw"/>
 
 ## Microwave
 For the Microwave, we took away it's physical controls, and bolted on a microphone. From now on, you can only control it by convincing a self-absorbed GPT-4 agent to turn on the Microwave. It'll listen to your requests, and if you call it *Master* while using only the *finest* of manners, it'll send the command to run the microwave. It also displays the conversation history on an IPad above the microwave, and will happily insult you through the speaker system.
@@ -40,6 +45,8 @@ For the Microwave, we took away it's physical controls, and bolted on a micropho
     </ul>
 </ProConTable>
 
+![](./Microwave.jpg)
+
 ## Kettle
 <FancyQuote>
     A watched pot never boils.
@@ -56,7 +63,6 @@ We added facial recognition to the pot, so every time you look at it, it turns o
     It has a desire for Arson, be warned.
 </HighlightedBlock>
 
-
 <ProConTable>
     <ul slot="pros">
         <li>Reminds you to not sit and stare at the kettle while it boils</li>
@@ -67,6 +73,9 @@ We added facial recognition to the pot, so every time you look at it, it turns o
         <li>It won't turn off when it's finished boiling</li>
     </ul>
 </ProConTable>
+
+![](./Kettle.jpg)
+
 
 ## Toaster
 
@@ -83,8 +92,9 @@ The Toaster works similarly to the Microwave, but instead it insulting you, you 
     </ul>
 </ProConTable>
 
+![](./Toaster.jpg)
 
-## Knife Block A
+## Knife Block Pain
 This knife block experiences pain. It will scream if you try to use it to store your knifes, you monster.
 
 <ProConTable>
@@ -97,7 +107,9 @@ This knife block experiences pain. It will scream if you try to use it to store 
     </ul>
 </ProConTable>
 
-## Knife Block B
+![](./KinfeBlockPain.jpg)
+
+## Knife Block Fear
 This knife block experiences fear. It'll run away from you if you approach, usually falling off the table and onto your feet.
 
 <ProConTable>
@@ -109,3 +121,5 @@ This knife block experiences fear. It'll run away from you if you approach, usua
         <li>The robots will come for you first when the AI takeover happens</li>
     </ul>
 </ProConTable>
+
+![](./KnifeBlockFear.jpg)

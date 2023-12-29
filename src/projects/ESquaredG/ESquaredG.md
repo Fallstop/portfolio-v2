@@ -20,9 +20,13 @@ collaborators:
 </script>
 
 
-<MarkdownLink href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Video Presentation</MarkdownLink>
+<MarkdownLink href="https://youtu.be/YLxBEmsuL-M">Video Presentation</MarkdownLink>
 <MarkdownLink href="https://github.com/Questionable-Research-Labs?q=ESquaredG&type=&language=&sort=">Source Repos</MarkdownLink>
 <MarkdownLink href="https://e2g.qrl.nz/" color="#6a2675">e2g.qrl.nz</MarkdownLink>
+<MarkdownLink href="https://next.jmw.nz/s/ykxMakbcpRJaNHD" color="#6a2675">Presentation File</MarkdownLink>
+
+
+<YoutubeEmbed videoID="YLxBEmsuL-M"/>
 
 # Background Information
 

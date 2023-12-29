@@ -29,7 +29,7 @@ Every year, there is a data science competition called GovHack. GovHack is all a
 
 <YoutubeEmbed videoID="wvJlPGGfMgM"/>
 
-## Website
+<!-- ## Website
 
 
 ## Data Scrapper
@@ -38,4 +38,4 @@ Every year, there is a data science competition called GovHack. GovHack is all a
 
 ## Govhack Awards
 
-## Project Continue
+## Project Continue -->

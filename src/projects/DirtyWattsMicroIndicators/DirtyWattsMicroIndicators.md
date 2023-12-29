@@ -21,7 +21,7 @@ tags: ["software", "svelte", "C/C++", "python", "govhack", "Science Fair", "envi
 </script>
 
 
-<MarkdownLink href="https://next.jmw.nz">Poster PDF</MarkdownLink>
+<MarkdownLink href="https://next.jmw.nz/s/i84kc8MAzHtm9Sr">Poster PDF</MarkdownLink>
 <MarkdownLink href="https://dirtywatts.nz">dirtywatts.nz</MarkdownLink>
 <MarkdownLink href="https://github.com/Questionable-Research-Labs/DirtyWatts">Questionable-Research-Labs/DirtyWatts</MarkdownLink>
 

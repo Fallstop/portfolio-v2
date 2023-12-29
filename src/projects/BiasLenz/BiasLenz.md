@@ -19,14 +19,18 @@ tags: ["software", "svelte", "python", "govhack", "48 Hours"]
 
 
 
-
-<MarkdownLink href="https://2023.hackerspace.govhack.org/projects/biaslenz">TODO Govhack Project</MarkdownLink>
+<MarkdownLink href="https://2023.hackerspace.govhack.org/projects/biaslenz">Govhack Project</MarkdownLink>
 <MarkdownLink href="https://biaslenz.qrl.nz/">biaslenz.qrl.nz</MarkdownLink>
 <MarkdownLink href="https://github.com/Questionable-Research-Labs/govhack-23">Questionable-Research-Labs/govhack-23</MarkdownLink>
-<!-- <MarkdownLink href="https://www.youtube.com/watch?v=wvJlPGGfMgM">Presentation Video</MarkdownLink>
-<YoutubeEmbed videoID="wvJlPGGfMgM"/> -->
+<MarkdownLink href="https://youtu.be/Q2H69tJGbvY">Presentation Video</MarkdownLink>
+
 
 ![:borderless:small](./logo-text.svg)
+
+
+
+<YoutubeEmbed videoID="Q2H69tJGbvY"/>
+
 
 Have you ever seen a truly awful photo of a politician in a newspaper? Next to the confident stance of the opposing party? The photography used in our media is the first thing we see, and can bias our opinions before we've even read the article. BiasLenz scans photography from New Zealand's biggest media organisations, looking for a political stance in their portrait photography.
 
@@ -45,4 +49,4 @@ Using the `schibsted/facial_expression_classifier` AI model, BiasLenz determines
 
 ![](./bias/)
 
-<MarkdownLink href="https://huggingface.co/spaces/schibsted/facial_expression_classifier">https://huggingface.co/spaces/schibsted/facial_expression_classifier</MarkdownLink>
+<MarkdownLink href="https://huggingface.co/spaces/schibsted/facial_expression_classifier">Hugging Face schibsted/facial_expression_classifier</MarkdownLink>
