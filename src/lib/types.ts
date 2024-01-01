@@ -2,6 +2,7 @@ export type Post = {
 	title: string
 	subtitle?: string
 	slug: string
+	postID: string
 	description: string
 	date: string
 	summary: string

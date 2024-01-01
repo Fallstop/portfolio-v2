@@ -12,7 +12,7 @@ const thumbnailPaths = import.meta.glob('/src/projects/**/thumbnail.webp', {
 
 const projectIDs = Object.keys(thumbnailPaths).map((path: string) => path.split('/').at(-2));
 
-export function entries() {
+function entries() {
     console.log("Entries:", projectIDs)
     return projectIDs.map((id) => ({ projectID: id }));
 }
