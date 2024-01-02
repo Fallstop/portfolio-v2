@@ -12,6 +12,7 @@
 	<title>{data.meta.title}</title>
 	<meta property="og:type" content="article" />
 	<meta property="og:title" content={data.meta.title} />
+	<link rel="canonical" href={data.meta.slug} />
 </svelte:head>
 
 <PrimaryLayout
