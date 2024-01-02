@@ -4,14 +4,14 @@ import { error } from '@sveltejs/kit';
 export const prerender = true;
 
 export async function load({ params }) {
-    console.log(params.slug, "test")
+    console.log(params.projectID, "test")
 	try {
 		const projects = await getProjects();
-		const project = projects.find((project) => project.postID.toLowerCase() === params.slug.toLowerCase());
+		const project = projects.find((project) => project.postID.toLowerCase() === params.projectID.toLowerCase());
 
 		if (!project) {
-			console.log(`Could not find ${params.slug}`,projects)
-			throw error(404, `Could not find ${params.slug}`)
+			console.log(`Could not find ${params.projectID}`,projects)
+			throw error(404, `Could not find ${params.projectID}`)
 		}
 
 
@@ -22,7 +22,7 @@ export async function load({ params }) {
 			meta: post.metadata as Post
 		}
 	} catch (e) {
-		console.log(`Could not find ${params.slug}`, e)
-		throw error(404, `Could not find ${params.slug}`)
+		console.log(`Could not find ${params.projectID}`, e)
+		throw error(404, `Could not find ${params.projectID}`)
 	}
 }

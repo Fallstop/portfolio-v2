@@ -1,4 +1,5 @@
-import { json, type RequestEvent } from "@sveltejs/kit"
+import { DefaultThumbnail } from "$lib/cms/loadProjects";
+import { json, redirect, type RequestEvent } from "@sveltejs/kit"
 
 import fs from 'fs';
 import path from 'path';
@@ -23,10 +24,10 @@ export async function GET({ params, fetch }: RequestEvent) {
         return json({ error: "No project ID provided" }, { status: 400 });
     }
 
-    let url = Object.keys(thumbnailPaths).find((path: string) => path.includes(projectID));
+    let url = Object.keys(thumbnailPaths).find((path: string) => path.includes(projectID ?? ""));
     if (!url) {
-        console.log("WARNING: No thumbnail found for project", projectID);
-        return json({ error: "No thumbnail found" }, { status: 404 });
+        // Return redirect to default thumbnail
+        throw redirect(302, DefaultThumbnail);
     }
 
     const thumbnailRequestPath = `.${url}`;

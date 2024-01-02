@@ -1,14 +1,13 @@
 import type { Post } from '$lib/types';
 import DefaultThumbnail from "/src/projects/default-thumbnail.webp";
 
+
 function generateSummary(content: string): string {
     return content
 }
 
 export async function getProjects() {
 	let posts: Post[] = []
-
-	console.log("Loading projects")
 
 	const paths = import.meta.glob('/src/projects/**/*.md', { eager: true });
 	const thumbnailPaths = import.meta.glob('/src/projects/**/thumbnail.webp', {
@@ -59,3 +58,6 @@ export async function getProjects() {
 
 	return posts
 }
+
+
+export {DefaultThumbnail}
