@@ -90,3 +90,13 @@ button {
     font-size: 1rem;
     line-height: 1.5;
 }
+
+
+
+// FancyBox lightboxes makes transparent diagrams/charts unreadable
+// Chuck a transparent texture behind them
+div.fancybox__container img.fancybox-image {
+    background: repeating-conic-gradient(#fff 0% 25%, #eee 0% 50%) 
+    50% / 20px 20px;
+
+}

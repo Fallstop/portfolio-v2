@@ -30,10 +30,12 @@
     "typescript": "^5.0.0",
     "vanilla-lazyload": "^17.8.5",
     "vite": "^5.0.0",
-    "vite-imagetools": "^6.2.4"
+    "vite-imagetools": "^6.2.4",
+    "vite-plugin-inspect": "^0.8.1"
   },
   "type": "module",
   "dependencies": {
+    "@fancyapps/ui": "^5.0.32",
     "@fontsource-variable/work-sans": "^5.0.16",
     "lucide-svelte": "^0.292.0"
   }

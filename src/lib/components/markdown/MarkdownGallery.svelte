@@ -1,15 +1,11 @@
 <script lang="ts">
-    import { onMount } from "svelte";
+    import { onDestroy, onMount } from "svelte";
     import MarkdownImage from "./MarkdownImage.svelte";
 
-    import {
-        Lightbox,
-        LightboxGallery,
-        GalleryThumbnail,
-        GalleryImage,
-    } from "svelte-lightbox";
+
     import type { ProcessedImageMetadata } from "imagetools-core";
     import { parseSettings } from "./parseMediaSettings";
+    import { randomHash } from "$lib/utilities/math";
 
     export let src: object = {};
     export let alt = "";
@@ -22,66 +18,36 @@
         id: number;
         small: ProcessedImageMetadata;
         large: ProcessedImageMetadata;
-
     }
 
     let galleryData: ImageMetadata[];
+
+    
     $: galleryData = imagesData.map((x, i) => ({
         id: i,
         small: x[0],
         large: x[1],
     }));
 
-    let activeImage: number;
-    function getImageMeta(imageID: number | undefined, galleryData: ImageMetadata[]): ProcessedImageMetadata {
-        if (activeImage === undefined) return galleryData[0].large;
-        const { width, height } = galleryData[activeImage].large;
-        return galleryData[activeImage].large;
-    }
 
-    $: ({ width: activeImageWidth, height: activeImageHeight} = getImageMeta(activeImage, galleryData));
+
+    let sharedKey = randomHash();
 </script>
-<div >
 
-<LightboxGallery
-    arrowsConfig={{ color: "#fff", enableKeyboardControl: true, character: "hide" }}
-    bind:activeImage
-    imagePreset="fullscreen"
-    >
-
-    <!-- customization={{ lightboxProps: {
-        class: "__customLightbox",
-        style: `--active-image-height: ${activeImageHeight}px; --active-image-width: ${activeImageWidth}px;`
-    } }} -->
-
-    <div class="image-gallery {classes}" slot="thumbnail">
+<div>
+    <div class="image-gallery {classes}">
         {#each galleryData as imageMetadata}
             {@const { id, small, large } = imageMetadata}
-            <GalleryThumbnail {id}>
                 <MarkdownImage
                     width={small.width}
                     height={small.height}
                     src={small.src}
                     alt=":none"
+                    fullSizeSrc={large.src}
+                    {sharedKey}
                 />
-            </GalleryThumbnail>
-            <!-- <div class="image">
-                </div> -->
         {/each}
     </div>
-
-    {#each galleryData as imageMetadata}
-        {@const { id, small, large } = imageMetadata}
-        <GalleryImage {id}>
-            <MarkdownImage
-                width={large.width}
-                height={large.height}
-                src={large.src}
-                alt=":raw"
-            />
-        </GalleryImage>
-    {/each}
-</LightboxGallery>
 </div>
 
 <style lang="scss">
@@ -92,7 +58,7 @@
         gap: $grid-gap;
         margin-bottom: $grid-gap;
         position: relative;
-        & > :global(div) {
+        & > :global(a) {
             flex: 1 1 auto;
             position: relative;
             height: 300px;
@@ -108,7 +74,7 @@
             }
         }
         &.full {
-            & > :global(div) {
+            & > :global(a) {
                 $row-size: 3;
                 // flex: 1 1 100%;
                 max-width: 100%;
@@ -119,7 +85,6 @@
                 );
             }
         }
-
 
         &::after {
             content: "";

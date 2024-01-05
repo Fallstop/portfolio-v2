@@ -90,9 +90,6 @@
             padding-left: 1rem;
             padding-right: 1rem;
             padding-bottom: calc(var(--headshot-height) + 2rem);
-            .project-list {
-                gap: 1rem;
-            }
         }
         @media screen and (max-width: $mobile-breakpoint) {
             padding-left: 0.5rem;

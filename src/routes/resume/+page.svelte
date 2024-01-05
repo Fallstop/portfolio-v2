@@ -87,11 +87,6 @@
 </PrimaryLayout>
 
 <style lang="scss">
-    .skills-card {
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-    }
     .card-container {
         display: flex;
         flex-direction: column;

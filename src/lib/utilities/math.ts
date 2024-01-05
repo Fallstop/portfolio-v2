@@ -4,6 +4,11 @@ export function wrap(value: number, min: number, max: number) {
     return ((value - min) % range) + min;
 }
 
-export function randomFromList(value: any[] | string) {
+export function randomFromList<T>(value: T[] | string): T | string {
     return value[Math.floor(Math.random() * value.length)]
+}
+
+export function randomHash(): string {
+    let r = (Math.random() + 1).toString(36).substring(2);
+    return r;
 }

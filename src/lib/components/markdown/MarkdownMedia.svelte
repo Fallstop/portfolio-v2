@@ -6,7 +6,7 @@
     export let src: string | object;
 
     let type: "image" | "video" | "gallery" = "image";
-    console.log(src)
+    console.log("Markdown Media Import",src)
     if (typeof src === "object") {
         type = "gallery";
     } else {

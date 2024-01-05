@@ -3,6 +3,7 @@
 	import { NavigationOption } from "$lib/components/layout/layoutDataStore.js";
     import AuthorsSection from "$lib/components/markdown/AuthorsSection.svelte";
     import CollaboratorSection from "$lib/components/markdown/CollaboratorSection.svelte";
+    import LightBoxPage from "$lib/components/markdown/LightBoxPage.svelte";
 
 	export let data;
 </script>
@@ -14,6 +15,8 @@
 	<meta property="og:title" content={data.meta.title} />
 	<link rel="canonical" href={data.meta.slug} />
 </svelte:head>
+
+<LightBoxPage/>
 
 <PrimaryLayout
 	navigation_option={NavigationOption.Blog}
