@@ -80,9 +80,9 @@ export function imagetools(userOptions: Partial<VitePluginOptions> = {}): Plugin
                 ...Object.fromEntries(srcURL.searchParams)
             })
 
-            if (!directives.toString()) return null
-
             directives = pluginOptions.extendDirectives ? pluginOptions.extendDirectives(directives) : directives
+
+            if (!directives.toString()) return null
 
             const img = lazyLoadImage()
             const widthParam = directives.get('w')
@@ -143,6 +143,7 @@ export function imagetools(userOptions: Partial<VitePluginOptions> = {}): Plugin
             const as = asParam ? asParam[0] : undefined
             for (const [key, format] of Object.entries(outputFormats)) {
                 if (as === key) {
+                    
                     outputFormat = format(asParam && asParam[1] ? asParam[1].split(';') : undefined)
                     break
                 }
@@ -156,6 +157,7 @@ export function imagetools(userOptions: Partial<VitePluginOptions> = {}): Plugin
             };
 
             const output = await outputFormat(outputMetadatas) as any[];
+
             return dataToEsm(output, esmSettings)
         },
 

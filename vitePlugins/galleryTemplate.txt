@@ -1,6 +1,6 @@
 const galleryData = import.meta.glob("<FOLDERNAME>*.{jpg,png,webp,svg}", {
     query: {
-        "thumbnail": true
+        "gallery": true
     },
     eager: true
 });

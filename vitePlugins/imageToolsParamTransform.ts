@@ -1,4 +1,6 @@
 
+type ImageConfig = Array<[string, string[]]>;
+
 export function resolveThumbnailConfigs() {
     // we would like to reuse the existing directives as much as possible
     // const resizeTransform = resize({ w: config.customKeyword }, ctx)
@@ -6,15 +8,21 @@ export function resolveThumbnailConfigs() {
 
 
     // return the transform function
-    return function (config: Array<[string, string[]]>) {
-        if (!config.find(([key]) => key === "thumbnail")) return undefined;
+    return function (config: ImageConfig) {
+        if (config.find(([key]) => key === "normal")) {
+            return undefined
+            
+        }
+
+        // Lower Res on gallery mode
+        const galleryMode = config.find(([key]) => key === "gallery");
 
         // apply both transformations and return the result
         return [{
             "format": "webp",
             "quality": 60,
-            "w": 800,
-            "h": 800,
+            "w": galleryMode ? 800 : 1920,
+            "h": galleryMode ? 800 : 1920,
             "fit": "inside",
             "withoutEnlargement": true,
         }, {}]
@@ -24,8 +32,10 @@ export function resolveThumbnailConfigs() {
 
 export function interceptDirectives() {
     return function (directives: URLSearchParams): URLSearchParams {
-        if (!directives.has("thumbnail")) return directives;
-        directives.append("as","metadata")
+        if (!directives.has("normal"))  {
+            directives.delete("url")
+            directives.append("as","metadata")
+        }
         return directives;
     }
 }

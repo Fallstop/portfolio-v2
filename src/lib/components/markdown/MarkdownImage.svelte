@@ -1,18 +1,36 @@
 <script lang="ts">
+    import type { ProcessedImageMetadata } from "imagetools-core";
+
     import { parseSettings } from "./parseMediaSettings";
-    export let src: string = "";
+    export let src: [ProcessedImageMetadata, ProcessedImageMetadata] | string;
     export let alt = "";
     export let width: number | null = null;
     export let height: number | null = null;
 
     export let sharedKey = "";
-    export let fullSizeSrc = src;
+
+    interface ImageMetadata {
+        small: ProcessedImageMetadata;
+        large: ProcessedImageMetadata;
+    } 
+
+
+    let galleryData: ImageMetadata | undefined;
+
+    
+    $: galleryData = typeof src !== "string" ? {
+        small: src[0],
+        large: src[1],
+    } : undefined;
+
+    $: rawLink = typeof src === "string" ? src : undefined;
 
     const {classes, altText} = parseSettings(alt);
 </script>
 
-<a href={fullSizeSrc} data-fancybox={sharedKey}>
-    <img {...$$restProps} {src} {width} {height} class={classes} alt={altText} title={altText} loading="lazy" />
+
+<a href={galleryData?.large?.src ?? rawLink} data-fancybox={sharedKey}>
+    <img {...$$restProps} src={galleryData?.small?.src ?? rawLink} width={galleryData?.small?.width} height={galleryData?.small?.height} class={classes} alt={altText} title={altText} loading="lazy" />
 </a>
 
 <style lang="scss">

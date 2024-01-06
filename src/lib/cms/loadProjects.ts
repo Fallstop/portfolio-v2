@@ -13,7 +13,10 @@ export async function getProjects() {
 	const thumbnailPaths = import.meta.glob('/src/projects/**/thumbnail.webp', {
 		 eager: true,
 		 import: 'default',
-		 as: 'url',
+		 query: {
+			"normal": true,
+			"url": true
+			}
 		});
 
 	for (const path in paths) {

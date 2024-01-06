@@ -8,7 +8,10 @@ export const prerender = true;
 
 const thumbnailPaths = import.meta.glob('/src/projects/**/thumbnail.webp', {
     eager: true,
-    as: "url"
+    query: {
+        "normal": true,
+        "url": true
+    }
 });
 
 const projectIDs = Object.keys(thumbnailPaths).map((path: string) => path.split('/').at(-2));

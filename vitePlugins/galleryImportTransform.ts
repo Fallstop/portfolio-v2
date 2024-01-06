@@ -1,6 +1,7 @@
 import path from "node:path";
 import galleryTemplate from "./galleryTemplate.txt?raw";
 import { normalizePath } from "vite";
+import type { ResolveIdResult, CustomPluginOptions } from "rollup"; 
 
 const markdownFileRegex = /src\/projects\/.*\.md$/
 
@@ -12,20 +13,20 @@ const templateFolderKey = "<FOLDERNAME>";
 
 
 interface ResolveOptions {
-  attributes: any,
-  custom: any,
-  isEntry: boolean,
-  ssr: boolean
+  attributes: Record<string, string>;
+  custom?: CustomPluginOptions;
+  ssr?: boolean;
+  isEntry: boolean;
 }
+
 
 export default function galleryImportTransform({projectRoot}: {projectRoot: string}) {
   return {
     name: 'transform-file',
-    async resolveId(source: string, importer: string | undefined, options: ResolveOptions) {
+    async resolveId(source: string, importer: string | undefined, options: ResolveOptions): Promise<ResolveIdResult> {
       if (importer && markdownFileRegex.test(importer) && source.endsWith("/")) {
         // Markdown file importing folder!
         // Hasn't resolved so far, so we can assume it's a gallery import
-        console.log(source, importer, options)
 
         let galleryBaseDir = "";
         if (source.startsWith("/")) {
@@ -54,7 +55,6 @@ export default function galleryImportTransform({projectRoot}: {projectRoot: stri
 
 				// Replace with actual proxy
         const folderProxy = galleryTemplate.replaceAll(templateFolderKey,dirname);
-        console.log("folder proxy",folderProxy)
         return folderProxy;
         }
       return null

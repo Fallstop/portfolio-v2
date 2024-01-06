@@ -3,11 +3,14 @@
     import MarkdownImage from "./MarkdownImage.svelte";
     import MarkdownVideo from "./MarkdownVideo.svelte";    
 
-    export let src: string | object;
+    export let src: any;
 
     let type: "image" | "video" | "gallery" = "image";
     console.log("Markdown Media Import",src)
-    if (typeof src === "object") {
+    if (Array.isArray(src)) {
+        console.log("imagggggggs",src)
+        type = "image"
+    } else if (typeof src === "object") {
         type = "gallery";
     } else {
         let extension = src?.split('.').pop()?.toLowerCase();
@@ -17,9 +20,9 @@
     }
 </script>
 {#if type=="gallery"}
-    <MarkdownGallery {...$$props}/>
+    <MarkdownGallery {src} {...$$restProps}/>
 {:else if type=="video"}
-    <MarkdownVideo {...$$props}/>
+    <MarkdownVideo {src} {...$$restProps}/>
 {:else if type=="image"}
-    <MarkdownImage {...$$props}/>
+    <MarkdownImage {src} {...$$restProps} />
 {/if}

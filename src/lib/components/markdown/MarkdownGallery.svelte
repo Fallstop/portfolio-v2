@@ -7,27 +7,13 @@
     import { parseSettings } from "./parseMediaSettings";
     import { randomHash } from "$lib/utilities/math";
 
-    export let src: object = {};
+    export let src: any = {};
     export let alt = "";
     const { classes, altText } = parseSettings(alt);
 
     let imagesData: [ProcessedImageMetadata, ProcessedImageMetadata][];
-    $: imagesData = Object.values(src).map((x) => x.default);
+    $: imagesData = Object.values(src).map((x: any) => x.default);
 
-    interface ImageMetadata {
-        id: number;
-        small: ProcessedImageMetadata;
-        large: ProcessedImageMetadata;
-    }
-
-    let galleryData: ImageMetadata[];
-
-    
-    $: galleryData = imagesData.map((x, i) => ({
-        id: i,
-        small: x[0],
-        large: x[1],
-    }));
 
 
 
@@ -36,16 +22,12 @@
 
 <div>
     <div class="image-gallery {classes}">
-        {#each galleryData as imageMetadata}
-            {@const { id, small, large } = imageMetadata}
-                <MarkdownImage
-                    width={small.width}
-                    height={small.height}
-                    src={small.src}
-                    alt=":none"
-                    fullSizeSrc={large.src}
-                    {sharedKey}
-                />
+        {#each imagesData as imageMetadata}
+            <MarkdownImage
+                src={imageMetadata}
+                alt=":none"
+                {sharedKey}
+            />
         {/each}
     </div>
 </div>
