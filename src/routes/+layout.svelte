@@ -112,7 +112,7 @@
         }
 
         @media print {
-            padding: $print-page-padding;
+            padding: calc($print-page-padding/2) $print-page-padding;
         }
 
         // ::selection {
@@ -135,7 +135,7 @@
             filter: drop-shadow(0 0 5rem #fff) drop-shadow(0 0 5rem #fff) drop-shadow(0 0 5rem #fff);
 
             @media print {
-                height: calc($print-page-padding - 1rem);
+                height: $print-page-padding;
             }
         }
         .content-container {

@@ -116,7 +116,7 @@
             z-index: -1;
             transition: all 250ms ease-in-out;
             filter: brightness(0.7);
-            border-radius: 1rem;
+            border-radius: $border-radius;
             overflow: hidden;
 
             &::after {

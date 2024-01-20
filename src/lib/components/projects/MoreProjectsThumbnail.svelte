@@ -66,10 +66,13 @@
             width: 300px;
             flex-grow: unset;
             flex-direction: column;
+            text-align: right;
+            align-items: flex-end;
+            justify-content: space-evenly;
             .more-header {
                 font-size: 1.5rem;
             }
-            
+
             .qr-code {
                 display: block;
                 color: $text-color;
