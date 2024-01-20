@@ -4,7 +4,7 @@
     import { NavigationOption } from "$lib/components/layout/layoutDataStore";
     import MoreProjectsThumbnail from "$lib/components/projects/MoreProjectsThumbnail.svelte";
     import ProjectThumbnails from "$lib/components/projects/ProjectThumbnails.svelte";
-
+    import { ArrowRight } from "lucide-svelte";
 
     export let data: import("./$types").PageData;
 </script>
@@ -33,7 +33,7 @@
     <h2>Employment History</h2>
     <div class="card-container">
         <LiveCard>
-            <h3 class="company-name">Provida <span class="date">2021-present</span></h3>
+            <h3 class="company-name">Provida <span class="date">2021 <ArrowRight class="arrow"/> present</span></h3>
             <ul>
                 <li>Development of Provida's Video Meeting offering, based on Jitsi Meet.</li>
                 <li>Web development of <a href="https://www.zui.nz/">Zui</a>, the community instance of the video meeting offering.</li>
@@ -41,7 +41,7 @@
             </ul>
         </LiveCard>
         <LiveCard>
-            <h3 class="company-name">Avant Consulting Group <span class="date">2023-present</span></h3>
+            <h3 class="company-name">Avant Consulting Group <span class="date">2023 <ArrowRight class="arrow"/> present</span></h3>
             <ul>
                 <li>General software development for clients.</li>
                 <li>Automatically pulling balance information out of NZ bank statements</li>
@@ -57,7 +57,7 @@
             </ul>
         </LiveCard>
         <LiveCard>
-            <h3 class="company-name">N3T <span class="date">2021 → 2022</span></h3>
+            <h3 class="company-name">N3T <span class="date">2021 <ArrowRight class="arrow"/> 2022</span></h3>
             <ul>
                 <li>Research and Development on methods of low-cost vehicle weight estimation.</li>
                 <li>Using Geophones connected to ESP32's to stream live data to a controller server on a Raspberry Pi.</li>
@@ -65,7 +65,7 @@
             </ul>
         </LiveCard>
         <LiveCard>
-            <h3 class="company-name">LilRegi <span class="date">2021 → 2022</span></h3>
+            <h3 class="company-name">LilRegi <span class="date">2021 <ArrowRight class="arrow"/> 2022</span></h3>
             <ul>
                 <li>Developing a new front-end for their online check-in tool.</li>
                 <li>Implemented vaccine pass and ticket scanning and validation</li>
@@ -81,7 +81,7 @@
     <h2>Education</h2>
     <div class="card-container">
         <LiveCard>
-            <h3 class="company-name">Huanui College <span class="date">2017 → 2023</span></h3>
+            <h3 class="company-name">Huanui College <span class="date">2017 <ArrowRight class="arrow"/> 2023</span></h3>
             <ul>
                 <li>Completed my A2 level Physics, Maths, and Digital Media under the CIE Curriculum.</li>
                 <li>Current Head Boy, leading the prefect group of 20</li>
@@ -105,9 +105,14 @@
             margin: 0 0 1rem 0;
 
             .date {
+                margin-left: 0.5rem;
                 font-weight: lighter;
-                color: #666;
+                color: $hint-color;
             }
+        }
+        a {
+            color: $hint-color;
+
         }
     }
     .projects-container {
@@ -124,5 +129,14 @@
         page-break-after: avoid;
     }
 
+    :global(.arrow) {
+        width: 0.8em;
+        height: 0.8em;
+        // padding-top: 0.2em;
+        display: inline-block;
+        vertical-align:baseline;
+        position: relative;
+        top: 0.05em;
 
+    }
 </style>
