@@ -169,6 +169,8 @@
                 animation-delay: calc($time-delay * -1);
                 transform: scale(1.1);
             }
+
+
         }
 
         &:hover {
@@ -182,6 +184,10 @@
                     opacity: 1;
                 }
             }
+        }
+
+        @media print {
+            aspect-ratio: unset;
         }
     }
 

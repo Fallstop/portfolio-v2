@@ -8,7 +8,6 @@ collaborators:
  - Ara Bartlett
  - Leya Stow
  - Carolyn
-highlight: true
 tags: ["software", "svelte", "python", "govhack", "48 Hours"]
 ---
 

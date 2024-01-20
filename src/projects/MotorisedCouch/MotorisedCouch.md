@@ -10,6 +10,7 @@ collaborators:
     - Ara Bartlett
     - Cam Matheson
     - Carolyn
+highlight: true
 tags: ["software", "hardware", "C/C++", "48 Hours", "Terrible Ideas"]
 ---
 

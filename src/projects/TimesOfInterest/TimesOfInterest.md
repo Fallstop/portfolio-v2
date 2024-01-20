@@ -8,7 +8,6 @@ collaborators:
  - Jacob Read
  - Taine Reader
  - Dan Burns
-highlight: true
 tags: ["software", "svelte", "covid", "govhack", "48 Hours"]
 ---
 

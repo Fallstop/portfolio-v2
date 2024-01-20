@@ -98,5 +98,14 @@ button {
 div.fancybox__container img.fancybox-image {
     background: repeating-conic-gradient(#fff 0% 25%, #eee 0% 50%) 
     50% / 20px 20px;
-
 }
+
+
+@media print 
+{
+    @page {
+      size: A4; /* DIN A4 standard, Europe */
+      margin: 15mm 0 0 0;
+    }
+}
+

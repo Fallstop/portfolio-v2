@@ -33,11 +33,18 @@
     <h2>Employment History</h2>
     <div class="card-container">
         <LiveCard>
-            <h3 class="company-name">Provida <span class="date">2021 → present</span></h3>
+            <h3 class="company-name">Provida <span class="date">2021-present</span></h3>
             <ul>
-                <li>Development of their Video Meeting offering, based on Jitsi Meet.</li>
-                <li>Web development of the Zui meeting launcher, their community edition of the video meeting offering.</li>
-                <li>Automated scanning and validation of APC medical and vaccine certificates</li>
+                <li>Development of Provida's Video Meeting offering, based on Jitsi Meet.</li>
+                <li>Web development of <a href="https://www.zui.nz/">Zui</a>, the community instance of the video meeting offering.</li>
+                <li>Automated scanning and validation of APC medical and vaccine certificates.</li>
+            </ul>
+        </LiveCard>
+        <LiveCard>
+            <h3 class="company-name">Avant Consulting Group <span class="date">2023-present</span></h3>
+            <ul>
+                <li>General software development for clients.</li>
+                <li>Automatically pulling balance information out of NZ bank statements</li>
             </ul>
         </LiveCard>
         <LiveCard>
@@ -69,7 +76,7 @@
     <h2>Highlighted Projects</h2>
     <div class="projects-container">
         <ProjectThumbnails posts={data.postsHighlighted} />
-        <MoreProjectsThumbnail />
+        <MoreProjectsThumbnail missedProjects={data.missedProjects} />
     </div>
     <h2>Education</h2>
     <div class="card-container">
@@ -93,7 +100,9 @@
         gap: 1rem;
         .company-name {
             font-weight: bold;
-            font-size: 2rem;
+            font-size: 1.5rem;
+            
+            margin: 0 0 1rem 0;
 
             .date {
                 font-weight: lighter;
@@ -106,8 +115,14 @@
         flex-direction: row;
         flex-wrap: wrap;
         gap: 1rem;
+
+        
     }
     h2 {
         margin-top: 2rem;
+        font-size: 2rem;
+        page-break-after: avoid;
     }
+
+
 </style>
