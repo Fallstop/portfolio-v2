@@ -41,10 +41,10 @@
             </ul>
         </LiveCard>
         <LiveCard>
-            <h3 class="company-name">Avant Consulting Group <span class="date">2023 <ArrowRight class="arrow"/> present</span></h3>
+            <h3 class="company-name">Avant Consulting Group <span class="date">2024 <ArrowRight class="arrow"/> present</span></h3>
             <ul>
                 <li>General software development for clients.</li>
-                <li>Automatically pulling balance information out of NZ bank statements</li>
+                <li>Automatically pulling balance information out of NZ bank statements using AWS Textract</li>
             </ul>
         </LiveCard>
         <LiveCard>
