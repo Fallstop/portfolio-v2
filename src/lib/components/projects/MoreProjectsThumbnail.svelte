@@ -19,7 +19,8 @@
 </div>
 
 <a href="/projects" class="more-projects">
-    <span class="more-header">{missedProjects > 1 ? missedProjects : ''} More Projects</span>
+    <span class="more-header">{missedProjects > 1 ? missedProjects : ''} More</span>
+    <span class="more-header headline">Projects</span>
     <div class="qr-code">
         {@html svg}
     </div>
@@ -45,15 +46,23 @@
         text-align: center;
 
         @media screen {
+            flex-direction: column;
+            .more-header {
+                display: block;
+                &.headline {
+                }
+            }
             border: 4px dashed $mid-tone;
             border-radius: $border-radius;
-            color: $mid-tone;
-            font-size: 2rem;
+            
+            color: #fff0;
+            
+            font-size: 2.5rem;
             
             transition: all 0.2s ease-in-out;
-            &:hover {
-                border-color: $text-color;
+            &:hover, &:active, &:focus {
                 color: $text-color;
+                border: 4px dashed $text-color;
             }
             .qr-code {
                 display: none;
@@ -61,6 +70,7 @@
             .link-name {
                 display: none;
             }
+            
         }
         @media print {
             width: 300px;

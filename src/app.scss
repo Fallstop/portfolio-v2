@@ -29,8 +29,10 @@ html,body {
     scroll-behavior: smooth;
 
     // Firefox
-	scrollbar-color: #fff $background-color;
-	scrollbar-width: thin;
+    @supports not selector(::-webkit-scrollbar) {
+        scrollbar-width: auto;
+        scrollbar-color: $accent-color $background-color;
+    }
 	
 	// Webkit
 	&::-webkit-scrollbar {

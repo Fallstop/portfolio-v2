@@ -11,7 +11,7 @@
 
     let nameInput: string | undefined;
     let emailInput: string | undefined;
-    let messageInput: string | undefined
+    let messageInput: string | undefined;
 
     let nameChanged = false;
     let emailChanged = false;
@@ -21,12 +21,23 @@
     $: emailChanged = !!emailInput && emailChanged;
     $: messageChanged = !!messageInput && messageChanged;
 
-    $: nameInputValid = nameInput && nameInput.length > 0 && nameInput.length < messageMaxLength;
-    $: emailInputValid = emailInput?.split("")?.filter((x)=>x=="@")?.length == 1;
-    $: messageInputValid = messageInput && messageInput.length > 3 && messageInput.length < messageMaxLength;
+    $: nameInputValid =
+        nameInput &&
+        nameInput.length > 0 &&
+        nameInput.length < messageMaxLength;
+    $: emailInputValid =
+        emailInput?.split("")?.filter((x) => x == "@")?.length == 1;
+    $: messageInputValid =
+        messageInput &&
+        messageInput.length >= 3 &&
+        messageInput.length <= messageMaxLength;
 
-    $: formValid = nameInput && emailInput && messageInput && emailInputValid && messageInputValid;
-
+    $: formValid =
+        nameInput &&
+        emailInput &&
+        messageInput &&
+        emailInputValid &&
+        messageInputValid;
 </script>
 
 <PrimaryLayout
@@ -35,12 +46,25 @@
     personal_headshot
 >
     <h1 class="page-header">Send me a message!</h1>
-    <form method="post" use:enhance >
+    <form method="post" use:enhance>
         <div class="form-group">
             <div class="form-inside">
                 <label for="name">Name</label>
-                <LiveCard size="wrap" style={!nameInputValid && nameChanged ? "error" : "normal"} >
-                    <input required bind:value={nameInput} type="text" id="name" name="name" placeholder="Something close to a name here" on:blur={()=>{nameChanged=true}}/>
+                <LiveCard
+                    size="wrap"
+                    style={!nameInputValid && nameChanged ? "error" : "normal"}
+                >
+                    <input
+                        required
+                        bind:value={nameInput}
+                        type="text"
+                        id="name"
+                        name="name"
+                        placeholder="Something close to a name here"
+                        on:blur={() => {
+                            nameChanged = true;
+                        }}
+                    />
                 </LiveCard>
                 <div class="helper-text">
                     {#if !nameInputValid && nameChanged}
@@ -54,8 +78,23 @@
             </div>
             <div class="form-inside">
                 <label for="email">Email</label>
-                <LiveCard size="wrap" style={!emailInputValid && emailChanged ? "error" : "normal"}>
-                    <input required bind:value={emailInput} type="email" id="email" name="email" placeholder="Mail of the E variant" on:blur={()=>{emailChanged=true}}/>
+                <LiveCard
+                    size="wrap"
+                    style={!emailInputValid && emailChanged
+                        ? "error"
+                        : "normal"}
+                >
+                    <input
+                        required
+                        bind:value={emailInput}
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="Mail of the E variant"
+                        on:blur={() => {
+                            emailChanged = true;
+                        }}
+                    />
                 </LiveCard>
                 <div class="helper-text">
                     {#if !emailInputValid && emailChanged}
@@ -69,28 +108,50 @@
             </div>
         </div>
         <div class="form-inside">
-            <label for="message">Message</label>
-            <LiveCard size="wrap" style={!messageInputValid && messageChanged ? "error" : "normal"}>
-                <textarea required bind:value={messageInput} id="message" name="message" placeholder="Interesting message here..." on:blur={()=>{messageChanged=true}}></textarea>
-            </LiveCard>
-            <div class="helper-text">
-                {#if !messageInputValid && messageChanged}
-                    <span class="validation" transition:fade>
-                        Please enter a message between 3 and {messageMaxLength} characters
-                    </span>
-                {:else}
-                    &nbsp;
-                {/if}
-                <span class="message-length">
-                    {messageInput?.length || 0} / {messageMaxLength}
+            <label for="message"
+                >Message
+
+                <span class="helper-text">
+                    {#if !messageInputValid && messageChanged}
+                        &nbsp;
+                        <span class="validation" transition:fade>
+                            Please enter a message between 3 and {messageMaxLength}
+                            characters
+                        </span>
+                    {:else}
+                       
+                    {/if}
                 </span>
+            </label>
+            <LiveCard
+                size="wrap"
+                style={!messageInputValid && messageChanged
+                    ? "error"
+                    : "normal"}
+            >
+                <textarea
+                    required
+                    class=""
+                    bind:value={messageInput}
+                    id="message"
+                    name="message"
+                    placeholder="Interesting message here..."
+                    on:blur={() => {
+                        messageChanged = true;
+                    }}
+                ></textarea>
+            </LiveCard>
+            <div class="detail-row right">
+                    <span class="helper-text message-length">
+                        {messageInput?.length || 0} / {messageMaxLength}
+                    </span>
             </div>
-        </div>
-        <div class="form-inside">
-            <button class="submit-button" type="submit" disabled={!formValid}>
-                <Send />
-                Send
-            </button>
+            <div class="detail-row left">
+                <button class="submit-button" type="submit" disabled={!formValid}>
+                    <Send />
+                    Send
+                </button>
+            </div>
         </div>
     </form>
 </PrimaryLayout>
@@ -135,13 +196,20 @@
                 @include body-font;
             }
 
-
             .helper-text {
-                font-size: 0.75rem;
+                font-size: 0.85rem;
                 color: $hint-color;
+            }
+            .detail-row {
                 display: flex;
-                flex-direction: row;
+                align-items: flex-start;
                 justify-content: space-between;
+                &.left {
+                    flex-direction: row;
+                }
+                &.right {
+                    flex-direction: row-reverse;
+                }
             }
 
             .submit-button {
@@ -152,6 +220,7 @@
                 border-radius: $border-radius;
                 transition: background-color 0.2s ease-in-out;
                 width: max-content;
+                float: right;
 
                 @include icon-inline;
 

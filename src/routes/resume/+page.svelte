@@ -18,7 +18,7 @@
 <div class="content">
     <h1 class="page-header">Jasper Miller-Waugh</h1>
     <p>
-        I'm a year-13 student about to start computer-systems engineering at University of Auckland.
+        I'm a first year engineering student at University of Auckland, and I've got a passion for making.
     </p>
     <div class="card-container">
         <LiveCard>
@@ -44,7 +44,7 @@
             <h3 class="company-name">Avant Consulting Group <span class="date">2024 <ArrowRight class="arrow"/> present</span></h3>
             <ul>
                 <li>General software development for clients.</li>
-                <li>Automatically pulling balance information out of NZ bank statements using AWS Textract</li>
+                <li>For example: automatically pulling balance information out of NZ bank statements using AWS Textract</li>
             </ul>
         </LiveCard>
         <LiveCard>
@@ -82,6 +82,14 @@
     <div class="card-container">
         <LiveCard>
             <h3 class="company-name">Huanui College <span class="date">2017 <ArrowRight class="arrow"/> 2023</span></h3>
+            <ul>
+                <li>Completed my A2 level Physics, Maths, and Digital Media under the CIE Curriculum.</li>
+                <li>Current Head Boy, leading the prefect group of 20</li>
+                <li>Enrolled into my fast-track offer into UOA Engineering, to start in 2024</li>
+            </ul>
+        </LiveCard>
+        <LiveCard>
+            <h3 class="company-name">University of Auckland - Engineering <span class="date">2024 <ArrowRight class="arrow"/> present</span></h3>
             <ul>
                 <li>Completed my A2 level Physics, Maths, and Digital Media under the CIE Curriculum.</li>
                 <li>Current Head Boy, leading the prefect group of 20</li>

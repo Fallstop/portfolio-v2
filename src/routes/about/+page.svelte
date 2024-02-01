@@ -17,9 +17,9 @@
     personal_headshot
 >
     <div class="content">
-        <h1 class="page-header"><div>Kia ora,</div> <div>I'm Jasper M-W.</div></h1>
+        <h1 class="page-header">Kia ora, I'm Jasper&nbsp;M-W.</h1>
         <h3>
-            I'm a high schooler at Huanui College, who's spent the last {getYearsFrom("2019")} years
+            I'm a first-year engineering student at University of Auckland, who's spent the last {getYearsFrom("2019")} years
             building random projects in my spare time.
         </h3>
         <p>
@@ -60,16 +60,19 @@
             />
             <FactBox title="Servers in basement" description="5" />
             <FactBox title="Camera" description="Sony a 7II" />
-            <FactBox title="BrainF*ck Interpreters Developed" description="8" />
-            <FactBox
-                title="Tasks pointlessly automated"
-                description="Uncountable"
-            />
             <FactBox
                 title="Github Repo Count"
                 description={data.github.totalRepoCount.toString()}
             />
-            <FactBox title="Books Published" description="1" />
+            <FactBox title="Last poor financial decision" description={formatDate(new Date(Date.now() - 60*60*24))} />
+            <FactBox title="BrainF*ck Interpreters Developed" description="8" />
+            <FactBox
+                title="Tasks pointlessly automated"
+                description="Uncountable"
+                />
+                <FactBox title="Pronouns" description="He/Him" />
+                <FactBox title="Books Published" description="1" />
+
         </div>
 
         <h2>Highlighted Projects</h2>
