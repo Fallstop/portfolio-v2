@@ -34,7 +34,8 @@
     "vanilla-lazyload": "^17.8.5",
     "vite": "^5.0.0",
     "vite-imagetools": "^6.2.4",
-    "vite-plugin-inspect": "^0.8.1"
+    "vite-plugin-inspect": "^0.8.1",
+    "canvas": "^2.8.0"
   },
   "type": "module",
   "dependencies": {
