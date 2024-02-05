@@ -1,27 +1,45 @@
 import { default as canvasLib } from "canvas";
 import fs from "fs"
 import roundedRect from "./roundedRectangle"
-import { TextStyle, drawBgImage, registerFonts, tileFont, wrapText } from "./canvasUtil";
+import { TextStyle, WrappedText, accentFont, drawBgImage, paragraphFont, registerFonts, tileFont, wrapText } from "./canvasUtil";
 import { randomOrderList } from "$lib/utilities/math";
 
 let { createCanvas, loadImage } = canvasLib;
 
 interface GenerationOptions {
     projectName: string,
+    projectDescription: string,
     projectDate: string,
     backgroundImage: Buffer
 }
 
-let MainTitleStyle = new TextStyle({
+let TitleTextStyle = new TextStyle({
     fillStyle: "#f5f5f5",
     textAlign: "left",
     textBaseline: "top",
-    fontSize: 100,
-    fontName: tileFont
-})
-
+    fontSize: 60,
+    fontName: tileFont,
+    lineHeight: 1.8
+});
+let ParagraphTextStyle = new TextStyle({
+    fillStyle: "#f5f5f5",
+    textAlign: "left",
+    textBaseline: "top",
+    fontSize: 40,
+    fontName: paragraphFont,
+    lineHeight: 1.4
+});
+let AccentTextStyle = new TextStyle({
+    fillStyle: "#F39F5A",
+    textAlign: "left",
+    textBaseline: "top",
+    fontSize: 40,
+    fontName: accentFont,
+    lineHeight: 1.8
+});
 export default async function renderCanvas(opts: GenerationOptions): Promise<Buffer> {
-    const {projectDate, projectName, backgroundImage} = opts;
+    const {projectDate, projectDescription, projectName, backgroundImage} = opts;
+    console.log(opts)
 
     const height = 630;
     const width = 1200;
@@ -36,7 +54,7 @@ export default async function renderCanvas(opts: GenerationOptions): Promise<Buf
 
     registerFonts();
 
-    context.globalAlpha = 0.5;
+    context.globalAlpha = 0.4;
     await drawBgImage(context, backgroundImage, width, height);
     context.globalAlpha = 1;
 
@@ -56,34 +74,27 @@ export default async function renderCanvas(opts: GenerationOptions): Promise<Buf
     }
 
     context.fillStyle = bgGradient;
-    context.globalAlpha = 0.7;
+    context.globalAlpha = 0.4;
     context.fillRect(0,0,width,height)
     context.globalAlpha = 1;
 
-    MainTitleStyle.canvasApply(context)
-    const y = wrapText(context, projectName, padding, padding, 600, 140);
+    
+    const text_width_space = width - (padding*2)
 
-    context.lineWidth = 4;
-    context.fillStyle = "rgba(0,0,0,0.5)";
-    context.strokeStyle = "#f5f5f5";
-    context.beginPath();
-    roundedRect(context, padding - 10, padding - 15, 600 + 50, y - padding, 25, true)
-    context.stroke();
+    let dateText = new WrappedText(context, projectDate, text_width_space, AccentTextStyle);
+    let titleText = new WrappedText(context, projectName, text_width_space, TitleTextStyle);
+    let descriptionText = new WrappedText(context, projectDescription, text_width_space, ParagraphTextStyle);
+    
+    // Draw text from the bottom up
+    let bottom_y = height - padding;
+    bottom_y -= descriptionText.draw(padding, bottom_y - descriptionText.total_height);
+    bottom_y -= titleText.draw(padding, bottom_y - titleText.total_height);
+    bottom_y -= dateText.draw(padding, bottom_y - dateText.total_height);
 
-    MainTitleStyle.canvasApply(context)
-    wrapText(context, projectDate, padding, padding, 600, 140);
 
-    const subtitle = projectDate
-        ? `${projectDate} · HTTPS://JMW.NZ`
-        : 'HTTPS://JMW.NZ';
-    context.font = '32pt "Open Sans"';
-    context.textAlign = 'left';
-    context.textBaseline = 'bottom';
-    context.fillStyle = '#f5f5f5';
-    context.fillText(subtitle, padding, height - padding);
 
     // let blobFile: Blob = await new Promise((resolve, reject)=>{
-    //     const buffer = canvas.toBlob((blob)=>{
+        //     const buffer = canvas.toBlob((blob)=>{
     //         if (blob) {
     //             resolve(blob)
     //         } else {
@@ -93,4 +104,4 @@ export default async function renderCanvas(opts: GenerationOptions): Promise<Buf
     // })
     console.log("Finished Gen")
     return canvas.toBuffer('image/jpeg', { quality: 1 });
-};
+};    

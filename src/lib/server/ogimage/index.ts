@@ -1,16 +1,9 @@
 import { json, redirect, type RequestEvent } from "@sveltejs/kit";
 import fs from "node:fs";
-import { DefaultThumbnail } from "$lib/cms/loadProjects";
+import { DefaultThumbnail, getProjects } from "$lib/cms/loadProjects";
 import renderCanvas from "./canvasRender";
+import type { Post } from "$lib/types";
 
-
-const thumbnailPaths = import.meta.glob('/src/projects/**/thumbnail.webp', {
-    eager: true,
-    query: {
-        "normal": true,
-        "url": true
-    }
-});
 
 
 export async function generateImage({params}: RequestEvent): Promise<Response> {
@@ -19,8 +12,10 @@ export async function generateImage({params}: RequestEvent): Promise<Response> {
         return json({ error: "No project ID provided" }, { status: 400 });
     }
 
-    let url = Object.keys(thumbnailPaths).find((path: string) => path.includes(projectID ?? ""));
-    if (!url) {
+    const allProjects = await getProjects();
+
+    let project = allProjects.find((project: Post) => project.postID==projectID);
+    if (!project) {
         // Return redirect to default thumbnail
         throw redirect(302, DefaultThumbnail);
     }
@@ -31,10 +26,11 @@ export async function generateImage({params}: RequestEvent): Promise<Response> {
 
 
     const fileBlob = await renderCanvas({
-        projectDate: "Wow",
-        projectName: "yes.",
+        projectDate: project.date,
+        projectName: project.title,
+        projectDescription: project.description,
         backgroundImage: thumbnailFile
-    })
+    });
 
 
     return new Response(fileBlob)
