@@ -39,7 +39,6 @@ let AccentTextStyle = new TextStyle({
 });
 export default async function renderCanvas(opts: GenerationOptions): Promise<Buffer> {
     const {projectDate, projectDescription, projectName, backgroundImage} = opts;
-    console.log(opts)
 
     const height = 630;
     const width = 1200;
