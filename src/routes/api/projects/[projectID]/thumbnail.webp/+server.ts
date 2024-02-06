@@ -2,7 +2,6 @@ import { DefaultThumbnail } from "$lib/cms/loadProjects";
 import { json, redirect, type RequestEvent } from "@sveltejs/kit"
 
 import fs from 'fs';
-import path from 'path';
 
 export const prerender = true;
 
@@ -14,12 +13,7 @@ const thumbnailPaths = import.meta.glob('/src/projects/**/thumbnail.webp', {
     }
 });
 
-const projectIDs = Object.keys(thumbnailPaths).map((path: string) => path.split('/').at(-2));
 
-function entries() {
-    console.log("Entries:", projectIDs)
-    return projectIDs.map((id) => ({ projectID: id }));
-}
 
 export async function GET({ params, fetch }: RequestEvent) {
     let { projectID } = params;

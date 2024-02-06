@@ -5,6 +5,8 @@ import { svelteInspector } from '@sveltejs/vite-plugin-svelte-inspector';
 import{ imagetools } from './vitePlugins/imageToolPlugin';
 import {interceptDirectives, resolveThumbnailConfigs} from "./vitePlugins/imageToolsParamTransform";
 import galleryImportTransform from "./vitePlugins/galleryImportTransform";
+import { visualizer } from "rollup-plugin-visualizer";
+
 
 export default defineConfig({
   plugins: [
@@ -18,7 +20,11 @@ export default defineConfig({
       build: true,
 
     }),
-    svelteInspector({})
+    svelteInspector({}),
+    visualizer({
+      emitFile: true,
+      filename: "stats.html",
+    }),
   ],
   css: {
     preprocessorOptions: {

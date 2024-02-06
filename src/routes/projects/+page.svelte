@@ -16,6 +16,13 @@
     fluid_sim_background
     navigation_option={NavigationOption.Midpoint}
     personal_headshot
+    SEOProps={{
+        type: "mainpage",
+        description: `${$projectSearchResult?.length || "Many"} random and interesting projects that I've worked on over the years.`,
+        slug: "/projects",
+        title: "Jasper M-W | Projects",
+        image: "/projects/ogimage.png"
+    }}
 >
     <div class="project-container">
         <h1 class="page-header">Projects</h1>

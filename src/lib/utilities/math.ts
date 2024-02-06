@@ -8,6 +8,11 @@ export function randomFromList<T>(value: T[] | string): T | string {
     return value[Math.floor(Math.random() * value.length)]
 }
 
+export function randomOrderList<T>(value: T[]): T[] {
+    value.sort(()=>Math.random()-0.5)
+    return value
+}
+
 export function randomHash(): string {
     let r = (Math.random() + 1).toString(36).substring(2);
     return r;
