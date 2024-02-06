@@ -1,6 +1,5 @@
 import { default as canvasLib } from "canvas";
-import fs from "fs"
-import roundedRect from "./roundedRectangle"
+import seedrandom from "seedrandom";
 import { ShapeStyle, TextStyle, WrappedText, accentFont, drawBgImage, paragraphFont, registerFonts, tileFont } from "./canvasUtil";
 import { randomOrderList } from "$lib/utilities/math";
 import { ogImageHeight, ogImagePadding, ogImageWidth } from "$lib/components/layout/SEO.svelte";
@@ -55,20 +54,23 @@ export default async function renderCanvas(opts: GenerationOptions): Promise<Buf
     if (!context) {
         throw new Error("Failed to create Canvas");
     }
-
     registerFonts();
+
+    let seeded_rng = seedrandom(projectName);
+
+
 
     await drawBgImage(context, backgroundImage, ogImageWidth, ogImageHeight);
 
     // Gradient spans across 5 canvases, choose where to start and send;
     const gradientSize = 2;
-    const randomXPos = Math.random() * (gradientSize - 1);
-    const randomYPos = Math.random() * (gradientSize - 1);
+    const randomXPos = seeded_rng() * (gradientSize - 1);
+    const randomYPos = seeded_rng() * (gradientSize - 1);
     const gradientXOffset = randomXPos * ogImageWidth;
     const gradientYOffset = randomYPos * ogImageHeight;
 
     let bgGradient = context.createLinearGradient(0 - gradientXOffset, 0 - gradientYOffset, (ogImageWidth * gradientSize) - gradientXOffset, (ogImageHeight* gradientSize) - gradientYOffset);
-    let keyColours = randomOrderList(["#451952", "#662549", "#AE445A", "#F39F5A", "#451952"]);
+    let keyColours = randomOrderList(["#451952", "#662549", "#AE445A", "#F39F5A", "#451952"], seeded_rng);
     console.log(keyColours)
     for (let i = 0; i < keyColours.length; i++) {
         let ratio = i / (keyColours.length-1)

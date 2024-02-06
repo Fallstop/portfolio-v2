@@ -45,7 +45,6 @@
         <meta property="og:image:height" content={`${ogImageWidth}`} />
         <meta property="og:image:alt" content={`${post.date} |${post.title} | ${post.description}`} />
         <meta property="og:image:type" content="image/png" />
-
         
         <meta name="article:published_time" content={post.date} />
         <meta name="article:author" content={`${canonicalURL}/about`} />

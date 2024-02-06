@@ -9,7 +9,7 @@ export const accentFont = "Accent Sans";
 
 
 export function registerFonts() {
-    registerFont('./src/lib/server/ogimage/assets/OpenSans-ExtraBold.ttf', { family: tileFont });
+    registerFont('./src/lib/server/ogimage/assets/WorkSans-ExtraBold.ttf', { family: tileFont });
     registerFont('./src/lib/server/ogimage/assets/OpenSans-Regular.ttf', { family: paragraphFont });
     registerFont('./src/lib/server/ogimage/assets/OpenSans-Bold.ttf', { family: accentFont });
 }
@@ -154,7 +154,7 @@ export async function drawBgImage(ctx: CanvasRenderingContext2D, backgroundImage
     let y_offset = 0;
     let x_offset = 0;
 
-    if (Math.abs(widthScale - 1) > Math.abs(heightScale - 1)) {
+    if (widthScale - 1 > heightScale - 1) {
         // Width is further
         scaledHeight = imageHeight * widthScale;
         y_offset = (scaledHeight - pageHeight) / 2;
@@ -162,6 +162,7 @@ export async function drawBgImage(ctx: CanvasRenderingContext2D, backgroundImage
         // Height is further
         scaledWidth = imageWidth * heightScale;
         x_offset = (scaledWidth - pageWidth) / 2;
+
     }
 
 

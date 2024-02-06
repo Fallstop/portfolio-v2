@@ -34,7 +34,7 @@ const config = {
     adapter: adapter({
 			routes: {
 				include: ['/*'],
-				exclude: ['<all>', '/sitemap.xml']
+				exclude: ['/sitemap.xml', '<all>']
 			}
     }),
     alias: {

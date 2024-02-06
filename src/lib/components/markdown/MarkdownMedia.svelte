@@ -6,7 +6,6 @@
     export let src: any;
 
     let type: "image" | "video" | "gallery" = "image";
-    console.log("Markdown Media Import",src)
     if (Array.isArray(src)) {
         console.log("imagggggggs",src)
         type = "image"

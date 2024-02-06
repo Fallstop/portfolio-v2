@@ -1501,7 +1501,7 @@
 />
 <div class="freeze-frame-container">
 	{#each generatedCanvasPrintFrames || [] as frame}
-		<img class="freeze-frame" src={frame} />
+		<img class="freeze-frame" src={frame} alt=""/>
 	{/each}
 </div>
 <div class="canvas-overlay"></div>

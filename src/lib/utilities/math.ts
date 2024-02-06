@@ -8,8 +8,8 @@ export function randomFromList<T>(value: T[] | string): T | string {
     return value[Math.floor(Math.random() * value.length)]
 }
 
-export function randomOrderList<T>(value: T[]): T[] {
-    value.sort(()=>Math.random()-0.5)
+export function randomOrderList<T>(value: T[], randFn = Math.random): T[] {
+    value.sort(()=>randFn()-0.5)
     return value
 }
 
