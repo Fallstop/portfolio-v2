@@ -1,8 +1,10 @@
 import { default as canvasLib } from "canvas";
 import fs from "fs"
 import roundedRect from "./roundedRectangle"
-import { TextStyle, WrappedText, accentFont, drawBgImage, paragraphFont, registerFonts, tileFont, wrapText } from "./canvasUtil";
+import { ShapeStyle, TextStyle, WrappedText, accentFont, drawBgImage, paragraphFont, registerFonts, tileFont } from "./canvasUtil";
 import { randomOrderList } from "$lib/utilities/math";
+import { ogImageHeight, ogImagePadding, ogImageWidth } from "$lib/components/layout/SEO.svelte";
+
 
 let { createCanvas, loadImage } = canvasLib;
 
@@ -37,15 +39,18 @@ let AccentTextStyle = new TextStyle({
     fontName: accentFont,
     lineHeight: 1.8
 });
+
+let blackenOverlay = new ShapeStyle({
+    fillStyle: "#000",
+    strokeStyle: "",
+    lineWidth: 0
+});
+
 export default async function renderCanvas(opts: GenerationOptions): Promise<Buffer> {
     const {projectDate, projectDescription, projectName, backgroundImage} = opts;
 
-    const height = 630;
-    const width = 1200;
-    const padding = 80;
-
     // Initialize
-    const canvas = createCanvas(width, height);
+    const canvas = createCanvas(ogImageWidth, ogImageHeight);
     const context = canvas.getContext('2d');
     if (!context) {
         throw new Error("Failed to create Canvas");
@@ -53,18 +58,16 @@ export default async function renderCanvas(opts: GenerationOptions): Promise<Buf
 
     registerFonts();
 
-    context.globalAlpha = 0.4;
-    await drawBgImage(context, backgroundImage, width, height);
-    context.globalAlpha = 1;
+    await drawBgImage(context, backgroundImage, ogImageWidth, ogImageHeight);
 
     // Gradient spans across 5 canvases, choose where to start and send;
     const gradientSize = 2;
     const randomXPos = Math.random() * (gradientSize - 1);
     const randomYPos = Math.random() * (gradientSize - 1);
-    const gradientXOffset = randomXPos * width;
-    const gradientYOffset = randomYPos * height;
+    const gradientXOffset = randomXPos * ogImageWidth;
+    const gradientYOffset = randomYPos * ogImageHeight;
 
-    let bgGradient = context.createLinearGradient(0 - gradientXOffset, 0 - gradientYOffset, (width * gradientSize) - gradientXOffset, (height* gradientSize) - gradientYOffset);
+    let bgGradient = context.createLinearGradient(0 - gradientXOffset, 0 - gradientYOffset, (ogImageWidth * gradientSize) - gradientXOffset, (ogImageHeight* gradientSize) - gradientYOffset);
     let keyColours = randomOrderList(["#451952", "#662549", "#AE445A", "#F39F5A", "#451952"]);
     console.log(keyColours)
     for (let i = 0; i < keyColours.length; i++) {
@@ -73,22 +76,27 @@ export default async function renderCanvas(opts: GenerationOptions): Promise<Buf
     }
 
     context.fillStyle = bgGradient;
+    context.globalAlpha = 0.6;
+    context.fillRect(0,0,ogImageWidth,ogImageHeight)
+    
     context.globalAlpha = 0.4;
-    context.fillRect(0,0,width,height)
+    blackenOverlay.canvasApply(context);
+    context.fillRect(0,0,ogImageWidth,ogImageHeight)
+
     context.globalAlpha = 1;
 
     
-    const text_width_space = width - (padding*2)
+    const text_width_space = ogImageWidth - (ogImagePadding*2)
 
     let dateText = new WrappedText(context, projectDate, text_width_space, AccentTextStyle);
     let titleText = new WrappedText(context, projectName, text_width_space, TitleTextStyle);
     let descriptionText = new WrappedText(context, projectDescription, text_width_space, ParagraphTextStyle);
     
     // Draw text from the bottom up
-    let bottom_y = height - padding;
-    bottom_y -= descriptionText.draw(padding, bottom_y - descriptionText.total_height);
-    bottom_y -= titleText.draw(padding, bottom_y - titleText.total_height);
-    bottom_y -= dateText.draw(padding, bottom_y - dateText.total_height);
+    let bottom_y = ogImageHeight - ogImagePadding;
+    bottom_y -= descriptionText.draw(ogImagePadding, bottom_y - descriptionText.total_height);
+    bottom_y -= titleText.draw(ogImagePadding, bottom_y - titleText.total_height);
+    bottom_y -= dateText.draw(ogImagePadding, bottom_y - dateText.total_height);
 
 
 

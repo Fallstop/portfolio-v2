@@ -13,7 +13,6 @@
 	<title>{data.meta.title}</title>
 	<meta property="og:type" content="article" />
 	<meta property="og:title" content={data.meta.title} />
-	<link rel="canonical" href={data.meta.slug} />
 </svelte:head>
 
 <LightBoxPage/>
@@ -21,6 +20,10 @@
 <PrimaryLayout
 	navigation_option={NavigationOption.Blog}
 	fluid_sim_background={false}
+	SEOProps={{
+		type: "post",
+		post: data.meta
+	}}
 >
 	<article>
 		<!-- Title -->

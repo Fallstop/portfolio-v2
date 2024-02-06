@@ -1,4 +1,5 @@
-import { NodeCanvasRenderingContext2D, default as canvasLib } from "canvas";
+import { CanvasRenderingContext2D, default as canvasLib, createCanvas } from "canvas";
+import webp from "@cwasm/webp"
 
 const {registerFont, loadImage} = canvasLib
 
@@ -14,13 +15,13 @@ export function registerFonts() {
 }
 
 export class WrappedText {
-    ctx: NodeCanvasRenderingContext2D
+    ctx: CanvasRenderingContext2D
     text_lines: string[] = []
     line_width: number
     line_height: number
     total_height: number
     text_style: TextStyle
-    constructor (ctx: NodeCanvasRenderingContext2D, text: string, line_width: number, text_style: TextStyle) {
+    constructor (ctx: CanvasRenderingContext2D, text: string, line_width: number, text_style: TextStyle) {
         this.ctx = ctx;
         this.line_width = line_width;
         this.text_style = text_style;
@@ -100,7 +101,7 @@ export class TextStyle {
         this.lineHeight = lineHeight
     }
 
-    canvasApply(ctx: NodeCanvasRenderingContext2D) {
+    canvasApply(ctx: CanvasRenderingContext2D) {
         ctx.font = `${this.fontSize}pt ${this.fontName}`
         ctx.textAlign = this.textAlign
         ctx.textBaseline = this.textBaseline
@@ -127,7 +128,7 @@ export class ShapeStyle {
         this.lineWidth = lineWidth
     }
 
-    canvasApply(ctx: NodeCanvasRenderingContext2D) {
+    canvasApply(ctx: CanvasRenderingContext2D) {
         ctx.lineWidth = this.lineWidth
         ctx.fillStyle = this.fillStyle
         ctx.strokeStyle = this.strokeStyle
@@ -135,25 +136,39 @@ export class ShapeStyle {
 }
 
 
-export async function drawBgImage(ctx: NodeCanvasRenderingContext2D, backgroundImage: Buffer, pageWidth: number, pageHeight: number) {
-    const backgroundSlate = await loadImage(backgroundImage);
-    const imageWidth = backgroundSlate.naturalWidth, imageHeight = backgroundSlate.naturalHeight;
+export async function drawBgImage(ctx: CanvasRenderingContext2D, backgroundImage: Buffer, pageWidth: number, pageHeight: number) {
+    let rawImage = webp.decode(backgroundImage);
+    let imageData = ctx.createImageData(rawImage.width, rawImage.height);
+    imageData.data.set(rawImage.data);
 
+    
+    const imageWidth = rawImage.width, imageHeight = rawImage.height;
+    
+    
     let scaledWidth = pageWidth;
     let scaledHeight = pageHeight;
 
     const widthScale = pageWidth / imageWidth;
     const heightScale = pageHeight / imageHeight;
 
+    let y_offset = 0;
+    let x_offset = 0;
+
     if (Math.abs(widthScale - 1) > Math.abs(heightScale - 1)) {
         // Width is further
         scaledHeight = imageHeight * widthScale;
+        y_offset = (scaledHeight - pageHeight) / 2;
     } else {
         // Height is further
         scaledWidth = imageWidth * heightScale;
+        x_offset = (scaledWidth - pageWidth) / 2;
     }
 
 
-    ctx.drawImage(backgroundSlate, 0, 0, scaledWidth, scaledHeight);
+    let scalingCanvas = createCanvas(imageWidth, imageHeight);
+    let scalingCtx = scalingCanvas.getContext('2d');
+    scalingCtx.putImageData(imageData, 0,0);
+    ctx.drawImage(scalingCanvas, 0 - x_offset, 0 - y_offset, scaledWidth, scaledHeight);
+
     
 }

@@ -44,6 +44,12 @@
     fluid_sim_background
     navigation_option={NavigationOption.Midpoint}
     personal_headshot
+    SEOProps={{
+        type: "mainpage",
+        description: "Get in touch!",
+        slug: "/contact",
+        title: "Jasper M-W | Contact Me",
+    }}
 >
     <h1 class="page-header">Send me a message!</h1>
     <form method="post" use:enhance>

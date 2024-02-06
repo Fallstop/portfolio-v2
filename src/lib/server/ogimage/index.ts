@@ -19,10 +19,16 @@ export async function generateImage({params}: RequestEvent): Promise<Response> {
         // Return redirect to default thumbnail
         throw redirect(302, DefaultThumbnail);
     }
+    const thumbnailRequestPath = `./src/projects/${project.postID}/thumbnail.webp`;
 
-    // const thumbnailRequestPath = `.${url}`;
-    // const thumbnailFile = fs.readFileSync(thumbnailRequestPath);
-    const thumbnailFile = fs.readFileSync("./src/projects/default-thumbnail.jpg");
+    let thumbnailFile;
+    try {
+        thumbnailFile = fs.readFileSync(thumbnailRequestPath);
+    } catch (e) {
+        console.log(e)
+        thumbnailFile = fs.readFileSync("./src/projects/default-thumbnail.webp");
+    }
+    // const thumbnailFile = fs.readFileSync("./src/projects/default-thumbnail.jpg");
 
 
     const fileBlob = await renderCanvas({

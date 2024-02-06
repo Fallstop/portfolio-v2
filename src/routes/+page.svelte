@@ -1,4 +1,5 @@
 <script lang="ts">
+
     import Name from "$lib/assets/svg/Name.svelte"
     import PrimaryLayout from "$lib/components/layout/PrimaryLayout.svelte";
     import FluidCanvas from "$lib/components/fluidSim/FluidCanvas.svelte";
@@ -7,7 +8,17 @@
 <svelte:head>
     <title>Jasper M-W Portfolio</title>
 </svelte:head>
-<PrimaryLayout fluid_sim_background fluid_sim_interactive personal_headshot>
+<PrimaryLayout
+    fluid_sim_background
+    fluid_sim_interactive
+    personal_headshot
+    SEOProps={{
+		type: "mainpage",
+        description: "Jasper Miller-Waugh's Portfolio",
+        slug: "",
+        title: "Jasper M-W",
+	}}
+>
     <div class="name-title" title="Jasper M-W">
         <Name/>
     </div>    

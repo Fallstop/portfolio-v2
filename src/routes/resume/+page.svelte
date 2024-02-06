@@ -13,6 +13,12 @@
     navigation_option={NavigationOption.Midpoint}
     personal_headshot
     splash_on_print
+    SEOProps={{
+        type: "mainpage",
+        description: "I'm a first year engineering student at University of Auckland, and I've got a passion for making.",
+        slug: "/resume",
+        title: "Jasper M-W | Resume",
+    }}
 >
 
 <div class="content">
