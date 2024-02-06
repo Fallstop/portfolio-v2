@@ -168,6 +168,9 @@
                 font-size: 1rem;
                 padding: 0.2rem;
             }
+            @media print {
+                display: none;
+            }
         }
 
         .navigation-container {

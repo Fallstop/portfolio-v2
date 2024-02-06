@@ -14,7 +14,7 @@ body {
     --headshot-height: 35vh;
     @media screen and (max-width: $tablet-breakpoint) {
         --headshot-height: 15vh;
-    }
+    }   
     @media screen and (max-width: $mobile-breakpoint) {
         --headshot-height: 0;
     }
@@ -107,7 +107,7 @@ div.fancybox__container img.fancybox-image {
 {
     @page {
       size: A4; /* DIN A4 standard, Europe */
-      margin: 15mm 0 0 0;
+      margin: $print-page-top-padding 0 0 0;
     }
 }
 

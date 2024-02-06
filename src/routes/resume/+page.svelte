@@ -81,19 +81,16 @@
     <h2>Education</h2>
     <div class="card-container">
         <LiveCard>
-            <h3 class="company-name">Huanui College <span class="date">2017 <ArrowRight class="arrow"/> 2023</span></h3>
+            <h3 class="company-name">UoA - Engineering <span class="date">2024 <ArrowRight class="arrow"/> present</span></h3>
             <ul>
-                <li>Completed my A2 level Physics, Maths, and Digital Media under the CIE Curriculum.</li>
-                <li>Current Head Boy, leading the prefect group of 20</li>
-                <li>Enrolled into my fast-track offer into UOA Engineering, to start in 2024</li>
+                <li>First year University of Auckland Bachelor of Engineering (Honours).</li>
             </ul>
         </LiveCard>
         <LiveCard>
-            <h3 class="company-name">University of Auckland - Engineering <span class="date">2024 <ArrowRight class="arrow"/> present</span></h3>
+            <h3 class="company-name">Huanui College <span class="date">2017 <ArrowRight class="arrow"/> 2023</span></h3>
             <ul>
-                <li>Completed my A2 level Physics, Maths, and Digital Media under the CIE Curriculum.</li>
-                <li>Current Head Boy, leading the prefect group of 20</li>
-                <li>Enrolled into my fast-track offer into UOA Engineering, to start in 2024</li>
+                <li>Completed my A2 level Physics, Maths, Computer Science, and Digital Media under the CIE Curriculum.</li>
+                <li>2023 Head Boy, leading the prefect group of 20</li>
             </ul>
         </LiveCard>
 

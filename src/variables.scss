@@ -61,6 +61,7 @@ $border-radius: 0.5rem;
 }
 
 $print-page-padding: 5rem;
+$print-page-top-padding: 15mm;
 
 @mixin icon-inline {
     :global(svg) {
