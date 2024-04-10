@@ -31,7 +31,7 @@ export const AuthorDetails: PeopleDetails[] = [
     },
     {
         name: "Taine Reader",
-        homepage: "https://invalidse.me/",
+        homepage: "https://yes.jmw.nz/",
     },
     {
         name: "Jacob Read",
