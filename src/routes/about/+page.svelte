@@ -37,7 +37,7 @@
         <div class="fact-container">
             <FactBox
                 title="Unusable CV Booster"
-                description="I'm the 2023 Head Boy of Huanui College"
+                description="I was the 2023 Head Boy of Huanui College"
             />
             <FactBox title="Age" description={getYearsFrom(birthdate).toString()} />
             {#if Math.random() > 0.9}

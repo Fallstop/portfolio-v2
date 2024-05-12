@@ -39,11 +39,10 @@
     <h2>Employment History</h2>
     <div class="card-container">
         <LiveCard>
-            <h3 class="company-name">Provida <span class="date">2021 <ArrowRight class="arrow"/> present</span></h3>
+            <h3 class="company-name">University of Auckland - CIE<span class="date">2024 <ArrowRight class="arrow"/> present</span></h3>
             <ul>
-                <li>Development of Provida's Video Meeting offering, based on Jitsi Meet.</li>
-                <li>Web development of <a href="https://www.zui.nz/">Zui</a>, the community instance of the video meeting offering.</li>
-                <li>Automated scanning and validation of APC medical and vaccine certificates.</li>
+                <li>Part of the Creative Technologist team at the Unleash Space's Makerspace.</li>
+                <li>Supervising the makerspace, running equipment workshops, facilitating curricular workshops, and repairing equipment.</li>
             </ul>
         </LiveCard>
         <LiveCard>
@@ -51,6 +50,14 @@
             <ul>
                 <li>General software development for clients.</li>
                 <li>For example: automatically pulling balance information out of NZ bank statements using AWS Textract</li>
+            </ul>
+        </LiveCard>
+        <LiveCard>
+            <h3 class="company-name">Provida <span class="date">2021 <ArrowRight class="arrow"/> 2023</span></h3>
+            <ul>
+                <li>Development of Provida's Video Meeting offering, based on Jitsi Meet.</li>
+                <li>Web development of <a href="https://www.zui.nz/">Zui</a>, the community instance of the video meeting offering.</li>
+                <li>Automated scanning and validation of APC medical and vaccine certificates.</li>
             </ul>
         </LiveCard>
         <LiveCard>
