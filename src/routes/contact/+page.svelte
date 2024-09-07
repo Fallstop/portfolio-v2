@@ -38,6 +38,21 @@
         messageInput &&
         emailInputValid &&
         messageInputValid;
+
+    function formEnhance(
+        formElement: HTMLElement,
+        formData,
+        action,
+        cancel,
+        submitter,
+    ) {
+        return async ({ result, update }) => {
+            if (!result.ok) {
+                return;
+            }
+            update();
+        };
+    }
 </script>
 
 <PrimaryLayout
@@ -66,7 +81,7 @@
                         type="text"
                         id="name"
                         name="name"
-                        placeholder="Something close to a name here"
+                        placeholder="John Smith"
                         on:blur={() => {
                             nameChanged = true;
                         }}
@@ -96,7 +111,7 @@
                         type="email"
                         id="email"
                         name="email"
-                        placeholder="Mail of the E variant"
+                        placeholder="email@example.org"
                         on:blur={() => {
                             emailChanged = true;
                         }}
@@ -124,9 +139,7 @@
                             Please enter a message between 3 and {messageMaxLength}
                             characters
                         </span>
-                    {:else}
-                       
-                    {/if}
+                    {:else}{/if}
                 </span>
             </label>
             <LiveCard
@@ -148,12 +161,19 @@
                 ></textarea>
             </LiveCard>
             <div class="detail-row right">
-                    <span class="helper-text message-length">
-                        {messageInput?.length || 0} / {messageMaxLength}
-                    </span>
+                <span class="helper-text message-length">
+                    {messageInput?.length || 0} / {messageMaxLength}
+                </span>
             </div>
             <div class="detail-row left">
-                <button class="submit-button" type="submit" disabled={!formValid}>
+                <button
+                    class="submit-button"
+                    type="submit"
+                    disabled={!formValid}
+                    title={formValid
+                        ? "Send message"
+                        : "Please fill all fields"}
+                >
                     <Send />
                     Send
                 </button>
