@@ -18,7 +18,7 @@ export function getPersonDetails(name: string): PeopleDetails {
         name: name,
     };
 }
-
+// <p>This is a proof of concept built for the Govhack 2024 Hackathon by <a class="text-inherit underline font-normal" href="https://jmw.nz">Jasper Miller-Waugh</a>, <a class="text-inherit underline font-normal" href="https://laspruca.nz">Connor Hare</a>, <a class="text-inherit underline font-normal" href="https://linktr.ee/haunanipao">Haunani Pao</a>, <a class="text-inherit underline font-normal" href="https://www.linkedin.com/in/debbietyl">Debbie Tan</a>, <a class="text-inherit underline font-normal" href="https://www.linkedin.com/in/steffanie-r/">Steffanie Relucio</a>, <a class="text-inherit underline font-normal" href="https://www.linkedin.com/in/elle-lum">Elle Lum</a>, <a class="text-inherit underline font-normal" href="https://www.linkedin.com/in/uxwithjade/">Jade Lim</a>, <a class="text-inherit underline font-normal" href="https://www.linkedin.com/in/johncaveishere/">John Cave</a>, <a class="text-inherit underline font-normal" href="https://walt.online">Walter Lim</a>.</p>
 
 export const AuthorDetails: PeopleDetails[] = [
     {
@@ -44,5 +44,33 @@ export const AuthorDetails: PeopleDetails[] = [
     {
         name: "Ara Bartlett",
         homepage: "https://www.linkedin.com/in/ara-bartlett-197b82250",
+    },
+    {
+        name: "Haunani Pao",
+        homepage: "https://linktr.ee/haunanipao",
+    },
+    {
+        name: "Debbie Tan",
+        homepage: "https://www.linkedin.com/in/debbietyl",
+    },
+    {
+        name: "Steffanie Relucio",
+        homepage: "https://www.linkedin.com/in/steffanie-r/",
+    },
+    {
+        name: "Elle Lum",
+        homepage: "https://www.linkedin.com/in/elle-lum",
+    },
+    {
+        name: "Jade Lim",
+        homepage: "https://www.linkedin.com/in/uxwithjade/",
+    },
+    {
+        name: "John Cave",
+        homepage: "https://www.linkedin.com/in/johncaveishere/",
+    },
+    {
+        name: "Walter Lim",
+        homepage: "https://walt.online",
     }
 ];
