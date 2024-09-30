@@ -18,6 +18,7 @@ Living in university accommodation has it's ups and downs. One of the downs is t
 To solve this, I created a couple of prototype devices as part of my Innovate 100G course. They resolve lockouts by physically lifting the door handle from the inside, bypassing the university's locking mechanism entirely.
 
 <MarkdownLink href="{pdfURL}">DoorSafeReport.pdf</MarkdownLink>
+![DoorSafeReport.pdf](./FullReport.pdf)
 
 <!-- ![DoorSafeReport.pdf](./FullReport.pdf) -->
 

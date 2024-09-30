@@ -4,20 +4,23 @@
     import { onDestroy, onMount } from "svelte";
 
     export let pdf_url: string;
-    export let file_name: string = pdf_url?.split("/")?.pop() || "file.pdf";
+    export let file_name: string = pdf_url?.split("/")?.pop() || `${pdf_url.length}.pdf`;
 
-    let src = pdf_url.startsWith("http") || !browser ? pdf_url : (origin || "")+pdf_url;
+    // Must be consistent, but unique
+    let div_id = `pdf_viewer_${file_name.replace(/[^a-zA-Z0-9]/g, '')}_id`;
 
-    let div_id = randomHash();
+    let adobeDCView: any = undefined;
 
     function setupPDF() {
         if (typeof AdobeDC === "undefined" || !browser) {
             console.log("AdobeDC not found");
             return;
         }
+        let src = pdf_url.startsWith("http") || !browser ? pdf_url : (origin || "")+pdf_url;
+
         console.log("Setting up adobe", src);
         
-        var adobeDCView = new AdobeDC.View({
+        adobeDCView = new AdobeDC.View({
             clientId: "1dd95e9483214ea9adbc52622e7bed5f",
             divId: div_id,
         });
@@ -30,7 +33,7 @@
                 },
                 metaData: { fileName: file_name},
             },
-            { embedMode: "SIZED_CONTAINER" },
+            { embedMode: "SIZED_CONTAINER", enableLinearization: true },
         );
     }
 
@@ -47,6 +50,11 @@
             return;
         }
         document.removeEventListener("adobe_dc_view_sdk.ready", setupPDF);
+        if (typeof AdobeDC !== "undefined" && typeof adobeDCView !== "undefined" && browser) {
+            console.log("AdobeDC found, unmounting");
+            adobeDCView.unMountViewerNode();
+        }
+
     });
 </script>
 
