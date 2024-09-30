@@ -8,6 +8,7 @@ import Fallstop from "$lib/components/ExtraIcons/Fallstop.svelte";
 import Provida from "$lib/components/ExtraIcons/Provida.svelte";
 import TerribleHack from "$lib/components/ExtraIcons/TerribleHack.svelte";
 import HuggingFace from "$lib/components/ExtraIcons/HuggingFace.svelte";
+import Film48Hours from "$lib/components/ExtraIcons/Film48Hours.svelte";
 
 export function extractDomain(url: string) {
     try {
@@ -137,5 +138,11 @@ export const brandingDetails: Record<string,BrandData> = {
         domain: "huggingface.co",
         icon: HuggingFace,
         color: "#FF9D00"
+    },
+    "www.48hours.co.nz": {
+        name: "48Hours",
+        domain: "48hours.co.nz",
+        icon: Film48Hours,
+        color: "#333"
     }
 }

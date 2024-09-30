@@ -3,11 +3,11 @@ date: "2022-05-17"
 title: "Spicy r/place"
 description: "Why manually place tiles, when you can automate it?"
 authors:
- - Nathan Hare
+ - Connor Hare
  - Jasper M-W
  - Taine Reader
 collaborators:
- - Nathan Hare
+ - Connor Hare
  - Jasper M-W
  - Taine Reader
 tags: ["software", "misc", "rust"]

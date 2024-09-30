@@ -26,12 +26,12 @@ export const AuthorDetails: PeopleDetails[] = [
         homepage: "https://jmw.nz/about",
     },
     {
-        name: "Nathan Hare",
+        name: "Connor Hare",
         homepage: "https://laspruca.nz/",
     },
     {
         name: "Taine Reader",
-        homepage: "https://yes.jmw.nz/",
+        homepage: "https://invalidse.com/",
     },
     {
         name: "Jacob Read",
@@ -40,5 +40,9 @@ export const AuthorDetails: PeopleDetails[] = [
     {
         name: "Zac M-W",
         homepage: "https://zac.nz/",
+    },
+    {
+        name: "Ara Bartlett",
+        homepage: "https://www.linkedin.com/in/ara-bartlett-197b82250",
     }
 ];

@@ -4,7 +4,7 @@ title: "Dirty Watts"
 description: "Track the cleanliness of your energy consumption with Dirtywatts – the electricity usage app that helps you go green."
 collaborators:
  - Jasper M-W
- - Nathan Hare
+ - Connor Hare
  - Jacob Read
  - Taine Reader
  - Ara Bartlett

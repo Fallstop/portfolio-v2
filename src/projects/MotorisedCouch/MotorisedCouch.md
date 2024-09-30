@@ -5,7 +5,7 @@ subtitle: "A couch fast enough that we should probably add seatbelts"
 description: "Building a collaborative driving experience, using nothing but a couch, a wheelchair, two electric scooters, a recycled UPS, and a suspicious briefcase."
 collaborators:
     - Jasper M-W
-    - Nathan Hare
+    - Connor Hare
     - Taine Reader
     - Ara Bartlett
     - Cam Matheson

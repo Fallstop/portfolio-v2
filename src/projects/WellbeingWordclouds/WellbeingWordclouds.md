@@ -5,12 +5,9 @@ subtitle: "Automatically turning student responses into wordclouds that share lo
 description: "Automatically turning student responses into wordclouds that share love."
 collaborators:
  - Jasper M-W
- - Nathan Hare
- - Jacob Read
- - Taine Reader
- - Ara Bartlett
- - Leya Stow
- - Grayson Sutherland
+ - Mataariki Aplin
+ - Sam Hostad
+ - The 2023 Wellbeing Committee
 highlight: true
 tags: ["software", "python", "Huanui College"]
 ---

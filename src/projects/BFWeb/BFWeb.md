@@ -6,7 +6,7 @@ authors:
  - Jasper M-W
 collaborators:
     - Jasper M-W
-    - Nathan Hare
+    - Connor Hare
     - Jacob Read
 tags: ["software", "48 Hours", "Terrible Ideas", "brainf*ck"]
 ---

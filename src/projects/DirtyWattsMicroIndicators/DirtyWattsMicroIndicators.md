@@ -4,7 +4,7 @@ title: "Dirty Watts Micro-Indicators"
 description: "Grid load impacts renewable energy mix in New Zealand. How can you help?"
 collaborators:
  - Jasper M-W
- - Nathan Hare
+ - Connor Hare
  - Jacob Read
  - Taine Reader
  - Ara Bartlett

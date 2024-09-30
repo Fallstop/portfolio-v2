@@ -5,7 +5,7 @@ subtitle: "The most powerful and secure random number tool you could ever want."
 description: "Using a massive robotic arm to violently roll dice."
 collaborators:
     - Jasper M-W
-    - Nathan Hare
+    - Connor Hare
     - Jacob Read
     - Taine Reader
 highlight: true

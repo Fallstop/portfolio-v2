@@ -5,10 +5,10 @@ description: "E²G (ESquaredG) takes on cost-optimising EEG headsets using multi
 tags: ["software", "hardware", "rust", "rust", "Science Fair"]
 authors:
  - Jasper M-W
- - Nathan Hare
+ - Connor Hare
 collaborators:
     - Jasper M-W
-    - Nathan Hare
+    - Connor Hare
 
 ---
 

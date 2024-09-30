@@ -4,7 +4,7 @@ title: "Toi: Times Of Interest"
 description: "Govhack Entry that visualizes the all the COVID-19 locations of interest in a intuitive timeline/map combo."
 collaborators:
  - Jasper M-W
- - Nathan Hare
+ - Connor Hare
  - Jacob Read
  - Taine Reader
  - Dan Burns
