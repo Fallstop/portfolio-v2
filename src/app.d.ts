@@ -6,6 +6,10 @@ declare global {
 		// interface Locals {}
 		// interface PageData {}
 		// interface Platform {}
+		// AdobeDC
+		interface AdobeDC {
+			View: (config: any) => void;
+		}
 	}
 }
 

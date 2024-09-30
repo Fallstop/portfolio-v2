@@ -2,7 +2,7 @@
 date: "2023-03-23"
 title: "HC Notices V2"
 description: "Second iteration of the Unofficial Huanui College daily notices reader"
-highlight: true
+highlight: false
 tags: ["software", "svelte", "Huanui College"]
 ---
 

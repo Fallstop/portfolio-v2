@@ -1,11 +1,9 @@
 import { sveltekit } from "@sveltejs/kit/vite";
 import { defineConfig } from "vite";
-import Inspect from "vite-plugin-inspect"
 import { svelteInspector } from '@sveltejs/vite-plugin-svelte-inspector';
 import{ imagetools } from './vitePlugins/imageToolPlugin';
 import {interceptDirectives, resolveThumbnailConfigs} from "./vitePlugins/imageToolsParamTransform";
 import galleryImportTransform from "./vitePlugins/galleryImportTransform";
-import { visualizer } from "rollup-plugin-visualizer";
 
 
 export default defineConfig({
@@ -16,15 +14,7 @@ export default defineConfig({
       resolveConfigs: resolveThumbnailConfigs(),
       extendDirectives: interceptDirectives(),
     }),
-    Inspect({
-      build: true,
-
-    }),
     svelteInspector({}),
-    visualizer({
-      emitFile: true,
-      filename: "stats.html",
-    }),
   ],
   css: {
     preprocessorOptions: {

@@ -106,6 +106,16 @@
                     white-space: unset;
                 }
             }
+            
+            @media print {
+                .header {
+                    font-size: 1.5rem;
+                }
+                .description {
+                    font-size: 0.9rem;
+                    line-height: 1;
+                }
+            }
         }
         .background {
             position: absolute;

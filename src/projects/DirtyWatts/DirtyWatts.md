@@ -10,7 +10,7 @@ collaborators:
  - Ara Bartlett
  - Leya Stow
  - Grayson Sutherland
-highlight: true
+highlight: false
 tags: ["software", "svelte", "rust", "python", "govhack", "48 Hours", "environmental"]
 ---
 

@@ -1,11 +1,13 @@
 <script lang="ts">
     import MarkdownGallery from "./MarkdownGallery.svelte";
     import MarkdownImage from "./MarkdownImage.svelte";
+    import MarkdownPdfPreview from "./MarkdownPDFPreview.svelte";
     import MarkdownVideo from "./MarkdownVideo.svelte";    
 
     export let src: any;
+    export let alt: any;
 
-    let type: "image" | "video" | "gallery" = "image";
+    let type: "image" | "video" | "gallery" | "pdf" = "image";
     if (Array.isArray(src)) {
         console.log("imagggggggs",src)
         type = "image"
@@ -16,12 +18,17 @@
         if (['mp4', 'webm', 'ogg'].includes(extension ?? "")) {
             type = "video";
         }
+        if (['pdf'].includes(extension ?? "")) {
+            type = "pdf";
+        }
     }
 </script>
 {#if type=="gallery"}
-    <MarkdownGallery {src} {...$$restProps}/>
+    <MarkdownGallery {src} {alt} {...$$restProps}/>
 {:else if type=="video"}
-    <MarkdownVideo {src} {...$$restProps}/>
+    <MarkdownVideo {src} {alt} {...$$restProps}/>
 {:else if type=="image"}
-    <MarkdownImage {src} {...$$restProps} />
+    <MarkdownImage {src} {alt} {...$$restProps} />
+{:else if type=="pdf"}
+    <MarkdownPdfPreview pdf_url={src} file_name={alt} {...$$restProps} /> 
 {/if}

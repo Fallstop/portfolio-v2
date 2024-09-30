@@ -19,8 +19,7 @@
 </div>
 
 <a href="/projects" class="more-projects">
-    <span class="more-header">{missedProjects > 1 ? missedProjects : ''} More</span>
-    <span class="more-header headline">Projects</span>
+    <span class="more-header headline">{missedProjects > 1 ? missedProjects : ''} More Projects</span>
     <div class="qr-code">
         {@html svg}
     </div>
@@ -76,8 +75,8 @@
             width: 300px;
             flex-grow: unset;
             flex-direction: column;
-            text-align: right;
-            align-items: flex-end;
+            text-align: left;
+            align-items: flex-start;
             justify-content: space-evenly;
             .more-header {
                 font-size: 1.5rem;
