@@ -6,7 +6,7 @@
     export let pdf_url: string;
     export let file_name: string = pdf_url?.split("/")?.pop() || "file.pdf";
 
-    let src = !pdf_url.startsWith("http") ? origin+pdf_url : pdf_url;
+    let src = pdf_url.startsWith("http") || !browser ? pdf_url : (origin || "")+pdf_url;
 
     let div_id = randomHash();
 
