@@ -20,7 +20,7 @@ To solve this, I created a couple of prototype devices as part of my Innovate 10
 
 ![DoorSafeReport.pdf](./FullReport.pdf)
 
-## Prototype 1
+<!-- ## Prototype 1
 ![:full](./Prototype1/)
 ## Prototype 2
-![:full](./Prototype2/)
+![:full](./Prototype2/) -->
