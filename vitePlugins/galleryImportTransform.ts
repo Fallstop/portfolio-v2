@@ -25,8 +25,10 @@ interface ResolveOptions {
 export default function galleryImportTransform({projectRoot}: {projectRoot: string}) {
   return {
     name: 'transform-file',
-    async resolveId(source: string, importer: string | undefined, options: ResolveOptions): Promise<ResolveIdResult> {
+    enforce: 'post',
+    async resolveId(source: string, importer: string | undefined, options: ResolveOptions): Promise<ResolveIdResult> {      
       if (importer && markdownFileRegex.test(importer) && source.endsWith("/")) {
+
         // Markdown file importing folder!
         // Hasn't resolved so far, so we can assume it's a gallery import
 
@@ -41,6 +43,7 @@ export default function galleryImportTransform({projectRoot}: {projectRoot: stri
           
           
           galleryBaseDir = fullSystemPath.slice(normalizePath(projectRoot).length);
+          console.log("Gallery base dir",galleryBaseDir)
         }
         return {
           id: galleryBaseDir+magicResolutionKey,
@@ -58,7 +61,7 @@ export default function galleryImportTransform({projectRoot}: {projectRoot: stri
 				// Replace with actual proxy
         const folderProxy = galleryTemplate.replaceAll(templateFolderKey,dirname);
         return folderProxy;
-        }
+      }
       return null
     }
   }

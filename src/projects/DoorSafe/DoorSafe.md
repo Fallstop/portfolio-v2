@@ -20,9 +20,7 @@ To solve this, I created a couple of prototype devices as part of my Innovate 10
 <MarkdownLink href="{pdfURL}">DoorSafeReport.pdf</MarkdownLink>
 ![DoorSafeReport.pdf](./FullReport.pdf)
 
-<!-- ![DoorSafeReport.pdf](./FullReport.pdf) -->
-
 ## Prototype 1
 ![:full](./Prototype1/)
 ## Prototype 2
-![:full](./Prototype2/)
+![:full](./Prototype2/) -->

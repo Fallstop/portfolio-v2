@@ -1,72 +1,104 @@
 <script lang="ts">
-    import { browser } from "$app/environment";
-    import { randomHash } from "$lib/utilities/math";
-    import { onDestroy, onMount } from "svelte";
+    import type { PDFSlick } from "@pdfslick/core";
+    import { onMount, onDestroy } from "svelte";
 
     export let pdf_url: string;
     export let file_name: string = pdf_url?.split("/")?.pop() || `${pdf_url.length}.pdf`;
 
-    // Must be consistent, but unique
-    let div_id = `pdf_viewer_${file_name.replace(/[^a-zA-Z0-9]/g, '')}_id`;
 
-    let adobeDCView: any = undefined;
+    let container: HTMLDivElement;
 
-    function setupPDF() {
-        if (typeof AdobeDC === "undefined" || !browser) {
-            console.log("AdobeDC not found");
-            return;
-        }
-        let src = pdf_url.startsWith("http") || !browser ? pdf_url : (origin || "")+pdf_url;
+    /**
+     * Reference to the pdfSlick instance
+     */
+    let pdfSlick: PDFSlick;
 
-        console.log("Setting up adobe", src);
-        
-        adobeDCView = new AdobeDC.View({
-            clientId: "1dd95e9483214ea9adbc52622e7bed5f",
-            divId: div_id,
-        });
-        adobeDCView.previewFile(
-            {
-                content: {
-                    location: {
-                        url: src,
-                    },
-                },
-                metaData: { fileName: file_name},
+    /**
+     * Keep PDF Slick state portions we're interested in using in your app
+     */
+    let pageNumber = 1;
+    let numPages = 0;
+
+    let unsubscribe: CallableFunction | undefined;
+
+    onMount(async () => {
+        /**
+         * This is all happening on client side, so we'll make sure we only load it there
+         */
+        const { create, PDFSlick } = await import("@pdfslick/core");
+
+        /**
+         * Create the PDF Slick store
+         */
+        const store = create();
+
+        pdfSlick = new PDFSlick({
+            container,
+            store,
+            options: {
+                scaleValue: "page-fit",
             },
-            { embedMode: "SIZED_CONTAINER", enableLinearization: true },
-        );
-    }
+        });
 
-    onMount(() => {
-        if (!browser) {
-            return;
-        }
-        setupPDF();
-        document.addEventListener("adobe_dc_view_sdk.ready", setupPDF);
+        /**
+         * Load the PDF document
+         */
+        pdfSlick.loadDocument(pdf_url);
+        store.setState({ pdfSlick });
+
+        /**
+         * Subscribe to state changes, and keep values of interest as reactive Svelte vars,
+         * (or alternatively we could hook these or entire PDF state into a Svelte store)
+         *
+         * Also keep reference of the unsubscribe function we call on component destroy
+         */
+        unsubscribe = store.subscribe((s) => {
+            pageNumber = s.pageNumber;
+            numPages = s.numPages;
+        });
     });
 
-    onDestroy(() => {
-        if (!browser) {
-            return;
-        }
-        document.removeEventListener("adobe_dc_view_sdk.ready", setupPDF);
-        if (typeof AdobeDC !== "undefined" && typeof adobeDCView !== "undefined" && browser) {
-            console.log("AdobeDC found, unmounting");
-            adobeDCView.unMountViewerNode();
-        }
-
-    });
+    onDestroy(() => unsubscribe && unsubscribe());
 </script>
 
-<svelte:head>
-    <script src="https://acrobatservices.adobe.com/view-sdk/viewer.js"></script>
-</svelte:head>
-<div class="pdf-preview" id="{div_id}" style="height: 100vh; width: 100%;"></div>
+<div class="pdf-preview pdfSlick">
+    <div class="flex-1 relative h-full" id="container">
+        <!--
+        The important part —
+        we use the reference to this `container` when creating PDF Slick instance above
+      -->
+        <div
+            id="viewerContainer"
+            class="pdfSlickContainer absolute inset-0"
+            bind:this={container}
+        >
+            <div id="viewer" class="pdfSlickViewer pdfViewer" />
+        </div>
+    </div>
+
+    <!-- ... -->
+
+    <!-- Use `pdfSlick`, `pageNumber` and `numPages` to create PDF pagination -->
+    <div class="flex justify-center">
+        <button
+            on:click={() => pdfSlick?.gotoPage(Math.max(pageNumber - 1, 1))}
+            disabled={pageNumber <= 1}
+        >
+            Show Previous Page
+        </button>
+        <button
+            on:click={() =>
+                pdfSlick?.gotoPage(Math.min(pageNumber + 1, numPages))}
+            disabled={pageNumber >= numPages}
+        >
+            Show Next Page
+        </button>
+    </div>
+</div>
 
 <style>
     .pdf-preview {
         position: relative;
         width: 100%;
-
     }
 </style>
