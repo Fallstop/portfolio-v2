@@ -68,7 +68,7 @@
             <FactBox title="Camera" description="Sony a 7II" />
             <FactBox
                 title="Github Repo Count"
-                description={data.github.totalRepoCount.toString()}
+                description={data.github.totalRepoCount?.toString()}
             />
             <FactBox title="Last poor financial decision" description={formatDate(new Date(Date.now() - 60*60*24))} />
             <FactBox title="BrainF*ck Interpreters Developed" description="8" />

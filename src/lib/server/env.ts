@@ -1,5 +1,5 @@
-import { env } from '$env/dynamic/private';
+export {VITE_GITHUB_AUTH_TOKEN as GITHUB_AUTH_TOKEN, DISCORD_WEBHOOK, VITE_ADOBE_CLIENT_ID as ADOBE_CLIENT_ID} from '$env/static/private';
 
-export const GITHUB_AUTH_TOKEN = env.GITHUB_AUTH_TOKEN;
-export const DISCORD_WEBHOOK = env.DISCORD_WEBHOOK;
-export const ADOBE_CLIENT_ID = env.VITE_ADOBE_CLIENT_ID;
+// export const GITHUB_AUTH_TOKEN = env.GITHUB_AUTH_TOKEN ?? "";
+// export const DISCORD_WEBHOOK = env.DISCORD_WEBHOOK ?? "";
+// export const ADOBE_CLIENT_ID = env.VITE_ADOBE_CLIENT_ID ?? "";

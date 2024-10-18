@@ -7,7 +7,7 @@ export async function load({fetch}: PageServerLoadEvent) {
 	const posts: Post[] = await response.json()
 
 	return {
-		github: getGithubStats(),
+		github: await getGithubStats(),
 		postsHighlighted: posts.filter((post) => post.highlight),
 	};
 }

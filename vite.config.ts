@@ -1,6 +1,5 @@
 import { sveltekit } from "@sveltejs/kit/vite";
 import { defineConfig } from "vite";
-import { svelteInspector } from '@sveltejs/vite-plugin-svelte-inspector';
 import{ imagetools } from './vitePlugins/imageToolPlugin';
 import {interceptDirectives, resolveThumbnailConfigs} from "./vitePlugins/imageToolsParamTransform";
 import galleryImportTransform from "./vitePlugins/galleryImportTransform";
@@ -14,7 +13,6 @@ export default defineConfig({
       resolveConfigs: resolveThumbnailConfigs(),
       extendDirectives: interceptDirectives(),
     }),
-    svelteInspector({}),
   ],
   css: {
     preprocessorOptions: {
