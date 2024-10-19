@@ -1,7 +1,7 @@
 @use "./variables.scss" as *;
 
 // Supports weights 100-900
-@import "@fontsource-variable/work-sans";
+@use "@fontsource-variable/work-sans";
 
 body {
     @include body-font;

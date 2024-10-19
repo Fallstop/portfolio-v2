@@ -7,7 +7,9 @@ const markdownFileRegex = /src\/projects\/.*\.md$/
 
 const projectsFolder = "/src/projects";
 
-const magicResolutionKey = "\0GALLERY_IMPORT";
+
+// Super weird regression when including the conventional '\0' api key.
+const magicResolutionKey = "_____GALLERY_IMPORT";
 
 const templateFolderKey = "<FOLDERNAME>";
 
