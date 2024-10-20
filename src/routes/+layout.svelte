@@ -179,11 +179,12 @@
             justify-content: center;
             height: min(100%, 100vh);
             pointer-events: none;
+            -webkit-user-drag: none;
+            
             @media screen and (max-width: $tablet-breakpoint) {
                 height: auto;
                 justify-content: start;
             }
-            -webkit-user-drag: none;
         }
         @media print {
             grid-template-columns: 100% 0;
