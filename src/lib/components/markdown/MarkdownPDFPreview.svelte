@@ -5,6 +5,7 @@
     import "@pdfslick/core/dist/pdf_viewer.css";
     import LiveCard from "../LiveCard.svelte";
     import { SquareArrowOutUpRight } from "lucide-svelte";
+    import { browser } from "$app/environment";
 
     export let pdf_url: string;
     export let file_name: string =
@@ -26,6 +27,7 @@
     let unsubscribe: CallableFunction | undefined;
 
     onMount(async () => {
+        if (!browser) return;
         /**
          * This is all happening on client side, so we'll make sure we only load it there
          */
@@ -86,30 +88,10 @@
                 <div id="viewer" class="pdfSlickViewer pdfViewer" />
             </div>
         </div>
-
-        <!-- ... -->
-
-        <!-- Use `pdfSlick`, `pageNumber` and `numPages` to create PDF pagination -->
-        <!-- <div class="flex justify-center">
-            <button
-            on:click={() => pdfSlick?.gotoPage(Math.max(pageNumber - 1, 1))}
-            disabled={pageNumber <= 1}
-            >
-            Show Previous Page
-            </button>
-            <button
-            on:click={() =>
-            pdfSlick?.gotoPage(Math.min(pageNumber + 1, numPages))}
-            disabled={pageNumber >= numPages}
-            >
-            Show Next Page
-            </button>
-            </div> -->
     </div>
 </div>
 
 <style lang="scss">
-    // @use "";
     .pdf-preview-container {
         margin-top: 2rem;
 
