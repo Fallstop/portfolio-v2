@@ -3,10 +3,11 @@
     import Name from "$lib/assets/svg/Name.svelte"
     import PrimaryLayout from "$lib/components/layout/PrimaryLayout.svelte";
     import FluidCanvas from "$lib/components/fluidSim/FluidCanvas.svelte";
+    import LiveCard from "$lib/components/LiveCard.svelte";
 
 </script>
 <svelte:head>
-    <title>Jasper M-W Portfolio</title>
+    <title>Jasper Miller-Waugh | Portfolio</title>
 </svelte:head>
 <PrimaryLayout
     fluid_sim_background
@@ -14,14 +15,14 @@
     personal_headshot
     SEOProps={{
 		type: "mainpage",
-        description: "Jasper Miller-Waugh's Portfolio",
+        description: "I'm a engineering student at the University of Auckland, and I've got a passion for making.",
         slug: "",
         title: "Jasper M-W",
 	}}
 >
     <div class="name-title" title="Jasper M-W">
         <Name/>
-    </div>    
+    </div>
 </PrimaryLayout>
 
 <style lang="scss">
@@ -30,12 +31,12 @@
         box-sizing: border-box;
         padding: 0;
         line-height: 1;
+        width: 110%;
+        height: 100%;
 
         :global(svg) {
             width: 100%;
         }
-        width: 110%;
-        height: 100%;
 
         @media screen and (max-width: $tablet-breakpoint) {
             width: 100%;

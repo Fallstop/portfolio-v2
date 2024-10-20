@@ -177,7 +177,7 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
-            height: min(100%, 100vh);
+            height: 100vh;
             pointer-events: none;
             -webkit-user-drag: none;
             
