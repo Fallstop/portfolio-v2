@@ -9,7 +9,6 @@
 
     let type: "image" | "video" | "gallery" | "pdf" = "image";
     if (Array.isArray(src)) {
-        console.log("imagggggggs",src)
         type = "image"
     } else if (typeof src === "object") {
         type = "gallery";

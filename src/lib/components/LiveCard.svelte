@@ -8,18 +8,26 @@
     export let tabbable: boolean = false;
     export let highlighted: boolean = false;
     export let title: string | null = null;
-    $: clickable = !!$fluidSimFunctions;
+    export let type: "button" | "link" = "button";
+    $: clickable = (!!$fluidSimFunctions) || type === "link";
 </script>
 
-<button class="fact-box {size} {style} {hidden}" class:clickable={clickable} use:liveCardEffect on:click class:highlighted {title} type="button" tabindex={tabbable && clickable ? 0 : -1}>
-    <slot />
-</button>
+{#if type === "button"}
+    <button {...$$restProps} class="fact-box {size} {style} {hidden}" class:clickable={clickable} use:liveCardEffect on:click class:highlighted {title} tabindex={tabbable && clickable ? 0 : -1}><slot /></button>
+{:else if type === "link"}
+    <!-- svelte-ignore a11y-missing-attribute -->
+    <a {...$$restProps} class="fact-box {size} {style} {hidden}" class:clickable={clickable} use:liveCardEffect on:click class:highlighted {title} tabindex={tabbable && clickable ? 0 : -1}><slot /></a>
+{/if}
+
 
 <style lang="scss">
     @use "../../variables.scss" as *;
     @use "sass:color" as *;
     
     .fact-box {
+        @include icon-inline;
+
+
         background-color: adjust($background-color, $alpha: -0.2);
         padding: 1rem;
         border-radius: $border-radius;
@@ -37,6 +45,9 @@
         border: none;
         display: block;
         text-align: left;
+        
+        color: $text-color;
+        text-decoration: none;
 
 
         &:hover {

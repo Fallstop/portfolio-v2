@@ -160,6 +160,10 @@
                     $accent-color
                 );
 
+                $time-delay: math.random() * math.$pi + s;
+                animation-delay: calc($time-delay * -1);
+                transform: scale(1.1);
+
                 background-size: 400% 400%;
                 animation: gradient 10s ease infinite;
 
@@ -175,9 +179,6 @@
                     }
                 }
 
-                $time-delay: random() * math.$pi + s;
-                animation-delay: calc($time-delay * -1);
-                transform: scale(1.1);
             }
 
 
