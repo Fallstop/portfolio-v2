@@ -12,10 +12,14 @@
   },
   "devDependencies": {
     "@cwasm/webp": "^0.1.5",
+    "@fancyapps/ui": "^5.0.36",
+    "@fontsource-variable/work-sans": "^5.1.0",
     "@octokit/core": "^6.1.2",
     "@octokit/types": "^13.6.1",
+    "@pdfslick/core": "^1.5.2",
     "@sveltejs/adapter-cloudflare": "^4.7.3",
     "@sveltejs/kit": "^2.7.1",
+    "@sveltejs/vite-plugin-svelte": "^3.1.2",
     "@types/node": "^22.7.6",
     "@types/qrcode-svg": "^1.1.5",
     "@types/seedrandom": "^3.0.8",
@@ -23,11 +27,13 @@
     "fuse.js": "^7.0.0",
     "imagetools-core": "^6.0.0",
     "lucide-static": "^0.453.0",
+    "lucide-svelte": "^0.453.0",
     "mdsvex": "^0.12.3",
     "mdsvex-relative-images": "^1.0.3",
     "qrcode-svg": "^1.1.0",
     "remark-external-links": "^9.0.0",
     "rollup-plugin-visualizer": "^5.12.0",
+    "sass": "^1.80.3",
     "seedrandom": "^3.0.5",
     "sharp": "^0.33.5",
     "svelte": "^4.2.19",
@@ -40,15 +46,8 @@
     "vite": "^5.4.9",
     "vite-imagetools": "^7.0.4",
     "vite-plugin-inspect": "^0.8.7",
-    "@fancyapps/ui": "^5.0.36",
-    "@fontsource-variable/work-sans": "^5.1.0",
-    "@pdfslick/core": "^1.5.2",
-    "@sveltejs/vite-plugin-svelte": "^3.1.2",
-    "lucide-svelte": "^0.453.0",
-    "sass-embedded": "^1.80.3",
     "wrangler": "^3.81.0"
   },
   "type": "module",
-  "dependencies": {
-  }
+  "dependencies": {}
 }
