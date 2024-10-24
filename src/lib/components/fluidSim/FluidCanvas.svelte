@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { run } from 'svelte/legacy';
+
 	import { createEventDispatcher, onMount, setContext } from "svelte";
 	import * as shaders from "./fluidShader";
 	import { generateColor } from "./colourGradient";
@@ -12,48 +14,82 @@
 	import InteractiveMouse from "./InteractiveMouse.svelte";
 	import { wrap } from "$lib/utilities/math";
 
-	export let SIM_RESOLUTION = 32;
-	export let DYE_RESOLUTION = 512;
-	export let CAPTURE_RESOLUTION = 256;
-	export let INITIAL_DENSITY_DISSIPATION = 0.05;
-	export let INITIAL_VELOCITY_DISSIPATION = 0.4;
 
-	export let DENSITY_DISSIPATION = 0.05;
-	export let VELOCITY_DISSIPATION = 0.4;
-	export let PRESSURE = 0.1;
-	export let PRESSURE_ITERATIONS = 20;
-	export let CURL = 15;
-	export let SPLAT_RADIUS = 1;
-	export let SPLAT_FORCE = 500;
-	export let SHADING = true;
-	export let COLORFUL = true;
-	export let COLOR_UPDATE_SPEED = 10;
-	export let PAUSED = false;
-	export let BACK_COLOR = { r: 255, g: 255, b: 255 };
-	export let TRANSPARENT = false;
-	export let BLOOM = false;
-	export let BLOOM_ITERATIONS = 8;
-	export let BLOOM_RESOLUTION = 256;
-	export let BLOOM_INTENSITY = 0.8;
-	export let BLOOM_THRESHOLD = 0.6;
-	export let BLOOM_SOFT_KNEE = 0.7;
-	export let SUNRAYS = false;
-	export let SUNRAYS_RESOLUTION = 196;
-	export let SUNRAYS_WEIGHT = 1.0;
 
-	export let INTERACTIVE = true;
 
-	export let FPS = 1;
 
-	export let SPLASH_ON_PRINT = false;
+	interface Props {
+		SIM_RESOLUTION?: number;
+		DYE_RESOLUTION?: number;
+		CAPTURE_RESOLUTION?: number;
+		INITIAL_DENSITY_DISSIPATION?: number;
+		INITIAL_VELOCITY_DISSIPATION?: number;
+		DENSITY_DISSIPATION?: number;
+		VELOCITY_DISSIPATION?: number;
+		PRESSURE?: number;
+		PRESSURE_ITERATIONS?: number;
+		CURL?: number;
+		SPLAT_RADIUS?: number;
+		SPLAT_FORCE?: number;
+		SHADING?: boolean;
+		COLORFUL?: boolean;
+		COLOR_UPDATE_SPEED?: number;
+		PAUSED?: boolean;
+		BACK_COLOR?: any;
+		TRANSPARENT?: boolean;
+		BLOOM?: boolean;
+		BLOOM_ITERATIONS?: number;
+		BLOOM_RESOLUTION?: number;
+		BLOOM_INTENSITY?: number;
+		BLOOM_THRESHOLD?: number;
+		BLOOM_SOFT_KNEE?: number;
+		SUNRAYS?: boolean;
+		SUNRAYS_RESOLUTION?: number;
+		SUNRAYS_WEIGHT?: number;
+		INTERACTIVE?: boolean;
+		FPS?: number;
+		SPLASH_ON_PRINT?: boolean;
+	}
 
-	let generatedCanvasPrintFrames: string[] | null = null;
+	let {
+		SIM_RESOLUTION = 32,
+		DYE_RESOLUTION = $bindable(512),
+		CAPTURE_RESOLUTION = 256,
+		INITIAL_DENSITY_DISSIPATION = 0.05,
+		INITIAL_VELOCITY_DISSIPATION = 0.4,
+		DENSITY_DISSIPATION = $bindable(0.05),
+		VELOCITY_DISSIPATION = $bindable(0.4),
+		PRESSURE = 0.1,
+		PRESSURE_ITERATIONS = 20,
+		CURL = 15,
+		SPLAT_RADIUS = 1,
+		SPLAT_FORCE = 500,
+		SHADING = $bindable(true),
+		COLORFUL = true,
+		COLOR_UPDATE_SPEED = 10,
+		PAUSED = $bindable(false),
+		BACK_COLOR = { r: 255, g: 255, b: 255 },
+		TRANSPARENT = false,
+		BLOOM = $bindable(false),
+		BLOOM_ITERATIONS = 8,
+		BLOOM_RESOLUTION = 256,
+		BLOOM_INTENSITY = 0.8,
+		BLOOM_THRESHOLD = 0.6,
+		BLOOM_SOFT_KNEE = 0.7,
+		SUNRAYS = $bindable(false),
+		SUNRAYS_RESOLUTION = 196,
+		SUNRAYS_WEIGHT = 1.0,
+		INTERACTIVE = true,
+		FPS = $bindable(1),
+		SPLASH_ON_PRINT = false
+	}: Props = $props();
+
+	let generatedCanvasPrintFrames: string[] | null = $state(null);
 
 	const MAX_STEP_SIZE = 0.016666;
 
 	let eventDispatch = createEventDispatcher();
 
-	$: disableInteractive(INTERACTIVE);
 	function disableInteractive(interactive: boolean) {
 		if (interactive) return;
 
@@ -66,14 +102,6 @@
 
 	const textureURL = "/assets/fluidSim/LDR_LLL1_0.png";
 
-	// should work similarly to dat.gui's onFinishChange hook
-	$: SIM_RESOLUTION,
-		DYE_RESOLUTION,
-		BLOOM_ITERATIONS,
-		BLOOM_RESOLUTION,
-		SUNRAYS_RESOLUTION,
-		gl && initFramebuffers();
-	$: SHADING, BLOOM, SUNRAYS, displayMaterial && updateKeywords();
 
 	function getSupportedFormat(
 		gl: WebGL2RenderingContext,
@@ -1231,9 +1259,9 @@
 		else return { width: min, height: max };
 	}
 
-	let canvas: HTMLCanvasElement;
+	let canvas: HTMLCanvasElement = $state();
 
-	let gl: WebGL2RenderingContext | null;
+	let gl: WebGL2RenderingContext | null = $state();
 	let ext: {
 		formatRGBA: any;
 		halfFloatTexType: any;
@@ -1242,7 +1270,7 @@
 		supportLinearFiltering: any;
 	};
 
-	const pointers: PointerInfo[] = [];
+	const pointers: PointerInfo[] = $state([]);
 	const splatStack: number[] = [];
 
 	let dye;
@@ -1281,7 +1309,7 @@
 		uniforms: any;
 		programs?: any[];
 		activeProgram?: any;
-	};
+	} = $state();
 
 	let lastUpdateTime: number;
 	let colorUpdateTimer: number;
@@ -1491,6 +1519,21 @@
 		colorUpdateTimer = 0.0;
 		update();
 	});
+	run(() => {
+		disableInteractive(INTERACTIVE);
+	});
+	// should work similarly to dat.gui's onFinishChange hook
+	run(() => {
+		SIM_RESOLUTION,
+			DYE_RESOLUTION,
+			BLOOM_ITERATIONS,
+			BLOOM_RESOLUTION,
+			SUNRAYS_RESOLUTION,
+			gl && initFramebuffers();
+	});
+	run(() => {
+		SHADING, BLOOM, SUNRAYS, displayMaterial && updateKeywords();
+	});
 </script>
 
 <canvas
@@ -1498,7 +1541,7 @@
 	class:hide={generatedCanvasPrintFrames}
 	out:fade={{ duration: 500 }}
 	bind:this={canvas}
-/>
+></canvas>
 <div class="freeze-frame-container">
 	{#each generatedCanvasPrintFrames || [] as frame}
 		<img class="freeze-frame" src={frame} alt=""/>
@@ -1511,8 +1554,8 @@
 {/if}
 
 <svelte:window
-	on:mouseup={() => INTERACTIVE && (pointers[0].down = false)}
-	on:touchend={(e) => {
+	onmouseup={() => INTERACTIVE && (pointers[0].down = false)}
+	ontouchend={(e) => {
 		if (!INTERACTIVE) return;
 
 		const touches = e.changedTouches;
@@ -1522,7 +1565,7 @@
 			pointer.down = false;
 		}
 	}}
-	on:keydown={(e) => {
+	onkeydown={(e) => {
 		if (e.code === "KeyP" && !e.ctrlKey) {
 			// We don't want to to trigger on Input elements
 			const tagName = e.target?.tagName?.toUpperCase();
@@ -1567,11 +1610,11 @@
 			}
 		}
 	}}
-	on:afterprint={() => {
+	onafterprint={() => {
 		// PAUSED = false;
 		// generatedCanvasPrintFrames = null;
 	}}
-	on:mousedown={(e) => {
+	onmousedown={(e) => {
 		if (!INTERACTIVE) return;
 		const posX = scaleByPixelRatio(e.offsetX);
 		const posY = scaleByPixelRatio(e.offsetY);
@@ -1579,7 +1622,7 @@
 		if (pointer == null) pointer = createPointer();
 		updatePointerDownData(pointer, -1, posX, posY);
 	}}
-	on:mousemove={(e) => {
+	onmousemove={(e) => {
 		if (!INTERACTIVE) return;
 
 		const pointer = pointers[0];
@@ -1588,7 +1631,7 @@
 		const posY = scaleByPixelRatio(e.offsetY);
 		updatePointerMoveData(pointer, posX, posY);
 	}}
-	on:touchstart={(e) => {
+	ontouchstart={(e) => {
 		if (!INTERACTIVE) return;
 
 		const touches = e.targetTouches;
@@ -1605,7 +1648,7 @@
 			);
 		}
 	}}
-	on:touchmove={(e) => {
+	ontouchmove={(e) => {
 		if (!INTERACTIVE) return;
 
 		const touches = e.targetTouches;

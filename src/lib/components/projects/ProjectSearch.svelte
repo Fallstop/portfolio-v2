@@ -7,23 +7,27 @@
     import { tagCase } from "./tags";
     import { Search } from "lucide-svelte";
 
-    export let projectList: Post[];
+    interface Props {
+        projectList: Post[];
+    }
+
+    let { projectList }: Props = $props();
 
     const tagNumShownMobile = 10;
 
     // Find all tags, and count how many times they appear
-    $: allTagReferences = projectList
+    let allTagReferences = $derived(projectList
         .flatMap((post) => post.tags.map(normaliseCase))
         .filter((tag) => tag)
         .reduce(
             (cnt, cur) => ((cnt[cur] = cnt[cur] + 1 || 1), cnt),
             {} as Record<string, number>,
-        );
+        ));
 
     // Sort by most common
-    $: allTags = Object.entries(allTagReferences)
+    let allTags = $derived(Object.entries(allTagReferences)
         .sort((a, b) => b[1] - a[1])
-        .map((tag) => tag[0]);
+        .map((tag) => tag[0]));
 
     let selectedTag = writable<string | null>(null);
 

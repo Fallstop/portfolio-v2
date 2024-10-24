@@ -1,16 +1,22 @@
 <script lang="ts">
     import CheckURL from "lucide-static/icons/check.svg?url";
     import XURL from "lucide-static/icons/x.svg?url";
+    interface Props {
+        pros?: import('svelte').Snippet;
+        cons?: import('svelte').Snippet;
+    }
+
+    let { pros, cons }: Props = $props();
 </script>
 
 <div class="procon-table">
     <div class="pro-list" style="--icon-url: url({CheckURL})">
         <h4 class="header">Pros</h4>
-        <slot name="pros"/>
+        {@render pros?.()}
     </div>
     <div class="con-list" style="--icon-url: url({XURL});">
         <h4 class="header" >Cons</h4>
-        <slot name="cons"/>
+        {@render cons?.()}
     </div>
 </div>
 <style lang="scss">

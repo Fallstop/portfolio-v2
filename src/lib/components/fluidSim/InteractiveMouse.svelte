@@ -5,7 +5,7 @@
 
     let mousePos = spring({x: 0, y: 0});
 </script>
-<svelte:window on:mousemove={e => mousePos.set({x: e.clientX, y: e.clientY})}/>
+<svelte:window onmousemove={e => mousePos.set({x: e.clientX, y: e.clientY})}/>
 
 <div class="mouse-follow" style="left: {$mousePos.x}px; top: {$mousePos.y}px"></div>
 

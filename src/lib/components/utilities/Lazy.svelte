@@ -1,14 +1,14 @@
 <script>
-	let loadComponent;
-	export { loadComponent as this };
+	
 
 
 	import {} from "lucide-svelte";
+	let { this: loadComponent, loading, component } = $props();
 
 </script>
 
 {#await loadComponent()}
-	<slot name="loading" />
+	{@render loading?.()}
 {:then { default: Component }}
-	<slot name="component" {Component} />
+	{@render component?.({ Component, })}
 {/await}

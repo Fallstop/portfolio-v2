@@ -5,7 +5,7 @@
     import CollaboratorSection from "$lib/components/markdown/CollaboratorSection.svelte";
     import LightBoxPage from "$lib/components/markdown/LightBoxPage.svelte";
 
-	export let data;
+	let { data } = $props();
 </script>
 
 <!-- SEO -->
@@ -39,7 +39,7 @@
 
 		<!-- Post -->
 		<div class="prose">
-			<svelte:component this={data.content} />
+			<data.content />
 		</div>
 
 		<CollaboratorSection collaborators={data.meta.collaborators} />

@@ -1,4 +1,6 @@
 <script lang="ts">
+    import { run } from 'svelte/legacy';
+
     import { enhance } from "$app/forms";
 
     import LiveCard from "$lib/components/LiveCard.svelte";
@@ -9,35 +11,41 @@
 
     const messageMaxLength = 1024;
 
-    let nameInput: string | undefined;
-    let emailInput: string | undefined;
-    let messageInput: string | undefined;
+    let nameInput: string | undefined = $state();
+    let emailInput: string | undefined = $state();
+    let messageInput: string | undefined = $state();
 
-    let nameChanged = false;
-    let emailChanged = false;
-    let messageChanged = false;
+    let nameChanged = $state(false);
+    let emailChanged = $state(false);
+    let messageChanged = $state(false);
 
-    $: nameChanged = !!nameInput && nameChanged;
-    $: emailChanged = !!emailInput && emailChanged;
-    $: messageChanged = !!messageInput && messageChanged;
+    run(() => {
+        nameChanged = !!nameInput && nameChanged;
+    });
+    run(() => {
+        emailChanged = !!emailInput && emailChanged;
+    });
+    run(() => {
+        messageChanged = !!messageInput && messageChanged;
+    });
 
-    $: nameInputValid =
-        nameInput &&
+    let nameInputValid =
+        $derived(nameInput &&
         nameInput.length > 0 &&
-        nameInput.length < messageMaxLength;
-    $: emailInputValid =
-        emailInput?.split("")?.filter((x) => x == "@")?.length == 1;
-    $: messageInputValid =
-        messageInput &&
+        nameInput.length < messageMaxLength);
+    let emailInputValid =
+        $derived(emailInput?.split("")?.filter((x) => x == "@")?.length == 1);
+    let messageInputValid =
+        $derived(messageInput &&
         messageInput.length >= 3 &&
-        messageInput.length <= messageMaxLength;
+        messageInput.length <= messageMaxLength);
 
-    $: formValid =
-        nameInput &&
+    let formValid =
+        $derived(nameInput &&
         emailInput &&
         messageInput &&
         emailInputValid &&
-        messageInputValid;
+        messageInputValid);
 
     function formEnhance(
         formElement: HTMLElement,
@@ -82,7 +90,7 @@
                         id="name"
                         name="name"
                         placeholder="John Smith"
-                        on:blur={() => {
+                        onblur={() => {
                             nameChanged = true;
                         }}
                     />
@@ -112,7 +120,7 @@
                         id="email"
                         name="email"
                         placeholder="email@example.org"
-                        on:blur={() => {
+                        onblur={() => {
                             emailChanged = true;
                         }}
                     />
@@ -155,7 +163,7 @@
                     id="message"
                     name="message"
                     placeholder="Interesting message here..."
-                    on:blur={() => {
+                    onblur={() => {
                         messageChanged = true;
                     }}
                 ></textarea>

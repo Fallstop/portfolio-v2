@@ -4,7 +4,11 @@
 
     const possibleSymbols = "!@#$%^&*";
 
-    export let length = 1;
+    interface Props {
+        length?: number;
+    }
+
+    let { length = 1 }: Props = $props();
 </script>
 <code>
     {#each new Array(length) as i}

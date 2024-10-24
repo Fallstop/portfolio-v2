@@ -1,5 +1,9 @@
 <script lang="ts">
-    export let channelName: string;
+    interface Props {
+        channelName: string;
+    }
+
+    let { channelName }: Props = $props();
 </script>
 
 <style>

@@ -1,4 +1,4 @@
-<script lang="ts" context="module">
+<script lang="ts" module>
     import type { Post } from "$lib/types";
 
     export interface MainPageSEO {
@@ -23,7 +23,11 @@
 </script>
 
 <script lang="ts">
-    export let SEOProps: SEOProps;
+    interface Props {
+        SEOProps: SEOProps;
+    }
+
+    let { SEOProps }: Props = $props();
 
     const canonicalURL = "https://jmw.nz";
 </script>

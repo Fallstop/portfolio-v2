@@ -8,7 +8,11 @@
     import ProjectThumbnails from "$lib/components/projects/ProjectThumbnails.svelte";
     import MoreProjectsThumbnail from "$lib/components/projects/MoreProjectsThumbnail.svelte";
 
-    export let data: import("./$types").PageData;
+    interface Props {
+        data: import("./$types").PageData;
+    }
+
+    let { data }: Props = $props();
 </script>
 
 <PrimaryLayout
@@ -87,7 +91,7 @@
                 <ProjectThumbnails posts={data.postsHighlighted} />
                 <MoreProjectsThumbnail />
             </div>
-            <div class="mask-overlay" />
+            <div class="mask-overlay"></div>
         </div>
     </div>
 </PrimaryLayout>

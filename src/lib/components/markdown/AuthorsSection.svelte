@@ -1,7 +1,11 @@
 <script lang="ts">
     import { getPersonDetails } from "$lib/utilities/getPeopleDetails";
 
-    export let authors: string[] = ["Jasper M-W"];
+    interface Props {
+        authors?: string[];
+    }
+
+    let { authors = ["Jasper M-W"] }: Props = $props();
 </script>
 By
 {#each authors as author, i}

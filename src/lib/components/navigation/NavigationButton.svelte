@@ -1,21 +1,32 @@
 <script lang="ts">
     import type { Icon } from "lucide-svelte";
-    export let icon: typeof homePage.icon;
-    export let pageSlug: PageSlug;
-    export let title: string;
-    export let primary = false;
 
     import { page } from "$app/stores";
     import { homePage, type PageSlug } from "./pages";
     import { liveCardEffect } from "$lib/effects/liveCardEffect";
+    interface Props {
+        icon: typeof homePage.icon;
+        pageSlug: PageSlug;
+        title: string;
+        primary?: boolean;
+    }
 
-    $: activePage = $page.url.pathname == pageSlug;
+    let {
+        icon,
+        pageSlug,
+        title,
+        primary = false
+    }: Props = $props();
 
+    let activePage = $derived($page.url.pathname == pageSlug);
+
+
+    const SvelteComponent = $derived(activePage ? homePage.icon : icon);
 </script>
 
 <a href={activePage ? homePage.pageSlug : pageSlug} use:liveCardEffect={{movementScaler: 300}}>
     <div class="navigation-button" class:primary={primary || activePage}>
-        <svelte:component this={activePage ? homePage.icon : icon} size="0.9em" />
+        <SvelteComponent size="0.9em" />
         <span class="button-title">
             {activePage ? homePage.title : title}
         </span>

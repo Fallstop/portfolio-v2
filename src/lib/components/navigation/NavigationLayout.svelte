@@ -5,9 +5,13 @@
     import { homePage, pages, promotedPage } from "./pages";
     import { NavigationOption } from "../layout/layoutDataStore";
 
-    export let direction: NavigationOption;
+    interface Props {
+        direction: NavigationOption;
+    }
 
-    $: staggeredButtons = direction === NavigationOption.Home || direction === NavigationOption.Midpoint;
+    let { direction }: Props = $props();
+
+    let staggeredButtons = $derived(direction === NavigationOption.Home || direction === NavigationOption.Midpoint);
 </script>
 
 <div
@@ -17,7 +21,7 @@
     class:desktop-only={direction === NavigationOption.Blog || direction === NavigationOption.Midpoint}
 >
     {#if staggeredButtons}
-        <div class="empty" />
+        <div class="empty"></div>
     {/if}
     {#each pages as { pageSlug, title, icon, primary } (direction+pageSlug)}
         <div class="animation-container">
@@ -25,7 +29,7 @@
         </div>
     {/each}
     {#if staggeredButtons}
-        <div class="empty" />
+        <div class="empty"></div>
     {/if}
 </div>
 <div class="mobile-container">

@@ -1,7 +1,11 @@
 <script lang="ts">
     import { getPersonDetails } from "$lib/utilities/getPeopleDetails";
 
-    export let collaborators: string[];
+    interface Props {
+        collaborators: string[];
+    }
+
+    let { collaborators }: Props = $props();
 </script>
 
 {#if collaborators && collaborators.length > 0}

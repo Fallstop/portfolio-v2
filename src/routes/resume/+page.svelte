@@ -6,7 +6,11 @@
     import ProjectThumbnails from "$lib/components/projects/ProjectThumbnails.svelte";
     import { ArrowRight } from "lucide-svelte";
 
-    export let data: import("./$types").PageData;
+    interface Props {
+        data: import("./$types").PageData;
+    }
+
+    let { data }: Props = $props();
 </script>
 
 <PrimaryLayout

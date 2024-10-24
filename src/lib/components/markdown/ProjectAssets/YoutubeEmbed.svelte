@@ -1,7 +1,11 @@
 <script lang="ts">
-    export let videoID: string;
 
-    export let shortMode: boolean = false;
+    interface Props {
+        videoID: string;
+        shortMode?: boolean;
+    }
+
+    let { videoID, shortMode = false }: Props = $props();
 </script>
 
 <style>

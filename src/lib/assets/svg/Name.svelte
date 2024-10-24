@@ -4,7 +4,7 @@
     let canvas: HTMLCanvasElement;
     let duration = "8s";
 
-    let svgElement: SVGSVGElement;
+    let svgElement: SVGSVGElement = $state();
     let canvasRendered = false;
 
     let backgroundBlurSize = 200;

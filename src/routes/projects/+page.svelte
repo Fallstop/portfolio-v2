@@ -7,9 +7,13 @@
     import type { Readable } from "svelte/store";
     import { receive, send } from "$lib/utilities/sendTransition";
     import { flip } from "svelte/animate";
-    export let data: import("./$types").PageData;
+    interface Props {
+        data: import("./$types").PageData;
+    }
 
-    let projectSearchResult: Readable<Post[]>;
+    let { data }: Props = $props();
+
+    let projectSearchResult: Readable<Post[]> = $state();
 </script>
 
 <PrimaryLayout
