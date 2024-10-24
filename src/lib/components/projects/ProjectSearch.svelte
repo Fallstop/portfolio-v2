@@ -1,6 +1,5 @@
 <script lang="ts">
     import type { Post } from "$lib/types";
-    import { derived, writable, type Readable } from "svelte/store";
     import Fuse from "fuse.js";
     import LiveCard from "../LiveCard.svelte";
     import { normaliseCase, toProperCase } from "$lib/utilities/string";
@@ -16,26 +15,30 @@
     const tagNumShownMobile = 10;
 
     // Find all tags, and count how many times they appear
-    let allTagReferences = $derived(projectList
-        .flatMap((post) => post.tags.map(normaliseCase))
-        .filter((tag) => tag)
-        .reduce(
-            (cnt, cur) => ((cnt[cur] = cnt[cur] + 1 || 1), cnt),
-            {} as Record<string, number>,
-        ));
+    let allTagReferences = $derived(
+        projectList
+            .flatMap((post) => post.tags.map(normaliseCase))
+            .filter((tag) => tag)
+            .reduce(
+                (cnt, cur) => ((cnt[cur] = cnt[cur] + 1 || 1), cnt),
+                {} as Record<string, number>,
+            ),
+    );
 
     // Sort by most common
-    let allTags = $derived(Object.entries(allTagReferences)
-        .sort((a, b) => b[1] - a[1])
-        .map((tag) => tag[0]));
+    let allTags = $derived(
+        Object.entries(allTagReferences)
+            .sort((a, b) => b[1] - a[1])
+            .map((tag) => tag[0]),
+    );
 
-    let selectedTag = writable<string | null>(null);
+    let selectedTag = $state<string | null>(null);
 
     function toggleTag(tag: string) {
-        if ($selectedTag === tag) {
-            $selectedTag = null;
+        if (selectedTag === tag) {
+            selectedTag = null;
         } else {
-            $selectedTag = tag;
+            selectedTag = tag;
         }
     }
 
@@ -43,29 +46,26 @@
         keys: ["title", "description", "date"],
     });
 
-    let textSearch = writable("");
+    let textSearch = $state("");
 
-    export const searchResult: Readable<Post[]> = derived(
-        [textSearch, selectedTag],
-        ([textSearch, selectedTag]) => {
-            let filteredResult = projectList;
+    export const searchResult: Readable<Post[]> = $derived.by(() => {
+        let filteredResult = projectList;
 
-            // Start with fuzzy search
-            if (textSearch) {
-                filteredResult = fuse
-                    .search(textSearch)
-                    .map((result) => result.item);
-            }
+        // Start with fuzzy search
+        if (textSearch) {
+            filteredResult = fuse
+                .search(textSearch)
+                .map((result) => result.item);
+        }
 
-            if (selectedTag) {
-                filteredResult = filteredResult.filter((post) => {
-                    return post.tags.map(normaliseCase).includes(selectedTag);
-                });
-            }
+        if (selectedTag) {
+            filteredResult = filteredResult.filter((post) => {
+                return post.tags.map(normaliseCase).includes(selectedTag);
+            });
+        }
 
-            return filteredResult;
-        },
-    );
+        return filteredResult;
+    });
 </script>
 
 <div class="search-controller">
@@ -82,7 +82,7 @@
             <LiveCard
                 tabbable
                 size="small"
-                hidden={i>=tagNumShownMobile ? "hidden-mobile" : "visible"}
+                hidden={i >= tagNumShownMobile ? "hidden-mobile" : "visible"}
                 on:click={() => {
                     toggleTag(tag);
                 }}

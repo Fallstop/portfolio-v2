@@ -13,7 +13,7 @@
 
     let { data }: Props = $props();
 
-    let projectSearchResult: Readable<Post[]> = $state();
+    let projectSearch: { searchResult: Readable<Post[]>; } | undefined = $state(undefined);
 </script>
 
 <PrimaryLayout
@@ -22,7 +22,7 @@
     personal_headshot
     SEOProps={{
         type: "mainpage",
-        description: `${$projectSearchResult?.length || "Many"} random and interesting projects that I've worked on over the years.`,
+        description: `${projectSearch?.searchResult?.length || "Many"} random and interesting projects that I've worked on over the years.`,
         slug: "/projects",
         title: "Jasper M-W | Projects",
         image: "/projects/ogimage.png"
@@ -32,11 +32,12 @@
         <h1 class="page-header">Projects</h1>
         <ProjectSearch
             projectList={data.posts}
-            bind:searchResult={projectSearchResult}
+            bind:this={projectSearch}
         />
         <ul class="project-list">
-            {#if $projectSearchResult}
-                <ProjectThumbnails posts={$projectSearchResult} />
+            {JSON.stringify(projectSearch?.searchResult) || "What"}
+            {#if projectSearch?.searchResult}
+                <ProjectThumbnails posts={projectSearch?.searchResult} />
             {/if}
         </ul>
     </div>

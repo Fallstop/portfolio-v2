@@ -3,6 +3,7 @@
     import { onMount } from "svelte";
     import { ENABLE_FLUID_SIM, FLUID_SIM_INTERACTIVE, NAVIGATION_CONFIG, NavigationOption, PERSONAL_HEADSHOT, SPLASH_BACKGROUND_ON_PRINT } from "./layoutDataStore";
     import type { SEOProps } from "./SEO.svelte";
+    import Seo from "./SEO.svelte";
     // import Seo from "./SEO.svelte";
 
     // export let fluid_sim_background: boolean = true;
@@ -19,7 +20,7 @@
         navigation_option?: NavigationOption,
         personal_headshot?: boolean,
         splash_on_print?: boolean,
-        SEOProps: SEOProps
+        SEOData: SEOProps
     }
 
     let {
@@ -28,7 +29,7 @@
         navigation_option = NavigationOption.Home,
         personal_headshot = false,
         splash_on_print = false,
-        SEOProps
+        SEOData
     }: PrimaryLayoutProps = $props();
 
     onMount(()=>{
@@ -39,5 +40,5 @@
         SPLASH_BACKGROUND_ON_PRINT.set(splash_on_print)
     })
 </script>
-<Seo {SEOProps} />
+<Seo {SEOData} />
 <slot/>
