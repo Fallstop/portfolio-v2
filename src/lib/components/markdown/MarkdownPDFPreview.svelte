@@ -6,11 +6,14 @@
     import LiveCard from "../LiveCard.svelte";
     import { SquareArrowOutUpRight } from "lucide-svelte";
 
-    export let pdf_url: string;
-    export let file_name: string =
-        pdf_url?.split("/")?.pop() || `${pdf_url.length}.pdf`;
+    interface Props {
+        pdf_url: string;
+        file_name?: string;
+    }
 
-    let container: HTMLDivElement;
+    let { pdf_url, file_name = pdf_url?.split("/")?.pop() || `${pdf_url.length}.pdf` }: Props = $props();
+
+    let container: HTMLDivElement = $state();
 
     /**
      * Reference to the pdfSlick instance
@@ -83,7 +86,7 @@
                 class="pdfSlickContainer absolute inset-0"
                 bind:this={container}
             >
-                <div id="viewer" class="pdfSlickViewer pdfViewer" />
+                <div id="viewer" class="pdfSlickViewer pdfViewer"></div>
             </div>
         </div>
 

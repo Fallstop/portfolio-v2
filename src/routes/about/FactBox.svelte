@@ -1,8 +1,12 @@
 <script lang="ts">
     import LiveCard from "$lib/components/LiveCard.svelte";
 
-    export let title: string = "";
-    export let description: string = "";
+    interface Props {
+        title?: string;
+        description?: string;
+    }
+
+    let { title = "", description = "" }: Props = $props();
 </script>
 
 <LiveCard>

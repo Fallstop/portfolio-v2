@@ -1,11 +1,16 @@
 <script lang="ts">
     import { parseSettings } from "./parseMediaSettings";
 
-    export let alt = "";
+    interface Props {
+        alt?: string;
+        [key: string]: any
+    }
+
+    let { alt = "", ...rest }: Props = $props();
     const {classes, altText} = parseSettings(alt);
 </script>
-<!-- svelte-ignore a11y-media-has-caption -->
-<video {...$$restProps} controls class="{classes} border" aria-describedby={altText} title={altText}>
+<!-- svelte-ignore a11y_media_has_caption -->
+<video {...rest} controls class="{classes} border" aria-describedby={altText} title={altText}>
     Your browser does not support the video tag.
 </video>
 

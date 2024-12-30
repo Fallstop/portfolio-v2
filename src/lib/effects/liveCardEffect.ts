@@ -60,7 +60,6 @@ export function liveCardEffect(
                 (Math.pow(yRatio, 2) + minRatio) *
                 Math.sign(yRatio) *
                 movementScaler;
-            console.log("Y", yScaled, yRatio, y, movementScaler)
 
             fluidSim.splatPoint(x, y, xScaled, yScaled, undefined);
         }

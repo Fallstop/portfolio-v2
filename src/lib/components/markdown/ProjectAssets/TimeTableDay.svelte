@@ -1,7 +1,7 @@
 <script lang="ts">
     import { onMount } from "svelte";
 
-    let text = "Loading...";
+    let text = $state("Loading...");
     onMount(async ()=>{
         try {
             let request = await fetch("https://hctools.jmw.nz/api/gettimetableday");

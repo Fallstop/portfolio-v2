@@ -43,7 +43,6 @@ export default function galleryImportTransform({projectRoot}: {projectRoot: stri
           
           
           galleryBaseDir = fullSystemPath.slice(normalizePath(projectRoot).length);
-          console.log("Gallery base dir",galleryBaseDir)
         }
         return {
           id: galleryBaseDir+magicResolutionKey,

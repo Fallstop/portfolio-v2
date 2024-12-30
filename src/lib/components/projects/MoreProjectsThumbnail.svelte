@@ -1,7 +1,11 @@
 <script lang="ts">
     import QRCode from "qrcode-svg";
 
-    export let missedProjects: number = 0;
+    interface Props {
+        missedProjects?: number;
+    }
+
+    let { missedProjects = 0 }: Props = $props();
 
     let svg = new QRCode({
         content: "https://jmw//projects",

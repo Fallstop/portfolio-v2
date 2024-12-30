@@ -71,7 +71,7 @@ export default async function renderCanvas(opts: GenerationOptions): Promise<Buf
 
     let bgGradient = context.createLinearGradient(0 - gradientXOffset, 0 - gradientYOffset, (ogImageWidth * gradientSize) - gradientXOffset, (ogImageHeight* gradientSize) - gradientYOffset);
     let keyColours = randomOrderList(["#451952", "#662549", "#AE445A", "#F39F5A", "#451952"], seeded_rng);
-    console.log(keyColours)
+
     for (let i = 0; i < keyColours.length; i++) {
         let ratio = i / (keyColours.length-1)
         bgGradient.addColorStop(ratio, keyColours[i])
@@ -111,6 +111,5 @@ export default async function renderCanvas(opts: GenerationOptions): Promise<Buf
     //         }
     //     },'image/jpeg', { quality: 1 });
     // })
-    console.log("Finished Gen")
     return canvas.toBuffer('image/jpeg', { quality: 1 });
 };    

@@ -9,57 +9,49 @@
 
     const messageMaxLength = 1024;
 
-    let nameInput: string | undefined;
-    let emailInput: string | undefined;
-    let messageInput: string | undefined;
+    let nameInput: string | undefined = $state();
+    let emailInput: string | undefined = $state();
+    let messageInput: string | undefined = $state();
 
-    let nameChanged = false;
-    let emailChanged = false;
-    let messageChanged = false;
+    let nameChanged = $state(false);
+    let emailChanged = $state(false);
+    let messageChanged = $state(false);
 
-    $: nameChanged = !!nameInput && nameChanged;
-    $: emailChanged = !!emailInput && emailChanged;
-    $: messageChanged = !!messageInput && messageChanged;
+    $effect.pre(() => {
+        nameChanged = !!nameInput && nameChanged;
+    });
+    $effect.pre(() => {
+        emailChanged = !!emailInput && emailChanged;
+    });
+    $effect.pre(() => {
+        messageChanged = !!messageInput && messageChanged;
+    });
 
-    $: nameInputValid =
-        nameInput &&
+    let nameInputValid =
+        $derived(nameInput &&
         nameInput.length > 0 &&
-        nameInput.length < messageMaxLength;
-    $: emailInputValid =
-        emailInput?.split("")?.filter((x) => x == "@")?.length == 1;
-    $: messageInputValid =
-        messageInput &&
+        nameInput.length < messageMaxLength);
+    let emailInputValid =
+        $derived(emailInput?.split("")?.filter((x) => x == "@")?.length == 1);
+    let messageInputValid =
+        $derived(messageInput &&
         messageInput.length >= 3 &&
-        messageInput.length <= messageMaxLength;
+        messageInput.length <= messageMaxLength);
 
-    $: formValid =
-        nameInput &&
+    let formValid =
+        $derived(nameInput &&
         emailInput &&
         messageInput &&
         emailInputValid &&
-        messageInputValid;
+        messageInputValid);
 
-    function formEnhance(
-        formElement: HTMLElement,
-        formData,
-        action,
-        cancel,
-        submitter,
-    ) {
-        return async ({ result, update }) => {
-            if (!result.ok) {
-                return;
-            }
-            update();
-        };
-    }
 </script>
 
 <PrimaryLayout
     fluid_sim_background
     navigation_option={NavigationOption.Midpoint}
     personal_headshot
-    SEOProps={{
+    SEOData={{
         type: "mainpage",
         description: "Get in touch!",
         slug: "/contact",
@@ -82,7 +74,7 @@
                         id="name"
                         name="name"
                         placeholder="John Smith"
-                        on:blur={() => {
+                        onblur={() => {
                             nameChanged = true;
                         }}
                     />
@@ -112,7 +104,7 @@
                         id="email"
                         name="email"
                         placeholder="email@example.org"
-                        on:blur={() => {
+                        onblur={() => {
                             emailChanged = true;
                         }}
                     />
@@ -155,7 +147,7 @@
                     id="message"
                     name="message"
                     placeholder="Interesting message here..."
-                    on:blur={() => {
+                    onblur={() => {
                         messageChanged = true;
                     }}
                 ></textarea>

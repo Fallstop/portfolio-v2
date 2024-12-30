@@ -2,19 +2,33 @@
     import { getBrandDetails } from "$lib/utilities/getBrandDetails";
     import type { Globe } from "lucide-svelte";
 
-    export let href: string;
-    export let openInNewTab: boolean = true;
-    export let icon: typeof Globe | null = null;
-    export let color: string | null = null;
-    export let size: "normal" | "small" | "large" = "normal";
+    interface Props {
+        href: string;
+        openInNewTab?: boolean;
+        icon?: typeof Globe | null;
+        color?: string | null;
+        size?: "normal" | "small" | "large";
+        children?: import('svelte').Snippet;
+    }
 
-    $: urlBrand = getBrandDetails(href);
+    let {
+        href,
+        openInNewTab = true,
+        icon = null,
+        color = null,
+        size = "normal",
+        children
+    }: Props = $props();
 
+    let urlBrand = $derived(getBrandDetails(href));
+
+
+    const SvelteComponent = $derived(icon || urlBrand.icon);
 </script>
 
 <a class="{size}" {href} target={openInNewTab ? "_blank" : "_self"} style="--brand-color: {color || urlBrand.color}">
-    <svelte:component this={icon || urlBrand.icon} />
-    <slot/>
+    <SvelteComponent />
+    {@render children?.()}
 </a>
 
 <style lang="scss">

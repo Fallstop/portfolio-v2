@@ -4,7 +4,7 @@
     let canvas: HTMLCanvasElement;
     let duration = "8s";
 
-    let svgElement: SVGSVGElement;
+    let svgElement: SVGSVGElement = $state();
     let canvasRendered = false;
 
     let backgroundBlurSize = 200;
@@ -24,7 +24,6 @@
     let i = 0;
 
     function renderCanvas() {
-        console.log("RENDERING CANVAS", i++);
         if (!canvas) return;
 
         let boundingBox = svgElement.getBoundingClientRect();
@@ -34,7 +33,6 @@
             boundingBox.width,
             boundingBox.height,
         ];
-        console.log(boundingBox);
 
         canvas.width = windowInnerWidth;
         canvas.height = Math.max(
@@ -72,12 +70,6 @@
         let viewBoxHeight = viewBox[3];
 
         ctx.translate(boundingBox.x, boundingBox.y);
-        console.log(
-            boundingBox.width,
-            viewBoxWidth,
-            boundingBox.height,
-            viewBoxHeight
-        );
         ctx.scale(
             boundingBox.width / viewBoxWidth,
             boundingBox.height / viewBoxHeight

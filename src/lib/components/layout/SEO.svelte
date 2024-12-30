@@ -1,4 +1,4 @@
-<script lang="ts" context="module">
+<script lang="ts" module>
     import type { Post } from "$lib/types";
 
     export interface MainPageSEO {
@@ -14,7 +14,7 @@
         type: "post";
     }
 
-    export type SEOProps = MainPageSEO | PostPageSEO;
+    export type SEODataI = MainPageSEO | PostPageSEO;
 
     export const ogImageHeight = 630;
     export const ogImageWidth = 1200;
@@ -23,14 +23,18 @@
 </script>
 
 <script lang="ts">
-    export let SEOProps: SEOProps;
+    interface Props {
+        SEOData: SEODataI;
+    }
+
+    let { SEOData }: Props = $props();
 
     const canonicalURL = "https://jmw.nz";
 </script>
 
 <svelte:head>
-    {#if SEOProps.type == "post"}
-        {@const post = SEOProps.post}
+    {#if SEOData?.type == "post"}
+        {@const post = SEOData?.post}
         <title>{post.title} - Jasper M-W</title>
         <meta name="description" content={post.description} />
         <link rel="canonical" href={`${canonicalURL}${post.slug}`} />
@@ -50,25 +54,25 @@
         <meta name="article:author" content={`${canonicalURL}/about`} />
         
     {:else}
-        <title>{SEOProps.title}</title>
-        <meta name="description" content={SEOProps.description} />
-        <link rel="canonical" href={`${canonicalURL}${SEOProps.slug}`} />
+        <title>{SEOData?.title}</title>
+        <meta name="description" content={SEOData?.description} />
+        <link rel="canonical" href={`${canonicalURL}${SEOData?.slug}`} />
 
-        <meta property="og:title" content={SEOProps.title} />
-        <meta property="og:description" content={SEOProps.description} />
-        <meta property="og:image" content={SEOProps.image} />
-        <meta property="og:url" content={`${canonicalURL}${SEOProps.slug}`} />
+        <meta property="og:title" content={SEOData?.title} />
+        <meta property="og:description" content={SEOData?.description} />
+        <meta property="og:image" content={SEOData?.image} />
+        <meta property="og:url" content={`${canonicalURL}${SEOData?.slug}`} />
 
-        {#if SEOProps.image}
-            <meta property="og:image" content={`${canonicalURL}${SEOProps.image}`} />
+        {#if SEOData?.image}
+            <meta property="og:image" content={`${canonicalURL}${SEOData?.image}`} />
         {:else}
-            <meta property="og:image" content={`${canonicalURL}${SEOProps.slug}/ogimage.png`} />
+            <meta property="og:image" content={`${canonicalURL}${SEOData?.slug}/ogimage.png`} />
         {/if}
         <meta property="og:image:width" content={`${ogImageWidth}`} />
         <meta property="og:image:height" content={`${ogImageWidth}`} />
         <meta property="og:image:type" content="image/png" />
 
-        {#if SEOProps.type == "profile"}
+        {#if SEOData?.type == "profile"}
             <meta property="og:type" content="profile" />
             <meta property="profile:first_name" content="Jasper" />
             <meta property="profile:last_name" content="Miller-Waugh" />

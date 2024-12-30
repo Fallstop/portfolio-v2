@@ -1,22 +1,41 @@
 <script lang="ts">
     import { liveCardEffect } from "$lib/effects/liveCardEffect";
+    import type { MouseEventHandler } from "svelte/elements";
     import { fluidSimFunctions } from "./layout/layoutDataStore";
 
-    export let hidden: "hidden-mobile" | "hidden" | "visible" = "visible";
-    export let size: "small" | "medium" | "large" | "wrap" | "wrap grow" = "medium";
-    export let style: "normal" | "error" = "normal";
-    export let tabbable: boolean = false;
-    export let highlighted: boolean = false;
-    export let title: string | null = null;
-    export let type: "button" | "link" = "button";
-    $: clickable = (!!$fluidSimFunctions) || type === "link";
+    interface Props {
+        hidden?: "hidden-mobile" | "hidden" | "visible";
+        size?: "small" | "medium" | "large" | "wrap" | "wrap grow";
+        style?: "normal" | "error";
+        tabbable?: boolean;
+        highlighted?: boolean;
+        title?: string | null;
+        type?: "button" | "link";
+        children?: import('svelte').Snippet;
+        [key: string]: any,
+        onClick?: MouseEventHandler<HTMLButtonElement | HTMLAnchorElement>;
+    }
+
+    let {
+        hidden = "visible",
+        size = "medium",
+        style = "normal",
+        tabbable = false,
+        highlighted = false,
+        title = null,
+        type = "button",
+        children,
+        onClick,
+        ...rest
+    }: Props = $props();
+    let clickable = $derived((!!$fluidSimFunctions) || type === "link");
 </script>
 
 {#if type === "button"}
-    <button {...$$restProps} class="fact-box {size} {style} {hidden}" class:clickable={clickable} use:liveCardEffect on:click class:highlighted {title} tabindex={tabbable && clickable ? 0 : -1}><slot /></button>
+    <button {...rest} class="fact-box {size} {style} {hidden}" class:clickable={clickable} use:liveCardEffect onclick={onClick} class:highlighted {title} tabindex={tabbable && clickable ? 0 : -1}>{@render children?.()}</button>
 {:else if type === "link"}
-    <!-- svelte-ignore a11y-missing-attribute -->
-    <a {...$$restProps} class="fact-box {size} {style} {hidden}" class:clickable={clickable} use:liveCardEffect on:click class:highlighted {title} tabindex={tabbable && clickable ? 0 : -1}><slot /></a>
+    <!-- svelte-ignore a11y_missing_attribute -->
+    <a {...rest} role="link" class="fact-box {size} {style} {hidden}" class:clickable={clickable} use:liveCardEffect onclick={onClick} class:highlighted {title} tabindex={tabbable && clickable ? 0 : -1}>{@render children?.()}</a>
 {/if}
 
 

@@ -7,18 +7,22 @@
     import type { Readable } from "svelte/store";
     import { receive, send } from "$lib/utilities/sendTransition";
     import { flip } from "svelte/animate";
-    export let data: import("./$types").PageData;
+    interface Props {
+        data: import("./$types").PageData;
+    }
 
-    let projectSearchResult: Readable<Post[]>;
+    let { data }: Props = $props();
+
+    let projectSearch: { searchResult: Post[]; } | undefined = $state(undefined);
 </script>
 
 <PrimaryLayout
     fluid_sim_background
     navigation_option={NavigationOption.Midpoint}
     personal_headshot
-    SEOProps={{
+    SEOData={{
         type: "mainpage",
-        description: `${$projectSearchResult?.length || "Many"} random and interesting projects that I've worked on over the years.`,
+        description: `${projectSearch?.searchResult?.length || "Many"} random and interesting projects that I've worked on over the years.`,
         slug: "/projects",
         title: "Jasper M-W | Projects",
         image: "/projects/ogimage.png"
@@ -28,11 +32,13 @@
         <h1 class="page-header">Projects</h1>
         <ProjectSearch
             projectList={data.posts}
-            bind:searchResult={projectSearchResult}
+            onSearchResult={(result) => {
+                projectSearch = { searchResult: result };
+            }}
         />
         <ul class="project-list">
-            {#if $projectSearchResult}
-                <ProjectThumbnails posts={$projectSearchResult} />
+            {#if projectSearch?.searchResult}
+                <ProjectThumbnails posts={projectSearch?.searchResult} />
             {/if}
         </ul>
     </div>

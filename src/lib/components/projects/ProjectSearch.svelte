@@ -1,37 +1,45 @@
 <script lang="ts">
     import type { Post } from "$lib/types";
-    import { derived, writable, type Readable } from "svelte/store";
     import Fuse from "fuse.js";
     import LiveCard from "../LiveCard.svelte";
     import { normaliseCase, toProperCase } from "$lib/utilities/string";
     import { tagCase } from "./tags";
     import { Search } from "lucide-svelte";
 
-    export let projectList: Post[];
+    interface Props {
+        projectList: Post[];
+        onSearchResult: (result: Post[]) => void;
+    }
+
+    let { projectList, onSearchResult }: Props = $props();
 
     const tagNumShownMobile = 10;
 
     // Find all tags, and count how many times they appear
-    $: allTagReferences = projectList
-        .flatMap((post) => post.tags.map(normaliseCase))
-        .filter((tag) => tag)
-        .reduce(
-            (cnt, cur) => ((cnt[cur] = cnt[cur] + 1 || 1), cnt),
-            {} as Record<string, number>,
-        );
+    let allTagReferences = $derived(
+        projectList
+            .flatMap((post) => post.tags.map(normaliseCase))
+            .filter((tag) => tag)
+            .reduce(
+                (cnt, cur) => ((cnt[cur] = cnt[cur] + 1 || 1), cnt),
+                {} as Record<string, number>,
+            ),
+    );
 
     // Sort by most common
-    $: allTags = Object.entries(allTagReferences)
-        .sort((a, b) => b[1] - a[1])
-        .map((tag) => tag[0]);
+    let allTags = $derived(
+        Object.entries(allTagReferences)
+            .sort((a, b) => b[1] - a[1])
+            .map((tag) => tag[0]),
+    );
 
-    let selectedTag = writable<string | null>(null);
+    let selectedTag = $state<string | null>(null);
 
     function toggleTag(tag: string) {
-        if ($selectedTag === tag) {
-            $selectedTag = null;
+        if (selectedTag === tag) {
+            selectedTag = null;
         } else {
-            $selectedTag = tag;
+            selectedTag = tag;
         }
     }
 
@@ -39,29 +47,35 @@
         keys: ["title", "description", "date"],
     });
 
-    let textSearch = writable("");
+    let textSearch = $state("");
 
-    export const searchResult: Readable<Post[]> = derived(
-        [textSearch, selectedTag],
-        ([textSearch, selectedTag]) => {
-            let filteredResult = projectList;
+    
 
-            // Start with fuzzy search
-            if (textSearch) {
-                filteredResult = fuse
-                    .search(textSearch)
-                    .map((result) => result.item);
-            }
+    const searchResult: Post[] = $derived.by(() => {
+        let filteredResult = projectList;
 
-            if (selectedTag) {
-                filteredResult = filteredResult.filter((post) => {
-                    return post.tags.map(normaliseCase).includes(selectedTag);
-                });
-            }
+        // Start with fuzzy search
+        if (textSearch) {
+            filteredResult = fuse
+                .search(textSearch)
+                .map((result) => result.item);
+        }
 
-            return filteredResult;
-        },
-    );
+        if (selectedTag) {
+            filteredResult = filteredResult.filter((post) => {
+                return post.tags.map(normaliseCase).includes(selectedTag);
+            });
+        }
+
+        return filteredResult;
+    });
+
+    $effect(() => {
+        onSearchResult(searchResult);
+    });
+
+
+    
 </script>
 
 <div class="search-controller">
@@ -70,7 +84,7 @@
             <LiveCard size="wrap grow">
                 <div class="input-container">
                     <Search size="1rem" />
-                    <input bind:value={$textSearch} placeholder="Search" />
+                    <input bind:value={textSearch} placeholder="Search" />
                 </div>
             </LiveCard>
         </div>
@@ -78,11 +92,11 @@
             <LiveCard
                 tabbable
                 size="small"
-                hidden={i>=tagNumShownMobile ? "hidden-mobile" : "visible"}
-                on:click={() => {
+                hidden={i >= tagNumShownMobile ? "hidden-mobile" : "visible"}
+                onClick={() => {
                     toggleTag(tag);
                 }}
-                highlighted={$selectedTag === tag}
+                highlighted={selectedTag === tag}
                 title={`${allTagReferences[tag]}`}
             >
                 {tagCase(tag)}

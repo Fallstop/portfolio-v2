@@ -17,12 +17,17 @@
 
     import Lazy from "$lib/components/utilities/Lazy.svelte";
     import { fluidSimContextKey } from "$lib/components/fluidSim/util";
+    interface Props {
+        children?: import('svelte').Snippet;
+    }
 
-    let firstLoad = false;
+    let { children }: Props = $props();
 
-    let fluidFPS: number = 1;
+    let firstLoad = $state(false);
 
-    let fluidCanvas: any | null;
+    let fluidFPS: number = $state(1);
+
+    let fluidCanvas: any | null = $state();
 
     function fluidCanvasLoaded(e: CustomEvent<FluidSimFunctions>) {
         console.log("Canvas Loaded",e)
@@ -41,7 +46,7 @@
         $NAVIGATION_CONFIG == NavigationOption.Blog}
 >
     <div class="content-container">
-        <slot />
+        {@render children?.()}
     </div>
     {#if firstLoad}
         <div
@@ -72,15 +77,16 @@
         <Lazy
             this={() => import("$lib/components/fluidSim/FluidCanvas.svelte")}
         >
-            <svelte:fragment slot="component" let:Component={FluidCanvas}>
-                <FluidCanvas
-                    bind:this={fluidCanvas}
-                    bind:FPS={fluidFPS}
-                    on:loaded={fluidCanvasLoaded}
-                    INTERACTIVE={$FLUID_SIM_INTERACTIVE}
-                    SPLASH_ON_PRINT={$SPLASH_BACKGROUND_ON_PRINT}
-                />
-            </svelte:fragment>
+            {#snippet component({ Component: FluidCanvas })}
+                    <FluidCanvas
+                        bind:this={fluidCanvas}
+                        bind:FPS={fluidFPS}
+                        on:loaded={fluidCanvasLoaded}
+                        INTERACTIVE={$FLUID_SIM_INTERACTIVE}
+                        SPLASH_ON_PRINT={$SPLASH_BACKGROUND_ON_PRINT}
+                    />
+                
+            {/snippet}
         </Lazy>
     {/if}
 </div>

@@ -17,7 +17,7 @@
  * @param {Boolean} [stroke = true] Whether to stroke the rectangle.
  */
 
-import type { NodeCanvasRenderingContext2D } from "canvas";
+import type { CanvasRenderingContext2D } from "canvas";
 
 type RadiusOptions = number | {
     tr: number,
@@ -26,7 +26,7 @@ type RadiusOptions = number | {
     bl: number
 }
 
-export default function roundRect(ctx: NodeCanvasRenderingContext2D, x: number, y: number, width: number, height: number, radiusSetting: RadiusOptions = 5, fill: boolean, stroke: boolean = true) {
+export default function roundRect(ctx: CanvasRenderingContext2D, x: number, y: number, width: number, height: number, radiusSetting: RadiusOptions = 5, fill: boolean, stroke: boolean = true) {
     let radius = { tl: 0, tr: 0, br: 0, bl: 0 };
     if (typeof radiusSetting === 'number') {
         radius = { tl: radiusSetting, tr: radiusSetting, br: radiusSetting, bl: radiusSetting };

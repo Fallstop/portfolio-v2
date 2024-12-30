@@ -1,10 +1,16 @@
 <script lang="ts">
-    export let style: "info" | "warning" | "danger" = "info";
+    interface Props {
+        style?: "info" | "warning" | "danger";
+        header?: import('svelte').Snippet;
+        children?: import('svelte').Snippet;
+    }
+
+    let { style = "info", header, children }: Props = $props();
 </script>
 
 <div class="container {style}-style">
-    <header><slot name="header"></slot></header>
-    <div class="content"><slot/></div>
+    <header>{@render header?.()}</header>
+    <div class="content">{@render children?.()}</div>
 </div>
 
 <style lang="scss" >

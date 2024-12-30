@@ -1,5 +1,9 @@
 <script lang="ts">
-    export let channelName: string;
+    interface Props {
+        channelName: string;
+    }
+
+    let { channelName }: Props = $props();
 </script>
 
 <style>
@@ -29,7 +33,7 @@
 
 <div class="twitchStreamWrapper">
     <div class=twitchStreamVideo>
-        <iframe src="https://player.twitch.tv/?channel={channelName}&parent=localhost&parent=jmw.nz&muted=true" frameborder="0" title="Twitch Stream" allowfullscreen="true" scrolling="no" width="100%" height="100%" style="position: absolute"></iframe>
+        <iframe src="https://player.twitch.tv/?channel={channelName}&parent=localhost&parent=jmw.nz&muted=true" frameborder="0" title="Twitch Stream" allowfullscreen={true} scrolling="no" width="100%" height="100%" style="position: absolute"></iframe>
     </div>
-    <iframe class="twitchStreamChat" src="https://www.twitch.tv/embed/{channelName}/chat?parent=localhost&parent=jmw.nz" width="350"></iframe>
+    <iframe class="twitchStreamChat" src="https://www.twitch.tv/embed/{channelName}/chat?parent=localhost&parent=jmw.nz" width="350" title="Twitch Chat"></iframe>
 </div>

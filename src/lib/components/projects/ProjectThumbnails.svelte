@@ -3,7 +3,11 @@
     import { receive, send } from "$lib/utilities/sendTransition";
     import { flip } from "svelte/animate";
     import { fade } from "svelte/transition";
-    export let posts: Post[];
+    interface Props {
+        posts: Post[];
+    }
+
+    let { posts }: Props = $props();
 </script>
 
 {#each posts as post (post.slug)}
@@ -19,7 +23,7 @@
         <div
             class="background"
             style="--thumbnail-link: url({post.thumbnail}"
-        />
+></div>
         <li class="post">
             <div class="post-metadata">
                 <span class="date">{post.date}</span>

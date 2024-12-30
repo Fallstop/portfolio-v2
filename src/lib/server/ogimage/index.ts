@@ -25,7 +25,6 @@ export async function generateImage({params}: RequestEvent): Promise<Response> {
     try {
         thumbnailFile = fs.readFileSync(thumbnailRequestPath);
     } catch (e) {
-        console.log(e)
         thumbnailFile = fs.readFileSync("./src/projects/default-thumbnail.webp");
     }
     // const thumbnailFile = fs.readFileSync("./src/projects/default-thumbnail.jpg");

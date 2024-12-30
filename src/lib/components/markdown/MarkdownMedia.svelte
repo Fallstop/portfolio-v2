@@ -4,10 +4,15 @@
     import MarkdownPdfPreview from "./MarkdownPDFPreview.svelte";
     import MarkdownVideo from "./MarkdownVideo.svelte";    
 
-    export let src: any;
-    export let alt: any;
+    interface Props {
+        src: any;
+        alt: any;
+        [key: string]: any
+    }
 
-    let type: "image" | "video" | "gallery" | "pdf" = "image";
+    let { src, alt, ...rest }: Props = $props();
+
+    let type: "image" | "video" | "gallery" | "pdf" = $state("image");
     if (Array.isArray(src)) {
         type = "image"
     } else if (typeof src === "object") {
@@ -23,11 +28,11 @@
     }
 </script>
 {#if type=="gallery"}
-    <MarkdownGallery {src} {alt} {...$$restProps}/>
+    <MarkdownGallery {src} {alt} {...rest}/>
 {:else if type=="video"}
-    <MarkdownVideo {src} {alt} {...$$restProps}/>
+    <MarkdownVideo {src} {alt} {...rest}/>
 {:else if type=="image"}
-    <MarkdownImage {src} {alt} {...$$restProps} />
+    <MarkdownImage {src} {alt} {...rest} />
 {:else if type=="pdf"}
-    <MarkdownPdfPreview pdf_url={src} file_name={alt} {...$$restProps} /> 
+    <MarkdownPdfPreview pdf_url={src} file_name={alt} {...rest} /> 
 {/if}

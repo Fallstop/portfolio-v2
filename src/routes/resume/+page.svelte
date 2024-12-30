@@ -6,7 +6,11 @@
     import ProjectThumbnails from "$lib/components/projects/ProjectThumbnails.svelte";
     import { ArrowRight } from "lucide-svelte";
 
-    export let data: import("./$types").PageData;
+    interface Props {
+        data: import("./$types").PageData;
+    }
+
+    let { data }: Props = $props();
 </script>
 
 <PrimaryLayout
@@ -14,7 +18,7 @@
     navigation_option={NavigationOption.Midpoint}
     personal_headshot
     splash_on_print
-    SEOProps={{
+    SEOData={{
         type: "mainpage",
         description:
             "I'm a first year engineering student at University of Auckland, and I've got a passion for making.",

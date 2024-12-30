@@ -7,12 +7,16 @@
     import { parseSettings } from "./parseMediaSettings";
     import { randomHash } from "$lib/utilities/math";
 
-    export let src: any = {};
-    export let alt = "";
+    interface Props {
+        src?: any;
+        alt?: string;
+    }
+
+    let { src = {}, alt = "" }: Props = $props();
     const { classes, altText } = parseSettings(alt);
 
-    let imagesData: [ProcessedImageMetadata, ProcessedImageMetadata][];
-    $: imagesData = Object.values(src).map((x: any) => x.default);
+    let imagesData: [ProcessedImageMetadata, ProcessedImageMetadata][] = $derived(Object.values(src).map((x: any) => x.default));
+    
 
 
 
