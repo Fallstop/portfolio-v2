@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { run } from 'svelte/legacy';
-
 	import { createEventDispatcher, onMount, setContext } from "svelte";
 	import * as shaders from "./fluidShader";
 	import { generateColor } from "./colourGradient";
@@ -1519,11 +1517,11 @@
 		colorUpdateTimer = 0.0;
 		update();
 	});
-	run(() => {
+	$effect.pre(() => {
 		disableInteractive(INTERACTIVE);
 	});
 	// should work similarly to dat.gui's onFinishChange hook
-	run(() => {
+	$effect.pre(() => {
 		SIM_RESOLUTION,
 			DYE_RESOLUTION,
 			BLOOM_ITERATIONS,
@@ -1531,7 +1529,7 @@
 			SUNRAYS_RESOLUTION,
 			gl && initFramebuffers();
 	});
-	run(() => {
+	$effect.pre(() => {
 		SHADING, BLOOM, SUNRAYS, displayMaterial && updateKeywords();
 	});
 </script>

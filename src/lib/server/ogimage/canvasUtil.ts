@@ -1,4 +1,4 @@
-import { CanvasRenderingContext2D, default as canvasLib, createCanvas } from "canvas";
+import { type CanvasRenderingContext2D, default as canvasLib, createCanvas } from "canvas";
 import webp from "@cwasm/webp"
 
 const {registerFont, loadImage} = canvasLib

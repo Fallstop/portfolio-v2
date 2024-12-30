@@ -1,6 +1,4 @@
 <script lang="ts">
-    import { run } from 'svelte/legacy';
-
     import { enhance } from "$app/forms";
 
     import LiveCard from "$lib/components/LiveCard.svelte";
@@ -19,13 +17,13 @@
     let emailChanged = $state(false);
     let messageChanged = $state(false);
 
-    run(() => {
+    $effect.pre(() => {
         nameChanged = !!nameInput && nameChanged;
     });
-    run(() => {
+    $effect.pre(() => {
         emailChanged = !!emailInput && emailChanged;
     });
-    run(() => {
+    $effect.pre(() => {
         messageChanged = !!messageInput && messageChanged;
     });
 
@@ -47,20 +45,6 @@
         emailInputValid &&
         messageInputValid);
 
-    function formEnhance(
-        formElement: HTMLElement,
-        formData,
-        action,
-        cancel,
-        submitter,
-    ) {
-        return async ({ result, update }) => {
-            if (!result.ok) {
-                return;
-            }
-            update();
-        };
-    }
 </script>
 
 <PrimaryLayout

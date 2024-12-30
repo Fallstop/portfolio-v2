@@ -1,8 +1,6 @@
 <script lang="ts">
-    import { createBubbler } from 'svelte/legacy';
-
-    const bubble = createBubbler();
     import { liveCardEffect } from "$lib/effects/liveCardEffect";
+    import type { MouseEventHandler } from "svelte/elements";
     import { fluidSimFunctions } from "./layout/layoutDataStore";
 
     interface Props {
@@ -14,7 +12,8 @@
         title?: string | null;
         type?: "button" | "link";
         children?: import('svelte').Snippet;
-        [key: string]: any
+        [key: string]: any,
+        onClick?: MouseEventHandler<HTMLButtonElement | HTMLAnchorElement>;
     }
 
     let {
@@ -26,16 +25,17 @@
         title = null,
         type = "button",
         children,
+        onClick,
         ...rest
     }: Props = $props();
     let clickable = $derived((!!$fluidSimFunctions) || type === "link");
 </script>
 
 {#if type === "button"}
-    <button {...rest} class="fact-box {size} {style} {hidden}" class:clickable={clickable} use:liveCardEffect onclick={bubble('click')} class:highlighted {title} tabindex={tabbable && clickable ? 0 : -1}>{@render children?.()}</button>
+    <button {...rest} class="fact-box {size} {style} {hidden}" class:clickable={clickable} use:liveCardEffect onclick={onClick} class:highlighted {title} tabindex={tabbable && clickable ? 0 : -1}>{@render children?.()}</button>
 {:else if type === "link"}
     <!-- svelte-ignore a11y_missing_attribute -->
-    <a {...rest} role="link" class="fact-box {size} {style} {hidden}" class:clickable={clickable} use:liveCardEffect onclick={bubble('click')} class:highlighted {title} tabindex={tabbable && clickable ? 0 : -1}>{@render children?.()}</a>
+    <a {...rest} role="link" class="fact-box {size} {style} {hidden}" class:clickable={clickable} use:liveCardEffect onclick={onClick} class:highlighted {title} tabindex={tabbable && clickable ? 0 : -1}>{@render children?.()}</a>
 {/if}
 
 

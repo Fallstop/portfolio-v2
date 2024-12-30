@@ -93,7 +93,7 @@
                 tabbable
                 size="small"
                 hidden={i >= tagNumShownMobile ? "hidden-mobile" : "visible"}
-                on:click={() => {
+                onClick={() => {
                     toggleTag(tag);
                 }}
                 highlighted={selectedTag === tag}
