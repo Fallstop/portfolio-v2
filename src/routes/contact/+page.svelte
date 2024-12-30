@@ -67,7 +67,7 @@
     fluid_sim_background
     navigation_option={NavigationOption.Midpoint}
     personal_headshot
-    SEOProps={{
+    SEOData={{
         type: "mainpage",
         description: "Get in touch!",
         slug: "/contact",

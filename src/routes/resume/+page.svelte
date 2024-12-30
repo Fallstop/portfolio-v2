@@ -18,7 +18,7 @@
     navigation_option={NavigationOption.Midpoint}
     personal_headshot
     splash_on_print
-    SEOProps={{
+    SEOData={{
         type: "mainpage",
         description:
             "I'm a first year engineering student at University of Auckland, and I've got a passion for making.",

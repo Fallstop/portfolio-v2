@@ -20,7 +20,7 @@
     fluid_sim_background
     navigation_option={NavigationOption.Midpoint}
     personal_headshot
-    SEOProps={{
+    SEOData={{
         type: "mainpage",
         description: `${projectSearch?.searchResult?.length || "Many"} random and interesting projects that I've worked on over the years.`,
         slug: "/projects",

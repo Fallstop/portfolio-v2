@@ -14,7 +14,7 @@
         type: "post";
     }
 
-    export type SEOProps = MainPageSEO | PostPageSEO;
+    export type SEODataI = MainPageSEO | PostPageSEO;
 
     export const ogImageHeight = 630;
     export const ogImageWidth = 1200;
@@ -24,7 +24,7 @@
 
 <script lang="ts">
     interface Props {
-        SEOData: SEOProps;
+        SEOData: SEODataI;
     }
 
     let { SEOData }: Props = $props();

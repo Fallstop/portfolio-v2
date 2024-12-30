@@ -13,7 +13,7 @@
     fluid_sim_background
     fluid_sim_interactive
     personal_headshot
-    SEOProps={{
+    SEOData={{
 		type: "mainpage",
         description: "I'm a engineering student at the University of Auckland, and I've got a passion for making.",
         slug: "",

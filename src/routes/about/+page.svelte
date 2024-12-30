@@ -19,7 +19,7 @@
     fluid_sim_background
     navigation_option={NavigationOption.Midpoint}
     personal_headshot
-    SEOProps={{
+    SEOData={{
         type: "profile",
         title: "Jasper M-W | About Me",
         description: `I'm a first-year engineering student at University of Auckland, who's spent the last ${getYearsFrom("2019")} years building random projects in my spare time.`,

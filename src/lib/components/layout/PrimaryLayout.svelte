@@ -1,8 +1,7 @@
-<!-- @migration-task Error while migrating Svelte code: Identifier 'SEOProps' has already been declared -->
 <script lang="ts">
     import { onMount } from "svelte";
     import { ENABLE_FLUID_SIM, FLUID_SIM_INTERACTIVE, NAVIGATION_CONFIG, NavigationOption, PERSONAL_HEADSHOT, SPLASH_BACKGROUND_ON_PRINT } from "./layoutDataStore";
-    import type { SEOProps } from "./SEO.svelte";
+    import type { SEODataI } from "./SEO.svelte";
     import Seo from "./SEO.svelte";
     // import Seo from "./SEO.svelte";
 
@@ -14,13 +13,13 @@
 
     // export let SEOProps: SEOProps;
 
-    type PrimaryLayoutProps = {
+    export type PrimaryLayoutProps = {
         fluid_sim_background?: boolean,
         fluid_sim_interactive?: boolean,
         navigation_option?: NavigationOption,
         personal_headshot?: boolean,
         splash_on_print?: boolean,
-        SEOData: SEOProps
+        SEOData: SEODataI
     }
 
     let {

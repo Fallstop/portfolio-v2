@@ -20,7 +20,7 @@
 <PrimaryLayout
 	navigation_option={NavigationOption.Blog}
 	fluid_sim_background={false}
-	SEOProps={{
+	SEOData={{
 		type: "post",
 		post: data.meta
 	}}
