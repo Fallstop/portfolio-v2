@@ -8,9 +8,10 @@
 
     interface Props {
         projectList: Post[];
+        onSearchResult: (result: Post[]) => void;
     }
 
-    let { projectList }: Props = $props();
+    let { projectList, onSearchResult }: Props = $props();
 
     const tagNumShownMobile = 10;
 
@@ -48,7 +49,9 @@
 
     let textSearch = $state("");
 
-    export const searchResult: Readable<Post[]> = $derived.by(() => {
+    
+
+    const searchResult: Post[] = $derived.by(() => {
         let filteredResult = projectList;
 
         // Start with fuzzy search
@@ -63,9 +66,17 @@
                 return post.tags.map(normaliseCase).includes(selectedTag);
             });
         }
+        console.log("Running inside", filteredResult)
 
         return filteredResult;
     });
+
+    $effect(() => {
+        onSearchResult(searchResult);
+    });
+
+
+    
 </script>
 
 <div class="search-controller">
@@ -74,7 +85,7 @@
             <LiveCard size="wrap grow">
                 <div class="input-container">
                     <Search size="1rem" />
-                    <input bind:value={$textSearch} placeholder="Search" />
+                    <input bind:value={textSearch} placeholder="Search" />
                 </div>
             </LiveCard>
         </div>
@@ -86,7 +97,7 @@
                 on:click={() => {
                     toggleTag(tag);
                 }}
-                highlighted={$selectedTag === tag}
+                highlighted={selectedTag === tag}
                 title={`${allTagReferences[tag]}`}
             >
                 {tagCase(tag)}

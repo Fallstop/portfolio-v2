@@ -13,7 +13,7 @@
 
     let { data }: Props = $props();
 
-    let projectSearch: { searchResult: Readable<Post[]>; } | undefined = $state(undefined);
+    let projectSearch: { searchResult: Post[]; } | undefined = $state(undefined);
 </script>
 
 <PrimaryLayout
@@ -32,10 +32,12 @@
         <h1 class="page-header">Projects</h1>
         <ProjectSearch
             projectList={data.posts}
-            bind:this={projectSearch}
+            onSearchResult={(result) => {
+                console.log({result})
+                projectSearch = { searchResult: result };
+            }}
         />
         <ul class="project-list">
-            {JSON.stringify(projectSearch?.searchResult) || "What"}
             {#if projectSearch?.searchResult}
                 <ProjectThumbnails posts={projectSearch?.searchResult} />
             {/if}
