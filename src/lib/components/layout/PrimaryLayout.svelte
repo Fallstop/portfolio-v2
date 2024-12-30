@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { onMount } from "svelte";
+    import { onMount, type Snippet } from "svelte";
     import { ENABLE_FLUID_SIM, FLUID_SIM_INTERACTIVE, NAVIGATION_CONFIG, NavigationOption, PERSONAL_HEADSHOT, SPLASH_BACKGROUND_ON_PRINT } from "./layoutDataStore";
     import type { SEODataI } from "./SEO.svelte";
     import Seo from "./SEO.svelte";
@@ -19,7 +19,8 @@
         navigation_option?: NavigationOption,
         personal_headshot?: boolean,
         splash_on_print?: boolean,
-        SEOData: SEODataI
+        SEOData: SEODataI,
+        children: Snippet
     }
 
     let {
@@ -28,7 +29,8 @@
         navigation_option = NavigationOption.Home,
         personal_headshot = false,
         splash_on_print = false,
-        SEOData
+        SEOData,
+        children
     }: PrimaryLayoutProps = $props();
 
     onMount(()=>{
@@ -40,4 +42,4 @@
     })
 </script>
 <Seo {SEOData} />
-<slot/>
+{@render children?.()}

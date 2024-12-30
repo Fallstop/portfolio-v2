@@ -78,7 +78,6 @@
             this={() => import("$lib/components/fluidSim/FluidCanvas.svelte")}
         >
             {#snippet component({ Component: FluidCanvas })}
-                    
                     <FluidCanvas
                         bind:this={fluidCanvas}
                         bind:FPS={fluidFPS}
@@ -87,7 +86,7 @@
                         SPLASH_ON_PRINT={$SPLASH_BACKGROUND_ON_PRINT}
                     />
                 
-                    {/snippet}
+            {/snippet}
         </Lazy>
     {/if}
 </div>

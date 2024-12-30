@@ -1,10 +1,13 @@
-<script>
-	
+<script lang="ts">
+	type T = $$Generic;
+	interface Props {
+		loading?: import('svelte').Snippet;
+		component?: import('svelte').Snippet<[{ Component: T }]>;
+		this: ()=>Promise<{ default: T }>;
+	}
 
 
-	import {} from "lucide-svelte";
-	let { this: loadComponent, loading, component } = $props();
-
+	let { this: loadComponent, loading = undefined, component }: Props = $props();
 </script>
 
 {#await loadComponent()}

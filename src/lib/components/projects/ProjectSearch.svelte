@@ -66,7 +66,6 @@
                 return post.tags.map(normaliseCase).includes(selectedTag);
             });
         }
-        console.log("Running inside", filteredResult)
 
         return filteredResult;
     });

@@ -33,7 +33,6 @@
         <ProjectSearch
             projectList={data.posts}
             onSearchResult={(result) => {
-                console.log({result})
                 projectSearch = { searchResult: result };
             }}
         />

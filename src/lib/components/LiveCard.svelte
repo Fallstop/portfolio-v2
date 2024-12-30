@@ -35,7 +35,7 @@
     <button {...rest} class="fact-box {size} {style} {hidden}" class:clickable={clickable} use:liveCardEffect onclick={bubble('click')} class:highlighted {title} tabindex={tabbable && clickable ? 0 : -1}>{@render children?.()}</button>
 {:else if type === "link"}
     <!-- svelte-ignore a11y_missing_attribute -->
-    <a {...rest} class="fact-box {size} {style} {hidden}" class:clickable={clickable} use:liveCardEffect onclick={bubble('click')} class:highlighted {title} tabindex={tabbable && clickable ? 0 : -1}>{@render children?.()}</a>
+    <a {...rest} role="link" class="fact-box {size} {style} {hidden}" class:clickable={clickable} use:liveCardEffect onclick={bubble('click')} class:highlighted {title} tabindex={tabbable && clickable ? 0 : -1}>{@render children?.()}</a>
 {/if}
 
 

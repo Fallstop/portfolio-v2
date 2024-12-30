@@ -11,7 +11,6 @@ import { error } from '@sveltejs/kit';
 export const prerender = true;
 
 export async function load({ params }) {
-    console.log(params.projectID, "test")
 	try {
 		const projects = await getProjects();
 		const project = projects.find((project) => project.postID.toLowerCase() === params.projectID.toLowerCase());
