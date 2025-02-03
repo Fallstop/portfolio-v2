@@ -2,7 +2,7 @@
     import { fly } from "svelte/transition";
     import { onMount, setContext } from "svelte";
     import NavigationLayout from "$lib/components/navigation/NavigationLayout.svelte";
-    import "../app.scss";
+    import "../../app.scss";
     import {
         ENABLE_FLUID_SIM,
         FLUID_SIM_INTERACTIVE,

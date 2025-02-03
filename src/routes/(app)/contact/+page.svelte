@@ -175,7 +175,7 @@
 </PrimaryLayout>
 
 <style lang="scss">
-    @use "../../variables.scss" as *;
+    @use "../../../variables.scss" as *;
     @use "sass:color";
     form {
         display: flex;

@@ -47,7 +47,7 @@
 </PrimaryLayout>
 
 <style lang="scss">
-	@use "../../../variables.scss" as *;
+	@use "../../../../variables.scss" as *;
 
 	hgroup {
 		margin-bottom: 2rem;

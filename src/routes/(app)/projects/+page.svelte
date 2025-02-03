@@ -45,7 +45,7 @@
 </PrimaryLayout>
 
 <style lang="scss">
-    @use "../../variables.scss" as *;
+    @use "../../../variables.scss" as *;
     @use "sass:color";
     @use "sass:math";
     $max-projects: 100;

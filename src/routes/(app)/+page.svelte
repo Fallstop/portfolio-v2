@@ -26,7 +26,7 @@
 </PrimaryLayout>
 
 <style lang="scss">
-    @use "../variables.scss" as *;
+    @use "../../variables.scss" as *;
     .name-title {
         box-sizing: border-box;
         padding: 0;

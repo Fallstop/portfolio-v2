@@ -97,7 +97,7 @@
 </PrimaryLayout>
 
 <style lang="scss">
-    @use "../../variables.scss" as *;
+    @use "../../../variables.scss" as *;
     .content {
         @media screen and (max-width: $tablet-breakpoint) {
             padding-left: 1rem;

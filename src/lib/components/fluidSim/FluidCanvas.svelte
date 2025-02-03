@@ -29,6 +29,9 @@
 		CURL?: number;
 		SPLAT_RADIUS?: number;
 		SPLAT_FORCE?: number;
+		RANDOM_SPLAT_FORCE?: number;
+
+
 		SHADING?: boolean;
 		COLORFUL?: boolean;
 		COLOR_UPDATE_SPEED?: number;
@@ -62,6 +65,7 @@
 		CURL = 15,
 		SPLAT_RADIUS = 1,
 		SPLAT_FORCE = 500,
+		RANDOM_SPLAT_FORCE = 20,
 		SHADING = $bindable(true),
 		COLORFUL = true,
 		COLOR_UPDATE_SPEED = 10,
@@ -1573,7 +1577,7 @@
 
 		if (INTERACTIVE) {
 			if (e.key === " ")
-				splatStack.push(Math.trunc(Math.random() * 20) + 5);
+				splatStack.push(Math.trunc(Math.random() * RANDOM_SPLAT_FORCE) + RANDOM_SPLAT_FORCE/4);
 		}
 		if (SPLASH_ON_PRINT) {
 			if (e.ctrlKey && e.key == "p") {
