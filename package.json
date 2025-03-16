@@ -17,6 +17,7 @@
     "@octokit/core": "^6.1.2",
     "@octokit/types": "^13.6.1",
     "@pdfslick/core": "^1.5.2",
+    "@rollup/pluginutils": "^5.1.4",
     "@sveltejs/adapter-cloudflare": "^4.7.3",
     "@sveltejs/adapter-node": "^5.2.8",
     "@sveltejs/kit": "^2.7.1",
@@ -50,6 +51,5 @@
     "wrangler": "^3.82.0"
   },
   "type": "module",
-  "dependencies": {},
-  "packageManager": "yarn@1.22.19+sha1.4ba7fc5c6e704fce2066ecbfb0b0d8976fe62447"
+  "packageManager": "pnpm@9.15.2"
 }
