@@ -3,7 +3,7 @@ import { vitePreprocess } from '@sveltejs/vite-plugin-svelte'
 
 import { mdsvex } from "mdsvex";
 import relativeImages from 'mdsvex-relative-images'
-import remarkExternalLinks from 'remark-external-links'
+import rehypeExternalLinks from 'rehype-external-links'
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -20,7 +20,7 @@ const config = {
       _: "./src/lib/components/markdown/layout.svelte"
     },
     remarkPlugins: [
-      [remarkExternalLinks, { target: '_blank', rel: 'noopener' }],
+      [rehypeExternalLinks, { target: '_blank', rel: 'noopener' }],
       relativeImages
     ],
   })],

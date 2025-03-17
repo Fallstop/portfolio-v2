@@ -22,14 +22,14 @@
     SEOData={{
         type: "profile",
         title: "Jasper M-W | About Me",
-        description: `I'm a first-year engineering student at University of Auckland, who's spent the last ${getYearsFrom("2019")} years building random projects in my spare time.`,
+        description: `I'm a second-year Computer Systems Engineering student at University of Auckland, who's spent the last ${getYearsFrom("2019")} years building random projects in my spare time.`,
         slug: "/about"
     }}
 >
     <div class="content">
         <h1 class="page-header">Kia ora, I'm Jasper&nbsp;M-W.</h1>
         <h3>
-            I'm a first-year engineering student at University of Auckland, who's spent the last {getYearsFrom("2019")} years
+            I'm a second-year Computer Systems Engineering student at University of Auckland, who's spent the last {getYearsFrom("2019")} years
             building random projects in my spare time.
         </h3>
         <p>
@@ -52,13 +52,13 @@
             {:else}
                 <FactBox
                     title="Location"
-                    description="Whangarei, New Zealand"
+                    description="Auckland, New Zealand"
                 />
             {/if}
-            <FactBox title="Best frontend framework" description="Sveltekit" />
+            <FactBox title="Best Frontend Framework" description="Sveltekit" />
             {#if data.github.lastUpdatedAboutDetails}
                 <FactBox
-                    title="Last Update This Section"
+                    title="Last Website Update"
                     description={formatDate(
                         data.github.lastUpdatedAboutDetails
                     )}
@@ -73,15 +73,18 @@
             <FactBox
                 title="Github Repo Count"
                 description={data.github.totalRepoCount?.toString()}
-            />
+                />
+            <FactBox title="Starred Repositories" description={data.github.total_starred_repos?.toString()} />
             <FactBox title="Last poor financial decision" description={formatDate(new Date(Date.now() - 60*60*24))} />
             <FactBox title="BrainF*ck Interpreters Developed" description="8" />
             <FactBox
-                title="Tasks pointlessly automated"
+                title="Tasks Pointlessly Automated"
                 description="Uncountable"
                 />
-                <FactBox title="Pronouns" description="He/Him" />
-                <FactBox title="Books Published" description="1" />
+            <FactBox title="Pronouns" description="He/Him" />
+            <FactBox title="Rockets Fired" description="2" />
+
+            <FactBox title="Books Published" description="1" />
 
         </div>
 

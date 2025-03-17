@@ -1,4 +1,4 @@
-import { Octokit } from "@octokit/core";
+import { Octokit } from "@octokit/rest";
 import type { Endpoints } from "@octokit/types";
 import { GITHUB_AUTH_TOKEN } from "../env";
 
@@ -7,16 +7,19 @@ const additionalOrgs = ["Questionable-Research-Labs", "zui-nz", "openhealthnz-cr
 export interface GithubStats {
     totalRepoCount: number;
     lastUpdatedAboutDetails: Date | null;
+    total_starred_repos: number;
 }
 
 export async function getGithubStats(): Promise<GithubStats> {
     let totalRepoCount = 0;
+    let total_starred_repos = 0;
 
     if (!GITHUB_AUTH_TOKEN) {
         console.log("No github token provided, skipping github stats")
         return {
             totalRepoCount,
             lastUpdatedAboutDetails: null,
+            total_starred_repos
         }
     }
 
@@ -45,10 +48,16 @@ export async function getGithubStats(): Promise<GithubStats> {
         lastUpdatedAboutDetails = authorDate ? new Date(authorDate) : null;
     });
 
-    await Promise.all([personalUser, commitsList, ...orgs]);
+
+    const starred_repos = octokit.paginate(octokit.activity.listReposStarredByAuthenticatedUser).then((response) => {
+        total_starred_repos = response.length;
+    });
+
+    await Promise.allSettled([personalUser, commitsList, starred_repos, ...orgs]);
 
     return {
         totalRepoCount,
-        lastUpdatedAboutDetails
+        lastUpdatedAboutDetails,
+        total_starred_repos
     }
 }
