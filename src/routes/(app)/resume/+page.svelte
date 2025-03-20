@@ -21,7 +21,7 @@
     SEOData={{
         type: "mainpage",
         description:
-            "I'm a first year engineering student at University of Auckland, and I've got a passion for making.",
+            "I'm a second-year Computer Systems Engineering student at University of Auckland, and I've got a passion for making.",
         slug: "/resume",
         title: "Jasper M-W | Resume",
     }}
@@ -29,12 +29,12 @@
     <div class="content">
         <h1 class="page-header">Jasper Miller-Waugh</h1>
         <p>
-            I'm a first year engineering student at University of Auckland, and
+            I'm a second-year Computer Systems Engineering student at University of Auckland, and
             I've got a passion for making.
         </p>
         <div class="card-container">
             <LiveCard>
-                <b>Tech skills:</b> Svelte web development, Rust and C++ systems
+                <b>Tech skills:</b> Svelte & React web development, Rust and C++ systems
                 programming, 3D printing and design, Python data-processing, DevOps
                 with on-premise servers, IOT integration.
             </LiveCard>
@@ -56,110 +56,134 @@
                 </h3>
                 <ul>
                     <li>
-                        Part of the Creative Technologist team at the Unleash
-                        Space's Makerspace.
+                        Part of the Creative Technologist team at the Center of Innovation and Entrepreneurship.
                     </li>
                     <li>
                         Supervising the makerspace, running equipment workshops,
-                        facilitating curricular workshops, and repairing
+                        designing and facilitating curricular workshops, and repairing
                         equipment.
                     </li>
                 </ul>
             </LiveCard>
             <LiveCard>
                 <h3 class="company-name">
-                    Avant Consulting Group <span class="date">2024</span>
-                </h3>
-                <ul>
-                    <li>General software development for clients.</li>
-                    <li>
-                        For example: automatically pulling balance information
-                        out of NZ bank statements using AWS Textract
-                    </li>
-                </ul>
-            </LiveCard>
-            <LiveCard>
-                <h3 class="company-name">
-                    Provida <span class="date"
-                        >2021 <ArrowRight class="arrow" /> 2023</span
+                    Watchful - Full Stack Software Engineer <span class="date">2024 <ArrowRight class="arrow" /> 2025</span
                     >
                 </h3>
                 <ul>
                     <li>
-                        Development of Provida's Video Meeting offering, based
-                        on Jitsi Meet.
+                        Over the summer, I worked as a software engineer at Watchful, a security camera monitoring platform.
+                    <li>
+                        I worked on a device-integration scripting tool, that not only allows rapid iteration on new security camera integrations, but also allows for third-party developers to potentially create their own integrations.
                     </li>
                     <li>
-                        Web development of <a href="https://www.zui.nz/">Zui</a
-                        >, the community instance of the video meeting offering.
-                    </li>
-                    <li>
-                        Automated scanning and validation of APC medical and
-                        vaccine certificates.
+                        I 15x the approximate throughput of a key platform event bottleneck when the we were just starting to bump into the limitations of the old design. This gave Watchful headroom until a planned rework of the event pipeline.
                     </li>
                 </ul>
             </LiveCard>
             <LiveCard>
                 <h3 class="company-name">
-                    Naut <span class="date">2023</span>
+                    Startup Contracting <span class="date">2021<ArrowRight class="arrow" />2024</span>
                 </h3>
-                <ul>
-                    <li>
-                        Development of an interactive kiosk that runs on a
-                        Raspberry Pi, which allows users to play a simple game
-                        using a sailing Grinder
-                    </li>
-                    <li>
-                        Working within a tight timeline and limited personal
-                        availability
-                    </li>
-                    <li>
-                        Integrated my solution with an existing timer system
-                    </li>
-                    <li>
-                        includes a remote management portal with many settings,
-                        multiple game modes, and persistent high scores.
-                    </li>
-                </ul>
-            </LiveCard>
-            <LiveCard>
-                <h3 class="company-name">
-                    N3T <span class="date"
-                        >2021 <ArrowRight class="arrow" /> 2022</span
-                    >
-                </h3>
-                <ul>
-                    <li>
-                        Research and Development on methods of low-cost vehicle
-                        weight estimation.
-                    </li>
-                    <li>
-                        Using Geophones connected to ESP32's to stream live data
-                        to a controller server on a Raspberry Pi.
-                    </li>
-                    <li>
-                        3D Design and Printing of internal mounts for node
-                        electronics.
-                    </li>
-                </ul>
-            </LiveCard>
-            <LiveCard>
-                <h3 class="company-name">
-                    LilRegie <span class="date"
-                        >2021 <ArrowRight class="arrow" /> 2022</span
-                    >
-                </h3>
-                <ul>
-                    <li>
-                        Developing a new front-end for their online check-in
-                        tool.
-                    </li>
-                    <li>
-                        Implemented vaccine pass and ticket scanning and
-                        validation
-                    </li>
-                    <li>Integrated with existing infrastructure</li>
-                </ul>
+                <p>I worked with a variety of NZ based early-to-mid stage startups, developing software, electronics, performing R&D, all with a product focused mindset.</p>
+                <div class="sub-group">
+
+                    <LiveCard>
+                        <h3 class="company-name">
+                            Avant Consulting Group <span class="date">2024</span>
+                    </h3>
+                    <ul>
+                        <li>General software development for clients.</li>
+                        <li>
+                            For example: automatically pulling balance information
+                            out of NZ bank statements using AWS Textract
+                        </li>
+                    </ul>
+                </LiveCard>
+                <LiveCard>
+                    <h3 class="company-name">
+                        Provida <span class="date"
+                            >2021 <ArrowRight class="arrow" /> 2023</span
+                        >
+                    </h3>
+                    <ul>
+                        <li>
+                            Development of Provida's Video Meeting offering, based
+                            on Jitsi Meet.
+                        </li>
+                        <li>
+                            Web development of <a href="https://www.zui.nz/">Zui</a
+                            >, the community instance of the video meeting offering.
+                        </li>
+                        <li>
+                            Automated scanning and validation of APC medical and
+                            vaccine certificates.
+                        </li>
+                    </ul>
+                </LiveCard>
+                <LiveCard>
+                    <h3 class="company-name">
+                        Naut <span class="date">2023</span>
+                    </h3>
+                    <ul>
+                        <li>
+                            Development of an interactive kiosk that runs on a
+                            Raspberry Pi, which allows users to play a simple game
+                            using a sailing Grinder
+                        </li>
+                        <li>
+                            Working within a tight timeline and limited personal
+                            availability
+                        </li>
+                        <li>
+                            Integrated my solution with an existing timer system
+                        </li>
+                        <li>
+                            includes a remote management portal with many settings,
+                            multiple game modes, and persistent high scores.
+                        </li>
+                    </ul>
+                </LiveCard>
+                <LiveCard>
+                    <h3 class="company-name">
+                        N3T <span class="date"
+                            >2021 <ArrowRight class="arrow" /> 2022</span
+                        >
+                    </h3>
+                    <ul>
+                        <li>
+                            Research and Development on methods of low-cost vehicle
+                            weight estimation.
+                        </li>
+                        <li>
+                            Using Geophones connected to ESP32's to stream live data
+                            to a controller server on a Raspberry Pi.
+                        </li>
+                        <li>
+                            3D Design and Printing of internal mounts for node
+                            electronics.
+                        </li>
+                    </ul>
+                </LiveCard>
+                <LiveCard>
+                    <h3 class="company-name">
+                        LilRegie <span class="date"
+                            >2021 <ArrowRight class="arrow" /> 2022</span
+                            >
+                        </h3>
+                        <ul>
+                        <li>
+                            Developing a new front-end for their online check-in
+                            tool.
+                        </li>
+                        <li>
+                            Implemented vaccine pass and ticket scanning and
+                            validation
+                        </li>
+                        <li>Integrated with existing infrastructure</li>
+                    </ul>
+                </LiveCard>
+            </div>
             </LiveCard>
         </div>
         <h2>Highlighted Projects</h2>
@@ -171,14 +195,20 @@
         <div class="card-container">
             <LiveCard>
                 <h3 class="company-name">
-                    UoA - Engineering <span class="date"
+                    UoA - Computer Systems Engineering <span class="date"
                         >2024 <ArrowRight class="arrow" /> present</span
                     >
                 </h3>
                 <ul>
                     <li>
-                        First year University of Auckland Bachelor of
+                        Second year University of Auckland Bachelor of
                         Engineering (Honours).
+                    </li>
+                    <li>
+                        Computer Systems Engineering is a mix of Software Engineering and Electrical Engineering. I decided to go down this route due to my love of combing well-designed hardware, with excellent software to solve real-world problems.
+                    </li>
+                    <li>
+                        Current GPA: 8.5
                     </li>
                 </ul>
             </LiveCard>
@@ -217,6 +247,11 @@
                 color: $hint-color;
             }
         }
+        .sub-group {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
         a {
             color: $hint-color;
         }
@@ -226,6 +261,7 @@
         flex-direction: row;
         flex-wrap: wrap;
         gap: 1rem;
+
     }
     h2 {
         margin-top: 2rem;
