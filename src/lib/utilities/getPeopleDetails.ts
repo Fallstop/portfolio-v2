@@ -72,5 +72,17 @@ export const AuthorDetails: PeopleDetails[] = [
     {
         name: "Walter Lim",
         homepage: "https://walt.online",
+    },
+    {
+        name: "Anton Bennett",
+        homepage: "https://www.linkedin.com/in/anton-bennett-098b20309/",
+    },
+    {
+        name: "William Yang",
+        homepage: "https://www.linkedin.com/in/william-yang629/",
+    },
+    {
+        name: "Joel Mansor",
+        homepage: "https://www.linkedin.com/in/joel-mansor-bb7654223/"
     }
 ];

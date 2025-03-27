@@ -15,7 +15,7 @@ collaborators:
  - Grayson Sutherland
  - Ara Bartlett
  - Connor Hare
-highlight: true
+highlight: false
 tags: ["art", "film", "48 Hours"]
 ---
 <script lang="ts">
