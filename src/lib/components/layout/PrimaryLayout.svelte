@@ -1,8 +1,9 @@
 <script lang="ts">
     import { onMount, type Snippet } from "svelte";
-    import { ENABLE_FLUID_SIM, FLUID_SIM_INTERACTIVE, NAVIGATION_CONFIG, NavigationOption, PERSONAL_HEADSHOT, SPLASH_BACKGROUND_ON_PRINT } from "./layoutDataStore";
+    import { ENABLE_FLUID_SIM, FLUID_SIM_INTERACTIVE, NAVIGATION_CONFIG, NavigationOption, PERSONAL_HEADSHOT, SPLASH_BACKGROUND_ON_PRINT, fluidSimFunctions } from "./layoutDataStore";
     import type { SEODataI } from "./SEO.svelte";
     import Seo from "./SEO.svelte";
+  import MultiLayout from "./MultiLayout.svelte";
     // import Seo from "./SEO.svelte";
 
     // export let fluid_sim_background: boolean = true;
@@ -42,4 +43,12 @@
     })
 </script>
 <Seo {SEOData} />
-{@render children?.()}
+<MultiLayout
+    FLUID_SIM_INTERACTIVE={fluid_sim_interactive}
+    NAVIGATION_CONFIG={navigation_option}
+    PERSONAL_HEADSHOT={personal_headshot}
+    SPLASH_BACKGROUND_ON_PRINT={splash_on_print}
+    ENABLE_FLUID_SIM={fluid_sim_background}
+    fluidSimFunctions={fluidSimFunctions}
+    {children}
+/>
