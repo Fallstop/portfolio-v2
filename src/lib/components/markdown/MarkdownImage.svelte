@@ -41,12 +41,25 @@
 </script>
 
 
-<a href={galleryData?.large?.src ?? rawLink} data-fancybox={sharedKey}>
-    <img {...rest} src={galleryData?.small?.src ?? rawLink} width={galleryData?.small?.width} height={galleryData?.small?.height} class={classes} alt={altText} title={altText} loading="lazy" />
+<a href={galleryData?.large?.src ?? rawLink} data-fancybox={sharedKey} class:center={classes.includes("center")}>
+    {#if classes.includes("text")}
+        <span class="text">{altText}</span>
+    {:else}
+        <img {...rest} src={galleryData?.small?.src ?? rawLink} width={galleryData?.small?.width} height={galleryData?.small?.height} class={classes} alt={altText} title={altText} loading="lazy" />
+
+    {/if}
 </a>
 
 <style lang="scss">
     @use "./mediaSizes.scss" as *;
+
+    .center {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
     img {
         @include media-sizes;
     }

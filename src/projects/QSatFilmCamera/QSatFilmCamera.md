@@ -30,18 +30,39 @@ PSat is a summer program run by the Auckland Program for Space Systems (APSS) at
 
 Many teams are formed, which are filtered down through design reviews and checkpoints to a final few teams that get launched at the end of the program. The design reviews are loosely based on a simpler version of NASA's mission lifecycle.
 
-This year, the teams were provided with the following goal:
+Every team also had access to reference designs, which were provided by the APSS team. These reference PCB's were designed to vertically stack, and covered the basic functionality needed for a PSat. The reference designs included a battery powersupply, a MSP430 based MCU board, and a beacon board with a LoRa radio, GPS, and a buzzer.
+
+This year, the teams were provided with the following theme:
 > ### Create a superlative PSat.
 > Your PSat must be the best at something. It can be the fastest, the most powerful, the most efficient, or the most fun. 
 
 ## The concept
 
-We worked
+To fit the theme, we select "The Most Retro" as our superlative. We decided to build a payload that would take photos on deployment using a commerical film camera. Alongside the film camera, we wanted to include a small digital camera, and a sensor/communication module to send telemetry data back to the ground.
 
-#### PDR
-![](./QSatPDR.pdf)
+![:borderless:medium:center](./WinnerCameraTransparent.png)
+
+
+The payload must fit into a tiny space, around the ![same size as a tin can:text](./SizeComparision.webp), so we needed a tiny film camera to match. We settled on the [Winner Pocket Camera](https://filmphotographyproject.com/kodak-winner-110-pocket-camera-review/), a small 110 film camera that was one of the [official sponsor's of the 1988 Olympic Games](https://collectiblend.com/Cameras/Kodak-Eastman/Winner-Camera-(1988-Olympics).html). The camera is small, light, and dead-simple to operate. It has a fixed focus lens, a fixed aperture, and a fixed shutter speed. The only thing we needed to automate was the shutter release & film advance.
+
+
+#### Mission Definition Review
+
+Once we had our concept, we needed to present it to the APSS team for approval. It was a simple presentation, where we outlined our concept, the components we would use, and the timeline for the project. We also outlined the risks and challenges we would face, and how we would mitigate them. The presentation was well received, and we were given the green light to proceed with the project.
+
+![](./QSatMDR.pdf)
 
 ## First iteration
+
+Once we had the green light, we started to design our payload. Both the mechanical team and the electrical team started to work on the first prototype from both ends, working towards the Preliminary Design Review deadline. The mechanical team started to design the payload structure, while the electrical team started to design the electronics. We also started to source the components we would need for the project.
+
+#### Preliminary Design Review
+
+The first design review was held on the 1st of December 2024. We presented our concept to the APSS team, and received feedback on 
+
+![](./QSatPDR.pdf)
+
+
 ### Mechanical constraints
 ### Electrical fail
 
