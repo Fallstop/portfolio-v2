@@ -43,9 +43,13 @@
         background-color: var(--brand-color);
         box-shadow: 0 0 0 rgba(0, 0, 0, 0.5);
         transition: box-shadow 0.2s ease-in-out;
+        text-wrap: nowrap;
+        overflow: hidden;
+        max-width: 100%;
 
         @include icon-inline;
 
+        text-overflow: ellipsis;
         &:hover {
             box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.5);
         }
