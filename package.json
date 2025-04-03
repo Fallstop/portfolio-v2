@@ -49,7 +49,8 @@
     "vite-bundle-visualizer": "^1.2.1",
     "vite-imagetools": "^7.0.4",
     "vite-plugin-inspect": "^11.0.0",
-    "wrangler": "^4.5.1"
+    "wrangler": "^4.5.1",
+    "pdfjs-dist": "^4.10.38"
   },
   "type": "module",
   "packageManager": "pnpm@9.15.2"

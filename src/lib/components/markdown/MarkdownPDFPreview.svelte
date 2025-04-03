@@ -83,7 +83,7 @@
                 -->
             <div
                 id="viewerContainer"
-                class="pdfSlickContainer absolute inset-0"
+                class="pdfSlickContainer"
                 bind:this={container}
             >
                 <div id="viewer" class="pdfSlickViewer pdfViewer"></div>
@@ -160,6 +160,9 @@
         // }
 
         .pdfSlickContainer#viewerContainer {
+            position: absolute;
+            inset: 0;
+            overflow: scroll;
 
             #viewer {
                 display: flex;
