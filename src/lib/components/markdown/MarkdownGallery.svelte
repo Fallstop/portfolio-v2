@@ -71,6 +71,17 @@
                 );
             }
         }
+        &.small {
+            & > :global(a) {
+                $row-size: 5;
+                max-width: calc(
+                    ($max-blog-space-available - (($row-size - 1) * $grid-gap)) /
+                        $row-size
+                );
+                height: unset;
+                flex: 1 1 auto;
+            }
+        }
 
         &::after {
             content: "";

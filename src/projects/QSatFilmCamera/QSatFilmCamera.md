@@ -28,6 +28,7 @@ collaborators:
 ## What is Psat?
 
 
+
 ## The concept
 
 
@@ -45,6 +46,7 @@ collaborators:
 ## The day itself
 
 ## Photos captured
+![:small](./onboard_camera/)
 
 ## Recovery
 
