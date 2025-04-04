@@ -3,7 +3,7 @@
     import { onMount, onDestroy } from "svelte";
 
     import "@pdfslick/core/dist/pdf_viewer.css";
-    import LiveCard from "../LiveCard.svelte";
+    import LiveCard from "../utilities/LiveCard.svelte";
     import { SquareArrowOutUpRight } from "lucide-svelte";
 
     interface Props {
