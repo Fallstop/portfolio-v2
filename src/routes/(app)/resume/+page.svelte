@@ -1,5 +1,5 @@
 <script lang="ts">
-    import LiveCard from "$lib/components/LiveCard.svelte";
+    import LiveCard from "$lib/components/utilities/LiveCard.svelte";
     import PrimaryLayout from "$lib/components/layout/PrimaryLayout.svelte";
     import { NavigationOption } from "$lib/components/layout/layoutDataStore";
     import MoreProjectsThumbnail from "$lib/components/projects/MoreProjectsThumbnail.svelte";

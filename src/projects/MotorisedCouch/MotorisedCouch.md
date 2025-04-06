@@ -31,7 +31,9 @@ For the December 2023 Terrible Ideas Hackathon, my teams aimed for a long attemp
 Now, a high-speed couch isn't enough of a terrible idea itself, we needed to go deeper. Introducing, a collaborative driving experience. You now only get to control one side of the vehicle, the other side is now controlled by your enemy. You must agree on exactly were to go, and be perfectly in-tune with each other in order to get anywhere. 
 
 <HighlightedBlock style="warning">
-    <span slot="header">Loud Volume Warning - "Artistic Intent"</span>
+    {#snippet header()}
+      Loud Volume Warning - "Artistic Intent"
+    {/snippet}
 </HighlightedBlock>
 <YoutubeEmbed videoID="EpDFLeyvnqQ"/>
 

@@ -61,15 +61,19 @@ The industry has thus far been restricted to enterprise/research use cases, whic
 ![A whole bunch of probes directly connected to A2D converters:small:borderless](./graphics/IndustryStandard.svg)
 
 <ProConTable>
-    <ul slot="pros">
-        <li>Simple to engineer</li>
-        <li>Least possible chance for noise</li>
-        <li>Usually comes with software support</li>
-        <li>Almost sane pricing in small probe counts (~$1000)</li>
-    </ul>
-    <ul slot="cons">
+    {#snippet pros()}
+      <ul>
+          <li>Simple to engineer</li>
+          <li>Least possible chance for noise</li>
+          <li>Usually comes with software support</li>
+          <li>Almost sane pricing in small probe counts (~$1000)</li>
+      </ul>
+    {/snippet}
+    {#snippet cons()}
+    <ul>
         <li>Very wasteful in parts, meaning as probe count increases, so does the cost, linearly</li>
     </ul>
+    {/snippet}
 </ProConTable>
 
 ### DIY Microcontroller Method
@@ -79,14 +83,18 @@ This is the alternative method. It uses amplifiers connected to general purpose 
 
 
 <ProConTable>
-    <ul slot="pros">
+    {#snippet pros()}
+    <ul>
         <li>Very cheap due to mass production of microcontrollers.</li>
         <li>Great as an introduction to the technology</li>
     </ul>
-    <ul slot="cons">
+    {/snippet}
+    {#snippet cons()}
+    <ul>
         <li>Not very accurate (noisy and low resolution)</li>
         <li>Low channel counts mean reduced precision</li>
     </ul>
+    {/snippet}
 </ProConTable>
 
 # Opportunity
@@ -101,14 +109,14 @@ This is the simplest way to increase the number of probes. Each probe is mapped 
 ![One probe at a time being routed through the multiplexer:small:borderless](./graphics/MultiplexSignal.svg)
 
 <ProConTable>
-    <ul slot="pros">
+    {#snippet pros()}<ul>
         <li>Not much extra complexity</li>
         <li>Dramatically reduces cost</li>
-    </ul>
-    <ul slot="cons">
+    </ul>{/snippet}
+    {#snippet cons()}<ul>
         <li>Multiplexers tend have a max of 16 inputs, reducing the theoretical limit of the approach</li>
         <li>Multiplexers could introduce significant noise into the super-low voltage data lines.</li>
-    </ul>
+    </ul>{/snippet}
 </ProConTable>
 
 ### Many Probes to Many Amplifiers to some Multiplexers Channels to One A->D
@@ -118,13 +126,13 @@ This is the more complicated solution, but with a vastly increased theoretical l
 
 
 <ProConTable>
-    <ul slot="pros">
+    {#snippet pros()}<ul>
         <li>Multiplexer channels required exponential falls off as more probes are added</li>
         <li>Dramatically reduces costs</li>
-    </ul>
-    <ul slot="cons">
+    </ul>{/snippet}
+    {#snippet cons()}<ul>
         <li>Significantly more complex to implement</li>
-    </ul>
+    </ul>{/snippet}
 </ProConTable>
 
 

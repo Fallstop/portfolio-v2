@@ -1,5 +1,5 @@
 <script lang="ts">
-    import LiveCard from "$lib/components/LiveCard.svelte";
+    import LiveCard from "$lib/components/utilities/LiveCard.svelte";
     interface Props {
         children?: import('svelte').Snippet;
         [key: string]: any

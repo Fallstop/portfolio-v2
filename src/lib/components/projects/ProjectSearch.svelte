@@ -1,7 +1,7 @@
 <script lang="ts">
     import type { Post } from "$lib/types";
     import Fuse from "fuse.js";
-    import LiveCard from "../LiveCard.svelte";
+    import LiveCard from "../utilities/LiveCard.svelte";
     import { normaliseCase, toProperCase } from "$lib/utilities/string";
     import { tagCase } from "./tags";
     import { Search } from "lucide-svelte";

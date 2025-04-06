@@ -33,16 +33,16 @@ For the Microwave, we took away it's physical controls, and bolted on a micropho
 
 
 <ProConTable>
-    <ul slot="pros">
+    {#snippet pros()}<ul>
         <li>Will refuse to microwave anything that might damage the microwave</li>
         <li>Encourages ethical microwaving, no hamsters allowed</li>
         <li>Handsfree operation</li>
-    </ul>
-    <ul slot="cons">
+    </ul>{/snippet}
+    {#snippet cons()}<ul>
         <li>The microwave actively despises you, and is incredibly lazy</li>
         <li>You have to submit to your new master, the Microwave, before use</li>
         <li>If you are too rude for it at any point, it will refuse to serve you for the remainder of your conversation</li>
-    </ul>
+    </ul>{/snippet}
 </ProConTable>
 
 ![](./Microwave.jpg)
@@ -50,13 +50,17 @@ For the Microwave, we took away it's physical controls, and bolted on a micropho
 ## Kettle
 <FancyQuote>
     A watched pot never boils.
-    <span slot="author">Fundamental Law of Physics</span>
+    {#snippet author()}
+    <span>Fundamental Law of Physics</span>
+    {/snippet}
 </FancyQuote>
 
 We added facial recognition to the pot, so every time you look at it, it turns off. When you look away, it turns back on. Awful.
 
 <HighlightedBlock style="warning">
-    <span slot="header">Unfortunate Sideffect</span>
+    {#snippet header()}
+    <span>Unfortunate Side Effect</span>
+    {/snippet}
     If you leave the kettle on, it will never turn itself off.
     Every time you check it, it will be off, and it will turn on when you leave the room.
     <br/>
@@ -64,14 +68,18 @@ We added facial recognition to the pot, so every time you look at it, it turns o
 </HighlightedBlock>
 
 <ProConTable>
-    <ul slot="pros">
+    {#snippet pros()}
+    <ul>
         <li>Reminds you to not sit and stare at the kettle while it boils</li>
         <li>Excellent tool for committing arson</li>
     </ul>
-    <ul slot="cons">
+    {/snippet}
+    {#snippet cons()}
+    <ul>
         <li>You can't be in the same room as the kettle if you want it to boil</li>
         <li>It won't turn off when it's finished boiling</li>
     </ul>
+    {/snippet}
 </ProConTable>
 
 ![](./Kettle.jpg)
@@ -82,14 +90,14 @@ We added facial recognition to the pot, so every time you look at it, it turns o
 The Toaster works similarly to the Microwave, but instead it insulting you, you have to insult it for it to toast your bread.
 
 <ProConTable>
-    <ul slot="pros">
+    {#snippet pros()}<ul>
         <li>Handsfree operation</li>
         <li>Practice your insults</li>
-    </ul>
-    <ul slot="cons">
+    </ul>{/snippet}
+    {#snippet cons()}<ul>
         <li>You feel like a horrible person while using it</li>
         <li>The robots will come for you first when the AI takeover happens</li>
-    </ul>
+    </ul>{/snippet}
 </ProConTable>
 
 ![](./Toaster.jpg)
@@ -98,13 +106,13 @@ The Toaster works similarly to the Microwave, but instead it insulting you, you 
 This knife block experiences pain. It will scream if you try to use it to store your knifes, you monster.
 
 <ProConTable>
-    <ul slot="pros">
+    {#snippet pros()}<ul>
         <li>Practice M<RedactedText length={3}/>er in your kitchen!</li>
-    </ul>
-    <ul slot="cons">
+    </ul>{/snippet}
+    {#snippet cons()}<ul>
         <li>Jumpscare on every use</li>
         <li>The robots will come for you first when the AI takeover happens</li>
-    </ul>
+    </ul>{/snippet}
 </ProConTable>
 
 ![](./KinfeBlockPain.jpg)
@@ -113,13 +121,13 @@ This knife block experiences pain. It will scream if you try to use it to store 
 This knife block experiences fear. It'll run away from you if you approach, usually falling off the table and onto your feet.
 
 <ProConTable>
-    <ul slot="pros">
+    {#snippet pros()}<ul>
         <li>Improve your skills stabbing a moving target</li>
-    </ul>
-    <ul slot="cons">
+    </ul>{/snippet}
+    {#snippet cons()}<ul>
         <li>Might fall off the table with all the knifes</li>
         <li>The robots will come for you first when the AI takeover happens</li>
-    </ul>
+    </ul>{/snippet}
 </ProConTable>
 
 ![](./KnifeBlockFear.jpg)
