@@ -18,42 +18,52 @@
 
   let iframeRawContainer: HTMLDivElement | null = $state(null);
 
-  let computedParams = $derived(() => {
-    const p = new URLSearchParams(params);
-    p.append("autoplay", "1");
-    p.append("playsinline", "1");
-    return p.toString();
-  });
+  let computedParams = $derived(
+    (() => {
+      const p = new URLSearchParams(params);
+      p.append("autoplay", "1");
+      p.append("playsinline", "1");
+      return p.toString();
+    })()
+  );
 
   function injectIFrame() {
-	if (!iframeRawContainer) {
-		return;
-	}
+    if (!iframeRawContainer) {
+      return;
+    }
+
+    if (iframeRawContainer.firstChild) {
+      // If the iframe already exists, we don't need to do anything.
+      return;
+    }
 
     // On button press, we need to manually inject the iframe into the DOM, so we keep the button-press event chain going.
-	// This allows autoplay to function, so we should only need to press once.
+    // This allows autoplay to function, so we should only need to press once.
 
-	const iframe = document.createElement("iframe");
-	iframe.width = "560";
-	iframe.height = "315";
-	iframe.title = playLabel;
-	iframe.allow =
-		"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
-	iframe.allowFullscreen = true;
-	iframe.src = `https://www.youtube-nocookie.com/embed/${encodeURIComponent(
-		videoId
-	)}?${computedParams}`;
-	iframe.setAttribute("aria-label", playLabel);
+    const iframe = document.createElement("iframe");
+    iframe.width = "100%";
+    iframe.height = "100%";
+    iframe.style.position = "absolute";
+    iframe.scrolling = "no";
 
-	iframeRawContainer.appendChild(iframe);
-	iframe.focus();
+    iframe.title = playLabel;
+    iframe.frameBorder = "0";
+    iframe.allow =
+      "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+    iframe.allowFullscreen = true;
+    iframe.src = `https://www.youtube-nocookie.com/embed/${encodeURIComponent(
+      videoId
+    )}?${computedParams}`;
+    iframe.setAttribute("aria-label", playLabel);
+
+    iframeRawContainer.appendChild(iframe);
+    iframe.focus();
   }
 
-
   onDestroy(() => {
-	if (iframeRawContainer) {
-		iframeRawContainer.innerHTML = "";
-	}
+    if (iframeRawContainer) {
+      iframeRawContainer.innerHTML = "";
+    }
   });
 </script>
 
@@ -69,32 +79,23 @@
   class="lite-youtube"
   class:lite-youtube-activated={activated}
   onpointerover={() => (hovered = true)}
-  onclick={() => {activated = true; injectIFrame()}}
-  onkeypress={() => {activated = true; injectIFrame()}}
+  onclick={() => {
+    activated = true;
+    injectIFrame();
+  }}
+  onkeypress={() => {
+    activated = true;
+    injectIFrame();
+  }}
   role="button"
   tabindex="0"
 >
-  {#key videoId}
-    <!-- <picture>
-      <img class="lite-youtube-poster" alt={playLabel} src={thumbnailLink} />
-    </picture> -->
-  {/key}
-  <button type="button" class="lite-youtube-playbtn" aria-label={playLabel}
-  ></button>
-  <div bind:this={iframeRawContainer}></div>
-  <!-- {#if activated}
-    <iframe
-      width="560"
-      height="315"
-      title={playLabel}
-      allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-      allowfullscreen
-      src="https://www.youtube-nocookie.com/embed/{encodeURIComponent(
-        videoId
-      )}?{computedParams}"
-      use:focus
-    ></iframe>
-  {/if} -->
+  <picture>
+    <img class="lite-youtube-poster" alt={playLabel} src={thumbnailLink} />
+  </picture>
+  <button type="button" class="lite-youtube-playbtn" aria-label={playLabel}>
+  </button>
+  <div bind:this={iframeRawContainer} class="iframeRawContainer"></div>
 
   <noscript>
     <!-- To help google indexing, won't be loaded, but will be discoverd by search engines -->
@@ -110,48 +111,67 @@
   </noscript>
 </div>
 
-<style global>
-  :global(.lite-youtube) {
+<style lang="scss">
+  .lite-youtube {
     background-color: #000000;
     position: relative;
     display: block;
     contain: content;
     cursor: pointer;
+    /* gradient */
+    &:before {
+      content: "";
+      display: block;
+    pointer-events: none;
+      position: absolute;
+      top: 0;
+      background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAADGCAYAAAAT+OqFAAAAdklEQVQoz42QQQ7AIAgEF/T/D+kbq/RWAlnQyyazA4aoAB4FsBSA/bFjuF1EOL7VbrIrBuusmrt4ZZORfb6ehbWdnRHEIiITaEUKa5EJqUakRSaEYBJSCY2dEstQY7AuxahwXFrvZmWl2rh4JZ07z9dLtesfNj5q0FU3A5ObbwAAAABJRU5ErkJggg==);
+      background-position: top;
+      background-repeat: repeat-x;
+      height: 60px;
+      padding-bottom: 50px;
+      width: 100%;
+      transition: all 0.2s cubic-bezier(0, 0, 0.2, 1);
+      box-sizing: unset;
+      z-index: 1;
+    }
+
+    &::after {
+      /* responsive iframe with a 16:9 aspect ratio
+		  thanks https://css-tricks.com/responsive-iframes/
+		  */
+      content: "";
+      display: block;
+      padding-bottom: calc(100% / (16 / 9));
+      pointer-events: none;
+    }
+
+    & > :global(iframe) {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      border: 0;
+    }
+    &:hover > .lite-youtube-playbtn,
+    .lite-youtube-playbtn:focus {
+      filter: none;
+    }
   }
-  /* gradient */
-  :global(.lite-youtube::before) {
-    content: "";
-    display: block;
-    position: absolute;
-    top: 0;
-    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAADGCAYAAAAT+OqFAAAAdklEQVQoz42QQQ7AIAgEF/T/D+kbq/RWAlnQyyazA4aoAB4FsBSA/bFjuF1EOL7VbrIrBuusmrt4ZZORfb6ehbWdnRHEIiITaEUKa5EJqUakRSaEYBJSCY2dEstQY7AuxahwXFrvZmWl2rh4JZ07z9dLtesfNj5q0FU3A5ObbwAAAABJRU5ErkJggg==);
-    background-position: top;
-    background-repeat: repeat-x;
-    height: 60px;
-    padding-bottom: 50px;
-    width: 100%;
-    transition: all 0.2s cubic-bezier(0, 0, 0.2, 1);
-    box-sizing: unset;
-    z-index: 1;
+
+  .iframeRawContainer {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	z-index: 1;
   }
-  /* responsive iframe with a 16:9 aspect ratio
-	thanks https://css-tricks.com/responsive-iframes/
-	*/
-  :global(.lite-youtube::after) {
-    content: "";
-    display: block;
-    padding-bottom: calc(100% / (16 / 9));
-  }
-  :global(.lite-youtube) > :global(iframe) {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    border: 0;
-  }
+  
   /* poster */
-  :global(.lite-youtube-poster) {
+  .lite-youtube-poster {
     width: 100%;
     height: 100%;
     position: absolute;
@@ -160,7 +180,7 @@
     object-fit: cover;
   }
   /* play button */
-  :global(.lite-youtube) > :global(.lite-youtube-playbtn) {
+  .lite-youtube-playbtn {
     width: 68px;
     height: 48px;
     position: absolute;
@@ -177,17 +197,14 @@
     border: none;
     outline: 0;
   }
-  :global(.lite-youtube:hover) > :global(.lite-youtube-playbtn),
-  :global(.lite-youtube) :global(.lite-youtube-playbtn:focus) {
-    filter: none;
-  }
+
   /* Post-click styles */
-  :global(.lite-youtube.lite-youtube-activated) {
+  .lite-youtube.lite-youtube-activated {
     cursor: unset;
   }
-  :global(.lite-youtube.lite-youtube-activated::before),
-  :global(.lite-youtube.lite-youtube-activated)
-    > :global(.lite-youtube-playbtn) {
+  .lite-youtube.lite-youtube-activated::before,
+  .lite-youtube.lite-youtube-activated
+    > .lite-youtube-playbtn {
     opacity: 0;
     pointer-events: none;
   }
