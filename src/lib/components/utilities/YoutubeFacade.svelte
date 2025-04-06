@@ -1,8 +1,10 @@
 <!-- https://kellenmace.com/blog/lite-youtube-embed-for-svelte -->
 
 <script lang="ts">
-  import { X } from "lucide-svelte";
+  import { Copy, CopyCheckIcon, X } from "lucide-svelte";
   import { onDestroy } from "svelte";
+  import CopyAction from "./CopyAction.svelte";
+  import { fade } from "svelte/transition";
 
   interface Props {
     videoId: string;
@@ -17,6 +19,27 @@
   let hovered = $state(false);
 
   let iframeRawContainer: HTMLDivElement | null = $state(null);
+  let videoTitle = $state("");
+
+  async function fetchVideoTitle(videoId: string) {
+    if (!videoId) {
+      return;
+    }
+
+    const nameRequest = await fetch(`/api/metadata/youtube/${videoId}`);
+    if (nameRequest.ok) {
+      const data = await nameRequest.json();
+      if (data && data.title) {
+        videoTitle = data.title;
+      }
+    } else {
+      console.error("Failed to fetch video metadata");
+    }
+  }
+
+  $effect(() => {
+    fetchVideoTitle(videoId);
+  });
 
   let computedParams = $derived(
     (() => {
@@ -78,6 +101,37 @@
 <div
   class="lite-youtube"
   class:lite-youtube-activated={activated}
+  role="button"
+  tabindex="0"
+>
+  <div class="preview-bar">
+    <h3 class="video-title">
+      {#if videoTitle}
+      <span in:fade>
+        {videoTitle}
+      </span>
+      {/if}
+    </h3>
+      <CopyAction data={`https://www.youtube.com/watch?v=${videoId}`}>
+        {#snippet copyIcon(copied)}
+        <div class="copy-action">
+          {#if copied}
+            <CopyCheckIcon />
+            <span>Copied!</span>
+          {:else}
+            <Copy />
+            <span>Copy Link</span>
+          {/if}
+        </div>
+        {/snippet}
+      </CopyAction>
+  </div>
+  <picture>
+    <img class="lite-youtube-poster" alt={playLabel} src={thumbnailLink} />
+  </picture>
+  <button type="button" class="lite-youtube-playbtn" aria-label={playLabel}>
+  </button>
+  <div bind:this={iframeRawContainer} class="iframeRawContainer"
   onpointerover={() => (hovered = true)}
   onclick={() => {
     activated = true;
@@ -87,15 +141,8 @@
     activated = true;
     injectIFrame();
   }}
-  role="button"
-  tabindex="0"
->
-  <picture>
-    <img class="lite-youtube-poster" alt={playLabel} src={thumbnailLink} />
-  </picture>
-  <button type="button" class="lite-youtube-playbtn" aria-label={playLabel}>
-  </button>
-  <div bind:this={iframeRawContainer} class="iframeRawContainer"></div>
+  role={activated ? "" : "button"}>
+  </div>
 
   <noscript>
     <!-- To help google indexing, won't be loaded, but will be discoverd by search engines -->
@@ -106,6 +153,11 @@
         videoId
       )}?{computedParams}"
       title={playLabel}
+      frameborder="0"
+      scrolling="no"
+      width="100%"
+      height="100%"
+      style="position: absolute"
     >
     </iframe>
   </noscript>
@@ -122,7 +174,7 @@
     &:before {
       content: "";
       display: block;
-    pointer-events: none;
+      pointer-events: none;
       position: absolute;
       top: 0;
       background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAADGCAYAAAAT+OqFAAAAdklEQVQoz42QQQ7AIAgEF/T/D+kbq/RWAlnQyyazA4aoAB4FsBSA/bFjuF1EOL7VbrIrBuusmrt4ZZORfb6ehbWdnRHEIiITaEUKa5EJqUakRSaEYBJSCY2dEstQY7AuxahwXFrvZmWl2rh4JZ07z9dLtesfNj5q0FU3A5ObbwAAAABJRU5ErkJggg==);
@@ -161,15 +213,15 @@
   }
 
   .iframeRawContainer {
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	overflow: hidden;
-	z-index: 1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 1;
   }
-  
+
   /* poster */
   .lite-youtube-poster {
     width: 100%;
@@ -203,9 +255,74 @@
     cursor: unset;
   }
   .lite-youtube.lite-youtube-activated::before,
-  .lite-youtube.lite-youtube-activated
-    > .lite-youtube-playbtn {
+  .lite-youtube.lite-youtube-activated > .lite-youtube-playbtn {
     opacity: 0;
     pointer-events: none;
+  }
+
+  .preview-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 1rem;
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: top;
+    color: #eee;
+    
+    z-index: 2;
+
+
+
+    .video-title {
+      font-size: 1.2rem;
+      margin: 0;
+      padding: 0.5rem;
+
+    }
+
+    .copy-action {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-size: 1rem;
+      color: #eee;
+      width: 6em;
+      padding: 0.5rem;
+      border-radius: 0.5rem;
+
+      cursor: pointer;
+
+      &:hover {
+        color: #fff;
+        background-color: #0000053f;
+      }
+      &:active {
+        background-color: #00000594;
+      }
+    }
+
+    &::before {
+      content: "";
+      top: 0;
+      left: 0;
+      height: 4rem;
+      padding-bottom: 4rem;
+      width: 100%;
+
+      z-index: -1;
+
+      position: absolute;
+      background-repeat: repeat-x;
+      background-position: top;
+      background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAADGCAYAAAAT+OqFAAAAdklEQVQoz42QQQ7AIAgEF/T/D+kbq/RWAlnQyyazA4aoAB4FsBSA/bFjuF1EOL7VbrIrBuusmrt4ZZORfb6ehbWdnRHEIiITaEUKa5EJqUakRSaEYBJSCY2dEstQY7AuxahwXFrvZmWl2rh4JZ07z9dLtesfNj5q0FU3A5ObbwAAAABJRU5ErkJggg==);
+      -webkit-transition: opacity 0.25s cubic-bezier(0, 0, 0.2, 1);
+      transition: opacity 0.25s cubic-bezier(0, 0, 0.2, 1);
+      pointer-events: none;
+    }
   }
 </style>
