@@ -1,7 +1,7 @@
 <script lang="ts">
     import { enhance } from "$app/forms";
 
-    import LiveCard from "$lib/components/LiveCard.svelte";
+    import LiveCard from "$lib/components/utilities/LiveCard.svelte";
     import PrimaryLayout from "$lib/components/layout/PrimaryLayout.svelte";
     import { NavigationOption } from "$lib/components/layout/layoutDataStore";
     import { Send } from "lucide-svelte";

@@ -1,7 +1,7 @@
 <script lang="ts">
     import { liveCardEffect } from "$lib/effects/liveCardEffect";
     import type { MouseEventHandler } from "svelte/elements";
-    import { fluidSimFunctions } from "./layout/layoutDataStore";
+    import { fluidSimFunctions } from "../layout/layoutDataStore";
 
     interface Props {
         hidden?: "hidden-mobile" | "hidden" | "visible";
@@ -40,7 +40,7 @@
 
 
 <style lang="scss">
-    @use "../../variables.scss" as *;
+    @use "../../../variables.scss" as *;
     @use "sass:color" as *;
     
     .fact-box {
