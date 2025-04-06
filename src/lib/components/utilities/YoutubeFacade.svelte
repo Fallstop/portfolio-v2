@@ -8,10 +8,9 @@
 
   interface Props {
     videoId: string;
-    playLabel?: string;
-    params?: string;
+    shortMode?: boolean;
   }
-  let { videoId, playLabel = "Play", params = "" }: Props = $props();
+  let { videoId, shortMode = false}: Props = $props();
 
   const thumbnailLink = `https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg`;
 
@@ -43,7 +42,7 @@
 
   let computedParams = $derived(
     (() => {
-      const p = new URLSearchParams(params);
+      const p = new URLSearchParams();
       p.append("autoplay", "1");
       p.append("playsinline", "1");
       return p.toString();
@@ -69,7 +68,7 @@
     iframe.style.position = "absolute";
     iframe.scrolling = "no";
 
-    iframe.title = playLabel;
+    iframe.title = videoTitle;
     iframe.frameBorder = "0";
     iframe.allow =
       "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
@@ -77,7 +76,7 @@
     iframe.src = `https://www.youtube-nocookie.com/embed/${encodeURIComponent(
       videoId
     )}?${computedParams}`;
-    iframe.setAttribute("aria-label", playLabel);
+    iframe.setAttribute("aria-label", videoTitle);
 
     iframeRawContainer.appendChild(iframe);
     iframe.focus();
@@ -100,11 +99,12 @@
 
 <div
   class="lite-youtube"
+  class:short-mode={shortMode}
   class:lite-youtube-activated={activated}
   role="button"
   tabindex="0"
 >
-  <div class="preview-bar">
+  <div class="preview-bar" class:removed={activated}>
     <h3 class="video-title">
       {#if videoTitle}
       <span in:fade>
@@ -127,9 +127,9 @@
       </CopyAction>
   </div>
   <picture>
-    <img class="lite-youtube-poster" alt={playLabel} src={thumbnailLink} />
+    <img class="lite-youtube-poster" alt={videoTitle} src={thumbnailLink} />
   </picture>
-  <button type="button" class="lite-youtube-playbtn" aria-label={playLabel}>
+  <button type="button" class="lite-youtube-playbtn" aria-label={videoTitle}>
   </button>
   <div bind:this={iframeRawContainer} class="iframeRawContainer"
   onpointerover={() => (hovered = true)}
@@ -152,7 +152,7 @@
       src="https://www.youtube-nocookie.com/embed/{encodeURIComponent(
         videoId
       )}?{computedParams}"
-      title={playLabel}
+      title={videoTitle}
       frameborder="0"
       scrolling="no"
       width="100%"
@@ -170,6 +170,7 @@
     display: block;
     contain: content;
     cursor: pointer;
+
     /* gradient */
     &:before {
       content: "";
@@ -196,6 +197,22 @@
       display: block;
       padding-bottom: calc(100% / (16 / 9));
       pointer-events: none;
+    }
+
+    &.short-mode {
+      width: 50%;
+      max-width: 35m;
+      @media (max-width: $mobile-breakpoint) {
+        width: 90%;
+        margin: 0 auto;
+        
+      }
+
+      &::after {
+        padding-bottom: calc(100% / (9/16 ));
+
+      }
+
     }
 
     & > :global(iframe) {
