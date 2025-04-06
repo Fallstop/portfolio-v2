@@ -36,52 +36,52 @@ I came up with a basic design for an improved bell controller (a logic board con
 ### Bell times on an SD card edited via software such as Excel
 
 <ProConTable>
-    <ul slot="pros">
+    {#snippet pros()}<ul>
         <li>Very easy to implement</li>
         <li>Simple to understand</li>
-    </ul>
-    <ul slot="cons">
+    </ul>{/snippet}
+    {#snippet cons()}<ul>
         <li>Bells won’t work while configuring</li>
         <li>Requires interaction with system which increases the chance of physical damage</li>
         <li>Requires physical access to the bell system</li>
         <li>You can’t put restrictions on how the data is edited in a CSV file (risk of malformed data entry)</li>
-    </ul>
+    </ul>{/snippet}
 </ProConTable>
 
 
 ### Locally hosted website (Original direction, decided against later)
 
 <ProConTable>
-    <ul slot="pros">
+    {#snippet pros()}<ul>
         <li>Convenient because it is available on the local network (so anywhere at school)</li>
         <li>Reasonably secure as it is not accessible outside the local network</li>
         <li>Dedicated interface allowing for simplistic and helpful UI</li>
         <li>Instant changes to bell times</li>
-    </ul>
-    <ul slot="cons">
+    </ul>{/snippet}
+    {#snippet cons()}<ul>
         <li>Complicated to implement</li>
         <li>Possible future security vulnerabilities (simple websites within the school network would be great hacking targets for students)</li>
         <li>It is complex to make good quality web browser interfaces (I’m slow at front end coding i.e. making user interfaces)</li>
         <li>Having a static IP address can sometimes lead to problems with IP address conflicts</li>
-    </ul>
+    </ul>{/snippet}
 </ProConTable>
 
 
 ### Google Sheets (Not originally considered, final direction)
 
 <ProConTable>
-    <ul slot="pros">
+    {#snippet pros()}<ul>
         <li>Very simple to use</li>
         <li>The bells can be configured anywhere</li>
         <li>Data validation can be automatically done (low risk of malformed entries)</li>
         <li>The Bell Sheet can be easily shared between google accounts</li>
         <li>Google accounts are very secure and have an extremely high uptime</li>
         <li>Teachers are familiar with Google Sheets</li>
-    </ul>
-    <ul slot="cons">
+    </ul>{/snippet}
+    {#snippet cons()}<ul>
         <li>Relies on third party software that might change or get discontinued (low probability)</li>
         <li>People can do weird things and potentially mess the named ranges up in the sheet, disabling rows and introducing malformed data</li>
-    </ul>
+    </ul>{/snippet}
 </ProConTable>
 
 
@@ -91,13 +91,13 @@ I came up with a basic design for an improved bell controller (a logic board con
 ### Arduino based controller
 
 <ProConTable>
-    <ul slot="pros">
+    {#snippet pros()}<ul>
         <li>Cheap as chips ($2.50 - $15)</li>
         <li>Tiny</li>
         <li>Bare bones bootloader (Quick startup)</li>
         <li>Very very power efficient</li>
-    </ul>
-    <ul slot="cons">
+    </ul>{/snippet}
+    {#snippet cons()}<ul>
         <li>Lot’s of modules would have to be added (Ethernet adapter, SD card reader/writer, rtc,etc) increases complexity</li>
         <li>Fiddly workflow for testing and flashing the arduino</li>
         <li>It can only be reprogrammed with new code by flashing it with a computer setup with appropriate software (eg Arduino IDE)</li>
@@ -105,14 +105,14 @@ I came up with a basic design for an improved bell controller (a logic board con
         <li>Single threaded which means it would block the main program when testing internet connectivity or updating the time from an external source.</li>
         <li>Error logging isn’t really possible because if the single thread crashes, there isn’t anything to log it and it would just restart. There are workarounds but they are obtuse and unreliable.</li>
         <li>Almost everything relies on the sd card. Single point of failure for an item not renowned for long term reliability.</li>
-    </ul>
+    </ul>{/snippet}
 </ProConTable> 
 
 
 ### Raspberry Pi based controller (Final direction)
 
 <ProConTable>
-    <ul slot="pros">
+    {#snippet pros()}<ul>
         <li>It has a full operating system, so there is easy configuration and the ability to run background tasks.</li>
         <li>Can run Python which makes it very easy to connect to google sheets</li>
         <li>You can have multiple processes (programs) running simultaneously</li>
@@ -121,13 +121,13 @@ I came up with a basic design for an improved bell controller (a logic board con
         <li>Remote updates</li>
         <li>Expandability</li>
         <li>Heaps of spare processing power for future development</li>
-    </ul>
-    <ul slot="cons">
+    </ul>{/snippet}
+    {#snippet cons()}<ul>
         <li>More expensive (~$35).</li>
         <li>More components to go wrong</li>
         <li>Slower boot (but it shouldn't need restarting)</li>
         <li>Almost everything relies on the sd card. Single point of failure for an item not renowned for long term reliability.</li>
-    </ul>
+    </ul>{/snippet}
 </ProConTable>
 
 I ended up using a Raspberry pi 2 for the project, based on these considerations. Using an arduino could be more reliable, but it would take much longer to develop.

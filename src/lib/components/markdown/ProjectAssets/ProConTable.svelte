@@ -10,11 +10,11 @@
 </script>
 
 <div class="procon-table">
-    <div class="pro-list" style="--icon-url: url({CheckURL})">
+    <div class="pro-list" style='--icon-url: url("{CheckURL}")'>
         <h4 class="header">Pros</h4>
         {@render pros?.()}
     </div>
-    <div class="con-list" style="--icon-url: url({XURL});">
+    <div class="con-list" style='--icon-url: url("{XURL}")'>
         <h4 class="header" >Cons</h4>
         {@render cons?.()}
     </div>
@@ -52,7 +52,6 @@
                 border-bottom: 1px solid $dark-text-color;
                 
                 list-style-type: none;
-                // list-style-image: var(--icon-url);
 
 
                 &:last-child {

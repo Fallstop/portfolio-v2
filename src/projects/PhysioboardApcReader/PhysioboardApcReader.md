@@ -43,24 +43,24 @@ There are two choices when wanting to extract info from a Certificate, OCR or PD
 
 ## OCR
 <ProConTable>
-<ul slot="pros">
+{#snippet pros()}<ul>
 <li>Works for both an scan or the original PDF</li>
-</ul>
-<ul slot="cons">
+</ul>{/snippet}
+{#snippet cons()}<ul>
 <li>Less reliable for character recognition, especially with non-ascii characters</li>
 <li>Includes all text on the PDF, not just the relevant text</li>
-</ul>
+</ul>{/snippet}
 </ProConTable>
 
 ## PDF Text Extraction
 <ProConTable>
-  <ul slot="pros">
+  {#snippet pros()}<ul>
     <li>No chance of non-ascii characters preventing scanning</li>
     <li>Includes all text on the PDF, not just the relevant text</li>
-  </ul>
-  <ul slot="cons">
+  </ul>{/snippet}
+  {#snippet cons()}<ul>
     <li><b>Only</b> works with the original PDF</li>
-  </ul>
+  </ul>{/snippet}
 </ProConTable>
   
 

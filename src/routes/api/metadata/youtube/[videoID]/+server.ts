@@ -1,5 +1,5 @@
 import { getProjects } from '$lib/cms/loadProjects'
-import { json } from '@sveltejs/kit'
+import { error, json } from '@sveltejs/kit'
 
 export async function GET({fetch, params}) {
 
@@ -12,6 +12,15 @@ export async function GET({fetch, params}) {
             'Content-Type': 'application/json'
         }
     });
+
+    if (response.status === 404) {
+        return error(404, 'Video not found');
+    }
+
+    if (!response.ok) {
+        return error(response.status, 'Failed to fetch metadata');
+    }
+
     const data = await response.json();
 
     return json(data);
