@@ -11,9 +11,9 @@
         file_name?: string;
     }
 
-    let { pdf_url, file_name = pdf_url?.split("/")?.pop() || `${pdf_url.length}.pdf` }: Props = $props();
+    let { pdf_url, file_name = decodeURIComponent(pdf_url?.split("/")?.pop() || `${pdf_url.length}.pdf`) }: Props = $props();
 
-    let container: HTMLDivElement = $state();
+    let container: HTMLDivElement | undefined = $state();
 
     /**
      * Reference to the pdfSlick instance
@@ -38,6 +38,11 @@
          * Create the PDF Slick store
          */
         const store = create();
+
+        if (!container) {
+            console.error("Container not found");
+            return;
+        }
 
         pdfSlick = new PDFSlick({
             container,

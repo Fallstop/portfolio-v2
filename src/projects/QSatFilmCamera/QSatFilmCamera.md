@@ -50,7 +50,7 @@ The payload must fit into a tiny space, around the ![same size as a tin can:text
 
 Once we had our concept, we needed to present it to the APSS team for approval. It was a simple presentation, where we outlined our concept, the components we would use, and the timeline for the project. We also outlined the risks and challenges we would face, and how we would mitigate them. The presentation was well received, and we were given the green light to proceed with the project.
 
-![](./QSatMDR.pdf)
+![](./QSat%20MDR.pdf)
 
 ## First iteration
 
@@ -60,13 +60,18 @@ Once we had the green light, we started to design our payload. Both the mechanic
 
 The first design review was held on the 1st of December 2024. We presented our concept to the APSS team, and received feedback on 
 
-![](./QSatPDR.pdf)
+![](./QSat%20PDR.pdf)
 
 
 ### Mechanical constraints
 ### Electrical fail
 
 ## Second Iteration
+
+### Critical Design Review
+
+![](./QSat%20CDR.pdf)
+
 ### Electrical fail
 
 ## Third Iteration
