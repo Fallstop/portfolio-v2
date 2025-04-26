@@ -56,6 +56,36 @@ Once we had our concept, we needed to present it to the APSS team for approval. 
 
 Once we had the green light, we started to design our payload. Both the mechanical team and the electrical team started to work on the first prototype from both ends, working towards the Preliminary Design Review deadline. The mechanical team started to design the payload structure, while the electrical team started to design the electronics. We also started to source the components we would need for the project.
 
+### Electrical
+
+Despite the very analog nature of the film camera, we needed a full electrical subsystem to act as our flight computer. Not only did it need to detect and trigger the film camera at apogee, we also aimed to dynamically advance the film frame, trigger a digital camera to capture matching shots, and even record & broadcast flight information over a LoRa radio. Ambitious plans indeed.
+
+![:borderless:large](./first_iteration/SystemLayout.svg)
+
+Due to the mechanical constraints below, we had super limited space for the onboard flight system. Unlike most other teams, we couldn't just design an extension to the example PCB designs, as they were designed to stack, using up our precious vertical space within our PSAT. To make more space for the camera itself, we decided on a long motherboard like design.
+
+> Mechanical diagram here
+
+To start, we merged the MCU & Beacon example PCB's into one schematic, and began work in Altium. We had a heap of features to integrate.
+
+### Motor control system
+Unfortunately our film camera was designed for humans to operate, not robots. The trigger was simple to operate, a simple push-button mechanism the fired the fixed shutter. The film advance mechanism on the other hand, was another beast. To advance the frame, you had to slide the flat mechanism back and forth until it jams. Sometimes you could drag once, sometimes you needed to drag three times for a single shot. It's simple for a human with eyes, who can see the thing, but hard for a robot trying to tell by feel.
+
+![:borderless:medium:center](./first_iteration/FilmCameraShutterButton.png)
+
+![:borderless:medium:center](./first_iteration/FilmCameraShutterSlider.png)
+
+In a bid to keep things as simple as possible, we decide to use a servo for the shutter trigger, and a current sense motor combo for the film advance. The current going through the motor will peak when the motor stalls, we can *theoretically* find our three jam states from a single sensor.
+
+![:medium:center:borderless](./first_iteration/Venn%20Diagram.svg)
+
+For implementing,we decided on using an SG-90 servo for both the trigger and film advance, simply modding the latter to turn it into a geared down DC motor. To sense the current, we just needed a nice little bit of first-year opamp analysis to calculate a circuit to measure current.
+
+After all, if it didn't work, we always had the next iteration to get it right.
+
+### Mechanical constraints
+
+### Electrical fail
 #### Preliminary Design Review
 
 The first design review was held on the 1st of December 2024. We presented our concept to the APSS team, and received feedback on 
@@ -63,8 +93,6 @@ The first design review was held on the 1st of December 2024. We presented our c
 ![](./QSat%20PDR.pdf)
 
 
-### Mechanical constraints
-### Electrical fail
 
 ## Second Iteration
 
