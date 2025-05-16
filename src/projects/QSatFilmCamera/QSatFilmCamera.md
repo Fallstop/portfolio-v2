@@ -2,7 +2,7 @@
 date: "2025-03-09"
 title: "QSat APSS"
 description: "Fitting a pocket film camera into a rocket payload."
-tags: ["software", "hardware", "lora"]
+tags: ["software", "hardware", "lora", "apss"]
 authors:
  - Jasper M-W
 collaborators:
@@ -22,8 +22,18 @@ collaborators:
     import RedactedText from "$md/RedactedText.svelte";
 </script>
 
+<MarkdownLink href="https://photos.app.goo.gl/4VSRH3fttHpKH7LG9">Full Photo Album</MarkdownLink>
 <MarkdownLink href="https://github.com/questionable-innovations/QSAT_2024-2025">Questionable-Innovations/QSAT_2024-2025</MarkdownLink>
-<MarkdownLink href="https://apss.co.nz/">APSS</MarkdownLink>
+<MarkdownLink href="https://apss.co.nz/">PSAT</MarkdownLink>
+
+
+## We launched a film camera in a rocket in 2025.
+With modern electronics, advanced cad, and the latest 3D printing technology, we managed to capture an entirely white film frame.
+This is the cool story of how we managed to capture perhaps the most boring photo possible.
+
+![A pure white frame:center:small](./white_frames/picture104.jpg)
+*todo: replace with actual film photo that'll have texture to it, right now it looks like it's stuck loading*
+
 
 ## What is PSat?
 PSat is a summer program run by the [Auckland Program for Space Systems (APSS)](https://apss.co.nz/) at the University of Auckland. The program is designed to give students hands-on experience in building and launching a small "pico-satellite" payload. The payload can be anything the students like, as long as it's self-contained, and fits into the I class rockets, [Sudden Rush](https://locprecision.com/products/sudden-rush) , provided by APSS.
@@ -64,7 +74,7 @@ Despite the very analog nature of the film camera, we needed a full electrical s
 
 Due to the mechanical constraints below, we had super limited space for the onboard flight system. Unlike most other teams, we couldn't just design an extension to the example PCB designs, as they were designed to stack, using up our precious vertical space within our PSAT. To make more space for the camera itself, we decided on a long motherboard like design.
 
-> Mechanical diagram here
+> Mechanical diagram should go here? Something to show where the Motherboard was inside the PSAT
 
 To start, we merged the MCU & Beacon example PCB's into one schematic, and began work in Altium. We had a heap of features to integrate.
 
@@ -74,6 +84,8 @@ Unfortunately our film camera was designed for humans to operate, not robots. Th
 ![:borderless:medium:center](./first_iteration/FilmCameraShutterButton.png)
 
 ![:borderless:medium:center](./first_iteration/FilmCameraShutterSlider.png)
+
+
 
 In a bid to keep things as simple as possible, we decide to use a servo for the shutter trigger, and a current sense motor combo for the film advance. The current going through the motor will peak when the motor stalls, we can *theoretically* find our three jam states from a single sensor.
 
@@ -102,6 +114,8 @@ The first design review was held on the 1st of December 2024. We presented our c
 
 ### Electrical fail
 
+
+
 ## Third Iteration
 
 ### The rebuild
@@ -110,10 +124,13 @@ The first design review was held on the 1st of December 2024. We presented our c
 
 ## The day itself
 
+## Recovery
+
 ## Photos captured
 ![:small](./onboard_camera/)
 
-## Recovery
+
+## The white photo mystery
 
 
 

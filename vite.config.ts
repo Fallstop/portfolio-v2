@@ -25,5 +25,8 @@ export default defineConfig({
   ssr: {
     noExternal: ["@fancyapps/ui"]
   },
-  clearScreen: false
+  clearScreen: false,
+  server: {
+    allowedHosts: ["dev.portfolio.jmw.nz"]
+  }
 });
