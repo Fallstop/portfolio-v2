@@ -91,7 +91,7 @@ In a bid to keep things as simple as possible, we decide to use a servo for the 
 
 ![:medium:center:borderless](./first_iteration/Venn%20Diagram.svg)
 
-For implementing,we decided on using an SG-90 servo for both the trigger and film advance, simply modding the latter to turn it into a geared down DC motor. To sense the current, we just needed a nice little bit of first-year opamp analysis to calculate a circuit to measure current.
+For implementing, we decided on using an SG-90 servo for both the trigger and film advance, simply modding the latter to turn it into a geared down DC motor. To sense the current, we just needed a nice little bit of first-year opamp analysis to calculate a circuit to measure current.
 
 After all, if it didn't work, we always had the next iteration to get it right.
 
@@ -130,7 +130,22 @@ The first design review was held on the 1st of December 2024. We presented our c
 ![:small](./onboard_camera/)
 
 
-## The white photo mystery
+### The white photo mystery
 
+The first few photos for both cameras, are somehow completely blown-out. There's a couple of thory's behind this:
 
+#### Exposure adjusted to inside the rocket
+It's completly pitch-black inside of the rocket, so the exposure could've been completely blown out by the time it left the rocket.
+- This doesn't explain the white frame from the Film camera, as it had a set exposure.
+- The digital camera would've turned on outside the rocket itself.
 
+#### The cameras were pointing at the sun
+Neither would cope with pointing at the sun, which would compltelty blow out any photos.
+- The both cameras were pointing diffrent directions, and took photos at roughly the same time, ruling this out.
+
+#### The smoke from the rocket obscured the view
+Lots of smoke was released by the explsoive seperation charge, this could've obscured the view of both cameras.
+- The smoke would've dispated by the second frame, and would not have caused such a clipped photo.
+
+#### It seperated inside of a cloud
+The low clouds present would reflect more than enough light to overwelhm both the fixed shutter of the film camera, and the exposure adjustment of the digital camera.
