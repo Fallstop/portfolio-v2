@@ -95,9 +95,34 @@ For implementing, we decided on using an SG-90 servo for both the trigger and fi
 
 After all, if it didn't work, we always had the next iteration to get it right.
 
-### Mechanical constraints
+### Mechanical Constraints
+The payload must fit within the I class rocket, Sudden Rush, as mentioned before. The airspace that can house the payload has a maximum height of 125 mm and a maximum width/diameter of 74 mm. This airspace must also have room to hold the parachute when it's not being deployed. The payload must also eject out from the rocket freely after reaching apogee.
+
+Our payload had a maximum height of 125 mm and maximum width/diameter of 74 mm because we wanted to utilise as much of the airspace as we could. This was primarily due to the film camera taking up the majority of the space inside our payload as its dimensions were 114.512 mm x 55 mm x 26.1 mm. Therefore, we could only place the camera right down the middle of the payload to maximise the space we could use around the camera. The remaining space surrounding the camera allowed us to fit the two servo's we had planned to use as well as the custom PCB and the PSU board. 
+*photo of (cad?) model (completed model or just show airspace?)*
+
+As a result of us maximising the rocket tube's airspace, we had to come up with an idea on how we could attach the parachute to our payload. Since we weren't able to attach a mount on the top or bottom end of our payload, we decided to mount our parachute on the side of the payload, not through an external mount. We had enough airspace inside the payload that we could make a small channel that allowed us to feed the parachute strap through. 
+*Photo showing the ingenious strap mount*
+
+#### Version 1
+*Explain  v1*
+*Photo(s) of v1*
+
+#### Version 2
+*Explain changes from v1 to v2*
+*Photos of changes from v1 to v2? + photo(s) of v2*
+
+#### Version 3
+*Explain changes from v2 to v3*
+*Photos of changes from v2 to v3? + photo(s) of v3?*
+
+#### Version 4
+Due to the sudden demise of our custom PCB one week before launch day, we had to switch to using a simplified setup using (ESP32 + ....) *(Jasper -> fix this with correct name/stuff lmao)*. This meant we had to change interiors of the shell that was meant to house the custom PCB. 
+*Explain changes from v3 to v4*
+*Photos of changes from v3 to v4? + photo(s) of v4?*
 
 ### Electrical fail
+
 #### Preliminary Design Review
 
 The first design review was held on the 1st of December 2024. We presented our concept to the APSS team, and received feedback on 
@@ -132,20 +157,20 @@ The first design review was held on the 1st of December 2024. We presented our c
 
 ### The white photo mystery
 
-The first few photos for both cameras, are somehow completely blown-out. There's a couple of thory's behind this:
+The first few photos for both cameras, were somehow completely blown-out. There are a couple of theories behind this:
 
 #### Exposure adjusted to inside the rocket
-It's completly pitch-black inside of the rocket, so the exposure could've been completely blown out by the time it left the rocket.
-- This doesn't explain the white frame from the Film camera, as it had a set exposure.
+It's completely pitch-black inside of the rocket, so the exposure could've been completely blown out by the time it left the rocket.
+- This doesn't explain the white frame from the film camera, as it had a set exposure. *mention the fixed set or will it be explained in a different section, i.e. maybe one tht mentions the firmware side of this project?*
 - The digital camera would've turned on outside the rocket itself.
 
 #### The cameras were pointing at the sun
-Neither would cope with pointing at the sun, which would compltelty blow out any photos.
-- The both cameras were pointing diffrent directions, and took photos at roughly the same time, ruling this out.
+Neither would cope with pointing at the sun, which would completely blow out any photos.
+- Both cameras were pointing at different directions, and took photos at roughly the same time, ruling this out.
 
 #### The smoke from the rocket obscured the view
-Lots of smoke was released by the explsoive seperation charge, this could've obscured the view of both cameras.
-- The smoke would've dispated by the second frame, and would not have caused such a clipped photo.
+Lots of smoke was *were?* released by the explosive seperation charge, this could've obscured the view of both cameras.
+- The smoke would've dissipated by the second frame, and would not have caused such a clipped photo.
 
-#### It seperated inside of a cloud
-The low clouds present would reflect more than enough light to overwelhm both the fixed shutter of the film camera, and the exposure adjustment of the digital camera.
+#### It separated inside of a cloud
+The low clouds present would reflect more than enough light to overwelhm both the fixed shutter of the film camera, and the exposure adjustment of the digital camera. *iirc there were no clouds above us*
