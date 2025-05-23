@@ -117,7 +117,7 @@ As a result of us maximising the rocket tube's airspace, we had to come up with 
 *Photos of changes from v2 to v3? + photo(s) of v3?*
 
 #### Version 4
-Due to the sudden demise of our custom PCB one week before launch day, we had to switch to using a simplified setup using (ESP32 + ....) *(Jasper -> fix this with correct name/stuff lmao)*. This meant we had to change interiors of the shell that was meant to house the custom PCB. 
+Due to the sudden demise of our custom PCB one week before launch day, we had to scope-down our setup to use a single [ESP32 S2](https://www.wemos.cc/en/latest/s2/s2_mini.html) as the core. This meant we had to change interiors of the shell that was designed to house the custom PCB, to now house a series of individual modules jankily wired together. 
 *Explain changes from v3 to v4*
 *Photos of changes from v3 to v4? + photo(s) of v4?*
 
@@ -144,6 +144,13 @@ The first design review was held on the 1st of December 2024. We presented our c
 ## Third Iteration
 
 ### The rebuild
+
+So ... we don't have a controller. We're supposed to launch in four days. This is where our Hackathon experience came in handy.
+
+We split our goals into three sequential scopes:
+
+![:center:borderless:large](./third_iteration/RedesignDiagram.svg)
+
 ### Trigger Panic
 ### The Remote
 
