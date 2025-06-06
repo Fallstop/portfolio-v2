@@ -145,16 +145,22 @@ The first design review was held on the 1st of December 2024. We presented our c
 
 ### The rebuild
 
-So ... we don't have a controller. We're supposed to launch in four days. This is where our Hackathon experience came in handy.
+So ... we don't have a controller. We're supposed to **launch in four days**. This is where our Hackathon experience came in handy.
 
 We split our goals into three sequential scopes:
 
 ![:center:borderless:large](./third_iteration/RedesignDiagram.svg)
 
-### Trigger Panic
-### The Remote
+Priority one was simple. It would simply wait until the payload was ejected into the bright sunlight, then push down the trigger on the film camera. This was the MVP that if functional in time, would make it worth the time to launch the payload.
 
-## The day itself
+The next scope, priority two, added a digital camera and power management to the design. On capsual injection, now it would enable the 5V rail on the powersupply. This would both enable the Servo, and power up the ESP-CAM. The ESP-CAM would take as many photos as possible on boot, and save to the included SD card.
+
+Finally, as our stretch goal in priority three, we wanted remote arming. As we only had a single shot, the worst case scenario was our payload activating prematurely and wasting the film. If we're constantly looking for light, we would have to arm the payload, and assembly the rocket without any light leaking into the payload.
+
+This is why we choose an ESP32 as the core MCU at the start, as this enabled us to easily communicate over [ESP-NOW](https://www.espressif.com/en/solutions/low-power-solutions/esp-now) using the built in antenna. Along with a [Cheap-Yellow-Display](https://github.com/witnessmenow/ESP32-Cheap-Yellow-Display?tab=readme-ov-file#esp32-cheap-yellow-display) on hand.
+
+## Launch Day
+
 
 ## Recovery
 
