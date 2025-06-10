@@ -20,6 +20,7 @@ collaborators:
     import HighlightedBlock from "$md/HighlightedBlock.svelte";
     import ProConTable from "$md/ProConTable.svelte";
     import RedactedText from "$md/RedactedText.svelte";
+    import TodoMark from "$md/TodoMark.svelte";
 </script>
 
 <MarkdownLink href="https://photos.app.goo.gl/4VSRH3fttHpKH7LG9">Full Photo Album</MarkdownLink>
@@ -32,7 +33,7 @@ With modern electronics, advanced cad, and the latest 3D printing technology, we
 This is the cool story of how we managed to capture perhaps the most boring photo possible.
 
 ![A pure white frame:center:small](./white_frames/picture104.jpg)
-*todo: replace with actual film photo that'll have texture to it, right now it looks like it's stuck loading*
+<TodoMark>replace with actual film photo that'll have texture to it, right now it looks like it's stuck loading</TodoMark>
 
 
 ## What is PSat?
@@ -99,27 +100,27 @@ After all, if it didn't work, we always had the next iteration to get it right.
 The payload must fit within the I class rocket, Sudden Rush, as mentioned before. The airspace that can house the payload has a maximum height of 125 mm and a maximum width/diameter of 74 mm. This airspace must also have room to hold the parachute when it's not being deployed. The payload must also eject out from the rocket freely after reaching apogee.
 
 Our payload had a maximum height of 125 mm and maximum width/diameter of 74 mm because we wanted to utilise as much of the airspace as we could. This was primarily due to the film camera taking up the majority of the space inside our payload as its dimensions were 114.512 mm x 55 mm x 26.1 mm. Therefore, we could only place the camera right down the middle of the payload to maximise the space we could use around the camera. The remaining space surrounding the camera allowed us to fit the two servo's we had planned to use as well as the custom PCB and the PSU board. 
-*photo of (cad?) model (completed model or just show airspace?)*
+<TodoMark>photo of (cad?) model (completed model or just show airspace?)</TodoMark>
 
 As a result of us maximising the rocket tube's airspace, we had to come up with an idea on how we could attach the parachute to our payload. Since we weren't able to attach a mount on the top or bottom end of our payload, we decided to mount our parachute on the side of the payload, not through an external mount. We had enough airspace inside the payload that we could make a small channel that allowed us to feed the parachute strap through. 
-*Photo showing the ingenious strap mount*
+<TodoMark>Photo showing the ingenious strap mount</TodoMark>
 
 #### Version 1
-*Explain  v1*
-*Photo(s) of v1*
+<TodoMark>Explain  v1</TodoMark>
+<TodoMark>Photo(s) of v1</TodoMark>
 
 #### Version 2
-*Explain changes from v1 to v2*
-*Photos of changes from v1 to v2? + photo(s) of v2*
+<TodoMark>Explain changes from v1 to v2</TodoMark>
+<TodoMark>Photos of changes from v1 to v2? + photo(s) of v2</TodoMark>
 
 #### Version 3
-*Explain changes from v2 to v3*
-*Photos of changes from v2 to v3? + photo(s) of v3?*
+<TodoMark>Explain changes from v2 to v3</TodoMark>
+<TodoMark>Photos of changes from v2 to v3? + photo(s) of v3?</TodoMark>
 
 #### Version 4
 Due to the sudden demise of our custom PCB one week before launch day, we had to scope-down our setup to use a single [ESP32 S2](https://www.wemos.cc/en/latest/s2/s2_mini.html) as the core. This meant we had to change interiors of the shell that was designed to house the custom PCB, to now house a series of individual modules jankily wired together. 
-*Explain changes from v3 to v4*
-*Photos of changes from v3 to v4? + photo(s) of v4?*
+<TodoMark>Explain changes from v3 to v4</TodoMark>
+<TodoMark>Photos of changes from v3 to v4? + photo(s) of v4</TodoMark>
 
 ### Electrical fail
 
@@ -169,6 +170,9 @@ This is why we choose an ESP32 as the core MCU at the start, as this enabled us 
 
 
 ### The white photo mystery
+
+<TodoMark>This should basically be yeeted</TodoMark>
+
 
 The first few photos for both cameras, were somehow completely blown-out. There are a couple of theories behind this:
 
