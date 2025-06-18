@@ -13,7 +13,7 @@
 
     let { pdf_url, file_name = pdf_url?.split("/")?.pop() || `${pdf_url.length}.pdf` }: Props = $props();
 
-    let container: HTMLDivElement = $state();
+    let container: HTMLDivElement | undefined = $state();
 
     /**
      * Reference to the pdfSlick instance
@@ -38,6 +38,10 @@
          * Create the PDF Slick store
          */
         const store = create();
+
+        if (container === undefined) {
+            throw new Error("PDF Container element is not defined");
+        }
 
         pdfSlick = new PDFSlick({
             container,
