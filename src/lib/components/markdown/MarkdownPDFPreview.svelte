@@ -39,9 +39,8 @@
          */
         const store = create();
 
-        if (!container) {
-            console.error("Container not found");
-            return;
+        if (container === undefined) {
+            throw new Error("PDF Container element is not defined");
         }
 
         pdfSlick = new PDFSlick({
