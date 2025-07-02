@@ -107,19 +107,27 @@ As a result of us maximising the rocket tube's airspace, we had to come up with 
 
 #### Version 1
 <TodoMark>Explain  v1</TodoMark>
+Version 1 included airspaces for the two servos we planned on using, as well as a airspace for the custom PCB. This was primarily to allow us to visualise what the payload looked like, essentially a base template we could build off from.
 <TodoMark>Photo(s) of v1</TodoMark>
 
 #### Version 2
 <TodoMark>Explain changes from v1 to v2</TodoMark>
+Airspace surrounding the space where the servos would go were expanded for allowing a better fit of the the servos.
+Airspace created at the base of the interior of the shell to allow for placement of the PSU board.
+Cutouts were made in front of the location where the film camera lens were going to look out from. Cutout also made for the ESP-32 Cam lens to look out through.
+
+After attempting to place the servos into their dedicated spot, the airspaces were found to still be too tight. Modifications were temporarily made by removing some of the supporting walls inside using a scalpel.
 <TodoMark>Photos of changes from v1 to v2? + photo(s) of v2</TodoMark>
 
 #### Version 3
 <TodoMark>Explain changes from v2 to v3</TodoMark>
+Version 3 were 3D printed with larger airspaces for the servos.
 <TodoMark>Photos of changes from v2 to v3? + photo(s) of v3?</TodoMark>
 
 #### Version 4
 Due to the sudden demise of our custom PCB one week before launch day, we had to scope-down our setup to use a single [ESP32 S2](https://www.wemos.cc/en/latest/s2/s2_mini.html) as the core. This meant we had to change interiors of the shell that was designed to house the custom PCB, to now house a series of individual modules jankily wired together. 
 <TodoMark>Explain changes from v3 to v4</TodoMark>
+One half of the Version 3 shell had to be changed.
 <TodoMark>Photos of changes from v3 to v4? + photo(s) of v4</TodoMark>
 
 ### Electrical fail
