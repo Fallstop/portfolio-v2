@@ -46,7 +46,7 @@
 
         <meta property="og:image" content={`${canonicalURL}${post.slug}/ogimage.png`} />
         <meta property="og:image:width" content={`${ogImageWidth}`} />
-        <meta property="og:image:height" content={`${ogImageWidth}`} />
+        <meta property="og:image:height" content={`${ogImageHeight}`} />
         <meta property="og:image:alt" content={`${post.date} |${post.title} | ${post.description}`} />
         <meta property="og:image:type" content="image/png" />
         
@@ -69,7 +69,7 @@
             <meta property="og:image" content={`${canonicalURL}${SEOData?.slug}/ogimage.png`} />
         {/if}
         <meta property="og:image:width" content={`${ogImageWidth}`} />
-        <meta property="og:image:height" content={`${ogImageWidth}`} />
+        <meta property="og:image:height" content={`${ogImageHeight}`} />
         <meta property="og:image:type" content="image/png" />
 
         {#if SEOData?.type == "profile"}

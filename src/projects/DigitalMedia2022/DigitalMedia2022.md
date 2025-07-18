@@ -2,7 +2,7 @@
 date: "2022-10-31"
 title: "Digital Media 2022"
 description: "A photography and design portfolio for my AS Digital Media exam."
-tags: ["art", "Huanui College", "covid"]
+tags: ["Art", "Huanui College", "COVID"]
 ---
 
 <script>

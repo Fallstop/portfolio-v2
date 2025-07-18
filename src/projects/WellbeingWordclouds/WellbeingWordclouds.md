@@ -9,7 +9,7 @@ collaborators:
  - Sam Hostad
  - The 2023 Wellbeing Committee
 highlight: true
-tags: ["software", "python", "Huanui College"]
+tags: ["Software", "Python", "Huanui College"]
 ---
 <script lang="ts">
     import LiveCard from "$md/LiveCard.svelte";

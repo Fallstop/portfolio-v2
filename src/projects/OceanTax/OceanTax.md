@@ -12,7 +12,9 @@ collaborators:
  - Jade Lim
  - John Cave
  - Walter Lim
-tags: ["software", "react", "rust", "govhack", "48 Hours"]
+highlight: true
+tags: ["Software", "React", "TypeScript", "Rust", "GovHack", "48 Hours"]
+---
 ---
 
 <script>

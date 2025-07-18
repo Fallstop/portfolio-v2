@@ -2,7 +2,7 @@
 date: "2021-05-22"
 title: "Accidental Author"
 description: "I may have published a book with 391 pages of repeated 'E's."
-tags: ["misc"]
+tags: ["Art"]
 ---
 
 # The first book

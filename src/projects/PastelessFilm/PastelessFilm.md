@@ -22,7 +22,7 @@ collaborators:
  - Glyn Fleming Bone
  - Mitchell Foster
  - Jasper M-W
-tags: ["art", "film", "48 Hours"]
+tags: ["Art", "Film", "48 Hours"]
 ---
 
 <!-- [Watch Here! ... actually please don't.<br><br> -->

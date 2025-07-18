@@ -10,7 +10,7 @@ collaborators:
  - Connor Hare
  - Jasper M-W
  - Taine Reader
-tags: ["software", "misc", "rust"]
+tags: ["Software", "Rust"]
 ---
 <script>
   import MarkdownLink from "$md/MarkdownLink.svelte";

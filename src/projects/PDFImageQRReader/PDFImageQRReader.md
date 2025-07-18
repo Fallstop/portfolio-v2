@@ -2,7 +2,7 @@
 date: "2021-12-15"
 title: "React QR Scanner"
 description: "React library to scan user-uploaded PDF's locally for QR codes."
-tags: ["software", "react", "covid"]
+tags: ["Software", "React", "TypeScript", "COVID"]
 ---
 
 <script>

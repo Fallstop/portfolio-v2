@@ -10,7 +10,7 @@
         tabbable?: boolean;
         highlighted?: boolean;
         title?: string | null;
-        type?: "button" | "link";
+        type?: "button" | "link" | "none";
         children?: import('svelte').Snippet;
         [key: string]: any,
         onClick?: MouseEventHandler<HTMLButtonElement | HTMLAnchorElement>;
@@ -32,10 +32,12 @@
 </script>
 
 {#if type === "button"}
-    <button {...rest} class="fact-box {size} {style} {hidden}" class:clickable={clickable} use:liveCardEffect onclick={onClick} class:highlighted {title} tabindex={tabbable && clickable ? 0 : -1}>{@render children?.()}</button>
+    <button {...rest} class="fact-box interactive {size} {style} {hidden}" class:clickable={clickable} use:liveCardEffect onclick={onClick} class:highlighted {title} tabindex={tabbable && clickable ? 0 : -1}>{@render children?.()}</button>
 {:else if type === "link"}
     <!-- svelte-ignore a11y_missing_attribute -->
-    <a {...rest} role="link" class="fact-box {size} {style} {hidden}" class:clickable={clickable} use:liveCardEffect onclick={onClick} class:highlighted {title} tabindex={tabbable && clickable ? 0 : -1}>{@render children?.()}</a>
+    <a {...rest} role="link" class="fact-box interactive {size} {style} {hidden}" class:clickable={clickable} use:liveCardEffect onclick={onClick} class:highlighted {title} tabindex={tabbable && clickable ? 0 : -1}>{@render children?.()}</a>
+{:else if type === "none"}
+    <div {...rest} class="fact-box {size} {style} {hidden}" use:liveCardEffect class:highlighted {title} >{@render children?.()}</div>
 {/if}
 
 
@@ -69,7 +71,7 @@
         text-decoration: none;
 
 
-        &:hover {
+        &.interactive:hover {
             background-color: adjust($primary-color, $alpha: -0.8);
         }
 

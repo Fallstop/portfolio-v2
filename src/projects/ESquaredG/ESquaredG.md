@@ -2,7 +2,7 @@
 date: "2021-08-10"
 title: "E²G 2021 Science Fair"
 description: "E²G (ESquaredG) takes on cost-optimising EEG headsets using multiplexers"
-tags: ["software", "hardware", "rust", "rust", "Science Fair"]
+tags: ["Software", "Hardware", "Rust", "Science Fair"]
 authors:
  - Jasper M-W
  - Connor Hare

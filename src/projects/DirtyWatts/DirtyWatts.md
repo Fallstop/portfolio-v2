@@ -11,7 +11,7 @@ collaborators:
  - Leya Stow
  - Grayson Sutherland
 highlight: false
-tags: ["software", "svelte", "rust", "python", "govhack", "48 Hours", "environmental"]
+tags: ["Software", "Svelte", "TypeScript", "Rust", "C/C++", "Python", "GovHack", "48 Hours", "Environmental"]
 ---
 
 <script>

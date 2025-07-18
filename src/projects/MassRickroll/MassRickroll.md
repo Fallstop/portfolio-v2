@@ -2,7 +2,7 @@
 date: "2021-08-05"
 title: "Mass Rickroll"
 description: "A group rickroll experience like no other."
-tags: ["software", "misc"]
+tags: ["Software", "TypeScript"]
 ---
 
 This is a system where via multiple methods, a [client connects](https://mass-rickroll.host.qrl.nz/active) to a remote server where [anyone can trigger an event](http://mass-rickroll.host.qrl.nz/rick) to rickroll everyone connected simultaneously.

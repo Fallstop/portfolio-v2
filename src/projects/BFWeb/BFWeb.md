@@ -8,7 +8,8 @@ collaborators:
     - Jasper M-W
     - Connor Hare
     - Jacob Read
-tags: ["software", "48 Hours", "Terrible Ideas", "brainf*ck"]
+tags: ["Software", "48 Hours", "Terrible Ideas", "Brainf*ck"]
+---
 ---
 
 <script lang="ts">
