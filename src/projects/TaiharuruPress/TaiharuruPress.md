@@ -3,10 +3,18 @@ date: "2021-04-21"
 title: "Taiharuru Press Website"
 description: "Taiharuru Press Website - Speedrunning a high performance JAM stack website."
 tags: ["Software", "Svelte", "Rust"]
+collaborators:
+ - Jasper M-W
 ---
-> #### [Github: https://github.com/Fallstop/TaiharuruPress](https://github.com/Fallstop/TaiharuruPress)
 
-> #### [Website: https://taiharuru.co.nz](https://taiharuru.co.nz/)
+<script lang="ts">
+    import MarkdownLink from "$md/MarkdownLink.svelte";
+</script>
+
+<MarkdownLink href="https://github.com/Fallstop/TaiharuruPress" >Fallstop/TaiharuruPress</MarkdownLink>
+<MarkdownLink href="https://taiharuru.co.nz" >Taiharuru Press Website</MarkdownLink>
+
+
 
 ## Framework
 
@@ -18,4 +26,4 @@ The entire site took around about one day of work, from go ahead to finish, endi
 
 ## Design
 
-The whole thing is a modified version of [gatsby-starter-morning-dew](https://github.com/maxpou/gatsby-starter-morning-dew), it is a very nice template but I had to convert it from a blog to a Book catalog.
+The whole thing is a modified version of [gatsby-starter-morning-dew](https://github.com/maxpou/gatsby-starter-morning-dew), it is a very nice template but I had to convert it from a blog to a book catalog.

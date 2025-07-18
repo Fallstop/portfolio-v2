@@ -1,5 +1,6 @@
 <script lang="ts">
     import { getPersonDetails } from "$lib/utilities/getPeopleDetails";
+  import LiveCard from "../utilities/LiveCard.svelte";
 
     interface Props {
         collaborators: string[];
@@ -16,11 +17,16 @@
                 {@const authorData = getPersonDetails(collaborator)}
                 <li>
                     {#if authorData.homepage}
-                        <a class="name" href={authorData.homepage} target="_blank">
+                        <!-- <a class="name" href={authorData.homepage} target="_blank">
                             {authorData.name}
-                        </a>
+                        </a> -->
+                        <LiveCard type="link" size="small" href={authorData.homepage} target="_blank" title={authorData.name} >
+                                {authorData.name}
+                        </LiveCard>
                     {:else}
-                        <span class="name">{authorData.name}</span>
+                        <LiveCard type="none" size="small" title={authorData.name} >
+                                {authorData.name}
+                        </LiveCard>
                     {/if}
                 </li>
             {/each}
@@ -32,28 +38,34 @@
     .collaborators {
         margin-top: 2rem;
         padding-top: 1rem;
+
+        h2 {
+            margin-bottom: 0;
+        }
+
         border-top: 1px solid $mid-tone;
         ul {
-            display: flex;
-            flex-wrap: wrap;
-            list-style: none;
+            display: block;
             padding: 0;
             margin: 0;
-            flex-direction: row;
-            gap: 1rem;
             li {
                 margin: 0;
                 padding: 0;
-                .name {
+                list-style: none;
+                display: inline-block;
+                padding-top: 0.5rem;
+                padding-right: 0.5rem;
+
+                a {
+                    // background-color: $mid-tone;
+                    box-shadow: 0 0 0 rgba(0, 0, 0, 0.5);
+                    transition: box-shadow 0.2s ease-in-out;
+
                     font-weight: bold;
                     color: $text-color;
                     text-decoration: none;
-                    padding: 0.5rem;
-                }
-                a {
-                    background-color: $mid-tone;
-                    box-shadow: 0 0 0 rgba(0, 0, 0, 0.5);
-                    transition: box-shadow 0.2s ease-in-out;
+                    color: $text-color;
+
                     :global(svg) {
                         height: 1.3em;
                         max-width: 1.3em;
