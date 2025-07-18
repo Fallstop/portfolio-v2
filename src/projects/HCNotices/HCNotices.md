@@ -2,7 +2,7 @@
 date: "2021-04-22"
 title: "HC Notices V1"
 description: "Unofficial Huanui College daily notices reader, because your eyes matter."
-tags: ["software", "svelte", "Huanui College"]
+tags: ["Software", "Svelte", "TypeScript", "Huanui College"]
 ---
 
 <script lang="ts">

@@ -1,8 +1,8 @@
 ---
 date: "2021-04-21"
 title: "Taiharuru Press Website"
-description: "Taiharuru Press Website - Speedrunning a high performance horizontally scalable JAM stack website."
-tags: ["software", "svelte", "rust"]
+description: "Taiharuru Press Website - Speedrunning a high performance JAM stack website."
+tags: ["Software", "Svelte", "Rust"]
 ---
 > #### [Github: https://github.com/Fallstop/TaiharuruPress](https://github.com/Fallstop/TaiharuruPress)
 

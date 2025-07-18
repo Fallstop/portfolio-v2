@@ -13,7 +13,8 @@ collaborators:
  - John Cave
  - Walter Lim
 highlight: true
-tags: ["software", "react", "rust", "govhack", "48 Hours"]
+tags: ["Software", "React", "TypeScript", "Rust", "GovHack", "48 Hours"]
+---
 ---
 
 <script>

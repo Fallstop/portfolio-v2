@@ -11,7 +11,7 @@ collaborators:
     - Cam Matheson
     - Carolyn
 highlight: true
-tags: ["software", "hardware", "C/C++", "48 Hours", "Terrible Ideas"]
+tags: ["Software", "Hardware", "C/C++", "48 Hours", "Terrible Ideas"]
 ---
 
 <script lang="ts">

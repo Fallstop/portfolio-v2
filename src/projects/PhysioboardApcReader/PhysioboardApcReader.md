@@ -2,7 +2,7 @@
 date: "2022-01-16"
 title: "NZ Physioboard APC Reader"
 description: "React library to scan user-uploaded PDF's locally for QR codes."
-tags: ["software", "react", "covid"]
+tags: ["Software", "React", "TypeScript", "COVID"]
 ---
 <script>
   import MarkdownLink from "$md/MarkdownLink.svelte";

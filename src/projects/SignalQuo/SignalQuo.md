@@ -2,7 +2,7 @@
 date: "2023-07-12"
 title: "Signal Quo"
 description: "Grapple 23 - Secondary emergency LoRa Mesh communication network designed for Mars."
-tags: ["software", "hardware", "lora"]
+tags: ["Software", "Svelte", "C/C++", "TypeScript", "Hardware", "LoRa"]
 authors:
  - Jasper M-W
 collaborators:

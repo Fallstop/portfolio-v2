@@ -8,7 +8,7 @@ collaborators:
  - Ara Bartlett
  - Leya Stow
  - Carolyn
-tags: ["software", "svelte", "python", "govhack", "48 Hours"]
+tags: ["Software", "Svelte", "Python", "GovHack", "48 Hours"]
 ---
 
 <script>

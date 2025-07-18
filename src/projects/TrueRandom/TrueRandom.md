@@ -9,7 +9,7 @@ collaborators:
     - Jacob Read
     - Taine Reader
 highlight: true
-tags: ["software", "hardware", "python", "48 Hours", "Terrible Ideas"]
+tags: ["Software", "Hardware", "Svelte", "Python", "48 Hours", "Terrible Ideas"]
 ---
 <script lang="ts">
     import TwitchStream from "$md/TwitchStream.svelte";

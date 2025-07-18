@@ -16,7 +16,7 @@ collaborators:
  - Ara Bartlett
  - Connor Hare
 highlight: true
-tags: ["art", "film", "48 Hours"]
+tags: ["Art", "Film", "48 Hours"]
 ---
 <script lang="ts">
     import LiveCard from "$md/LiveCard.svelte";

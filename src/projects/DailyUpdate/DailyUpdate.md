@@ -5,7 +5,7 @@ description: "Find out when the daily update is and watch it live."
 collaborators:
  - Jasper M-W
  - Zac M-W
-tags: ["software", "svelte", "covid"]
+tags: ["Software", "Svelte", "TypeScript", "COVID"]
 ---
 
 <script>
