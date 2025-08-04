@@ -41,11 +41,8 @@ export default function galleryImportTransform({projectRoot}: {projectRoot: stri
           
           let fullSystemPath = normalizePath(path.join(importDirname, source));
           
-          // path.relative(fullSystemPath, projectRoot);
-          // galleryBaseDir = fullSystemPath.slice(normalizePath(projectRoot).length);
-          galleryBaseDir = path.relative(projectRoot, fullSystemPath);
-          galleryBaseDir = galleryBaseDir;
-          console.log(fullSystemPath, importDirname, source, galleryBaseDir)
+          
+          galleryBaseDir = fullSystemPath.slice(normalizePath(projectRoot).length);
         }
         return {
           id: galleryBaseDir+magicResolutionKey,
@@ -58,7 +55,7 @@ export default function galleryImportTransform({projectRoot}: {projectRoot: stri
     load(id: string) {
 			if (id.endsWith(magicResolutionKey)) {
 
-        let dirname = "./" + normalizePath(id.slice(0,-magicResolutionKey.length));
+        let dirname = id.slice(0,-magicResolutionKey.length);
 
 				// Replace with actual proxy
         const folderProxy = galleryTemplate.replaceAll(templateFolderKey,dirname);
