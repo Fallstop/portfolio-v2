@@ -209,15 +209,16 @@ When we say rebuild, we meant it. We went back to basics, getting Priority One u
 ![The controller:center](./final_design/remote.png)
 
 ## Launch Day
-
+![:full](./launch_day/)
 
 ## Recovery
+![:full](./recovery/)
 
 ## Photos captured
 ![:small](./onboard_camera/) 
 
 
-### The blank photo mystery
+<!-- ### The blank photo mystery
 
 <TodoMark>This should basically be yeeted</TodoMark>
 
@@ -238,8 +239,9 @@ The separation charge didn't seem to create much smoke, but it could possibly ha
 The low clouds present would reflect more than enough light to overwhelm both the fixed shutter of the film camera, and the exposure adjustment of the digital camera. We don't believe it separated anywhere near the minimal clouds present. 
 
 ### The real cause?
-We still don't know. We had some more random theories, such as the ejection charge triggering the film camera and overexposing the film at the same time, but to this day we still don't know what truly caused it. The most probable answer is probably the simplest: The body was rotating at high speeds, enough for the sun to blow out both the film photo and the first two digital photos. This speed can be seen in the first few non-blank digital photos, before it got settled into a more stable fall.
+We still don't know. We had some more random theories, such as the ejection charge triggering the film camera and overexposing the film at the same time, but to this day we still don't know what truly caused it. The most probable answer is probably the simplest: The body was rotating at high speeds, enough for the sun to blow out both the film photo and the first two digital photos. This speed can be seen in the first few non-blank digital photos, before it got settled into a more stable fall. -->
 
+## High Speed Footage
 Here's the first non blank photo (first), along with the satellite imagery of the location (second), so you can see the speed for yourself.
 
-![sattelite view :medium:center](./misc_images/compare_satellite/)
+![satellite view :medium:center](./misc_images/compare_satellite/)
