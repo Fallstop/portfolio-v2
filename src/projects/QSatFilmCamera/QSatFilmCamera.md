@@ -5,6 +5,11 @@ description: "Fitting a pocket film camera into a rocket payload."
 tags: ["software", "hardware", "lora", "apss"]
 authors:
  - Jasper M-W
+ - Taine Reader
+ - Anton Bennett
+ - William Yang
+ - Joel Mansor
+
 collaborators:
     - Jasper M-W
     - Taine Reader
@@ -105,30 +110,54 @@ Our payload had a maximum height of 125 mm and maximum width/diameter of 74 mm b
 As a result of us maximising the rocket tube's airspace, we had to come up with an idea on how we could attach the parachute to our payload. Since we weren't able to attach a mount on the top or bottom end of our payload, we decided to mount our parachute on the side of the payload, not through an external mount. We had enough space inside the payload that we could make a small channel that allowed us to feed the parachute strap through. 
 <TodoMark>Photo showing the ingenious strap mount</TodoMark>
 
+#### Version 0
+'Version 0' was our inital proof-of-concept to make sure our film camera could fit inside our allocated payload size. We 3D printed a cylinder with the area for the camera cut out of the inside. The benafits of doing this allowed the whole team to get an idea of area around the camera we have to work with, and with the CAD model we could start allocating space for different elements.
+<TodoMark>Photo of V0 (White design) </TodoMark>
+
 #### Version 1
-<TodoMark>Explain  v1</TodoMark>
-Version 1 included airspaces for the two servos we planned on using, as well as a airspace for the custom PCB. This was primarily to allow us to visualise what the payload looked like, essentially a base template we could build off from.
-<TodoMark>Photo(s) of v1</TodoMark>
+![](./mechanical/version_one/) 
+
+
+
+With version 1 we began exploring size and placement of elements. We knew roughly what elements were going into the payload, so we were able to cut out the space for them. This allowed us to expore wether the internal structure would hold with so much material cut out. This included performing drop tests and general structural tests. 
+Another element that was explored was how we can open & close the payload. This problem is nontrivial as the payload must retain its outer cylindrical form, and a top cap could not be used as the internal structure of the payload could not all be accessed. So the idea for a clamshell mechanisim was tested. The payload shell was split vertically, with holes to allow 4 bolts to hold the shell together. Another benafit of this design was, with the camera removed, all internal electronics were easilly accessable to run wires. 
 
 #### Version 2
+![:medium:center](./fit_checks/FitCheck1.jpg)
+
+![medium:center](./fit_checks/FitCheck2.jpg)
+
+<TodoMark>Needs Organising</TodoMark>
+
+![:small:center](./V2.jpg)
+
 <TodoMark>Explain changes from v1 to v2</TodoMark>
 Airspace surrounding the space where the servos would go were expanded for allowing a better fit of the the servos.
 Airspace created at the base of the interior of the shell to allow for placement of the PSU board.
 Cutouts were made in front of the location where the film camera lens were going to look out from. Cutout also made for the ESP-32 Cam lens to look out through.
 
 After attempting to place the servos into their dedicated spot, the airspaces were found to still be too tight. Modifications were temporarily made by removing some of the supporting walls inside using a scalpel.
-<TodoMark>Photos of changes from v1 to v2? + photo(s) of v2</TodoMark>
+
 
 #### Version 3
+
+![:borderless:medium:center](./V3Closed.jpg)
 <TodoMark>Explain changes from v2 to v3</TodoMark>
 Version 3 were 3D printed with larger airspaces for the servos.
-<TodoMark>Photos of changes from v2 to v3? + photo(s) of v3?</TodoMark>
+
+
+<TodoMark>Photos of changes from v2 to v3? + photo(s) of v3? (Black)</TodoMark>
 
 #### Version 4
+<TodoMark>Explain changes from v2 to v3</TodoMark>
+Version 3 were 3D printed with larger airspaces for the servos.
+<TodoMark>Photos of changes from v2 to v3? + photo(s) of v3? (Orange)</TodoMark>
+
+#### Version 4.5
 Due to the sudden demise of our custom PCB one week before launch day, we had to scope-down our setup to use a single [ESP32 S2](https://www.wemos.cc/en/latest/s2/s2_mini.html) as the core. This meant we had to change interiors of the shell that was designed to house the custom PCB, to now house a series of individual modules jankily wired together. 
 <TodoMark>Explain changes from v3 to v4</TodoMark>
 One half of the Version 3 shell had to be changed.
-<TodoMark>Photos of changes from v3 to v4? + photo(s) of v4</TodoMark>
+<TodoMark>Photos of changes from v3 to v4? + photo(s) of v4(Blue Half in APSS)</TodoMark>
 
 ### Electrical fail
 
