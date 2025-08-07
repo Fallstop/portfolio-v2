@@ -24,7 +24,7 @@
     let sharedKey = randomHash();
 </script>
 
-<div class:center-outer={classes.includes("center")}>
+<div class:center-outer={classes.includes("center")} class="image-gallery-container">
     <div class="image-gallery {classes}">
         {#each imagesData as imageMetadata}
             <MarkdownImage
@@ -49,6 +49,9 @@
         gap: $grid-gap;
         margin-bottom: $grid-gap;
         position: relative;
+
+
+
         & > :global(a) {
             flex: 1 1 auto;
             position: relative;

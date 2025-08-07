@@ -67,4 +67,10 @@
 			padding: 1.5rem 1rem;
 		}
 	}
+
+	@media screen and (max-width: $mobile-breakpoint) {
+		article {
+			padding: 1.5rem 0rem;
+		}
+	}
 </style>

@@ -37,8 +37,7 @@ collaborators:
 With modern electronics, advanced CAD, and the latest 3D printing technology, we managed to capture an entirely white film frame.
 This is the cool story of how we managed to capture perhaps the most boring photo possible.
 
-![A pure white frame:center:small](./white_frames/picture104.jpg)
-<TodoMark>replace with actual film photo that'll have texture to it, right now it looks like it's stuck loading</TodoMark>
+![A pure white frame:center:large](./final_photo.jpg)
 
 
 ## What is PSat?
