@@ -9,7 +9,7 @@ authors:
  - Anton Bennett
  - William Yang
  - Joel Mansor
-
+highlight: true
 collaborators:
     - Jasper M-W
     - Taine Reader
@@ -107,7 +107,7 @@ After all, if it didn't work, we always had the next iteration to get it right. 
 
 We used the camera as the core of our payload, and designed around it in the remaining space. Two 3D printed shells would bolt on either side of the camera, each holding their respective half of the components. On one side of the camera, we placed the battery with the film advance servo, and the other housed our long custom PCB with the trigger pushing servo.
 
-![:borderless:medium:center](./PsatAirboxes-1.png)
+![:medium:center](./PsatAirboxes-1.png)
 
 
 As a result of us maximising the rocket tube's airspace, we had to come up with an idea on how we could attach the parachute to our payload. Since we weren't able to attach a mount on the top or bottom end of our payload, we decided to mount our parachute on the side of the payload, not through an external mount. We had enough space inside the payload that we could make a small channel that allowed us to feed the parachute strap through. 
@@ -116,7 +116,7 @@ As a result of us maximising the rocket tube's airspace, we had to come up with 
 
 #### Version 0
 'Version 0' was our inital proof-of-concept to make sure our film camera could fit inside our allocated payload size. We 3D printed a cylinder with the area for the camera cut out of the inside. The benafits of doing this allowed the whole team to get an idea of area around the camera we have to work with, and with the CAD model we could start allocating space for different elements.
-<TodoMark>Photo of V0 (White design) </TodoMark>
+<!-- <TodoMark>Photo of V0 (White design) </TodoMark> -->
 
 #### Version 1
 ![:center](./mechanical/version_one/) 
@@ -131,11 +131,9 @@ Another element that was explored was how we can open & close the payload. This 
 
 ![medium:center](./fit_checks/FitCheck2.jpg)
 
-<TodoMark>Needs Organising</TodoMark>
 
-![:small:center](./V2.jpg)
+![:small:center](./mechanical/version_two/)
 
-<TodoMark>Explain changes from v1 to v2</TodoMark>
 Airspace surrounding the space where the servos would go were expanded for allowing a better fit of the the servos.
 Airspace created at the base of the interior of the shell to allow for placement of the PSU board.
 Cutouts were made in front of the location where the film camera lens were going to look out from. Cutout also made for the ESP-32 Cam lens to look out through.
@@ -145,25 +143,28 @@ After attempting to place the servos into their dedicated spot, the airspaces we
 
 #### Version 3
 
-![:borderless:medium:center](./V3Closed.jpg)
-<TodoMark>Explain changes from v2 to v3</TodoMark>
 Version 3 were 3D printed with larger airspaces for the servos.
 
+![:small](./V3Closed.jpg)
+<!-- <TodoMark>Explain changes from v2 to v3</TodoMark> -->
 
-<TodoMark>Photos of changes from v2 to v3? + photo(s) of v3? (Black)</TodoMark>
+
+<!-- <TodoMark>Photos of changes from v2 to v3? + photo(s) of v3? (Black)</TodoMark> -->
 
 #### Version 4
-<TodoMark>Explain changes from v2 to v3</TodoMark>
+<!-- <TodoMark>Explain changes from v2 to v3</TodoMark> -->
 Version 3 were 3D printed with larger airspaces for the servos.
-<TodoMark>Photos of changes from v2 to v3? + photo(s) of v3? (Orange)</TodoMark>
+
+![:small](./mechanical/version_four/outOfThePrinter.jpg)
+<!-- <TodoMark>Photos of changes from v2 to v3? + photo(s) of v3? (Orange)</TodoMark> -->
 
 #### Version 4.5
 Due to the sudden demise of our custom PCB one week before launch day, we had to scope-down our setup to use a single [ESP32 S2](https://www.wemos.cc/en/latest/s2/s2_mini.html) as the core. This meant we had to change interiors of the shell that was designed to house the custom PCB, to now house a series of individual modules jankily wired together. 
-<TodoMark>Explain changes from v3 to v4</TodoMark>
+<!-- <TodoMark>Explain changes from v3 to v4</TodoMark>
 One half of the Version 3 shell had to be changed.
-<TodoMark>Photos of changes from v3 to v4? + photo(s) of v4(Blue Half in APSS)</TodoMark>
+<TodoMark>Photos of changes from v3 to v4? + photo(s) of v4(Blue Half in APSS)</TodoMark> -->
 
-### Electrical fail
+<!-- ### Electrical fail -->
 
 #### Preliminary Design Review
 
@@ -207,6 +208,9 @@ When we say rebuild, we meant it. We went back to basics, getting Priority One u
 *Spoilers: We managed to get all of these working, and the remote looks amazing. Take a look:*
 
 ![The controller:center](./final_design/remote.png)
+
+![The controller:center](./third_iteration/DSC09352.jpg)
+
 
 ## Launch Day
 ![:full](./launch_day/)

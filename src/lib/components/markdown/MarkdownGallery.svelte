@@ -24,7 +24,7 @@
     let sharedKey = randomHash();
 </script>
 
-<div>
+<div class:center-outer={classes.includes("center")}>
     <div class="image-gallery {classes}">
         {#each imagesData as imageMetadata}
             <MarkdownImage
@@ -37,6 +37,11 @@
 </div>
 
 <style lang="scss">
+    .center-outer {
+        display: flex;
+        justify-content: center;
+    }
+
     .image-gallery {
         $grid-gap: 1rem;
         display: flex;
