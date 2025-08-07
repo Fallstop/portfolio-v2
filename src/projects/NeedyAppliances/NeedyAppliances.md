@@ -3,6 +3,7 @@ date: "2023-03-12"
 title: "Needy Appliances"
 description: "Control your emotionally needy appliances with AI voice controls."
 tags: ["Software", "Svelte", "TypeScript", "Rust", "Hardware", "48 Hours", "Terrible Ideas"]
+highlight: true
 authors:
     - Jasper M-W
 collaborators:

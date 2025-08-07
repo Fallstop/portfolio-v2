@@ -5,6 +5,7 @@ description: "Grapple 23 - Secondary emergency LoRa Mesh communication network d
 tags: ["Software", "Svelte", "C/C++", "TypeScript", "Hardware", "LoRa"]
 authors:
  - Jasper M-W
+highlight: true
 collaborators:
     - Jasper M-W
     - Taine Reader

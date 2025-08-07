@@ -8,7 +8,6 @@ collaborators:
  - Mataariki Aplin
  - Sam Hostad
  - The 2023 Wellbeing Committee
-highlight: true
 tags: ["Software", "Python", "Huanui College"]
 ---
 <script lang="ts">
