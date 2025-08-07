@@ -83,19 +83,19 @@
             </LiveCard>
             <LiveCard>
                 <h3 class="company-name">
-                    Startup Contracting <span class="date">2021<ArrowRight class="arrow" />2024</span>
+                    Startup Contracting <span class="date">2021<ArrowRight class="arrow" />2025</span>
                 </h3>
                 <p>I worked with a variety of NZ based early-to-mid stage startups, developing software, electronics, performing R&D, all with a product focused mindset.</p>
                 <div class="sub-group">
 
                     <LiveCard>
                         <h3 class="company-name">
-                            Avant Consulting Group <span class="date">2024</span>
+                            Altitude Best <span class="date">2024<ArrowRight class="arrow" />2025</span>
                     </h3>
                     <ul>
-                        <li>General software development for clients.</li>
+                        <li>Backend engineering for <a href="https://www.cheersabby.com/" target="_blank">Cheers Abby.</a></li>
                         <li>
-                            For example: automatically pulling balance information
+                            Data Pipelines: automatically pulling balance information
                             out of NZ bank statements using AWS Textract
                         </li>
                     </ul>
@@ -112,8 +112,7 @@
                             on Jitsi Meet.
                         </li>
                         <li>
-                            Web development of <a href="https://www.zui.nz/">Zui</a
-                            >, the community instance of the video meeting offering.
+                            Web development of Zui, the community instance of the video meeting offering.
                         </li>
                         <li>
                             Automated scanning and validation of APC medical and
