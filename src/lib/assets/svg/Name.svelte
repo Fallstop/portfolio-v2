@@ -110,33 +110,17 @@
     });
 </script>
 
+<div class="svg-container">
+<!-- Background blur SVG -->
 <svg
     version="1.1"
     viewBox="0 0 326.56 144.96"
     xmlns="http://www.w3.org/2000/svg"
-    bind:this={svgElement}
+    class="blur-background"
 >
     <defs>
-        <!-- <linearGradient id="logo-gradient" x1="50%" y1="0%" x2="50%" y2="100%" gradientUnits="userSpaceOnUse" > 
-            
-            <stop offset="0%" stop-color="#451952">
-                <animate attributeName="stop-color" values="#451952; #662549; #451952" dur="4s" repeatCount="indefinite"></animate>
-            </stop>
-
-            <stop offset="100%" stop-color="#662549">
-                <animate attributeName="stop-color" values="#662549; #451952; #662549" dur="4s" repeatCount="indefinite"></animate>
-            </stop>
-
-        </linearGradient> -->
-        <!--
-            $primary-color: #451952;
-            $tint-color: #662549;
-            $secondary-color: #AE445A;
-            $accent-color: #F39F5A;
-        -->
-        <!-- Full random gradient with the above pallet -->
         <linearGradient
-            id="logo-gradient"
+            id="logo-gradient-blur"
             x1="100%"
             y1="100%"
             x2="0%"
@@ -187,9 +171,9 @@
                     repeatCount="indefinite"
                 />
             </stop>
-        </linearGradient></defs
-    >
-    <g class="text-group" transform="translate(-8.2879 -40.46281)" fill="#fff" style="shape-inside:url(#rect1035);white-space:pre" aria-label="Jasper M-W">
+        </linearGradient>
+    </defs>
+    <g class="text-group" transform="translate(-8.2879 -40.46281)" fill="url(#logo-gradient-blur)" style="shape-inside:url(#rect1035);white-space:pre" aria-label="Jasper M-W">
         <path d="m99.195 33.288v37.248q0 12.864-7.68 19.968-7.68 7.104-22.176 7.104-10.656 0-17.088-3.744-6.336-3.744-8.736-10.272-2.304-6.528-1.056-14.784l22.176-3.744q-1.248 9.024 0.288 12.384 1.632 3.36 5.568 3.36 3.264 0 4.8-2.784t1.536-9.12v-35.616z"/>
         <path d="m130.93 66.696q0-2.208-1.056-3.456-0.96-1.248-3.072-1.248-2.016 0-3.36 1.152t-1.536 4.608l-18.624-2.688q0.672-7.968 6.912-12.672t18.144-4.704q8.352 0 13.728 2.304 5.472 2.304 8.064 6.432 2.688 4.128 2.688 9.6v14.88q0 3.936 3.744 3.936 1.056 0 1.632-0.288l-0.96 11.328q-3.552 1.728-8.544 1.728-4.512 0-8.064-1.248-3.456-1.344-5.472-3.936-1.92-2.688-1.92-6.816v-0.96h2.112q-0.096 3.648-2.4 6.624-2.208 2.88-5.952 4.608t-8.544 1.728q-5.088 0-8.64-1.536-3.456-1.536-5.28-4.416t-1.824-6.816q0-5.28 3.36-8.544 3.36-3.36 9.696-4.608l16.704-3.456-0.096 7.776-5.184 1.248q-2.016 0.48-2.88 1.632-0.864 1.056-0.864 2.688 0 1.536 0.96 2.496t2.688 0.96q0.768 0 1.44-0.288 0.768-0.288 1.248-0.864 0.576-0.576 0.864-1.344 0.288-0.864 0.288-1.92z"/>
         <path d="m184.81 97.608q-7.008 0-13.536-1.92-6.432-1.92-11.232-5.76l7.872-11.424q2.592 2.304 6.816 4.128 4.224 1.728 8.448 1.728 1.632 0 2.88-0.384 1.344-0.384 1.344-1.344 0-0.768-0.768-1.152-0.672-0.384-3.072-0.768l-3.456-0.672q-10.464-2.016-14.784-5.76t-4.32-10.08q0-3.936 2.496-7.68 2.592-3.84 8.16-6.336t14.688-2.496q7.488 0 13.44 1.92 5.952 1.824 9.696 5.088l-7.584 10.944q-2.688-2.112-6.912-3.36-4.128-1.344-7.584-1.344-1.536 0-2.496 0.192t-1.44 0.576q-0.384 0.288-0.384 0.768 0 0.672 0.96 1.248t3.744 1.056l6.816 1.152q7.776 1.248 11.328 4.992 3.648 3.744 3.648 9.216 0 4.704-2.592 8.736-2.496 3.936-7.968 6.336-5.376 2.4-14.208 2.4z"/>
@@ -199,7 +183,15 @@
         <path d="m126.08 114.89v63.36h-19.488v-21.984l0.288-21.312h-0.288l-12.288 43.296h-17.856l-12.096-43.296h-0.384l0.288 21.312v21.984h-19.584v-63.36h31.296l7.296 28.128 2.784 11.808h0.192l2.784-11.808 7.296-28.128z"/>
         <path d="m175.36 143.78v16.8h-37.44v-16.8z"/>
     </g>   
+</svg>
 
+<!-- Main outline SVG -->
+<svg
+    version="1.1"
+    viewBox="0 0 326.56 144.96"
+    xmlns="http://www.w3.org/2000/svg"
+    bind:this={svgElement}
+>
     <g
         transform="translate(-42.021 -33.288)"
         class="main-path outlines"
@@ -248,31 +240,59 @@
     </g>
 
 </svg>
+</div>
 
 <style lang="scss">
     @use "../../../variables.scss" as *;
+    
+    .svg-container {
+        position: relative;
+        display: inline-block;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+        pointer-events: none;
+    }
+
     svg {
         overflow: visible;
-        .text-group {
-            fill: url(#logo-gradient);
-            filter: blur(40px);
-            stroke: none;
-            > * {
-                transform: scale(1.5);
-                // animation: flood-background 4s ease-out;
-                transform-origin: center;
-            }
-        }
-        .outlines {
-            fill: $background-color;
-            // animation: outline-fade-out 4s ease-out;
-            // opacity: 0;
-        }
+        width: 100%;
+        height: 100%;
         path {
             paint-order: stroke;
             stroke-linecap: square;
         }
+    }
 
+    .blur-background {
+        filter: blur(40px);
+        position: absolute;
+        top: 0;
+        left: 0;
+        // mask: radial-gradient(ellipse 80% 60% at center, 
+        //        rgba(0,0,0,1) 30%, 
+        //        rgba(0,0,0,0.8) 50%, 
+        //        rgba(0,0,0,0.3) 80%, 
+        //        rgba(0,0,0,0) 100%);
+        // -webkit-mask: radial-gradient(ellipse 80% 60% at center, 
+        //               rgba(0,0,0,1) 30%, 
+        //               rgba(0,0,0,0.8) 50%, 
+        //               rgba(0,0,0,0.3) 80%, 
+        //               rgba(0,0,0,0) 100%);
+        .text-group {
+            > * {
+                transform: scale(1.5);
+                transform-origin: center;
+            }
+        }
+    }
+
+    svg:not(.blur-background) {
+        position: relative;
+        z-index: 1;
+        .outlines {
+            fill: $background-color;
+        }
     }
     .main-path {
         animation: main-dash 3s ease-out;

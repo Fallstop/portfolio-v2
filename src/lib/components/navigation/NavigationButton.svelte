@@ -26,7 +26,7 @@
 
 <a href={activePage ? homePage.pageSlug : pageSlug} use:liveCardEffect={{movementScaler: 300}}>
     <div class="navigation-button" class:primary={primary || activePage}>
-        <SvelteComponent size="0.9em" />
+        <SvelteComponent size="0.9em" strokeWidth="1.25" />
         <span class="button-title">
             {activePage ? homePage.title : title}
         </span>
@@ -50,6 +50,10 @@
             box-shadow: 0 0 0 0 black;
             background-color: rgba(255,255,255, 0.5);
             transition: all 250ms ease-in-out;
+
+            font-weight: lighter;
+
+
             &:hover {
                 background-color: $tint-color;
                 color: $background-color;
