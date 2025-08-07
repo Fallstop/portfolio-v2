@@ -85,6 +85,7 @@ export function imagetools(userOptions: Partial<VitePluginOptions> = {}): Plugin
             if (!directives.toString()) return null
 
             const img = lazyLoadImage()
+            img.rotate();// Make sure the image is oriented correctly to XIF data
             const widthParam = directives.get('w')
             const heightParam = directives.get('h')
             if (directives.get('allowUpscale') !== 'true' && (widthParam || heightParam)) {

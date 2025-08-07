@@ -1,5 +1,5 @@
-export const sizeOptions = ["raw", "none", "small", "medium", "large", "full"]
-export const classOptions = [...sizeOptions, "borderless"];
+export const sizeOptions = ["raw", "none", "small", "medium", "large", "full", "text"]
+export const classOptions = [...sizeOptions, "borderless", "center"];
 
 export function parseSettings(settings: string) {
     let classes = [];

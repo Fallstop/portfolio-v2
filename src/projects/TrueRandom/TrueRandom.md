@@ -43,10 +43,10 @@ The abstraction of the ODrive is abstracted again by the code running on the ded
 
 The website ([truerandom.ml](https://truerandom.ml/)) is vaguely inspired by the legendary [is even api](https://isevenapi.xyz/), it is dockerized and is self hosted on [QRL's](https://qrl.nz) servers.
 
-##### User facing API
+##### **User facing API**
 
-The user facing api is just a simple express server serving from a buffer of random numbers.
+The user facing api is just a simple express server serving from a buffer of random numbers rolled ahead of time.
 
-##### Connection to the robot arm
+##### **Connection to the robot arm**
 
-Because this was developed at a hackathon, we had to do it in reverse, the robot arm server creates a websocket connection to the webserver, which then allows the webserver to send orders to the robot arm server that it can fulfill.
+Because this was developed at a Hackathon, we had to do it in reverse, the robot arm server creates a websocket connection to the webserver, which then allows the webserver to send orders to the robot arm server that it can fulfill.

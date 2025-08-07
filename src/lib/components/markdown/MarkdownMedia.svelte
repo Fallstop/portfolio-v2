@@ -18,7 +18,7 @@
     } else if (typeof src === "object") {
         type = "gallery";
     } else {
-        let extension = src?.split('.').pop()?.toLowerCase();
+        let extension = src?.split('.')?.pop()?.toLowerCase();
         if (['mp4', 'webm', 'ogg'].includes(extension ?? "")) {
             type = "video";
         }

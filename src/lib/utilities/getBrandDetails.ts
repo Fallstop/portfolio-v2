@@ -3,13 +3,13 @@ import Discord from "$lib/components/ExtraIcons/Discord.svelte";
 import Reddit from "$lib/components/ExtraIcons/Reddit.svelte";
 import Twitch from "$lib/components/ExtraIcons/Twitch.svelte";
 
-import { Github, Twitter, Youtube, Facebook, Instagram, Linkedin, Globe, Landmark } from "lucide-svelte";
+import { Github, Twitter, Youtube, Facebook, Instagram, Linkedin, Globe, Landmark, Camera } from "lucide-svelte";
 import Fallstop from "$lib/components/ExtraIcons/Fallstop.svelte";
 import Provida from "$lib/components/ExtraIcons/Provida.svelte";
 import TerribleHack from "$lib/components/ExtraIcons/TerribleHack.svelte";
 import HuggingFace from "$lib/components/ExtraIcons/HuggingFace.svelte";
 import Film48Hours from "$lib/components/ExtraIcons/Film48Hours.svelte";
-
+import Apss from "$lib/components/ExtraIcons/Apss.svelte"
 export function extractDomain(url: string) {
     try {
         return (new URL(url)).hostname;
@@ -144,5 +144,17 @@ export const brandingDetails: Record<string,BrandData> = {
         domain: "48hours.co.nz",
         icon: Film48Hours,
         color: "#333"
+    },
+    "apss.co.nz": {
+        name: "APSS",
+        domain: "apss.co.nz",
+        color: "#252525",
+        icon: Apss
+    },
+    "photos.app.goo.gl": {
+        name: "Google Photos",
+        domain: "photos.app.goo.gl",
+        color: "#146c2e",
+        icon: Camera
     }
 }
