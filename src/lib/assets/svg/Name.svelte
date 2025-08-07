@@ -117,6 +117,7 @@
     viewBox="0 0 326.56 144.96"
     xmlns="http://www.w3.org/2000/svg"
     class="blur-background"
+    style="--svg-width: {svgElement?.clientWidth}px;"
 >
     <defs>
         <linearGradient
@@ -249,9 +250,9 @@
         position: relative;
         display: inline-block;
         width: 100%;
-        height: 100%;
-        z-index: 0;
+        // height: 100%;
         pointer-events: none;
+        z-index: -1;
     }
 
     svg {
@@ -265,8 +266,9 @@
     }
 
     .blur-background {
-        filter: blur(40px);
+        filter: blur(calc(var(--svg-width, 500px) / 3));
         position: absolute;
+        z-index: -1;
         top: 0;
         left: 0;
         // mask: radial-gradient(ellipse 80% 60% at center, 
