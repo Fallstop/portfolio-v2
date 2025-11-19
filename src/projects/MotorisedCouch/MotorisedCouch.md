@@ -35,7 +35,7 @@ Now, a high-speed couch isn't enough of a terrible idea itself, we needed to go 
       Loud Volume Warning - "Artistic Intent"
     {/snippet}
 </HighlightedBlock>
-<YoutubeEmbed videoID="EpDFLeyvnqQ"/>
+<YoutubeEmbed videoID="EpDFLeyvnqQ" rounded={false}/>
 
 ## The Build
 We had no chance of shipping in new parts in time during the competition, so we had to work within the parts we had at the lab:

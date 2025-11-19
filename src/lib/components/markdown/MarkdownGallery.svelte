@@ -2,7 +2,6 @@
     import { onDestroy, onMount } from "svelte";
     import MarkdownImage from "./MarkdownImage.svelte";
 
-
     import type { ProcessedImageMetadata } from "imagetools-core";
     import { parseSettings } from "./parseMediaSettings";
     import { randomHash } from "$lib/utilities/math";
@@ -15,23 +14,19 @@
     let { src = {}, alt = "" }: Props = $props();
     const { classes, altText } = parseSettings(alt);
 
-    let imagesData: [ProcessedImageMetadata, ProcessedImageMetadata][] = $derived(Object.values(src).map((x: any) => x.default));
-    
-
-
-
+    let imagesData: [ProcessedImageMetadata, ProcessedImageMetadata][] =
+        $derived(Object.values(src).map((x: any) => x.default));
 
     let sharedKey = randomHash();
 </script>
 
-<div class:center-outer={classes.includes("center")} class="image-gallery-container">
+<div
+    class:center-outer={classes.includes("center")}
+    class="image-gallery-container"
+>
     <div class="image-gallery {classes}">
         {#each imagesData as imageMetadata}
-            <MarkdownImage
-                src={imageMetadata}
-                alt=":none"
-                {sharedKey}
-            />
+            <MarkdownImage src={imageMetadata} alt=":none" {sharedKey} />
         {/each}
     </div>
 </div>
@@ -43,22 +38,21 @@
     }
 
     .image-gallery {
-        $grid-gap: 1rem;
-        display: flex;
-        flex-wrap: wrap;
-        gap: $grid-gap;
-        margin-bottom: $grid-gap;
+        display: grid;
+        gap: $space-sm;
+        margin-bottom: $space-sm;
         position: relative;
-
-
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
 
         & > :global(a) {
-            flex: 1 1 auto;
             position: relative;
             height: 300px;
+            border-radius: $border-radius;
+
             & > :global(img) {
                 height: 100%;
                 width: 100%;
+                object-fit: cover;
                 vertical-align: middle;
                 transition: all 0.25s ease-in-out;
                 transform: scale(1);
@@ -68,32 +62,22 @@
             }
         }
         &.full {
+            @media screen and (min-width: $mobile-breakpoint) {
+                grid-template-columns: repeat(3, 1fr);
+            }
             & > :global(a) {
-                $row-size: 3;
-                // flex: 1 1 100%;
-                max-width: 100%;
-                height: unset;
-                max-width: calc(
-                    ($max-blog-space-available - (($row-size - 1) * $grid-gap)) /
-                        $row-size
-                );
+                height: auto;
+                aspect-ratio: 16/9;
             }
         }
         &.small {
-            & > :global(a) {
-                $row-size: 5;
-                max-width: calc(
-                    ($max-blog-space-available - (($row-size - 1) * $grid-gap)) /
-                        $row-size
-                );
-                height: unset;
-                flex: 1 1 auto;
+            @media screen and (min-width: $mobile-breakpoint) {
+                grid-template-columns: repeat(5, 1fr);
             }
-        }
-
-        &::after {
-            content: "";
-            flex-grow: 999;
+            & > :global(a) {
+                height: auto;
+                aspect-ratio: 1;
+            }
         }
     }
 

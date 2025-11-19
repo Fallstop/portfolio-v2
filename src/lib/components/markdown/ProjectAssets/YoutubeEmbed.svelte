@@ -1,19 +1,16 @@
 <script lang="ts">
-  import YoutubeFacade from "$lib/components/utilities/YoutubeFacade.svelte";
+    import YoutubeFacade from "$lib/components/utilities/YoutubeFacade.svelte";
 
     interface Props {
         videoID: string;
         shortMode?: boolean;
+        rounded?: boolean;
     }
 
-    let { videoID, shortMode = false }: Props = $props();
+    let { videoID, shortMode = false, rounded = true }: Props = $props();
 </script>
 
-
-<YoutubeFacade
-videoId={videoID}
-shortMode={shortMode}
-/>
+<YoutubeFacade videoId={videoID} {shortMode} {rounded} />
 
 <style lang="scss">
     .youtubeWrapper {

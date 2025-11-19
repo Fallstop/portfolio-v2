@@ -5,9 +5,9 @@ import { GITHUB_AUTH_TOKEN } from "../env";
 const additionalOrgs = ["Questionable-Research-Labs", "zui-nz", "openhealthnz-credentials"]
 
 export interface GithubStats {
-    totalRepoCount: number;
+    totalRepoCount: number | null;
     lastUpdatedAboutDetails: Date | null;
-    total_starred_repos: number;
+    total_starred_repos: number | null;
 }
 
 export async function getGithubStats(): Promise<GithubStats> {
@@ -17,9 +17,9 @@ export async function getGithubStats(): Promise<GithubStats> {
     if (!GITHUB_AUTH_TOKEN) {
         console.log("No github token provided, skipping github stats")
         return {
-            totalRepoCount,
+            totalRepoCount: null,
             lastUpdatedAboutDetails: null,
-            total_starred_repos
+            total_starred_repos: null
         }
     }
 

@@ -1,14 +1,21 @@
 h1 {
     font-size: 3rem;
 }
-h1,h2,h3,h4 {
+
+h1,
+h2,
+h3,
+h4 {
     font-weight: bold;
-    margin-top: 2rem;
+    margin-top: $space-md;
 }
-h3,h4 {
-    margin-top: 1rem;
+
+h3,
+h4 {
+    margin-top: $space-sm;
     margin-bottom: 0;
 }
+
 pre[class^="language-"] {
     font-size: 0.9rem;
     width: max-content;
@@ -18,9 +25,9 @@ pre[class^="language-"] {
 }
 
 blockquote {
-    margin-left: 1rem;
-    padding-left: 1rem;
-    border-left: rgba(0, 0, 0, 0.2) solid 5px; 
+    margin-left: $space-sm;
+    padding-left: $space-sm;
+    border-left: rgba(0, 0, 0, 0.2) solid 5px;
 }
 
 ul {

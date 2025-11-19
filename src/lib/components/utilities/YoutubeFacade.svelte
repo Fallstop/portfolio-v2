@@ -9,8 +9,9 @@
   interface Props {
     videoId: string;
     shortMode?: boolean;
+    rounded?: boolean;
   }
-  let { videoId, shortMode = false}: Props = $props();
+  let { videoId, shortMode = false, rounded = true }: Props = $props();
 
   const thumbnailLink = `https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg`;
 
@@ -46,7 +47,7 @@
       p.append("autoplay", "1");
       p.append("playsinline", "1");
       return p.toString();
-    })()
+    })(),
   );
 
   function injectIFrame() {
@@ -74,7 +75,7 @@
       "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
     iframe.allowFullscreen = true;
     iframe.src = `https://www.youtube-nocookie.com/embed/${encodeURIComponent(
-      videoId
+      videoId,
     )}?${computedParams}`;
     iframe.setAttribute("aria-label", videoTitle);
 
@@ -99,6 +100,7 @@
 
 <div
   class="lite-youtube"
+  class:rounded
   class:short-mode={shortMode}
   class:lite-youtube-activated={activated}
   role="button"
@@ -107,13 +109,13 @@
   <div class="preview-bar" class:removed={activated}>
     <h3 class="video-title">
       {#if videoTitle}
-      <span in:fade>
-        {videoTitle}
-      </span>
+        <span in:fade>
+          {videoTitle}
+        </span>
       {/if}
     </h3>
-      <CopyAction data={`https://www.youtube.com/watch?v=${videoId}`}>
-        {#snippet copyIcon(copied)}
+    <CopyAction data={`https://www.youtube.com/watch?v=${videoId}`}>
+      {#snippet copyIcon(copied)}
         <div class="copy-action">
           {#if copied}
             <CopyCheckIcon />
@@ -123,26 +125,28 @@
             <span>Copy Link</span>
           {/if}
         </div>
-        {/snippet}
-      </CopyAction>
+      {/snippet}
+    </CopyAction>
   </div>
   <picture>
     <img class="lite-youtube-poster" alt={videoTitle} src={thumbnailLink} />
   </picture>
   <button type="button" class="lite-youtube-playbtn" aria-label={videoTitle}>
   </button>
-  <div bind:this={iframeRawContainer} class="iframeRawContainer"
-  onpointerover={() => (hovered = true)}
-  onclick={() => {
-    activated = true;
-    injectIFrame();
-  }}
-  onkeypress={() => {
-    activated = true;
-    injectIFrame();
-  }}
-  role={activated ? "" : "button"}>
-  </div>
+  <div
+    bind:this={iframeRawContainer}
+    class="iframeRawContainer"
+    onpointerover={() => (hovered = true)}
+    onclick={() => {
+      activated = true;
+      injectIFrame();
+    }}
+    onkeypress={() => {
+      activated = true;
+      injectIFrame();
+    }}
+    role={activated ? "" : "button"}
+  ></div>
 
   <noscript>
     <!-- To help google indexing, won't be loaded, but will be discoverd by search engines -->
@@ -150,7 +154,7 @@
       allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
       allowfullscreen
       src="https://www.youtube-nocookie.com/embed/{encodeURIComponent(
-        videoId
+        videoId,
       )}?{computedParams}"
       title={videoTitle}
       frameborder="0"
@@ -164,6 +168,8 @@
 </div>
 
 <style lang="scss">
+  @use "../../../variables.scss" as *;
+
   .lite-youtube {
     background-color: #000000;
     position: relative;
@@ -205,14 +211,11 @@
       @media (max-width: $mobile-breakpoint) {
         width: 90%;
         margin: 0 auto;
-        
       }
 
       &::after {
-        padding-bottom: calc(100% / (9/16 ));
-
+        padding-bottom: calc(100% / (9 / 16));
       }
-
     }
 
     & > :global(iframe) {
@@ -226,6 +229,11 @@
     &:hover > .lite-youtube-playbtn,
     .lite-youtube-playbtn:focus {
       filter: none;
+    }
+
+    &.rounded {
+      border-radius: $border-radius;
+      overflow: hidden;
     }
   }
 
@@ -290,16 +298,13 @@
     justify-content: space-between;
     align-items: top;
     color: #eee;
-    
+
     z-index: 2;
-
-
 
     .video-title {
       font-size: 1.2rem;
       margin: 0;
       padding: 0.5rem;
-
     }
 
     .copy-action {
