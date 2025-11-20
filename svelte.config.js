@@ -41,11 +41,7 @@ const config = {
     }),
     csrf: {
       trustedOrigins: [
-        "https://jmw.nz",
-        "https://*.portfolio-v2-2tk.pages.dev",
-        "https://live-location.portfolio-v2-2tk.pages.dev",
-        "http://localhost",
-        "http://127.0.0.1",
+        "*",
       ]
     },
     alias: {
