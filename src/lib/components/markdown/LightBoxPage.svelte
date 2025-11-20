@@ -7,15 +7,6 @@
     onMount(() => {
         Fancybox.bind(`[data-fancybox]`, {
             // Your custom options
-            on: {
-                ready: (fancybox) => {
-                    // here `fancybox` refers to the current instance
-                    console.log("ready!", fancybox);
-                },
-                error: (e) => {
-                    console.log("error", e);
-                },
-            },
         });
         console.log("Fancy box init");
     });

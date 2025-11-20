@@ -47,7 +47,7 @@
             container,
             store,
             options: {
-                scaleValue: "page-fit",
+                scaleValue: "page-width",
             },
         });
 

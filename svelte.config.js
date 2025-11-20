@@ -4,6 +4,9 @@ import { vitePreprocess } from '@sveltejs/vite-plugin-svelte'
 import { mdsvex } from "mdsvex";
 import relativeImages from 'mdsvex-relative-images'
 import remarkExternalLinks from 'remark-external-links'
+import { join } from "path";
+
+const markdown_layout = join(import.meta.dirname, "./src/lib/components/markdown/layout.svelte");
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -17,7 +20,7 @@ const config = {
       quotes: true,
     },
     layout: {
-      _: "./src/lib/components/markdown/layout.svelte"
+      _: markdown_layout
     },
     remarkPlugins: [
       [remarkExternalLinks, { target: '_blank', rel: 'noopener' }],
