@@ -8,11 +8,27 @@
     import ProjectThumbnails from "$lib/components/projects/ProjectThumbnails.svelte";
     import MoreProjectsThumbnail from "$lib/components/projects/MoreProjectsThumbnail.svelte";
 
+    import { onMount } from "svelte";
+
     interface Props {
         data: import("./$types").PageData;
     }
 
     let { data }: Props = $props();
+
+    let location = $state("Auckland, New Zealand");
+
+    onMount(async () => {
+        try {
+            const res = await fetch("/api/location");
+            const data = await res.json();
+            if (data.location && data.location !== "Unknown Location") {
+                location = data.location;
+            }
+        } catch (e) {
+            console.error("Failed to fetch location", e);
+        }
+    });
 </script>
 
 <PrimaryLayout
@@ -54,7 +70,7 @@
                     description="Inside of your walls"
                 />
             {:else}
-                <FactBox title="Location" description="Auckland, New Zealand" />
+                <FactBox title="Location" description={location} />
             {/if}
             <FactBox title="Best Frontend Framework" description="Sveltekit" />
             {#if data.github.lastUpdatedAboutDetails}

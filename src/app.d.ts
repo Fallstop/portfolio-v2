@@ -5,7 +5,11 @@ declare global {
 		// interface Error {}
 		// interface Locals {}
 		// interface PageData {}
-		// interface Platform {}
+		interface Platform {
+			env: {
+				KV: KVNamespace;
+			};
+		}
 		// AdobeDC
 		interface AdobeDC {
 			View: (config: any) => void;
@@ -13,4 +17,4 @@ declare global {
 	}
 }
 
-export {};
+export { };
