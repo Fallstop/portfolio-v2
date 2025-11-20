@@ -26,12 +26,25 @@ export const POST: RequestHandler = async ({ request, platform }) => {
 
     // Authentication Helper
     const checkAuth = () => {
-        const user = formData.get('user');
-        const pass = formData.get('pass');
-        if (user === ULOGGER_USER && pass === ULOGGER_PASS) {
-            return true;
+        const user = formData.get('user') as string;
+        const pass = formData.get('pass') as string;
+
+        if (!user || !pass) return false;
+
+        const userMatch = user === ULOGGER_USER;
+
+        // Use crypto.subtle.timingSafeEqual for password
+        const encoder = new TextEncoder();
+        const a = encoder.encode(pass);
+        const b = encoder.encode(ULOGGER_PASS);
+
+        if (a.byteLength !== b.byteLength) {
+            return false;
         }
-        return false;
+
+        const passMatch = (crypto.subtle as any).timingSafeEqual(a, b);
+
+        return userMatch && passMatch;
     };
 
     // Handle Authentication
@@ -93,16 +106,25 @@ export const POST: RequestHandler = async ({ request, platform }) => {
         const username = credentials[0];
         const password = credentials[1];
 
-        if (username === ULOGGER_USER && password === ULOGGER_PASS) {
+        const userMatch = username === ULOGGER_USER;
+
+        const encoder = new TextEncoder();
+        const a = encoder.encode(password);
+        const b = encoder.encode(ULOGGER_PASS);
+
+        let passMatch = false;
+        if (a.byteLength === b.byteLength) {
+            passMatch = (crypto.subtle as any).timingSafeEqual(a, b);
+        }
+
+        if (userMatch && passMatch) {
             authenticated = true;
         }
     }
 
     if (!authenticated) {
         // Fallback to checking body params if sent
-        const user = formData.get('user');
-        const pass = formData.get('pass');
-        if (user === ULOGGER_USER && pass === ULOGGER_PASS) {
+        if (checkAuth()) {
             authenticated = true;
         }
     }
@@ -122,6 +144,11 @@ export const POST: RequestHandler = async ({ request, platform }) => {
 
             if (isNaN(lat) || isNaN(lon)) {
                 return json({ error: true, message: 'Missing required parameter' });
+            }
+
+            // Validate coordinates range
+            if (lat < -90 || lat > 90 || lon < -180 || lon > 180) {
+                return json({ error: true, message: 'Invalid coordinates' });
             }
 
             try {
