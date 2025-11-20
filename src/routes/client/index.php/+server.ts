@@ -18,7 +18,7 @@ import { ULOGGER_USER, ULOGGER_PASS } from '$env/static/private';
 
 export const POST: RequestHandler = async ({ request, platform }) => {
     const formData = await request.formData();
-    console.log(formData)
+    console.log(JSON.stringify(formData.entries()))
     const action = formData.get('action');
 
     if (!platform?.env?.KV) {
@@ -136,6 +136,7 @@ export const POST: RequestHandler = async ({ request, platform }) => {
 
     switch (action) {
         case 'addtrack':
+            console.log('Add Track requested');
             // Return a dummy track ID
             return json({ error: false, trackid: 1 });
 
@@ -146,6 +147,7 @@ export const POST: RequestHandler = async ({ request, platform }) => {
             if (isNaN(lat) || isNaN(lon)) {
                 return json({ error: true, message: 'Missing required parameter' });
             }
+            console.log(`Received position: ${lat}, ${lon}`);
 
             // Validate coordinates range
             if (lat < -90 || lat > 90 || lon < -180 || lon > 180) {
@@ -169,6 +171,7 @@ export const POST: RequestHandler = async ({ request, platform }) => {
 
                 const data = await response.json();
                 const address = data.address;
+                console.log(JSON.stringify(address));
 
                 // Construct location string: "State, CountryCode" or "Region, CountryCode"
                 let locationString = '';
