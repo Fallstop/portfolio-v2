@@ -18,6 +18,7 @@ import { ULOGGER_USER, ULOGGER_PASS } from '$env/static/private';
 
 export const POST: RequestHandler = async ({ request, platform }) => {
     const formData = await request.formData();
+    console.log(formData)
     const action = formData.get('action');
 
     if (!platform?.env?.KV) {
