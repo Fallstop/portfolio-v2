@@ -73,6 +73,7 @@
                 <ul>
                     <li>
                         Over the summer, I worked as a software engineer at Watchful, a security camera monitoring platform.
+                    </li>
                     <li>
                         I worked on a device-integration scripting tool, that not only allows rapid iteration on new security camera integrations, but also allows for third-party developers to potentially create their own integrations.
                     </li>
