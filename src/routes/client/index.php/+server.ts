@@ -16,10 +16,10 @@ import { error, json } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
 import { ULOGGER_USER, ULOGGER_PASS } from '$env/static/private';
 
-export const POST: RequestHandler = async ({ request, platform }) => {
+export const POST: RequestHandler = async ({ request, platform, cookies }) => {
     const formData = await request.formData();
-    console.log(JSON.stringify(formData.entries()))
     const action = formData.get('action');
+    console.log(`Location Tracker Action: ${action}`,);
 
     if (!platform?.env?.KV) {
         return json({ error: true, message: 'KV not configured' });
@@ -48,6 +48,17 @@ export const POST: RequestHandler = async ({ request, platform }) => {
         return userMatch && passMatch;
     };
 
+    const unauthedSend = () => {
+        // Tell client that they are unauthed
+
+        return json({ error: true, message: 'Unauthorized' }, {
+            headers: {
+                'WWW-Authenticate': 'OAuth realm="users@ulogger"',
+            },
+            status: 401
+        });
+    }
+
     // Handle Authentication
     if (action === 'auth') {
         if (checkAuth()) {
@@ -70,73 +81,41 @@ export const POST: RequestHandler = async ({ request, platform }) => {
                 }
             });
         } else {
-            return json({ error: true, message: 'Unauthorized' });
+            console.log("Incorrect User/Pass")
+            return unauthedSend();
         }
     }
 
     // For other actions, check auth first (but parameters might be different for addpos/addtrack)
 
-    const authHeader = request.headers.get('Authorization');
-    const cookieHeader = request.headers.get('Cookie');
     let authenticated = false;
+    const sessionId = cookies.get('ulogger');
 
     // Check Cookie
-    if (cookieHeader) {
-        const cookies = Object.fromEntries(cookieHeader.split('; ').map(c => c.split('=')));
-        if (cookies.ulogger) {
-            const sessionId = cookies.ulogger;
+    if (sessionId) {
 
-            // Hash the session ID to verify
-            const encoder = new TextEncoder();
-            const data = encoder.encode(sessionId);
-            const hashBuffer = await crypto.subtle.digest('SHA-256', data);
-            const hashArray = Array.from(new Uint8Array(hashBuffer));
-            const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-
-            // Check if hash exists in KV
-            const sessionValid = await platform.env.KV.get(`session:${hashHex}`);
-            if (sessionValid) {
-                authenticated = true;
-            }
-        }
-    }
-
-    if (!authenticated && authHeader) {
-        const base64Credentials = authHeader.split(' ')[1];
-        const credentials = atob(base64Credentials).split(':');
-        const username = credentials[0];
-        const password = credentials[1];
-
-        const userMatch = username === ULOGGER_USER;
-
+        // Hash the session ID to verify
         const encoder = new TextEncoder();
-        const a = encoder.encode(password);
-        const b = encoder.encode(ULOGGER_PASS);
+        const data = encoder.encode(sessionId);
+        const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+        const hashArray = Array.from(new Uint8Array(hashBuffer));
+        const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
 
-        let passMatch = false;
-        if (a.byteLength === b.byteLength) {
-            passMatch = (crypto.subtle as any).timingSafeEqual(a, b);
-        }
 
-        if (userMatch && passMatch) {
+        // Check if hash exists in KV
+        const sessionValid = await platform.env.KV.get(`session:${hashHex}`);
+        if (sessionValid) {
             authenticated = true;
         }
     }
 
     if (!authenticated) {
-        // Fallback to checking body params if sent
-        if (checkAuth()) {
-            authenticated = true;
-        }
-    }
-
-    if (!authenticated) {
-        return json({ error: true, message: 'Unauthorized' });
+        console.log("Missing auth header")
+        return unauthedSend();
     }
 
     switch (action) {
         case 'addtrack':
-            console.log('Add Track requested');
             // Return a dummy track ID
             return json({ error: false, trackid: 1 });
 
@@ -147,7 +126,6 @@ export const POST: RequestHandler = async ({ request, platform }) => {
             if (isNaN(lat) || isNaN(lon)) {
                 return json({ error: true, message: 'Missing required parameter' });
             }
-            console.log(`Received position: ${lat}, ${lon}`);
 
             // Validate coordinates range
             if (lat < -90 || lat > 90 || lon < -180 || lon > 180) {
@@ -171,7 +149,6 @@ export const POST: RequestHandler = async ({ request, platform }) => {
 
                 const data = await response.json();
                 const address = data.address;
-                console.log(JSON.stringify(address));
 
                 // Construct location string: "State, CountryCode" or "Region, CountryCode"
                 let locationString = '';

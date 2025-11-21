@@ -16,7 +16,7 @@
 
     let { data }: Props = $props();
 
-    let location = $state("Auckland, New Zealand");
+    let location = $state("Loading...");
 
     onMount(async () => {
         try {
@@ -64,14 +64,7 @@
                 title="Age"
                 description={getYearsFrom(birthdate).toString()}
             />
-            {#if Math.random() > 0.9}
-                <FactBox
-                    title="Current Location"
-                    description="Inside of your walls"
-                />
-            {:else}
-                <FactBox title="Location" description={location} />
-            {/if}
+            <FactBox title="Location" description={location} />
             <FactBox title="Best Frontend Framework" description="Sveltekit" />
             {#if data.github.lastUpdatedAboutDetails}
                 <FactBox
