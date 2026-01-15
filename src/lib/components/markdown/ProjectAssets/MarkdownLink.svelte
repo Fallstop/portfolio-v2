@@ -27,7 +27,7 @@
 </script>
 
 <a class="{size}" {href} target={openInNewTab ? "_blank" : "_self"} style="--brand-color: {color || urlBrand.color}">
-    <SvelteComponent />
+    <SvelteComponent class="" />
     {@render children?.()}
 </a>
 

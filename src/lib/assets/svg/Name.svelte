@@ -117,7 +117,7 @@
     viewBox="0 0 326.56 144.96"
     xmlns="http://www.w3.org/2000/svg"
     class="blur-background"
-    style="--svg-width: {svgElement?.clientWidth}px;"
+    style="--svg-width: 100cqi;"
 >
     <defs>
         <linearGradient

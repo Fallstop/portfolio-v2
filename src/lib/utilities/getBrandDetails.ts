@@ -3,7 +3,7 @@ import Discord from "$lib/components/ExtraIcons/Discord.svelte";
 import Reddit from "$lib/components/ExtraIcons/Reddit.svelte";
 import Twitch from "$lib/components/ExtraIcons/Twitch.svelte";
 
-import { Github, Twitter, Youtube, Facebook, Instagram, Linkedin, Globe, Landmark, Camera } from "lucide-svelte";
+import { Github, Twitter, Youtube, Facebook, Instagram, Linkedin, Globe, Landmark, Camera, Vibrate } from "lucide-svelte";
 import Fallstop from "$lib/components/ExtraIcons/Fallstop.svelte";
 import Provida from "$lib/components/ExtraIcons/Provida.svelte";
 import TerribleHack from "$lib/components/ExtraIcons/TerribleHack.svelte";
@@ -108,6 +108,12 @@ export const brandingDetails: Record<string,BrandData> = {
         domain: "linkedin.com",
         icon: Linkedin,
         color: "#2867b2",
+    },
+    "haptics.jmw.nz": {
+        name: "WebHapticsPlugin",
+        domain: "haptics.jmw.nz",
+        icon: Vibrate,
+        color: "#E26500",
     },
     "jmw.nz": {
         name: "JMW",
