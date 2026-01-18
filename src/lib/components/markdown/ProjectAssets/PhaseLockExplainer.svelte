@@ -626,6 +626,7 @@
 			color: $hint-color;
 			cursor: pointer;
 			padding: 0.4rem 0.6rem;
+            padding-left: 0;
 			border-radius: $border-radius;
 			transition: color 0.2s;
 			
