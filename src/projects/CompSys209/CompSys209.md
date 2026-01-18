@@ -65,6 +65,7 @@ Our technique worked like this:
 3. **Wait for the next zero crossing**
 4. **Sample 200 current points** in an identical burst
 5. **Overlay the results** in software
+
 <PhaseLockedSampling/>
 <!-- ![:large:center](./PhaseLockedSampling.svg) -->
 

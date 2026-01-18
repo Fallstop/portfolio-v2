@@ -2,12 +2,12 @@
 	import { onMount } from 'svelte';
 
 	// --- Configuration ---
-	const SAMPLE_RATE_HZ = 9600;
+	const SAMPLE_RATE_HZ = 9613;
 	const WAVE_FREQ_HZ = 500;
 	const SAMPLES_PER_CYCLE = SAMPLE_RATE_HZ / WAVE_FREQ_HZ; // 19.2 samples per cycle
 	
 	// Display settings
-	const width = 700;
+	let width = $state(700);
 	const height = 200;
 	const compositeHeight = 160;
 	const amplitude = 70;
@@ -125,14 +125,14 @@
 	}
 	
 	// Phase error for standard mode (ADC mux switching delay)
-	const phaseErrorPixels = 12;
+	// const phaseErrorPixels = 12; // Removed: Visualizing samples off the line looks like a simulation error
 	
 	// --- Animation Loop ---
 	$effect(() => {
 		if (!isRunning) return;
 
 		let animationFrame: number;
-		const speed = 3;
+		const speed = 1.5;
 		const sampleInterval = width / displaySamples;
 		
 		const update = () => {
@@ -189,18 +189,16 @@
 						const scaledY = compositeHeight / 2 - (height / 2 - noisy) * (compositeHeight / height);
 						standardReconstructionV = [...standardReconstructionV, { x: globalX, y: scaledY }];
 					} else {
-						// Current sample has phase error due to mux delay
-						const errorX = sampleX + phaseErrorPixels;
-						const errorPhase = getPhaseFromX(errorX);
-						const y = getCurrent(errorX);
-						const noisy = getCurrent(errorX, true, sampleIndex + cycleCount * 1000);
-						samplesI = [...samplesI, { x: sampleX, y, noisy, phase: errorPhase }];
+						// Current sample - now perfectly timed on the grid (phase error comes from interleaving)
+						const y = getCurrent(sampleX);
+						const noisy = getCurrent(sampleX, true, sampleIndex + cycleCount * 1000);
+						samplesI = [...samplesI, { x: sampleX, y, noisy, phase }];
 						
-						// Add to composite - note the phase error carries over!
-						const compositeNoisy = getCurrentComposite(errorPhase, true, sampleIndex + cycleCount * 1000);
-						compositeI = [...compositeI, { phase: errorPhase, noisy: compositeNoisy }];
+						// Add to composite
+						const compositeNoisy = getCurrentComposite(phase, true, sampleIndex + cycleCount * 1000);
+						compositeI = [...compositeI, { phase, noisy: compositeNoisy }];
 						
-						// Add to standard reconstruction (actual x position with error, scaled y)
+						// Add to standard reconstruction
 						const globalX = sampleX;
 						const scaledY = compositeHeight / 2 - (height / 2 - noisy) * (compositeHeight / height);
 						standardReconstructionI = [...standardReconstructionI, { x: globalX, y: scaledY }];
@@ -236,14 +234,6 @@
 		return () => cancelAnimationFrame(animationFrame);
 	});
 
-	// Derived values
-	let statusText = $derived.by(() => {
-		if (mode === 'standard') return "Alternating V/I samples — half resolution per channel, phase error on current";
-		if (cycleCount === 0) return "Pass 1: Sampling VOLTAGE on zero-cross trigger...";
-		if (cycleCount === 1) return "Pass 2: Sampling CURRENT on zero-cross trigger...";
-		return "Complete — samples aligned perfectly!";
-	});
-	
 	let reconstructedPathV = $derived(buildReconstructedPath(samplesV));
 	let reconstructedPathI = $derived(buildReconstructedPath(samplesI));
 	let compositePathV = $derived(buildCompositeReconstructedPath(compositeV));
@@ -265,9 +255,15 @@
 	let compositeVCount = $derived(mode === 'supersample' ? compositeV.length : standardReconstructionV.length);
 	let compositeICount = $derived(mode === 'supersample' ? compositeI.length : standardReconstructionI.length);
 
+	// Reset when width changes to maintain sample alignment
+	$effect(() => {
+		width;
+		reset();
+	});
+
 	// Ghost paths for background (reactive to noise setting)
-	let ghostPathV = $derived(Array.from({length: width}, (_, i) => `${i === 0 ? 'M' : 'L'} ${i} ${getVoltage(i, noiseEnabled)}`).join(' '));
-	let ghostPathI = $derived(Array.from({length: width}, (_, i) => `${i === 0 ? 'M' : 'L'} ${i} ${getCurrent(i, noiseEnabled)}`).join(' '));
+	let ghostPathV = $derived(Array.from({length: Math.ceil(width)}, (_, i) => `${i === 0 ? 'M' : 'L'} ${i} ${getVoltage(i, noiseEnabled)}`).join(' '));
+	let ghostPathI = $derived(Array.from({length: Math.ceil(width)}, (_, i) => `${i === 0 ? 'M' : 'L'} ${i} ${getCurrent(i, noiseEnabled)}`).join(' '));
 </script>
 
 <div class="container">
@@ -286,8 +282,7 @@
 			</label>
 		</div>
 	</div>
-
-	<div class="oscilloscope">
+	<div class="oscilloscope" bind:clientWidth={width}>
 		<svg viewBox="0 0 {width} {height}">
 			<!-- Background Grid -->
 			<defs>
@@ -401,11 +396,6 @@
 				<text x="16" y="24" fill="#f72585" font-size="11" font-family="monospace">I ({iSampleCount})</text>
 			</g>
 		</svg>
-		
-		<div class="status-overlay">
-			<span class="status-dot" class:active={isRunning && cycleCount < 2}></span>
-			<span class="status-text">{statusText}</span>
-		</div>
 	</div>
 
 	<!-- Composite Single-Cycle View -->
