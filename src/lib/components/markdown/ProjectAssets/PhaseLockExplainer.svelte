@@ -1,7 +1,4 @@
 <script lang="ts">
-  import { FastForward } from 'lucide-svelte';
-	import { onMount } from 'svelte';
-
 	// --- Configuration ---
 	const SAMPLE_RATE_HZ = 9613;
 	const WAVE_FREQ_HZ = 500;
@@ -10,7 +7,7 @@
 	// Display settings
 	let width = $state(700);
 	const height = 200;
-	const compositeHeight = 160;
+	const compositeHeight = 240;
 	const amplitude = 70;
 	const cyclesOnScreen = 4;
 	// const displaySamples = Math.floor(SAMPLES_PER_CYCLE / 4); // Show fewer for visual clarity
@@ -124,30 +121,11 @@
 		phaseNoiseStandard = (Math.random() - 0.5) * 2 * Math.PI;
 		time = 0;
 		cycleCount = 0;
-		// samplesV = [];
-		// samplesI = [];
-		// compositeV = [];
-		// compositeI = [];
-		// standardReconstructionV = [];
-		// standardReconstructionI = [];
-
-		// Remove first and last to avoid visual artifacts
-		// samplesI = samplesV.slice(1, -1);
-		// samplesV = samplesV.slice(1, -1);
-		// compositeV = compositeV.slice(1, -1);
-		// compositeI = compositeI.slice(1, -1);
-		// standardReconstructionV = standardReconstructionV.slice(1, -1);
-		// standardReconstructionI = standardReconstructionI.slice(1, -1);
-
 		noiseSeed = Math.random() * 1000;
 		showcaseCycle = false;
 		currentlyResetting = true;
 	}
 
-	
-	// Phase error for standard mode (ADC mux switching delay)
-	// const phaseErrorPixels = 12; // Removed: Visualizing samples off the line looks like a simulation error
-	
 	// --- Animation Loop ---
 	$effect(() => {
 		if (!isRunning) return;
@@ -294,14 +272,13 @@
 	});
 	
 	// Sample count info
-	let vSampleCount = $derived(samplesV.length);
-	let iSampleCount = $derived(samplesI.length);
 	let compositeVCount = $derived(mode === 'supersample' ? compositeV.length : standardReconstructionV.length);
 	let compositeICount = $derived(mode === 'supersample' ? compositeI.length : standardReconstructionI.length);
 
 	// Reset when width changes to maintain sample alignment
 	$effect(() => {
 		width;
+		noiseEnabled;
 		reset();
 	});
 
@@ -310,9 +287,9 @@
 	let ghostPathI = $derived(Array.from({length: Math.ceil(width)}, (_, i) => `${i === 0 ? 'M' : 'L'} ${i} ${getCurrent(i, noiseEnabled)}`).join(' '));
 </script>
 
-<div class="container">
+<div class="container" id="PhaseLockSampling">
 	<div class="header">
-		<h3>{mode === "standard" ? 'Alternating Sampling' : 'Phase-Lock Sampling'}</h3>
+		<h3 >{mode === "standard" ? 'Alternating Sampling' : 'Phase-Lock Sampling'}</h3>
 		<div class="controls">
 			<button class:active={mode === 'standard'} onclick={() => { mode = 'standard'; reset(); }}>
 				Standard
@@ -430,15 +407,6 @@
 					<animate attributeName="opacity" values="0.6;0.3;0.6" dur="0.5s" repeatCount="indefinite" />
 				</line>
 			{/if}
-			
-			<!-- Channel Labels -->
-			<g transform="translate({width - 85}, {height - 45})">
-				<rect x="-5" y="-12" width="80" height="42" fill="rgba(0,0,0,0.6)" rx="4" />
-				<circle cx="6" cy="0" r="5" fill="#4cc9f0" />
-				<text x="16" y="4" fill="#4cc9f0" font-size="11" font-family="monospace">V ({vSampleCount})</text>
-				<circle cx="6" cy="20" r="5" fill="#f72585" />
-				<text x="16" y="24" fill="#f72585" font-size="11" font-family="monospace">I ({iSampleCount})</text>
-			</g>
 		</svg>
 	</div>
 
@@ -580,28 +548,28 @@
 		</div>
 		<div class="info-row">
 			<span class="label">Samples/Cycle:</span>
-			<span class="value">{SAMPLES_PER_CYCLE}</span>
+			<span class="value">{SAMPLES_PER_CYCLE.toFixed(1)}</span>
 		</div>
 	</div>
 
 	<div class="explanation">
 		{#if mode === 'standard'}
 			<p>
-				<strong>Standard ADC Sampling:</strong> The microcontroller alternates between reading Voltage and Current through a multiplexer. Each channel receives only <em>half</em> the samples, and the mux delay introduces <strong>phase error</strong> on the current channel.
+				<strong>Standard ADC Sampling:</strong> The microcontroller alternates between reading <span class="voltage-text">Voltage</span> and <span class="current-text">Current</span> through a multiplexer. Each channel receives only <em>half</em> the samples, and the mux delay introduces <strong>phase error</strong> on the current channel.
 			</p>
 			<p>
-				<strong>Bottom graph:</strong> As the ADC sweeps through {cyclesOnScreen} cycles, samples accumulate on the composite view from left to right. Notice how <span class="current-text">Current</span> samples are consistently offset from <span class="voltage-text">Voltage</span> — this error persists in the reconstruction.
+				<strong>Bottom graph:</strong> As the ADC sweeps through {cyclesOnScreen} cycles, samples accumulate on the composite view from left to right. Notice how little detail of the original wave gets perserved.
 			</p>
 		{:else}
 			<p>
 				<strong>Phase-Locked Super Sampling:</strong> Using a hardware zero-cross interrupt, we synchronize sampling across multiple AC cycles:
 			</p>
 			<ol>
-				<li><strong>Pass 1:</strong> Trigger on zero-cross → sample only <span class="voltage-text">Voltage</span> at full rate</li>
-				<li><strong>Pass 2:</strong> Trigger on zero-cross → sample only <span class="current-text">Current</span> at full rate</li>
+				<li><strong>Pass 1:</strong> Trigger on zero-cross, then sample only <span class="voltage-text">Voltage</span> at full rate</li>
+				<li><strong>Pass 2:</strong> Trigger on zero-cross, then sample only <span class="current-text">Current</span> at full rate</li>
 			</ol>
 			<p>
-				<strong>Bottom graph:</strong> Samples from both passes land at their <em>phase-relative</em> position on the single virtual cycle. Because both passes trigger at the same phase, <span class="voltage-text">V</span> and <span class="current-text">I</span> samples align perfectly — <strong>zero phase error</strong>, double the resolution per channel.
+				<strong>Bottom graph:</strong> Samples from both passes land at their <em>phase-relative</em> position on the single virtual cycle. Because both passes trigger at the same phase, <span class="voltage-text">V</span> and <span class="current-text">I</span> samples align perfectly, allowing the reconstruction to capture more details than it should be able to.
 			</p>
 		{/if}
 	</div>
@@ -819,12 +787,12 @@
 		}
 		
 		.voltage-text {
-			color: #4cc9f0;
+			color: #1a90b4;
 			font-weight: 600;
 		}
 		
 		.current-text {
-			color: #f72585;
+			color: #de0c6b;
 			font-weight: 600;
 		}
 	}
