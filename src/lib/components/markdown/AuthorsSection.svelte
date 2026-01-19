@@ -19,7 +19,7 @@ Authored by
 {/each}
 
 <style lang="scss">
-    @import "../../../variables.scss";
+    @use "../../../variables.scss" as *;
 
     .link {
         color: $text-color
