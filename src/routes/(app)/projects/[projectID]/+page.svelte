@@ -34,7 +34,7 @@
 			{/if}
 			<p>
 				<AuthorsSection authors={data.meta.authors} /> | 
-				Published at {data.meta.date}</p>
+				Project Date: {data.meta.date}</p>
 		</hgroup>
 
 		<!-- Post -->

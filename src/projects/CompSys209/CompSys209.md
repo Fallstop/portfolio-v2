@@ -6,9 +6,12 @@ highlight: true
 tags: ["Software", "Hardware", "TypeScript", "Svelte", "C/C++", "UoA"]
 authors:
   - Jasper M-W
+collaborators:
+  - Jasper M-W
   - Joel M
   - Mihir Ojas R
   - Taine R
+
 ---
 
 <script>

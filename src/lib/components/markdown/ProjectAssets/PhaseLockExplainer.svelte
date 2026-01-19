@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { FastForward } from 'lucide-svelte';
 	import { onMount } from 'svelte';
 
 	// --- Configuration ---
@@ -14,18 +15,21 @@
 	const cyclesOnScreen = 4;
 	// const displaySamples = Math.floor(SAMPLES_PER_CYCLE / 4); // Show fewer for visual clarity
     const displaySamples = SAMPLES_PER_CYCLE * cyclesOnScreen;
-	
+
 	// --- State ---
-	let mode: 'standard' | 'supersample' = $state('standard');
+	let mode: 'standard' | 'supersample' = $state('supersample');
 	let isRunning = $state(true);
 	let noiseEnabled = $state(true);
 	let noiseAmount = $state(0.15);
+	let phaseNoiseStandard = $state(0);
 	
 	// Animation state
 	let time = $state(0);
 	let cycleCount = $state(0);
 	let samplesV: Array<{x: number, y: number, noisy: number, phase: number}> = $state([]);
 	let samplesI: Array<{x: number, y: number, noisy: number, phase: number}> = $state([]);
+	let showcaseCycle = $state(false);
+	let currentlyResetting = $state(false);
 	
 	// Composite samples (mapped to single cycle for supersample mode)
 	let compositeV: Array<{phase: number, noisy: number}> = $state([]);
@@ -61,15 +65,19 @@
 		
 		return dist * amplitude;
 	}
+
+	function getAnglerOffset() {
+		return (mode==="standard") ? phaseNoiseStandard : 0;
+	}
 	
 	function getVoltage(x: number, addNoise = false, index = 0): number {
-		const t = (x / width) * (Math.PI * 2 * cyclesOnScreen);
+		const t = (x / width) * (Math.PI * 2 * cyclesOnScreen) + getAnglerOffset();
 		const base = height / 2 - Math.sin(t) * amplitude * 0.85;
 		return addNoise ? base + getDistortion(t, 0) : base;
 	}
 
 	function getCurrent(x: number, addNoise = false, index = 0): number {
-		const t = (x / width) * (Math.PI * 2 * cyclesOnScreen);
+		const t = (x / width) * (Math.PI * 2 * cyclesOnScreen) + getAnglerOffset();
 		// Load with slight phase shift (power factor simulation)
 		const base = height / 2 - Math.sin(t - 0.3) * amplitude * 0.55;
 		return addNoise ? base + getDistortion(t - 0.3, 1) : base;
@@ -77,12 +85,12 @@
 	
 	// Get voltage/current for composite (single cycle)
 	function getVoltageComposite(phase: number, addNoise = false, index = 0): number {
-		const base = compositeHeight / 2 - Math.sin(phase) * (amplitude * 0.85 * compositeHeight / height);
+		const base = compositeHeight / 2 - Math.sin(phase + getAnglerOffset()) * (amplitude * 0.85 * compositeHeight / height);
 		return addNoise ? base + getDistortion(phase, 0) * (compositeHeight / height) : base;
 	}
 
 	function getCurrentComposite(phase: number, addNoise = false, index = 0): number {
-		const base = compositeHeight / 2 - Math.sin(phase - 0.3) * (amplitude * 0.55 * compositeHeight / height);
+		const base = compositeHeight / 2 - Math.sin(phase - 0.3 + getAnglerOffset()) * (amplitude * 0.55 * compositeHeight / height);
 		return addNoise ? base + getDistortion(phase - 0.3, 1) * (compositeHeight / height) : base;
 	}
 	
@@ -113,16 +121,29 @@
 	
 	// --- Reset ---
 	function reset() {
+		phaseNoiseStandard = (Math.random() - 0.5) * 2 * Math.PI;
 		time = 0;
 		cycleCount = 0;
-		samplesV = [];
-		samplesI = [];
-		compositeV = [];
-		compositeI = [];
-		standardReconstructionV = [];
-		standardReconstructionI = [];
+		// samplesV = [];
+		// samplesI = [];
+		// compositeV = [];
+		// compositeI = [];
+		// standardReconstructionV = [];
+		// standardReconstructionI = [];
+
+		// Remove first and last to avoid visual artifacts
+		// samplesI = samplesV.slice(1, -1);
+		// samplesV = samplesV.slice(1, -1);
+		// compositeV = compositeV.slice(1, -1);
+		// compositeI = compositeI.slice(1, -1);
+		// standardReconstructionV = standardReconstructionV.slice(1, -1);
+		// standardReconstructionI = standardReconstructionI.slice(1, -1);
+
 		noiseSeed = Math.random() * 1000;
+		showcaseCycle = false;
+		currentlyResetting = true;
 	}
+
 	
 	// Phase error for standard mode (ADC mux switching delay)
 	// const phaseErrorPixels = 12; // Removed: Visualizing samples off the line looks like a simulation error
@@ -134,34 +155,55 @@
 		let animationFrame: number;
 		const speed = 1.5;
 		const sampleInterval = width / displaySamples;
+
 		
 		const update = () => {
+			if (currentlyResetting) {
+				if (samplesV.length || samplesI.length || compositeV.length || compositeI.length || standardReconstructionV.length || standardReconstructionI.length) {
+					// Remove one sample per frame for smooth clearing
+					samplesV = samplesV.slice(1);
+					samplesI = samplesI.slice(1);
+					compositeV = compositeV.slice(1);
+					compositeI = compositeI.slice(1);
+					standardReconstructionV = standardReconstructionV.slice(1);
+					standardReconstructionI = standardReconstructionI.slice(1);
+				} else {
+					currentlyResetting = false;
+				}
+
+				animationFrame = requestAnimationFrame(update);
+				return;
+			}
+
 			time += speed;
 
 			// Wrap around
-			if (time >= width) {
+			if (time >= width || (showcaseCycle && time >= width/2)) {
 				time = 0;
 				cycleCount++;
 				
 				if (mode === 'supersample') {
 					// After collecting both passes, keep showing the overlay
+					if (cycleCount > 1) {
+						showcaseCycle = true;
+					}
 					if (cycleCount > 2) {
 						reset();
 					}
 				} else {
-					// Standard mode loops continuously
-					samplesV = [];
-					samplesI = [];
-					standardReconstructionV = [];
-					standardReconstructionI = [];
-					
-					// Reset composite after all cycles shown
-					if (cycleCount >= cyclesOnScreen) {
-						cycleCount = 0;
-						compositeV = [];
-						compositeI = [];
+					if (cycleCount > 0) {
+						showcaseCycle = true;
 					}
+					if (cycleCount > 1) {
+						reset();
+					}
+
 				}
+			}
+
+			if (currentlyResetting || showcaseCycle) {
+				animationFrame = requestAnimationFrame(update);
+				return;
 			}
 
 			// Sampling Logic
@@ -172,7 +214,8 @@
 				const sampleX = sampleIndex * sampleInterval;
 				const phase = getPhaseFromX(sampleX);
 				
-				if (mode === 'standard') {
+				if (mode === 'standard'  && !showcaseCycle) {
+
 					// Alternating: even samples = V, odd samples = I
 					// This means each channel gets half the samples
 					if (sampleIndex % 2 === 0) {
@@ -188,6 +231,7 @@
 						const globalX = sampleX;
 						const scaledY = compositeHeight / 2 - (height / 2 - noisy) * (compositeHeight / height);
 						standardReconstructionV = [...standardReconstructionV, { x: globalX, y: scaledY }];
+						console.log($state.snapshot(standardReconstructionV), globalX)
 					} else {
 						// Current sample - now perfectly timed on the grid (phase error comes from interleaving)
 						const y = getCurrent(sampleX);
@@ -203,7 +247,7 @@
 						const scaledY = compositeHeight / 2 - (height / 2 - noisy) * (compositeHeight / height);
 						standardReconstructionI = [...standardReconstructionI, { x: globalX, y: scaledY }];
 					}
-				} else {
+				} else if (mode === 'supersample' && !showcaseCycle) {
 					// Super Sample Mode
 					if (cycleCount === 0) {
 						// Pass 1: Sample only Voltage
@@ -268,7 +312,7 @@
 
 <div class="container">
 	<div class="header">
-		<h3>Phase-Lock Sampling</h3>
+		<h3>{mode === "standard" ? 'Alternating Sampling' : 'Phase-Lock Sampling'}</h3>
 		<div class="controls">
 			<button class:active={mode === 'standard'} onclick={() => { mode = 'standard'; reset(); }}>
 				Standard
@@ -330,18 +374,18 @@
 				fill="none" 
 				stroke="url(#voltage-gradient)" 
 				stroke-width="1.5" 
-				opacity="0.2"
+				opacity="0.4"
 			/>
 			<path 
 				d={ghostPathI} 
 				fill="none" 
 				stroke="url(#current-gradient)" 
 				stroke-width="1.5" 
-				opacity="0.2"
+				opacity="0.4"
 			/>
 
 			<!-- Reconstructed Waveforms (from samples) -->
-			{#if mode === 'supersample' && cycleCount >= 2}
+			{#if showcaseCycle}
 				<path 
 					d={reconstructedPathV} 
 					fill="none" 
@@ -381,7 +425,7 @@
 			{/each}
 
 			<!-- Scan Line (ADC sampling head) -->
-			{#if cycleCount < 2}
+			{#if !showcaseCycle}
 				<line x1={time} y1="0" x2={time} y2={height} stroke="rgba(255,255,255,0.6)" stroke-width="1">
 					<animate attributeName="opacity" values="0.6;0.3;0.6" dur="0.5s" repeatCount="indefinite" />
 				</line>
