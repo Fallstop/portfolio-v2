@@ -1,58 +1,194 @@
+// =============================================================================
+// Markdown/Prose Typography
+// Best practices for long-form reading content
+// =============================================================================
+
+// -----------------------------------------------------------------------------
+// Headings - Clear hierarchy with proper spacing
+// More space above than below to group with following content
+// -----------------------------------------------------------------------------
+
 h1 {
     font-size: $font-size-3xl;
-    margin-top: $space-md;
+    line-height: $line-height-tight;
+    letter-spacing: $letter-spacing-tight;
+    margin-top: $space-lg;
     margin-bottom: $space-sm;
+
+    // First heading in content shouldn't have top margin
+    &:first-child {
+        margin-top: 0;
+    }
 }
 
 h2 {
+    font-size: $font-size-xl;
+    line-height: $line-height-tight;
+    letter-spacing: $letter-spacing-tight;
     margin-top: $space-md;
     margin-bottom: $space-sm;
+
+    &:first-child {
+        margin-top: 0;
+    }
 }
 
 h3 {
+    font-size: $font-size-lg;
+    line-height: $line-height-snug;
     margin-top: $space-smd;
     margin-bottom: $space-xs;
+
+    &:first-child {
+        margin-top: 0;
+    }
 }
 
 h4 {
+    font-size: $font-size-md;
+    line-height: $line-height-snug;
     margin-top: $space-sm;
     margin-bottom: $space-xs;
+
+    &:first-child {
+        margin-top: 0;
+    }
 }
+
+// -----------------------------------------------------------------------------
+// Paragraphs - Comfortable reading rhythm
+// -----------------------------------------------------------------------------
+
+p {
+    line-height: $line-height-relaxed;
+    margin-top: 0;
+    margin-bottom: $space-sm;
+
+    // Adjacent paragraphs get consistent spacing
+    + p {
+        margin-top: 0;
+    }
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
+
+// Lead paragraph style
+p.lead {
+    font-size: $font-size-md;
+    line-height: $line-height-relaxed;
+}
+
+// -----------------------------------------------------------------------------
+// Lists - Proper indentation and spacing
+// -----------------------------------------------------------------------------
+
+ul, ol {
+    margin-top: 0;
+    margin-bottom: $space-sm;
+    padding-left: $space-smd;
+    line-height: $line-height-relaxed;
+
+    li {
+        margin-bottom: $space-xs;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    // Nested lists
+    ul, ol {
+        margin-top: $space-xs;
+        margin-bottom: 0;
+    }
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
+
+// -----------------------------------------------------------------------------
+// Blockquotes - Distinguished but readable
+// -----------------------------------------------------------------------------
+
+blockquote {
+    margin: $space-sm 0 $space-sm $space-sm;
+    padding: $space-xs 0 $space-xs $space-sm;
+    border-left: 4px solid $overlay-medium;
+    font-style: italic;
+    line-height: $line-height-relaxed;
+
+    p {
+        margin-bottom: $space-xs;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    // Citation
+    cite, footer {
+        display: block;
+        margin-top: $space-xs;
+        font-size: $font-size-sm;
+        font-style: normal;
+        color: $hint-color;
+
+        &::before {
+            content: "— ";
+        }
+    }
+}
+
+// -----------------------------------------------------------------------------
+// Code blocks - Readable with proper contrast
+// -----------------------------------------------------------------------------
 
 pre[class^="language-"] {
     font-size: $font-size-sm;
+    line-height: $line-height-normal;
     width: max-content;
     max-width: 100%;
-    box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.5);
-
+    margin: $space-sm 0;
+    box-shadow: 0 0 $space-xs rgba(0, 0, 0, 0.5);
+    border-radius: $border-radius;
 }
 
-blockquote {
-    margin-left: $space-sm;
-    padding-left: $space-sm;
-    border-left: $overlay-medium solid 5px;
+// Inline code
+code:not([class^="language-"]) {
+    font-size: 0.9em;
+    padding: 0.1em 0.3em;
+    background: $overlay-subtle;
+    border-radius: 3px;
+    @include mono-font;
 }
 
-ul {
-    margin-top: 0;
-}
+// -----------------------------------------------------------------------------
+// Tables - Clear data presentation
+// -----------------------------------------------------------------------------
 
 table {
     border-collapse: collapse;
     margin: $space-smd 0;
     font-size: $font-size-sm;
+    line-height: $line-height-normal;
+    width: 100%;
 }
 
 th, td {
     padding: $space-xs $space-sm;
     text-align: left;
     border-bottom: 1px solid $overlay-light;
+    vertical-align: top;
 }
 
 th {
     font-weight: $font-weight-semibold;
     background: $overlay-subtle;
     border-bottom: 2px solid rgba(0, 0, 0, 0.15);
+    white-space: nowrap;
 }
 
 tr:hover {
@@ -64,4 +200,107 @@ td code {
     padding: 0.15rem 0.4rem;
     border-radius: 4px;
     font-size: 0.85em;
+}
+
+// -----------------------------------------------------------------------------
+// Horizontal rules - Section breaks
+// -----------------------------------------------------------------------------
+
+hr {
+    border: none;
+    border-top: 1px solid $overlay-light;
+    margin: $space-md 0;
+}
+
+// -----------------------------------------------------------------------------
+// Links - Clear affordance
+// -----------------------------------------------------------------------------
+
+a {
+    color: $primary-color;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.15em;
+    transition: color $transition-fast;
+
+    &:hover {
+        color: $secondary-color;
+    }
+}
+
+// -----------------------------------------------------------------------------
+// Images and figures
+// -----------------------------------------------------------------------------
+
+img {
+    max-width: 100%;
+    height: auto;
+    margin: $space-sm 0;
+}
+
+figure {
+    margin: $space-smd 0;
+
+    img {
+        margin: 0;
+    }
+
+    figcaption {
+        margin-top: $space-xs;
+        font-size: $font-size-sm;
+        color: $hint-color;
+        line-height: $line-height-normal;
+    }
+}
+
+// -----------------------------------------------------------------------------
+// Strong and emphasis
+// -----------------------------------------------------------------------------
+
+strong, b {
+    font-weight: $font-weight-semibold;
+}
+
+em, i {
+    font-style: italic;
+}
+
+// -----------------------------------------------------------------------------
+// Small text and captions
+// -----------------------------------------------------------------------------
+
+small {
+    font-size: $font-size-sm;
+    line-height: $line-height-normal;
+}
+
+// -----------------------------------------------------------------------------
+// Definition lists
+// -----------------------------------------------------------------------------
+
+dl {
+    margin: $space-sm 0;
+
+    dt {
+        font-weight: $font-weight-semibold;
+        margin-top: $space-sm;
+
+        &:first-child {
+            margin-top: 0;
+        }
+    }
+
+    dd {
+        margin-left: $space-smd;
+        margin-bottom: $space-xs;
+    }
+}
+
+// -----------------------------------------------------------------------------
+// Abbreviations
+// -----------------------------------------------------------------------------
+
+abbr[title] {
+    text-decoration: underline dotted;
+    cursor: help;
 }

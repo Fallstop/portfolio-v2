@@ -60,29 +60,57 @@ html,body {
 
 h1, h2, h3, h4, h5, h6 {
     @include heading-font;
-    line-height: $line-height-tight;
-    margin: 0 0 1rem;
+    margin: 0 0 $space-sm;
 }
+
 h1 {
     font-weight: $font-weight-black;
+    line-height: $line-height-tight;
+    letter-spacing: $letter-spacing-tight;
 }
+
 h2 {
     font-weight: $font-weight-bold;
+    line-height: $line-height-tight;
+    letter-spacing: $letter-spacing-tight;
 }
-h3, h4, h5, h6 {
+
+h3 {
+    font-weight: $font-weight-semibold;
+    line-height: $line-height-snug;
+}
+
+h4, h5, h6 {
     font-weight: $font-weight-normal;
+    line-height: $line-height-snug;
+}
+
+// Paragraph typography
+p {
+    margin: 0 0 $space-sm;
+    line-height: $line-height-normal;
+
+    // Remove margin from last paragraph in container
+    &:last-child {
+        margin-bottom: 0;
+    }
 }
 
 h1.page-header {
     font-size: $font-size-4xl;
     @include heading-font;
     font-weight: $font-weight-black;
-    margin: 0 0 1rem;
+    line-height: $line-height-none;
+    letter-spacing: $letter-spacing-tight;
+    margin: 0 0 $space-smd;
+
     @media (max-width: $tablet-breakpoint) {
         font-size: $font-size-3xl;
+        line-height: $line-height-tight;
     }
     @media (max-width: $mobile-breakpoint) {
         font-size: $font-size-2xl;
+        line-height: $line-height-tight;
     }
 }
 
