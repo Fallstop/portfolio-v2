@@ -62,7 +62,13 @@ export function imagetools(userOptions: Partial<VitePluginOptions> = {}): Plugin
             let lazyImg: Sharp
             const lazyLoadImage = () => {
                 if (lazyImg) return lazyImg
-                return (lazyImg = sharp(decodeURIComponent(srcURL.pathname)))
+                // Handle Windows paths: URL pathname may have leading / before drive letter (e.g., /C:/...)
+                let filePath = decodeURIComponent(srcURL.pathname)
+                // Remove leading slash before Windows drive letter (e.g., /C:/ -> C:/)
+                if (/^\/[A-Za-z]:/.test(filePath)) {
+                    filePath = filePath.slice(1)
+                }
+                return (lazyImg = sharp(filePath))
             }
 
             let lazyMetadata: Metadata
@@ -198,10 +204,16 @@ export async function generateImageID(url: URL, config: ImageConfig, originalIma
         return hash([baseURL.href, JSON.stringify(config), buffer])
     }
 
+    // Handle Windows paths: URL pathname may have leading / before drive letter (e.g., /C:/...)
+    let filePath = decodeURIComponent(url.pathname)
+    if (/^\/[A-Za-z]:/.test(filePath)) {
+        filePath = filePath.slice(1)
+    }
+
     // baseURL isn't a valid URL, but just a string used for an identifier
     // use a relative path in the local case so that it's consistent across machines
-    const baseURL = new URL(url.protocol + path.relative(process.cwd(), url.pathname))
-    const { mtime } = await stat(path.resolve(process.cwd(), url.pathname))
+    const baseURL = new URL(url.protocol + path.relative(process.cwd(), filePath))
+    const { mtime } = await stat(path.resolve(process.cwd(), filePath))
     return hash([baseURL.href, JSON.stringify(config), mtime.getTime().toString()])
 }
 
