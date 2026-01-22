@@ -45,11 +45,11 @@
             box-sizing: border-box;
             color: $text-color;
             padding: 0.8rem;
-            font-size: 2rem;
+            font-size: $font-size-xl;
             border: 1px solid $text-color;
             box-shadow: 0 0 0 0 black;
             background-color: rgba(255,255,255, 0.5);
-            transition: all 250ms ease-in-out;
+            transition: all $transition-base;
 
             font-weight: lighter;
 
@@ -71,14 +71,14 @@
             }
 
             @media screen and (max-width: $tablet-breakpoint) {
-                font-size: 2rem;
+                font-size: $font-size-xl;
             }
             @media screen and (max-width: $mobile-breakpoint) {
-                font-size: 1.2rem;
+                font-size: $font-size-md;
             }
             @media screen and (min-width: $chonk-breakpoint) {
                 padding: 1rem;
-                font-size: 2.5rem;
+                font-size: $font-size-2xl;
             }
             &.primary {
                 @media (hover: none) {

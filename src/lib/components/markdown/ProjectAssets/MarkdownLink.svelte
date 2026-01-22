@@ -37,12 +37,12 @@
         display: inline-block;
         text-decoration: none;
         color: $dark-text-color;
-        margin: 0.5rem 0.5rem 0.5rem 0;
-        
-        padding: 0.5rem;
+        margin: $space-xs $space-xs $space-xs 0;
+
+        padding: $space-xs;
         background-color: var(--brand-color);
         box-shadow: 0 0 0 rgba(0, 0, 0, 0.5);
-        transition: box-shadow 0.2s ease-in-out;
+        transition: box-shadow $transition-base;
         text-wrap: nowrap;
         overflow: hidden;
         max-width: 100%;
@@ -51,16 +51,16 @@
 
         text-overflow: ellipsis;
         &:hover {
-            box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.5);
+            box-shadow: 0 0 $space-xs rgba(0, 0, 0, 0.5);
         }
 
         &.small {
-            padding: 0.25rem;
-            font-size: 0.75rem;
+            padding: calc($space-xs / 2);
+            font-size: $font-size-xs;
         }
         &.large {
-            padding: 1rem;
-            font-size: 1.5rem;
+            padding: $space-sm;
+            font-size: $font-size-lg;
         }
 }
 </style>

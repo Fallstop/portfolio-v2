@@ -61,7 +61,7 @@
         page-break-inside: avoid;
         break-inside: avoid;
         
-        transition: all 0.2s ease-in-out;
+        transition: all $transition-base;
 
         border: none;
         display: block;

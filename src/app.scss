@@ -5,8 +5,8 @@
 
 body {
     @include body-font;
-    font-size: 1rem;
-    line-height: 1.5;
+    font-size: $font-size-base;
+    line-height: $line-height-normal;
     color: $text-color;
     background-color: $background-color;
     margin: 0;
@@ -60,37 +60,37 @@ html,body {
 
 h1, h2, h3, h4, h5, h6 {
     @include heading-font;
-    line-height: 1.2;
+    line-height: $line-height-tight;
     margin: 0 0 1rem;
 }
 h1 {
-    font-weight: 900;
+    font-weight: $font-weight-black;
 }
 h2 {
-    font-weight: 700;
+    font-weight: $font-weight-bold;
 }
 h3, h4, h5, h6 {
-    font-weight: 400;
+    font-weight: $font-weight-normal;
 }
 
 h1.page-header {
-    font-size: 4rem;
+    font-size: $font-size-4xl;
     @include heading-font;
-    font-weight: 900;
+    font-weight: $font-weight-black;
     margin: 0 0 1rem;
     @media (max-width: $tablet-breakpoint) {
-        font-size: 3rem;
+        font-size: $font-size-3xl;
     }
     @media (max-width: $mobile-breakpoint) {
-        font-size: 2.5rem;
+        font-size: $font-size-2xl;
     }
 }
 
 button {
     @include body-font;
     color: $text-color;
-    font-size: 1rem;
-    line-height: 1.5;
+    font-size: $font-size-base;
+    line-height: $line-height-normal;
 }
 
 

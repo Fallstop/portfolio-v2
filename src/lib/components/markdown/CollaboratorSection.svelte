@@ -35,9 +35,10 @@
 {/if}
 
 <style lang="scss">
+    @use "../../../variables.scss" as *;
     .collaborators {
-        margin-top: 2rem;
-        padding-top: 1rem;
+        margin-top: $space-md;
+        padding-top: $space-sm;
 
         h2 {
             margin-bottom: 0;
@@ -53,27 +54,21 @@
                 padding: 0;
                 list-style: none;
                 display: inline-block;
-                padding-top: 0.5rem;
-                padding-right: 0.5rem;
+                padding-top: $space-xs;
+                padding-right: $space-xs;
 
                 a {
-                    // background-color: $mid-tone;
                     box-shadow: 0 0 0 rgba(0, 0, 0, 0.5);
-                    transition: box-shadow 0.2s ease-in-out;
+                    transition: box-shadow $transition-base;
 
-                    font-weight: bold;
+                    font-weight: $font-weight-bold;
                     color: $text-color;
                     text-decoration: none;
-                    color: $text-color;
 
-                    :global(svg) {
-                        height: 1.3em;
-                        max-width: 1.3em;
-                        display: inline;
-                        vertical-align: text-top;
-                    }
+                    @include icon-inline;
+
                     &:hover {
-                        box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.5);
+                        box-shadow: 0 0 $space-xs rgba(0, 0, 0, 0.5);
                     }
                 }
                 span {

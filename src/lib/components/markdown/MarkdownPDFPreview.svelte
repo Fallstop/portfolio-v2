@@ -116,9 +116,9 @@
 </div>
 
 <style lang="scss">
-    // @use "";
+    @use "../../../variables.scss" as *;
     .pdf-preview-container {
-        margin-top: 2rem;
+        margin-top: $space-md;
 
         outline: black 1px solid;
         border-radius: $border-radius;
@@ -129,7 +129,7 @@
         .top-bar {
             display: flex;
             justify-content: space-between;
-            padding: 1rem;
+            padding: $space-sm;
             align-items: center;
             flex-wrap: wrap;
 
@@ -137,7 +137,7 @@
                 @include mono-font;
             }
         }
-    }    
+    }
     .pdf-preview {
         position: relative;
         width: 100%;
@@ -145,23 +145,9 @@
         border-radius: $border-radius;
         background-color: $background-color;
 
-
-
         :global(.page .canvasWrapper) {
-            box-shadow: 0 0 1rem rgba(0, 0, 0, 0.2);
+            box-shadow: 0 0 $space-sm $overlay-medium;
         }
-
-        // :global(.page) {
-        //     position: relative;
-        // }
-
-        // :global(.textLayer) {
-        //     position: absolute;
-        //     top: 0;
-        // }
-        // :global(.textLayer > span) {
-        //     position: absolute;
-        // }
 
         .pdfSlickContainer#viewerContainer {
             position: absolute;
@@ -171,7 +157,7 @@
             #viewer {
                 display: flex;
                 align-items: center;
-                gap: 2rem;
+                gap: $space-md;
                 width: 100%;
                 flex-direction: column;
             }

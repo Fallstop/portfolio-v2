@@ -26,19 +26,14 @@
         grid-template-columns: 1fr 1fr;
         grid-template-rows: auto;
         grid-template-areas: "pros cons";
-        margin: 1rem 0;
-
-        // $borderSize: 2px;
-        // background-color: $mid-tone;
-        // grid-gap: $borderSize;
-
+        margin: $space-sm 0;
 
         .header {
             margin: 0;
             padding: 0;
-            font-size: 1.2rem;
+            font-size: $font-size-md;
             color: $dark-text-color;
-            padding: 0.5rem;
+            padding: $space-xs;
         }
 
         .con-list,.pro-list {
@@ -48,7 +43,7 @@
                 padding: 0;
             }
             :global(li) {
-                padding: 0.5rem;
+                padding: $space-xs;
                 border-bottom: 1px solid $dark-text-color;
                 
                 list-style-type: none;

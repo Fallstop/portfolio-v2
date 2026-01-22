@@ -1,23 +1,26 @@
 h1 {
-    font-size: 3rem;
-}
-
-h1,
-h2,
-h3,
-h4 {
-    font-weight: bold;
+    font-size: $font-size-3xl;
     margin-top: $space-md;
+    margin-bottom: $space-sm;
 }
 
-h3,
+h2 {
+    margin-top: $space-md;
+    margin-bottom: $space-sm;
+}
+
+h3 {
+    margin-top: $space-smd;
+    margin-bottom: $space-xs;
+}
+
 h4 {
     margin-top: $space-sm;
-    margin-bottom: 0;
+    margin-bottom: $space-xs;
 }
 
 pre[class^="language-"] {
-    font-size: 0.9rem;
+    font-size: $font-size-sm;
     width: max-content;
     max-width: 100%;
     box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.5);
@@ -27,7 +30,7 @@ pre[class^="language-"] {
 blockquote {
     margin-left: $space-sm;
     padding-left: $space-sm;
-    border-left: rgba(0, 0, 0, 0.2) solid 5px;
+    border-left: $overlay-medium solid 5px;
 }
 
 ul {
@@ -36,19 +39,19 @@ ul {
 
 table {
     border-collapse: collapse;
-    margin: 1.5rem 0;
-    font-size: 0.95rem;
+    margin: $space-smd 0;
+    font-size: $font-size-sm;
 }
 
 th, td {
-    padding: 0.75rem 1rem;
+    padding: $space-xs $space-sm;
     text-align: left;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid $overlay-light;
 }
 
 th {
-    font-weight: 600;
-    background: rgba(0, 0, 0, 0.03);
+    font-weight: $font-weight-semibold;
+    background: $overlay-subtle;
     border-bottom: 2px solid rgba(0, 0, 0, 0.15);
 }
 
