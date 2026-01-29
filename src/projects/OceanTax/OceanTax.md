@@ -14,7 +14,6 @@ collaborators:
  - Walter Lim
 tags: ["Software", "React", "TypeScript", "Rust", "GovHack", "48 Hours"]
 ---
----
 
 <script>
   import MarkdownLink from "$md/MarkdownLink.svelte";

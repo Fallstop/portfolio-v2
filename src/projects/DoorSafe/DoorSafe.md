@@ -11,7 +11,6 @@ tags: ["Software", "Hardware", "TypeScript", "C/C++", "UoA"]
     import pdfURL from "./FullReport.pdf?url";
 </script>
 
-## Door Safe
 
 Living in university accommodation has it's ups and downs. One of the downs is that the doors automatically lock behind you, and you need to use your campus card to get back in. This was a small problem to begin with, but we have gotten complacent over time, and now many of us have now payed the lockout fee many times over. This is not to mention the time wasted waiting to be let back in, or the multiple times that the entire door lock system has gone offline, leaving everyone in the hall locked out.
 
