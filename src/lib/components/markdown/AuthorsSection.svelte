@@ -7,7 +7,6 @@
 
     let { authors = ["Jasper M-W"] }: Props = $props();
 </script>
-Authored by
 {#each authors as author, i}
     {@const authorData = getPersonDetails(author)}
     {@const namePunctuation = i===authors.length-1 ? "" : i===authors.length-2 ? ", and " : ", "}

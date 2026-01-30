@@ -71,7 +71,7 @@ We implemented active second-order Sallen-Key low-pass filters with a cutoff aro
 
 Our initial plan was elegant: use hardware peak detection to grab the maximum voltage and current values, measure the phase offset between the two zero-crossing detectors (one for voltage, one for current), assume perfect sine waves, and calculate power directly. No waveform sampling needed - just peaks and phase. Precision diodes and hold capacitors gave us analog peak-hold circuits, with op-amp buffering so the ADC could read the values without draining the hold caps.
 
-Then we connected it to the test rig. The "sine waves" were anything but—heavily distorted waveforms that made peak-based calculations useless. A distorted wave with the same peak as a pure sine has completely different RMS and power values, and the phase relationship between zero crossings means nothing when the waveform isn't sinusoidal. We abandoned the approach and pivoted to full waveform sampling.
+Then we connected it to the test rig. The "sine waves" were anything but, they were heavily distorted waveforms that made peak-based calculations useless. A distorted wave with the same peak as a pure sine has completely different RMS and power values, and the phase relationship between zero crossings means nothing when the waveform isn't sinusoidal. We abandoned the approach and pivoted to full waveform sampling.
 
 ### Zero-Crossing Detection
 
@@ -155,6 +155,7 @@ The interface gave users a real-time dashboard with live power measurements, an 
 
 The captive portal meant users didn't need to know an IP address. Connect to WiFi, get redirected to the app, instant power monitoring.
 
+
 ## The Bootloader: Updating Firmware Over WiFi
 
 The OTA system started as a "nice to have" feature. It became essential.
@@ -170,9 +171,9 @@ So we built a custom bootloader that let the AVR rewrite its own flash from comm
 5. AVR writes to flash and verifies
 6. Reboot into new firmware
 
-It was terrifying the first time we tried it. One wrong byte and we'd brick our measurement brain. But when it worked—when we could update the core measurement code from a web browser while other teams hunted for a working programmer—it felt like magic.
+It was terrifying the first time we tried it. One wrong byte and we'd brick our measurement brain. But when it worked - when we could update the core measurement code from a web browser while other teams hunted for a working programmer - it felt like magic.
 
-The PCB was designed in Altium Designer with full surface-mount components—ATmega328PB in TQFP package, proper ground planes for signal integrity, and headers for programming and debugging (which we used exactly once before the OTA system was live).
+The PCB was designed in Altium Designer with full surface-mount components, ATmega328PB in TQFP package, proper ground planes for signal integrity, and headers for programming and debugging (which we used exactly once before the OTA system was live).
 
 ## The Enclosure: Form Meets Function
 

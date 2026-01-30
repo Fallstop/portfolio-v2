@@ -4,6 +4,7 @@
     import AuthorsSection from "$lib/components/markdown/AuthorsSection.svelte";
     import CollaboratorSection from "$lib/components/markdown/CollaboratorSection.svelte";
     import LightBoxPage from "$lib/components/markdown/LightBoxPage.svelte";
+    import { getPersonDetails } from "$lib/utilities/getPeopleDetails";
 
 	let { data } = $props();
 </script>
@@ -13,6 +14,12 @@
 	<title>{data.meta.title}</title>
 	<meta property="og:type" content="article" />
 	<meta property="og:title" content={data.meta.title} />
+	{#if data.meta.authors}
+		{#each data.meta.authors as author}
+			{@const authorData = getPersonDetails(author)}
+			<meta property="article:author" content={authorData.homepage ?? authorData.name} />
+		{/each}
+	{/if}
 </svelte:head>
 
 <LightBoxPage/>
