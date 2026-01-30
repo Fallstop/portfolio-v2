@@ -17,17 +17,17 @@
     - {@render author?.()}
 </div>
 <style lang="scss">
+    @use "../../../../variables.scss" as *;
     blockquote {
         margin-bottom: 0;
     }
     .author {
-        padding-left: 4rem;
-        font-weight: bold;
+        padding-left: $space-lg;
+        font-weight: $font-weight-bold;
         font-style: italic;
-        font-size: 0.9rem;
+        font-size: $font-size-sm;
     }
     .quote-mark {
-        font-weight: bold;
-
+        font-weight: $font-weight-bold;
     }
 </style>

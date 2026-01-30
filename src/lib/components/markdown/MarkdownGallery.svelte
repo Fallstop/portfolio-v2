@@ -54,7 +54,7 @@
                 width: 100%;
                 object-fit: cover;
                 vertical-align: middle;
-                transition: all 0.25s ease-in-out;
+                transition: all $transition-base;
                 transform: scale(1);
                 &:hover {
                     transform: scale(1.04);

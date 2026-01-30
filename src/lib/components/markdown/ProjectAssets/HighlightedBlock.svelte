@@ -16,7 +16,9 @@
 <style lang="scss" >
     @use "../../../../variables.scss" as *;
     .container {
-        padding: 1.5rem;
+        padding: $space-smd;
+        margin: $space-sm 0;
+        border-radius: $border-radius;
 
         &.info-style {
             background-color: $info-color;
@@ -31,8 +33,9 @@
         }
 
         header {
-            font-size: 1.2rem;
-            font-weight: bold;
+            font-size: $font-size-md;
+            font-weight: $font-weight-bold;
+            margin-bottom: $space-xs;
         }
     }
 </style>

@@ -13,10 +13,11 @@
 </div>
 
 <style lang="scss">
+    @use "../../../../variables.scss" as *;
     .horizontal-container {
         display: flex;
         flex-direction: row;
-        gap: 1rem;
-        margin-bottom: 1rem;
+        gap: $space-sm;
+        margin-bottom: $space-sm;
     }
 </style>

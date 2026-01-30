@@ -31,7 +31,7 @@ export const AuthorDetails: PeopleDetails[] = [
     },
     {
         name: "Taine Reader",
-        homepage: "https://invalidse.com/",
+        homepage: "https://reader.nz/",
     },
     {
         name: "Jacob Read",
@@ -84,5 +84,9 @@ export const AuthorDetails: PeopleDetails[] = [
     {
         name: "Joel Mansor",
         homepage: "https://www.linkedin.com/in/joel-mansor-bb7654223/"
+    },
+    {
+        name: "Mihir Ojas Rallapudi",
+        homepage: "https://www.linkedin.com/in/mihir-ojas/"
     }
 ];

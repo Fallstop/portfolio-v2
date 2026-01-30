@@ -75,20 +75,20 @@
                 );
             }
             .header {
-                font-size: 2rem;
+                font-size: $font-size-xl;
                 color: $dark-text-color;
                 white-space: nowrap;
 
                 margin: 0;
             }
             .date {
-                font-size: 1.2rem;
-                font-weight: bold;
+                font-size: $font-size-md;
+                font-weight: $font-weight-bold;
                 color: $accent-color;
                 @include body-font;
             }
             .description {
-                font-size: 1.2rem;
+                font-size: $font-size-md;
                 color: $dark-text-color;
                 margin: 0.5rem 0;
             }
@@ -128,7 +128,7 @@
             width: 100%;
             height: 100%;
             z-index: -1;
-            transition: all 250ms ease-in-out;
+            transition: all $transition-base;
             filter: brightness(0.7);
             border-radius: $border-radius;
             overflow: hidden;
@@ -146,7 +146,7 @@
                 opacity: 0.6;
                 content: "";
                 filter: grayscale(50%);
-                transition: all 250ms ease-in-out;
+                transition: all $transition-base;
                 transform: scale(1.1);
             }
             &::before {

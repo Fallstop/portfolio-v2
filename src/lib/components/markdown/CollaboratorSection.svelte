@@ -1,17 +1,18 @@
 <script lang="ts">
     import { getPersonDetails } from "$lib/utilities/getPeopleDetails";
-  import LiveCard from "../utilities/LiveCard.svelte";
+    import LiveCard from "../utilities/LiveCard.svelte";
 
     interface Props {
         collaborators: string[];
+        footer?: boolean;
     }
 
-    let { collaborators }: Props = $props();
+    let { collaborators, footer = false }: Props = $props();
 </script>
 
 {#if collaborators && collaborators.length > 0}
-    <div class="collaborators">
-        <h2>Collaborators</h2>
+    <div class="collaborators" class:footer>
+        <h3>Team</h3>
         <ul>
             {#each collaborators as collaborator}
                 {@const authorData = getPersonDetails(collaborator)}
@@ -35,51 +36,34 @@
 {/if}
 
 <style lang="scss">
+    @use "../../../variables.scss" as *;
     .collaborators {
-        margin-top: 2rem;
-        padding-top: 1rem;
-
-        h2 {
-            margin-bottom: 0;
+        h3 {
+            margin: 0 0 $space-xs 0;
+            font-size: $font-size-sm;
+            font-weight: $font-weight-semibold;
+            color: $hint-color;
+            text-transform: uppercase;
+            letter-spacing: $letter-spacing-wide;
         }
 
-        border-top: 1px solid $mid-tone;
         ul {
-            display: block;
+            display: flex;
+            flex-wrap: wrap;
+            gap: $space-xs;
             padding: 0;
             margin: 0;
             li {
                 margin: 0;
                 padding: 0;
                 list-style: none;
-                display: inline-block;
-                padding-top: 0.5rem;
-                padding-right: 0.5rem;
-
-                a {
-                    // background-color: $mid-tone;
-                    box-shadow: 0 0 0 rgba(0, 0, 0, 0.5);
-                    transition: box-shadow 0.2s ease-in-out;
-
-                    font-weight: bold;
-                    color: $text-color;
-                    text-decoration: none;
-                    color: $text-color;
-
-                    :global(svg) {
-                        height: 1.3em;
-                        max-width: 1.3em;
-                        display: inline;
-                        vertical-align: text-top;
-                    }
-                    &:hover {
-                        box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.5);
-                    }
-                }
-                span {
-                    border: 1px solid $mid-tone;
-                }
             }
+        }
+
+        &.footer {
+            margin-top: $space-md;
+            padding-top: $space-sm;
+            border-top: 1px solid $mid-tone;
         }
     }
 </style>

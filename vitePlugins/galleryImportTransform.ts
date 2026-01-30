@@ -36,13 +36,13 @@ export default function galleryImportTransform({projectRoot}: {projectRoot: stri
         if (source.startsWith("/")) {
           galleryBaseDir = source;
         } else {
-          // Relative import, attempting to not use the node path API for cloudflare worker compatibility
-          let importDirname = importer.split("/").slice(0,-1).join("/");
-          
-          let fullSystemPath = normalizePath(path.join(importDirname, source));
-          
-          
-          galleryBaseDir = fullSystemPath.slice(normalizePath(projectRoot).length);
+          // Relative import
+          // Use path.dirname and path.resolve to handle cross-platform paths correctly
+          let importDir = path.dirname(importer);
+          let fullSystemPath = path.resolve(importDir, source);
+
+          // Use path.relative to compute the project-relative path
+          galleryBaseDir = "/" + normalizePath(path.relative(projectRoot, fullSystemPath));
         }
         return {
           id: galleryBaseDir+magicResolutionKey,

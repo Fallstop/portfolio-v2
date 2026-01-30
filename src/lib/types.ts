@@ -12,4 +12,5 @@ export type Post = {
 	tags: string[]
 	authors: string[]
 	collaborators: string[]
+	hideTopTeam?: boolean
 }

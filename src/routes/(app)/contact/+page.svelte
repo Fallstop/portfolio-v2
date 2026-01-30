@@ -215,7 +215,7 @@
             }
 
             .helper-text {
-                font-size: 0.85rem;
+                font-size: $font-size-sm;
                 color: $hint-color;
             }
             .detail-row {
@@ -236,7 +236,7 @@
                 border: none;
                 padding: 1rem;
                 border-radius: $border-radius;
-                transition: background-color 0.2s ease-in-out;
+                transition: background-color $transition-base;
                 width: max-content;
                 float: right;
 
