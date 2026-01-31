@@ -824,6 +824,18 @@
 		if (dt != 0) {
 			FPS = (1 / dt + 3 * FPS) / 4;
 		}
+
+		frameCount++;
+
+		// Adaptive quality: reduce quality when FPS drops below 30
+		// Only check after warmup period to avoid false positives from initialization
+		if (frameCount > WARMUP_FRAMES && FPS < 30 && !qualityReduced) {
+			if (BLOOM) BLOOM = false;
+			if (SUNRAYS) SUNRAYS = false;
+			qualityReduced = true;
+			console.log("Fluid simulation quality reduced for performance.");
+		}
+
 		if (resizeCanvas()) initFramebuffers();
 		updateColors(dt);
 		applyInputs();
@@ -938,7 +950,8 @@
 			pressureProgram.uniforms.uDivergence,
 			divergence.attach(0),
 		);
-		for (let i = 0; i < PRESSURE_ITERATIONS; i++) {
+		const iterations = qualityReduced ? REDUCED_PRESSURE_ITERATIONS : PRESSURE_ITERATIONS;
+		for (let i = 0; i < iterations; i++) {
 			gl.uniform1i(
 				pressureProgram.uniforms.uPressure,
 				pressure.read.attach(1),
@@ -1318,6 +1331,12 @@
 
 	let blit: (target: any, clear?: boolean) => void;
 
+	// Adaptive quality state
+	let qualityReduced = false;
+	const REDUCED_PRESSURE_ITERATIONS = 10;
+	let frameCount = 0;
+	const WARMUP_FRAMES = 60; // Wait ~1 second at 60fps before checking quality
+
 	setContext(fluidSimContextKey, {
 		randomSplats,
 		splatPointer,
@@ -1325,6 +1344,14 @@
 	});
 
 	onMount(() => {
+		// Check for prefers-reduced-motion accessibility preference
+		const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+		if (prefersReducedMotion) {
+			PAUSED = true;
+			// Return early - don't initialize the full WebGL context for paused sim
+			// Just render one static frame
+		}
+
 		resizeCanvas();
 
 		pointers.push(createPointer());

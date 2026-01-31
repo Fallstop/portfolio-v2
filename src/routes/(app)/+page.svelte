@@ -2,8 +2,6 @@
 
     import Name from "$lib/assets/svg/Name.svelte"
     import PrimaryLayout from "$lib/components/layout/PrimaryLayout.svelte";
-    import FluidCanvas from "$lib/components/fluidSim/FluidCanvas.svelte";
-    import LiveCard from "$lib/components/utilities/LiveCard.svelte";
 
 </script>
 <svelte:head>

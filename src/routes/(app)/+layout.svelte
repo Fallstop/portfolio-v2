@@ -23,7 +23,14 @@
     });
   }
 
-  initTelemetry();
+  // Defer analytics initialization to idle time to reduce main thread blocking
+  if (browser) {
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(() => initTelemetry(), { timeout: 3000 });
+    } else {
+      setTimeout(initTelemetry, 1000);
+    }
+  }
 </script>
 
 {@render children?.()}

@@ -24,16 +24,17 @@ html,body {
     height: 100%;
 }
 
-*, html {
-
+html {
     scroll-behavior: smooth;
+}
 
+* {
     // Firefox
     @supports not selector(::-webkit-scrollbar) {
         scrollbar-width: auto;
         scrollbar-color: $accent-color $background-color;
     }
-	
+
 	// Webkit
 	&::-webkit-scrollbar {
 		width: 10px;

@@ -7,7 +7,7 @@
     NavigationOption,
     type FluidSimFunctions,
   } from "$lib/components/layout/layoutDataStore";
-  import { dev } from "$app/environment";
+  import { browser, dev } from "$app/environment";
 
   import Lazy from "$lib/components/utilities/Lazy.svelte";
   import type { Writable } from "svelte/store";
@@ -37,6 +37,12 @@
   let fluidFPS: number = $state(1);
 
   let fluidCanvas: any | null = $state();
+
+  // Check for prefers-reduced-motion to skip fluid sim entirely for accessibility
+  let prefersReducedMotion = $state(false);
+  if (browser) {
+    prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  }
 
   function fluidCanvasLoaded(e: CustomEvent<FluidSimFunctions>) {
     console.log("Canvas Loaded", e);
@@ -75,7 +81,7 @@
       alt="Personal Headshot"
     />
   {/if}
-  {#if ENABLE_FLUID_SIM}
+  {#if ENABLE_FLUID_SIM && !prefersReducedMotion}
     {#if dev}
       <div class="fps-counter">
         {Math.round(fluidFPS).toString().padStart(3, "0")} FPS
@@ -143,9 +149,10 @@
       bottom: 0;
       z-index: -2;
       user-select: none;
+      margin: 0;
 
-      filter: drop-shadow(0 0 5rem #fff) drop-shadow(0 0 5rem #fff)
-        drop-shadow(0 0 5rem #fff);
+      // Single drop-shadow is ~66% less GPU work than triple
+      filter: drop-shadow(0 0 4rem rgba(255, 255, 255, 0.95));
 
       @media print {
         height: $print-page-padding;
