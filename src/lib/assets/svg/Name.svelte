@@ -1,112 +1,30 @@
 <script lang="ts">
-    import { onDestroy, onMount } from "svelte";
+    import { onMount } from "svelte";
 
-    let canvas: HTMLCanvasElement = undefined as any;
     let duration = "8s";
 
     let svgElement: SVGSVGElement = $state() as SVGSVGElement;
-    let canvasRendered = false;
 
-    let backgroundBlurSize = 200;
+    let hasGPU = $state(true);
 
-    let windowInnerWidth = 0;
-    let windowInnerHeight = 0;
-
-    function generateSVGImage() {
-        let xml = new XMLSerializer().serializeToString(svgElement);
-        // make it base64
-        let svg64 = btoa(xml);
-        let b64Start = "data:image/svg+xml;base64,";
-
-        // prepend a "header"
-        return b64Start + svg64;
-    }
-    let i = 0;
-
-    function renderCanvas() {
-        if (!canvas) return;
-
-        let boundingBox = svgElement.getBoundingClientRect();
-        let area: [number, number, number, number] = [
-            boundingBox.x,
-            boundingBox.y,
-            boundingBox.width,
-            boundingBox.height,
-        ];
-
-        canvas.width = windowInnerWidth;
-        canvas.height = Math.max(
-            svgElement.height.baseVal.value + 8 * boundingBox.y,
-            windowInnerHeight
-        );
-        const ctx = canvas.getContext("2d");
-        if (!ctx) return;
-
-        let filterIntensifiers: string[] = [];
-        // filterIntensifiers.push("saturate(300%)");
-        // filterIntensifiers.push("contrast(300%)");
-        // filterIntensifiers.push("brightness(500%)");
-        filterIntensifiers.push("opacity(0.8)");
-        filterIntensifiers.push(`blur(${backgroundBlurSize}px)`);
-
-        // Draw optimised blurred background to canvas
-        ctx.filter = filterIntensifiers.join(" ");
-        // Draw gradient to canvas
-        const gradient = ctx.createLinearGradient(...area);
-        gradient.addColorStop(0, "#451952");
-        gradient.addColorStop(0.25, "#662549");
-        gradient.addColorStop(0.5, "#AE445A");
-        gradient.addColorStop(0.75, "#F39F5A");
-        gradient.addColorStop(1, "#451952");
-
-        ctx.fillStyle = gradient;
-
-        // Get SVG Viewbox width/height
-        let viewBox = svgElement
-            .getAttribute("viewBox")!
-            .split(" ")
-            .map((x) => +x);
-        let viewBoxWidth = viewBox[2];
-        let viewBoxHeight = viewBox[3];
-
-        ctx.translate(boundingBox.x, boundingBox.y);
-        ctx.scale(
-            boundingBox.width / viewBoxWidth,
-            boundingBox.height / viewBoxHeight
-        );
-        // ctx.translate(-42.021, -33.288);
-
-        // ctx.fillRect(...area);
-
-        svgElement.querySelectorAll(".canvasDraw").forEach((x) => {
-            let p = new Path2D(x.getAttribute("d")!);
-            // p.moveTo(boundingBox.x, boundingBox.y);
-            ctx.fill(p);
-        });
-
-        // We've rendered everything! We're good to remove the backup text
-        canvasRendered = true;
-    }
-    let renderInterval: ReturnType<typeof setInterval> | undefined;
-
-    function renderCache() {
-        // Only the horizontal size of the window is important for rendering
-        if (windowInnerWidth !== window.innerWidth && windowInnerWidth !== window.innerHeight) {
-            windowInnerWidth = window.innerWidth;
-            windowInnerHeight = window.innerHeight;
-            renderCanvas();
+    function detectGPUAcceleration(): boolean {
+        try {
+            const testCanvas = document.createElement('canvas');
+            const gl = testCanvas.getContext('webgl2') || testCanvas.getContext('webgl');
+            if (!gl) return false;
+            const debugInfo = gl.getExtension('WEBGL_debug_renderer_info');
+            if (debugInfo) {
+                const renderer = gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL);
+                if (/SwiftShader|Software|llvmpipe/i.test(renderer)) return false;
+            }
+            return true;
+        } catch {
+            return false;
         }
-        window.requestAnimationFrame(renderCache);
-        
     }
 
     onMount(() => {
-        renderCache();
-        // renderInterval = setInterval(renderCache, 1000);
-    });
-
-    onDestroy(() => {
-        if (renderInterval) clearInterval(renderInterval);
+        hasGPU = detectGPUAcceleration();
     });
 </script>
 
@@ -117,6 +35,7 @@
     viewBox="0 0 326.56 144.96"
     xmlns="http://www.w3.org/2000/svg"
     class="blur-background"
+    class:no-gpu={!hasGPU}
     style="--svg-width: 100cqi;"
 >
     <defs>
@@ -271,21 +190,17 @@
         z-index: -1;
         top: 0;
         left: 0;
-        // mask: radial-gradient(ellipse 80% 60% at center, 
-        //        rgba(0,0,0,1) 30%, 
-        //        rgba(0,0,0,0.8) 50%, 
-        //        rgba(0,0,0,0.3) 80%, 
-        //        rgba(0,0,0,0) 100%);
-        // -webkit-mask: radial-gradient(ellipse 80% 60% at center, 
-        //               rgba(0,0,0,1) 30%, 
-        //               rgba(0,0,0,0.8) 50%, 
-        //               rgba(0,0,0,0.3) 80%, 
-        //               rgba(0,0,0,0) 100%);
         .text-group {
             > * {
                 transform: scale(1.5);
                 transform-origin: center;
             }
+        }
+
+        &.no-gpu {
+            // Hide entirely without GPU — the unblurred text looks bad.
+            // MultiLayout provides a subtle gradient fallback instead.
+            display: none;
         }
     }
 

@@ -87,6 +87,7 @@
         {Math.round(fluidFPS).toString().padStart(3, "0")} FPS
       </div>
     {/if}
+    <div class="gradient-fallback"></div>
     <Lazy this={() => import("$lib/components/fluidSim/FluidCanvas.svelte")}>
       {#snippet component({ Component: FluidCanvas })}
         <FluidCanvas
@@ -188,6 +189,27 @@
         font-size: 1rem;
         padding: 0.2rem;
       }
+      @media print {
+        display: none;
+      }
+    }
+
+    .gradient-fallback {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      z-index: -11;
+      pointer-events: none;
+      background: radial-gradient(
+        ellipse at 30% 40%,
+        rgba(174, 68, 90, 0.32) 0%,
+        rgba(102, 37, 73, 0.22) 40%,
+        rgba(69, 25, 82, 0.14) 70%,
+        transparent 100%
+      );
+
       @media print {
         display: none;
       }

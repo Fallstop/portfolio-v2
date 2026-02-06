@@ -907,6 +907,9 @@
 	let frameCount = 0;
 	const WARMUP_FRAMES = 60; // Wait ~1 second at 60fps before checking quality
 
+	// Track whether WebGL initialized successfully
+	let webglInitialized = $state(false);
+
 	onMount(() => {
 		// Check for prefers-reduced-motion accessibility preference
 		const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -1052,6 +1055,8 @@
 		initFramebuffers();
 		multipleSplats(Math.trunc(Math.random() * 20) + 5);
 
+		webglInitialized = true;
+
 		eventDispatch("loaded", {
 			splatPoint,
 		});
@@ -1086,7 +1091,7 @@
 	{/each}
 </div>
 
-{#if INTERACTIVE}
+{#if INTERACTIVE && webglInitialized}
 	<InteractiveMouse />
 {/if}
 
