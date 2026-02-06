@@ -38,7 +38,14 @@
         />
         <ul class="project-list">
             {#if projectSearch?.searchResult}
-                <ProjectThumbnails posts={projectSearch?.searchResult} />
+                {#if projectSearch.searchResult.length === 0}
+                    <div class="no-results">
+                        <p>No projects found. Want to suggest an idea?</p>
+                        <a href="/contact">Get in touch</a>
+                    </div>
+                {:else}
+                    <ProjectThumbnails posts={projectSearch.searchResult} />
+                {/if}
             {/if}
         </ul>
     </div>
@@ -49,6 +56,23 @@
     @use "sass:color";
     @use "sass:math";
     $max-projects: 100;
+
+    .project-container .no-results {
+        width: 100%;
+        text-align: center;
+        padding: $space-lg 0;
+        color: $hint-color;
+
+        p {
+            margin-bottom: $space-sm;
+        }
+
+        a {
+            color: $secondary-color;
+            text-decoration: underline;
+            text-underline-offset: 0.2em;
+        }
+    }
 
     .project-container .project-list {
         list-style: none;

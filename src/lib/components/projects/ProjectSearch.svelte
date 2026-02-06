@@ -133,6 +133,7 @@
                     outline: none;
                 }
                 background: none;
+                color-scheme: light;
             }
             // Search Icon
             :global(svg) {
