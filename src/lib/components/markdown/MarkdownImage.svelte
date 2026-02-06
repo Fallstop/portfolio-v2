@@ -37,7 +37,9 @@
 
     let rawLink = $derived(typeof src === "string" ? src : undefined);
 
-    const {classes, altText} = parseSettings(alt);
+    const parsedSettings = $derived(parseSettings(alt));
+    const classes = $derived(parsedSettings.classes);
+    const altText = $derived(parsedSettings.altText);
 </script>
 
 

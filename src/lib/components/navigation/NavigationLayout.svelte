@@ -76,10 +76,6 @@
                 grid-template-columns: 50% 50%;
                 grid-template-rows: 1fr 1fr;
                 padding: 2rem;
-                .empty {
-                    // Not needed in column layout
-                    display: none;
-                }
             }
 
             &.column {
@@ -97,10 +93,6 @@
                 grid-template-rows: 1fr 1fr;
                 grid-gap: 0.5rem;
                 padding: 1rem;
-                .empty {
-                    // Not needed in column layout
-                    display: none;
-                }
             }
             &.desktop-only {
                 display: none;

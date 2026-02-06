@@ -12,7 +12,9 @@
     }
 
     let { src = {}, alt = "" }: Props = $props();
-    const { classes, altText } = parseSettings(alt);
+    const parsed = $derived(parseSettings(alt));
+    const classes = $derived(parsed.classes);
+    const altText = $derived(parsed.altText);
 
     let imagesData: [ProcessedImageMetadata, ProcessedImageMetadata][] =
         $derived(Object.values(src).map((x: any) => x.default));

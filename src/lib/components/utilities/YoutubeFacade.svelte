@@ -13,7 +13,7 @@
   }
   let { videoId, shortMode = false, rounded = true }: Props = $props();
 
-  const thumbnailLink = `https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg`;
+  const thumbnailLink = $derived(`https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg`);
 
   let activated = $state(false);
   let hovered = $state(false);

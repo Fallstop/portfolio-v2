@@ -12,20 +12,22 @@
 
     let { src, alt, ...rest }: Props = $props();
 
-    let type: "image" | "video" | "gallery" | "pdf" = $state("image");
-    if (Array.isArray(src)) {
-        type = "image"
-    } else if (typeof src === "object") {
-        type = "gallery";
-    } else {
-        let extension = src?.split('.')?.pop()?.toLowerCase();
-        if (['mp4', 'webm', 'ogg'].includes(extension ?? "")) {
-            type = "video";
+    let type: "image" | "video" | "gallery" | "pdf" = $derived.by(() => {
+        if (Array.isArray(src)) {
+            return "image";
+        } else if (typeof src === "object") {
+            return "gallery";
+        } else {
+            let extension = src?.split('.')?.pop()?.toLowerCase();
+            if (['mp4', 'webm', 'ogg'].includes(extension ?? "")) {
+                return "video";
+            }
+            if (['pdf'].includes(extension ?? "")) {
+                return "pdf";
+            }
         }
-        if (['pdf'].includes(extension ?? "")) {
-            type = "pdf";
-        }
-    }
+        return "image";
+    });
 </script>
 {#if type=="gallery"}
     <MarkdownGallery {src} {alt} {...rest}/>

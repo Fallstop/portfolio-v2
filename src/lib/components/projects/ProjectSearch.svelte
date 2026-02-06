@@ -43,9 +43,9 @@
         }
     }
 
-    const fuse = new Fuse(projectList, {
+    const fuse = $derived(new Fuse(projectList, {
         keys: ["title", "description", "date"],
-    });
+    }));
 
     let textSearch = $state("");
 

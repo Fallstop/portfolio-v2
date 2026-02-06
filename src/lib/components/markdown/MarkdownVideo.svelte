@@ -7,11 +7,11 @@
     }
 
     let { alt = "", ...rest }: Props = $props();
-    const {classes, altText} = parseSettings(alt);
+    const parsed = $derived(parseSettings(alt));
 </script>
-<div class:center={classes.includes("center")}>
+<div class:center={parsed.classes.includes("center")}>
     <!-- svelte-ignore a11y_media_has_caption -->
-    <video {...rest} controls class="{classes} border" aria-describedby={altText} title={altText}>
+    <video {...rest} controls class="{parsed.classes} border" aria-describedby={parsed.altText} title={parsed.altText}>
         Your browser does not support the video tag.
     </video>
 </div>

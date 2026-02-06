@@ -42,7 +42,8 @@ export default function galleryImportTransform({projectRoot}: {projectRoot: stri
           let fullSystemPath = path.resolve(importDir, source);
 
           // Use path.relative to compute the project-relative path
-          galleryBaseDir = "/" + normalizePath(path.relative(projectRoot, fullSystemPath));
+          // Preserve trailing slash from source (needed for import.meta.glob pattern)
+          galleryBaseDir = "/" + normalizePath(path.relative(projectRoot, fullSystemPath)) + "/";
         }
         return {
           id: galleryBaseDir+magicResolutionKey,

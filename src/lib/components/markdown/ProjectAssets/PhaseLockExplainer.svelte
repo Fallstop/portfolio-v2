@@ -701,43 +701,6 @@
 		height: auto;
 	}
 
-	.status-overlay {
-		position: absolute;
-		top: $space-xs;
-		left: $space-xs;
-		display: flex;
-		align-items: center;
-		gap: 0.5rem;
-		padding: 0.3rem 0.6rem;
-		background: rgba(0, 0, 0, 0.7);
-		border-radius: $border-radius;
-		backdrop-filter: blur(4px);
-	}
-
-	.status-dot {
-		width: 8px;
-		height: 8px;
-		background: $hint-color;
-		border-radius: 50%;
-		transition: background 0.2s;
-		
-		&.active {
-			background: $positive-color;
-			animation: pulse 1s ease infinite;
-		}
-	}
-
-	@keyframes pulse {
-		0%, 100% { opacity: 1; }
-		50% { opacity: 0.4; }
-	}
-
-	.status-text {
-		@include mono-font;
-		font-size: 0.7rem;
-		color: rgba(255, 255, 255, 0.8);
-	}
-
 	.info-panel {
 		display: flex;
 		gap: $space-sm;

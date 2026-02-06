@@ -11,17 +11,3 @@
 </script>
 
 <YoutubeFacade videoId={videoID} {shortMode} {rounded} />
-
-<style lang="scss">
-    .youtubeWrapper {
-        position: relative;
-        width: 100%;
-        padding-bottom: 56.25%;
-
-        &.shortMode {
-            width: min-content;
-            height: 5rem;
-            padding-right: 50%;
-        }
-    }
-</style>
