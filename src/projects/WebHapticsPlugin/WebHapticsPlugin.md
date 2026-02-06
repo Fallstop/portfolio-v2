@@ -31,7 +31,7 @@ My new MX Master 4 mouse features a haptic motor, so I created a simple WebSocke
 
 There's always the flip side, though. Remember what happened when we got push notifications: every site instantly weaponised them. Pop-up windows were so abused that every browser had to kill them with fire. If a real Haptics API ships with actual support, how long before an ad network starts serving "feel this deal!" vibrations on every load to harvest 2% extra attention?
 
-It's likely that Haptics will never get the critcal-mass attention for wide adoption, but dammit - I'm going to keep building with it.
+It's likely that Haptics will never get the critical-mass attention for wide adoption, but dammit - I'm going to keep building with it.
 <!-- Long-term view: will we look back at haptic-everything the way we now view 2020 neumorphic blob-buttons, or is tactile feedback the inevitable final layer of UX?
 
 So, do we start pushing for a proper permission-gated Haptics API tomorrow, or is the web better off staying numb forever? -->

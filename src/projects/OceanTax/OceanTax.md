@@ -24,8 +24,7 @@ tags: ["Software", "React", "TypeScript", "Rust", "GovHack", "48 Hours"]
 
 <MarkdownLink href="https://2024.hackerspace.govhack.org/projects/what_s_your_ocean_tax">Govhack Project</MarkdownLink>
 <MarkdownLink href="https://water.haxx.nz/">water.haxx.nz</MarkdownLink>
-<MarkdownLink href="https://github.com/govhack-2024/Report-card">Questionable-Research-Labs/
-Report-card</MarkdownLink>
+<MarkdownLink href="https://github.com/govhack-2024/Report-card">govhack-2024/Report-card</MarkdownLink>
 <MarkdownLink href="https://youtu.be/RBtr1msbol8">Presentation Video</MarkdownLink>
 
 

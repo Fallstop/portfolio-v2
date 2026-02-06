@@ -24,7 +24,7 @@ This year, on April Fools, reddit unleashed r/place 2 (electric boogaloo). This 
 [![R/Place canvas, many diffrent artworks made by thousands of communities](./finalPlace.png)](https://www.reddit.com/r/place/?cx=1000&cy=1683&px=610&ts=1649112460185)
 
 ### What is r/place
-For those of you have no clue what a r/place or even a reddit is, let me fill in the details. [Reddit](https://reddit.com) is a social networking site, and much like all other social networkings sites, is a complete cesspool. r/place was a *social experiment* devised by the Reddit, in which each user on the platform could place a single tile every five minutes on a canvas, like a Million Dollar Homepage rip-off.
+For those of you who have no clue what a r/place or even a reddit is, let me fill in the details. [Reddit](https://reddit.com) is a social networking site, and much like all other social networkings sites, is a complete cesspool. r/place was a *social experiment* devised by the Reddit, in which each user on the platform could place a single tile every five minutes on a canvas, like a Million Dollar Homepage rip-off.
 The first iteration took place on April fools 2017, and then, for some unknown reason, Reddit decided to resurrect this mess of an experiment in 2022, but now on a *much larger* scale.
 
 In this madness, we saw an opportunity for **botting**.
@@ -51,7 +51,7 @@ Obviously, having only a couple bots running on each of our dev machines was *hi
 
 To solve this problem and make our plane *truly* scalable, we came up with a completely 100% definitely done anywhere else, original solution, chuck it in a docker container.
 
-Now I know what your thinking, chucking it into a docker container isn't original at all, however that's where you wrong, we chucked it into a docker container, and used a browser with built in *tor*. 
+Now I know what your thinking, chucking it into a docker container isn't original at all, however that's where you're wrong, we chucked it into a docker container, and used a browser with built in *tor*. 
 
 I know, *truly groundbreaking*.
 
@@ -64,7 +64,7 @@ Well, it creates/solves several problems:
 - It gives each bot a unique IP so we don't look *sus*, increases the bots to pc ratios
 - It gives us a reason to add extra hype-words like *deep web*, *tor*, *onion routing*, *docker*, *containerisation*, and *distributed systems*. Incredible.
 - It also involves a lot more headaches with trying to configure the containers on a bot on bot instance, we almost had to do it properly until we jammed some json into an env variable.
-- We made one of our dev server's hate us
+- We made one of our dev servers hate us
 
 ![Server dying - it was doing its best:small](./serverDying.png)
 

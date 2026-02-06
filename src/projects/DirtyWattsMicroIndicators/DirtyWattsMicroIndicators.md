@@ -17,7 +17,6 @@ tags: ["Software", "Svelte", "TypeScript", "C/C++", "Python", "GovHack", "Scienc
 
 <script>
   import MarkdownLink from "$md/MarkdownLink.svelte";
-  import YoutubeEmbed from "$md/YoutubeEmbed.svelte";
 </script>
 
 
@@ -35,7 +34,7 @@ In **Aotearoa**, our ***power*** is not always from renewable sources. **Coal** 
 Micro-Indicators is a branch off another project with a whole team behind it.
 
 ### Indicator Device
-Aside from the main dashboard, there was a side project being worked, a DirtyWatts Indicator. Taine Reader and Ara Bartlett with the mentoring of Mac Jones built a hardware summary device that showed the state of the power grid through a single Indicator light. It scales from red at worst, to orange, to yellow, to green at best, considering the which sources of power are active to give a metric of our “clean” your power is.
+Aside from the main dashboard, there was a side project being worked, a DirtyWatts Indicator. Taine Reader and Ara Bartlett with the mentoring of Mac Jones built a hardware summary device that showed the state of the power grid through a single Indicator light. It scales from red at worst, to orange, to yellow, to green at best, considering which sources of power are active to give a metric of how "clean" your power is.
 
 ![Team sitting around the first prototype globe:small](./GovhackPhotos/FirstIndicator.webp)
 
@@ -94,9 +93,7 @@ This device is based on my old watch, a T-Watch 2020, it's an open-source watch 
 
 ## Custom VFD Board
 
-A while ago, I came across some mysterious 8-segment display tubes. After a bit of research, it turns out they were Vacuum Florescent Display Tubes from the USSR, the forgotten middle child between the famous Nixie Tubes, and today's LED digit displays. They were so forgotten that there was no-longer any documentation online about the particular tubes I had worked, creating an irresistible challenge for me. I thought it was the perfect mini-project to finally get a chance to learn how to design circuit boards, how to laser cut, and test out the Micro-Indicator framework with a novel design.
-
-A while ago, I came across some mysterious 8-segment display tubes. After a bit of research, it turns out they were Vacuum Florescent Display Tubes from the USSR, the forgotten middle child between the famous Nixie Tubes, and today's LED digit displays. For some unknown reason, the USSR doesn't seem to be around today, so there was absolutely no documentation on how they should be used! This was an irresistible challenge for me, so I took it up as a subproject showing how far you can take the Micro-Indicator framework, learning how to design circuit boards and laser cut along the way.
+A while ago, I came across some mysterious 8-segment display tubes. After a bit of research, it turns out they were Vacuum Florescent Display Tubes from the USSR, the forgotten middle child between the famous Nixie Tubes, and today's LED digit displays. There was absolutely no documentation online about the particular tubes I had, creating an irresistible challenge for me. This was the perfect mini-project to finally get a chance to learn how to design circuit boards, laser cut, and test out the Micro-Indicator framework with a novel design. I took it up as a subproject showing how far you can take the Micro-Indicator framework, learning how to design circuit boards and laser cut along the way.
 
 ![:full](./DevicePhotos/VFD/)
 
@@ -104,7 +101,7 @@ A while ago, I came across some mysterious 8-segment display tubes. After a bit 
 Translating live data from the power grid into a single light
 
 Unfortunately, we can't display every part of the power grid on one light, but we can “summarise” that information into one metric. That summarisation process is called a Scoring Algorithm. During the original GovHack competition, Taine Reader developed a Scoring Algorithm for the demonstration based off the past six hours of data, which was used initially for all devices.
-Now, it's a year later and the project has collected over 110,000 data points of how the power-grid behaves throughout all seasons. The original algorithm was showing it's weaknesses, so I set out to develop a new and more representative colour scale.
+Now, it's a year later and the project has collected over 110,000 data points of how the power-grid behaves throughout all seasons. The original algorithm was showing its weaknesses, so I set out to develop a new and more representative colour scale.
 
 ### CO2e Emissions by Power Source
 ![:large:borderless](./Graphs/Co2eEmissionsTransparent.png)

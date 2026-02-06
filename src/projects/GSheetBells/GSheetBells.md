@@ -196,7 +196,7 @@ Description
 ![This is the highest resolution release they have](./InnovationWirelessInterface.png)
 
 
-![Innovation Wireless Controller definitely has wires:borderless](./InervationWirelessController.png)
+![Innovation Wireless Controller definitely has wires:borderless](./InnovationWirelessController.png)
 
 
 

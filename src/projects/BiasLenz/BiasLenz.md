@@ -34,7 +34,7 @@ tags: ["Software", "Svelte", "Python", "GovHack", "48 Hours"]
 Have you ever seen a truly awful photo of a politician in a newspaper? Next to the confident stance of the opposing party? The photography used in our media is the first thing we see, and can bias our opinions before we've even read the article. BiasLenz scans photography from New Zealand's biggest media organisations, looking for a political stance in their portrait photography.
 
 ## Data Scrapper
-BiasLenz get's it's data from two places:
+BiasLenz gets its data from two places:
  - RSS Feeds from each organisation, scraping the headline photo from the page
  - Google Images search for images hosted on each news site with the politician
 

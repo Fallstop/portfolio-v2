@@ -13,23 +13,23 @@ tags: ["Software", "Svelte", "TypeScript", "Huanui College"]
 <MarkdownLink href="https://github.com/Fallstop/HCNoticeReader">Fallstop/HCNoticeReader</MarkdownLink>
 <MarkdownLink href="https://hcnotices.jmw.nz">hcnotices.jmw.nz</MarkdownLink>
 
-This is the second iteration of the HC Notices project, two years later. The first version was my first time using Svelte, and has quite a few compromises in the design. I've gone and rewritten it into the Sveltekit framework to create a zero-comprises design. I went through and added every single feature I found useful, no matter how over-engineered or esoteric they were.
+This is the second iteration of the HC Notices project, two years later. The first version was my first time using Svelte, and has quite a few compromises in the design. I've gone and rewritten it into the Sveltekit framework to create a zero-compromises design. I went through and added every single feature I found useful, no matter how over-engineered or esoteric they were.
 
 ## User Flow
 
 #### Homepage
 
-The landing page is simple - the current day's notice is dead center, with arrows to move between days. For touch users, they can simply use the one-one gesture to move between days. The current date at the top of the notice is a calendar button for jumping to a particular day. This is designed to load lightning fast, with a tiny __kb package and the latest notice data preloaded.
+The landing page is simple - the current day's notice is dead center, with arrows to move between days. For touch users, they can simply use the two-finger gesture to move between days. The current date at the top of the notice is a calendar button for jumping to a particular day. This is designed to load lightning fast, with a tiny __kb package and the latest notice data preloaded.
 
 ![](./Homepage.png)
 
 #### Print
-The last version of the HCNotices reader used the same page for printing, with a massive set of print-specific styles. Unfortunately, that caused a bunch of compatibility issues with particular browsers cutting off text. To reduce that with this iteration, I moved the print layout into it's own simplified page.
+The last version of the HCNotices reader used the same page for printing, with a massive set of print-specific styles. Unfortunately, that caused a bunch of compatibility issues with particular browsers cutting off text. To reduce that with this iteration, I moved the print layout into its own simplified page.
 
 ![](./PrintPage.png)
 
 #### Email Newsletter
-Some people want a reminder about the daily notice in their inbox, so they can now signup for the automated daily email with the newsletter content. This is rendered every morning in a custom MJML and sent out with MailJet's free tier. That free tier has a pretty low sending cap, so the signup page also includes subscriber stats, and stops new signup's at 95% capacity.
+Some people want a reminder about the daily notice in their inbox, so they can now signup for the automated daily email with the newsletter content. This is rendered every morning in a custom MJML and sent out with MailJet's free tier. That free tier has a pretty low sending cap, so the signup page also includes subscriber stats, and stops new signups at 95% capacity.
 
 ![](./mail/)
 

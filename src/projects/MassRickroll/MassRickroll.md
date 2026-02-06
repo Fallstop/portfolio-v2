@@ -5,7 +5,7 @@ description: "A group rickroll experience like no other."
 tags: ["Software", "TypeScript"]
 ---
 
-This is a system where via multiple methods, a [client connects](https://mass-rickroll.host.qrl.nz/active) to a remote server where [anyone can trigger an event](http://mass-rickroll.host.qrl.nz/rick) to rickroll everyone connected simultaneously.
+This is a system where via multiple methods, a [client connects](https://mass-rickroll.host.qrl.nz/active) to a remote server where [anyone can trigger an event](https://mass-rickroll.host.qrl.nz/rick) to rickroll everyone connected simultaneously.
 
 ## Links
  - Github: [HC-API-Tools](https://github.com/Fallstop/mass-rickroll)

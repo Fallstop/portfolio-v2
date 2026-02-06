@@ -16,9 +16,9 @@ A short deadline project developed for the Naut, a local E-Boat company, to use 
 
 ## Game Modes
 ### Non-Competitive
-![:full](./Compeditive/)
-### Competitive
 ![:full](./NonCompeditive/)
+### Competitive
+![:full](./Compeditive/)
 
 ## Admin Page
 The admin page can be opened on any nearby device connected to the management hotspot. In the admin portal, you can start the game, configure settings, and change game flows.

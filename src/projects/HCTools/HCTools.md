@@ -1,7 +1,7 @@
 ---
 date: "2021-04-04"
 title: "HC API Tools"
-description: "Simple to use API Gateway to access the mess of Huanui Collage Public data with ease."
+description: "Simple to use API Gateway to access the mess of Huanui College Public data with ease."
 tags: ["Software", "TypeScript", "Huanui College"]
 ---
 <script lang="ts">
@@ -16,7 +16,7 @@ tags: ["Software", "TypeScript", "Huanui College"]
 
 
 # Why this is a thing
-Because most of schools data about what events are coming, and what time table day it is, etc is posted on a google calender, which is non-machine friendly with a weird blend of timezones and API keys etc and non-human friendly because it is overly cluttered, also *no calender ever should have bulk text descriptions*. So I have made a simple open-source API Gateway.
+Because most of schools data about what events are coming, and what time table day it is, etc is posted on a google calendar, which is non-machine friendly with a weird blend of timezones and API keys etc and non-human friendly because it is overly cluttered, also *no calendar ever should have bulk text descriptions*. So I have made a simple open-source API Gateway.
 
 ## Methods
 HTTP API Route: `https://hctools.jmw.nz/api/`
@@ -24,7 +24,7 @@ HTTP API Route: `https://hctools.jmw.nz/api/`
 ### `gettimetableday/<?date>`
 > **Completed**
 
-The time table is completely disjointed from the actual calender, and jumps around a lot. So this API, with an optional date parameter (default is today), it will return a json object like this example:
+The time table is completely disjointed from the actual calendar, and jumps around a lot. So this API, with an optional date parameter (default is today), it will return a json object like this example:
 ```json
 { 
     "currentDay": 10, // Returns the current day, not returned if Day X event was missing
@@ -36,7 +36,7 @@ The time table is completely disjointed from the actual calender, and jumps arou
 ### `getdailynotice/<?date>`
 > **Completed**
 
-The daily notices are stored in the description of an google calendar event, not very easy to read due to the small box. This API method makes it easy to retrieve the notice to display in another webapp.
+The daily notices are stored in the description of a google calendar event, not very easy to read due to the small box. This API method makes it easy to retrieve the notice to display in another webapp.
 ```json
 { 
     "noticeText": "Wow yes notice<br>Remember to filter the HTML before using it!", // Returns the current day, not returned if Day X event was missing

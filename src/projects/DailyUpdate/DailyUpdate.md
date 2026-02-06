@@ -13,7 +13,7 @@ tags: ["Software", "Svelte", "TypeScript", "COVID"]
 </script>
 
 <MarkdownLink href="https://github.com/Fallstop/CovidAnnouncementTimer">Frontend</MarkdownLink>
-<MarkdownLink href="https://github.com/Fallstop/CovidAnnouncmentBackend">Backend</MarkdownLink>
+<MarkdownLink href="https://github.com/Fallstop/CovidAnnouncementBackend">Backend</MarkdownLink>
 <MarkdownLink href="https://dailyupdate.nz">dailyupdate.nz</MarkdownLink>
 
 ### Find out when the daily update is and watch it live.

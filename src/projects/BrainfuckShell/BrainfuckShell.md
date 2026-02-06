@@ -56,9 +56,9 @@ snap install brainfuck-shell
 
 ### From Source
 
-Snap does not support allot of platforms, so you can install from source as well pretty easily:
+Snap does not support a lot of platforms, so you can install from source as well pretty easily:
 
-You need make sure you have installed [rustup](https://rustup.rs/) and the latest stable compiler via `rustup install stable`):
+You need to make sure you have installed [rustup](https://rustup.rs/) and the latest stable compiler via `rustup install stable`:
 
 To build Brainf*ck-Shell, you will need to use the **latest stable (1.47 or later)** version of the compiler.
 

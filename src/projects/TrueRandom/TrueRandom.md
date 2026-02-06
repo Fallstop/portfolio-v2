@@ -41,7 +41,7 @@ The abstraction of the ODrive is abstracted again by the code running on the ded
 
 ### The Web Server
 
-The website ([truerandom.ml](https://truerandom.ml/)) is vaguely inspired by the legendary [is even api](https://isevenapi.xyz/), it is dockerized and is self hosted on [QRL's](https://qrl.nz) servers.
+The website ([tr.host.qrl.nz](https://tr.host.qrl.nz/)) is vaguely inspired by the legendary [is even api](https://isevenapi.xyz/), it is dockerized and is self hosted on [QRL's](https://qrl.nz) servers.
 
 ##### **User facing API**
 

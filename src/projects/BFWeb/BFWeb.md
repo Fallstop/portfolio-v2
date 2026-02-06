@@ -28,7 +28,7 @@ Brainf*ck is the future of programming, and this brings it to the web using init
 
 ### Example Usage
 
-Let's go through the process to use [this example website][web-bf-example], which doesn't support mobile (*which is most definitely not from intense technical limits on length*)
+Let's go through the process to use [this example website]({examplePageLink}), which doesn't support mobile (*which is most definitely not from intense technical limits on length*)
 
 First you start out your super simple brainf*ck code:
 
@@ -54,7 +54,7 @@ Then put the brainf*ck into our [Online Encoder](https://bf-web.qrl.nz/):
 
 ![Brainf*ck in simple encoder](./exanple_encoder.png)
 
-Now with the click of a button, you get a hosted URL which you can share around! In the example, it generates [the link from earlier]({examplePageLink}), which is only 19 thousand characters long.
+Now with the click of a button, you get a hosted URL which you can share around! In the example, it generates a URL (shown below), which is only 19 thousand characters long.
 
 
 <MarkdownLink color="#342e7e" href={examplePageLink}>

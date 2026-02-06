@@ -53,7 +53,7 @@ This year, the teams were provided with the following theme:
 
 ## The concept
 
-To fit the theme, we select "The Most Retro" as our superlative. We decided to build a payload that would take photos upon deployment using a commerical film camera. Alongside the film camera, we wanted to include a small digital camera, and a sensor/communication module to send telemetry data back to the ground.
+To fit the theme, we select "The Most Retro" as our superlative. We decided to build a payload that would take photos upon deployment using a commercial film camera. Alongside the film camera, we wanted to include a small digital camera, and a sensor/communication module to send telemetry data back to the ground.
 
 ![:borderless:medium:center](./WinnerCameraTransparent.png)
 
@@ -99,7 +99,7 @@ In a bid to keep things as simple as possible, we decide to use a servo for the 
 
 For implementing, we decided on using an SG-90 servo for both the trigger and film advance, simply modding the latter to turn it into a geared down DC motor. To sense the current, we just needed a nice little bit of first-year opamp analysis to calculate a circuit to measure current.
 
-After all, if it didn't work, we always had the next iteration to get it right. This is what we call forshadowing.
+After all, if it didn't work, we always had the next iteration to get it right. This is what we call foreshadowing.
 
 ### Mechanical
 **Constraints:** The payload must fit within the I class rocket. The airspace that can house the payload has a maximum height of 125 mm and a maximum width/diameter of 74 mm. This airspace must also have room to hold the parachute when it's not being deployed. The payload must also eject out from the rocket freely after reaching apogee. The payload must also be able to open and close, so we can access the electronics inside. Relative to the total space available, the film camera was massive, at 114.512 mm x 55 mm x 26.1 mm.
@@ -114,7 +114,7 @@ As a result of us maximising the rocket tube's airspace, we had to come up with 
 ![:center](./misc_images/RopeThing2.jpg)
 
 #### Version 0
-'Version 0' was our inital proof-of-concept to make sure our film camera could fit inside our allocated payload size. We 3D printed a cylinder with the area for the camera cut out of the inside. The benafits of doing this allowed the whole team to get an idea of area around the camera we have to work with, and with the CAD model we could start allocating space for different elements.
+'Version 0' was our initial proof-of-concept to make sure our film camera could fit inside our allocated payload size. We 3D printed a cylinder with the area for the camera cut out of the inside. The benefits of doing this allowed the whole team to get an idea of area around the camera we have to work with, and with the CAD model we could start allocating space for different elements.
 <!-- <TodoMark>Photo of V0 (White design) </TodoMark> -->
 
 #### Version 1
@@ -122,13 +122,13 @@ As a result of us maximising the rocket tube's airspace, we had to come up with 
 
 
 
-With version 1 we began exploring size and placement of elements. We knew roughly what elements were going into the payload, so we were able to cut out the space for them. This allowed us to expore wether the internal structure would hold with so much material cut out. This included performing drop tests and general structural tests. 
-Another element that was explored was how we can open & close the payload. This problem is nontrivial as the payload must retain its outer cylindrical form, and a top cap could not be used as the internal structure of the payload could not all be accessed. So the idea for a clamshell mechanisim was tested. The payload shell was split vertically, with holes to allow 4 bolts to hold the shell together. Another benafit of this design was, with the camera removed, all internal electronics were easilly accessable to run wires. 
+With version 1 we began exploring size and placement of elements. We knew roughly what elements were going into the payload, so we were able to cut out the space for them. This allowed us to explore whether the internal structure would hold with so much material cut out. This included performing drop tests and general structural tests.
+Another element that was explored was how we can open & close the payload. This problem is nontrivial as the payload must retain its outer cylindrical form, and a top cap could not be used as the internal structure of the payload could not all be accessed. So the idea for a clamshell mechanism was tested. The payload shell was split vertically, with holes to allow 4 bolts to hold the shell together. Another benefit of this design was, with the camera removed, all internal electronics were easily accessible to run wires. 
 
 #### Version 2
 ![:medium:center](./fit_checks/FitCheck1.jpg)
 
-![medium:center](./fit_checks/FitCheck2.jpg)
+![:medium:center](./fit_checks/FitCheck2.jpg)
 
 
 ![:small:center](./mechanical/version_two/)
@@ -142,7 +142,7 @@ After attempting to place the servos into their dedicated spot, the airspaces we
 
 #### Version 3
 
-Version 3 were 3D printed with larger airspaces for the servos.
+Version 3 was 3D printed with larger airspaces for the servos.
 
 ![:small](./V3Closed.jpg)
 <!-- <TodoMark>Explain changes from v2 to v3</TodoMark> -->
@@ -151,8 +151,8 @@ Version 3 were 3D printed with larger airspaces for the servos.
 <!-- <TodoMark>Photos of changes from v2 to v3? + photo(s) of v3? (Black)</TodoMark> -->
 
 #### Version 4
-<!-- <TodoMark>Explain changes from v2 to v3</TodoMark> -->
-Version 3 were 3D printed with larger airspaces for the servos.
+<!-- <TodoMark>Explain changes from v3 to v4</TodoMark> -->
+Version 4 was 3D printed with larger airspaces for the servos.
 
 ![:small](./mechanical/version_four/outOfThePrinter.jpg)
 <!-- <TodoMark>Photos of changes from v2 to v3? + photo(s) of v3? (Orange)</TodoMark> -->
@@ -167,7 +167,7 @@ One half of the Version 3 shell had to be changed.
 
 #### Preliminary Design Review
 
-The first design review was held on the 1st of December 2024. We presented our concept to the APSS team, and received feedback on 
+The first design review was held on the 1st of December 2024. We presented our concept to the APSS team and received valuable feedback.
 
 ![](./QSat%20PDR.pdf)
 

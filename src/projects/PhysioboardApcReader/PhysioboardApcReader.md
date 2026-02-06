@@ -1,7 +1,7 @@
 ---
 date: "2022-01-16"
 title: "NZ Physioboard APC Reader"
-description: "React library to scan user-uploaded PDF's locally for QR codes."
+description: "React library to scan user-uploaded PDFs locally for QR codes."
 tags: ["Software", "React", "TypeScript", "COVID"]
 ---
 <script>
@@ -24,7 +24,7 @@ tags: ["Software", "React", "TypeScript", "COVID"]
 
 ## Automatically extracting info from certificates
 
-At it's core, it's a typescript library that can read selected fields from the Annual Practising Certificate (PDF document) issued by the Physiotherapy Board. This is a tiny library, but this parser is a proof of concept for a future library that would have wide support for many different medical certificates.
+At its core, it's a typescript library that can read selected fields from the Annual Practising Certificate (PDF document) issued by the Physiotherapy Board. This is a tiny library, but this parser is a proof of concept for a future library that would have wide support for many different medical certificates.
 
 #### Physiotherapy Board APC Analysis
 
@@ -44,7 +44,7 @@ There are two choices when wanting to extract info from a Certificate, OCR or PD
 ## OCR
 <ProConTable>
 {#snippet pros()}<ul>
-<li>Works for both an scan or the original PDF</li>
+<li>Works for both a scan or the original PDF</li>
 </ul>{/snippet}
 {#snippet cons()}<ul>
 <li>Less reliable for character recognition, especially with non-ascii characters</li>

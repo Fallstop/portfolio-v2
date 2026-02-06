@@ -15,8 +15,6 @@ collaborators:
 ---
 
 <script>
-  import MarkdownLink from "$md/MarkdownLink.svelte";
-  import YoutubeEmbed from "$md/YoutubeEmbed.svelte";
   import PhaseLockedSampling from "$md/PhaseLockExplainer.svelte";
 </script>
 
@@ -196,7 +194,7 @@ The final judging by Datamars was intense. We had to demonstrate our system, exp
 When they announced we'd won first place and the accuracy award, it validated everything we'd built. All those hours debugging timing issues, all the iterations on the PCB, all the late nights optimizing the web interface - it was worth it.
 
 ![:full](./R1-E003.jpg)
-> Film photo taken and kindly shared by <a href="https://www.austinsprojects.com/" target="_none" rel="nofollow">Austin Jensen</a>
+> Film photo taken and kindly shared by <a href="https://www.austinsprojects.com/" target="_blank" rel="nofollow">Austin Jensen</a>
 
 ## What We Learned
 

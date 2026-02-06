@@ -22,7 +22,7 @@ The site used Gatsby, and Remark for the CMS (Much like the site you are looking
 
 ## Development Time
 
-The entire site took around about one day of work, from go ahead to finish, ending up with a fair bit of polish.
+The entire site took around one day of work, from go ahead to finish, ending up with a fair bit of polish.
 
 ## Design
 

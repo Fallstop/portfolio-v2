@@ -27,7 +27,7 @@ tags: ["Art", "Huanui College", "COVID"]
 
 ![](./CovidPhotos/FireAndFlames/)
 
-## Exploratory Photo's
+## Exploratory Photos
 ![](./CovidPhotos/Exploritory/)
 
 ## Final Result

@@ -27,7 +27,7 @@ Signal Quo is an prototype built by Somewhat Questionable. Our team claimed a fi
 The prompt was to build something that would improve life on Mars. During the week, we developed a secondary emergency communication network for a Mars colony. Consisting of a main hub, personal transmitters, and environmental monitoring devices, Signal Quo is designed to operate during even severe Martian dust storms. The system utilizes long range (LoRa) technology, and incorporates a novel HopTrace protocol that records each signal's path, enabling geolocation for nodes in distress.
 
 ## Our Vision
-Imagine invaluable human life thriving amidst the daunting Martian duststorms, fortified by a resilient communication system - that's the futureSignal Quo aspires to facilitate.
+Imagine invaluable human life thriving amidst the daunting Martian duststorms, fortified by a resilient communication system - that's the future Signal Quo aspires to facilitate.
 
 Out of this vision, the Signal Quo system was born - a mesh network acting as a secondary communication system for Martian colonists, featuring a main hub, personal transmitters, and environmental monitoring modules. All these devices are designed to function meticulously even during severe dust storms, making every EVA safer and more efficient.
 

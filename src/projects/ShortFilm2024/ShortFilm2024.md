@@ -19,7 +19,6 @@ highlight: false
 tags: ["Art", "Film", "48 Hours"]
 ---
 <script lang="ts">
-    import LiveCard from "$md/LiveCard.svelte";
     import YoutubeEmbed from "$md/YoutubeEmbed.svelte";
     import MarkdownLink from "$md/MarkdownLink.svelte";
 </script>

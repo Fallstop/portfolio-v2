@@ -88,7 +88,7 @@ We added facial recognition to the pot, so every time you look at it, it turns o
 
 ## Toaster
 
-The Toaster works similarly to the Microwave, but instead it insulting you, you have to insult it for it to toast your bread.
+The Toaster works similarly to the Microwave, but instead of insulting you, you have to insult it for it to toast your bread.
 
 <ProConTable>
     {#snippet pros()}<ul>
@@ -104,7 +104,7 @@ The Toaster works similarly to the Microwave, but instead it insulting you, you 
 ![](./Toaster.jpg)
 
 ## Knife Block Pain
-This knife block experiences pain. It will scream if you try to use it to store your knifes, you monster.
+This knife block experiences pain. It will scream if you try to use it to store your knives, you monster.
 
 <ProConTable>
     {#snippet pros()}<ul>
@@ -116,7 +116,7 @@ This knife block experiences pain. It will scream if you try to use it to store 
     </ul>{/snippet}
 </ProConTable>
 
-![](./KinfeBlockPain.jpg)
+![](./KnifeBlockPain.jpg)
 
 ## Knife Block Fear
 This knife block experiences fear. It'll run away from you if you approach, usually falling off the table and onto your feet.

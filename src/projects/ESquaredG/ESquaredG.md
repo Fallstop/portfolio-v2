@@ -194,7 +194,7 @@ Separating the amplifiers into rows of positives and columns of negatives and as
 # Now and in the Future
 
 ## Proof of Concept
-This is a sample of the planned parts laid out on a breadboard which is being used for testing and evaluating designs and parts. This design only has 4 inputs, which means it does not take full advantage of the concept, a s the number of inputs is equal to the channel counts (2 Positive, 2 Negative, 4 inputs, vs aka 4 Pos, 4 Neg, 16 inputs).
+This is a sample of the planned parts laid out on a breadboard which is being used for testing and evaluating designs and parts. This design only has 4 inputs, which means it does not take full advantage of the concept, as the number of inputs is equal to the channel counts (2 Positive, 2 Negative, 4 inputs, vs aka 4 Pos, 4 Neg, 16 inputs).
 
 Here is a video showing the tunning process to get the amplifiers into a state where they are sensitive to the correct voltages:
 
