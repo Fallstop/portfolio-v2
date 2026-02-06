@@ -4,8 +4,10 @@
     import LiveCard from "$lib/components/utilities/LiveCard.svelte";
     import PrimaryLayout from "$lib/components/layout/PrimaryLayout.svelte";
     import { NavigationOption } from "$lib/components/layout/layoutDataStore";
-    import { Send } from "lucide-svelte";
-    import { fade } from "svelte/transition";
+    import CopyAction from "$lib/components/utilities/CopyAction.svelte";
+    import { liveCardEffect } from "$lib/effects/liveCardEffect";
+    import { Send, CircleCheck, TriangleAlert, Linkedin, Github, Mail, Check } from "lucide-svelte";
+    import { fade, fly } from "svelte/transition";
 
     const messageMaxLength = 1024;
 
@@ -16,6 +18,9 @@
     let nameChanged = $state(false);
     let emailChanged = $state(false);
     let messageChanged = $state(false);
+
+    let formState: 'idle' | 'submitting' | 'success' | 'error' = $state('idle');
+    let errorMessage: string = $state('');
 
     $effect.pre(() => {
         nameChanged = !!nameInput && nameChanged;
@@ -45,6 +50,17 @@
         emailInputValid &&
         messageInputValid);
 
+    function resetForm() {
+        nameInput = undefined;
+        emailInput = undefined;
+        messageInput = undefined;
+        nameChanged = false;
+        emailChanged = false;
+        messageChanged = false;
+        formState = 'idle';
+        errorMessage = '';
+    }
+
 </script>
 
 <PrimaryLayout
@@ -58,126 +74,305 @@
         title: "Jasper M-W | Contact Me",
     }}
 >
+<div class="prose-wrapper">
+
     <h1 class="page-header">Send me a message!</h1>
-    <form method="post" use:enhance>
-        <div class="form-group">
-            <div class="form-inside">
-                <label for="name">Name</label>
-                <LiveCard
+    <p class="intro">Have a question, want to collaborate, or just want to say hello? Drop me a message below and I'll get back to you.</p>
+    
+    {#if formState === 'success'}
+    <div class="result-card" transition:fly={{ y: 20 }}>
+        <LiveCard size="large" type="none">
+            <div class="result-content">
+                <CircleCheck size="2.5rem" strokeWidth="1.5" />
+                <h2>Message sent!</h2>
+                <p>Thanks for reaching out. I'll get back to you soon.</p>
+                <button class="result-button success-button" onclick={resetForm}>
+                    <Send />
+                    Send another
+                </button>
+            </div>
+        </LiveCard>
+    </div>
+    {:else if formState === 'error'}
+    <div class="result-card" transition:fly={{ y: 20 }}>
+        <LiveCard size="large" type="none">
+            <div class="result-content error">
+                <TriangleAlert size="2.5rem" strokeWidth="1.5" />
+                <h2>Something went wrong</h2>
+                <p>{errorMessage}</p>
+                <button class="result-button error-button" onclick={() => { formState = 'idle'; }}>
+                    Try again
+                </button>
+            </div>
+        </LiveCard>
+    </div>
+    {:else}
+    <form method="post" use:enhance={() => {
+        formState = 'submitting';
+        return async ({ result }) => {
+            if (result.type === 'success') {
+                formState = 'success';
+            } else if (result.type === 'failure') {
+                errorMessage = (result.data as { error?: string })?.error || 'Failed to send message. Please try again.';
+                formState = 'error';
+            } else {
+                errorMessage = 'An unexpected error occurred. Please try again.';
+                formState = 'error';
+            }
+        };
+    }}>
+            <div class="form-group">
+                <div class="form-inside">
+                    <label for="name">Name</label>
+                    <LiveCard
                     size="wrap"
                     style={!nameInputValid && nameChanged ? "error" : "normal"}
-                >
+                    >
                     <input
-                        required
-                        bind:value={nameInput}
-                        type="text"
-                        id="name"
-                        name="name"
-                        placeholder="John Smith"
-                        onblur={() => {
-                            nameChanged = true;
-                        }}
-                    />
-                </LiveCard>
-                <div class="helper-text">
-                    {#if !nameInputValid && nameChanged}
+                    required
+                    bind:value={nameInput}
+                    type="text"
+                    id="name"
+                    name="name"
+                    placeholder="John Smith"
+                    onblur={() => {
+                        nameChanged = true;
+                    }}
+                        />
+                    </LiveCard>
+                    <div class="helper-text">
+                        {#if !nameInputValid && nameChanged}
                         <span class="validation" transition:fade>
                             Please enter a name, less than {messageMaxLength} characters
                         </span>
-                    {:else}
+                        {:else}
                         &nbsp;
-                    {/if}
+                        {/if}
+                    </div>
                 </div>
-            </div>
-            <div class="form-inside">
-                <label for="email">Email</label>
-                <LiveCard
+                <div class="form-inside">
+                    <label for="email">Email</label>
+                    <LiveCard
                     size="wrap"
                     style={!emailInputValid && emailChanged
-                        ? "error"
-                        : "normal"}
-                >
+                            ? "error"
+                            : "normal"}
+                    >
                     <input
-                        required
-                        bind:value={emailInput}
-                        type="email"
-                        id="email"
-                        name="email"
-                        placeholder="email@example.org"
-                        onblur={() => {
-                            emailChanged = true;
-                        }}
-                    />
-                </LiveCard>
-                <div class="helper-text">
-                    {#if !emailInputValid && emailChanged}
+                    required
+                    bind:value={emailInput}
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="email@example.org"
+                    onblur={() => {
+                        emailChanged = true;
+                    }}
+                        />
+                    </LiveCard>
+                    <div class="helper-text">
+                        {#if !emailInputValid && emailChanged}
                         <span class="validation" transition:fade>
                             Please enter a valid email address
                         </span>
-                    {:else}
+                        {:else}
                         &nbsp;
-                    {/if}
+                        {/if}
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="form-inside">
-            <label for="message"
+            <div class="form-inside">
+                <label for="message"
                 >Message
-
+                
                 <span class="helper-text">
                     {#if !messageInputValid && messageChanged}
-                        &nbsp;
-                        <span class="validation" transition:fade>
-                            Please enter a message between 3 and {messageMaxLength}
-                            characters
-                        </span>
+                    &nbsp;
+                    <span class="validation" transition:fade>
+                        Please enter a message between 3 and {messageMaxLength}
+                        characters
+                    </span>
                     {:else}{/if}
                 </span>
             </label>
             <LiveCard
-                size="wrap"
-                style={!messageInputValid && messageChanged
-                    ? "error"
-                    : "normal"}
-            >
+            size="wrap"
+            style={!messageInputValid && messageChanged
+                        ? "error"
+                        : "normal"}
+                >
                 <textarea
-                    required
-                    class=""
-                    bind:value={messageInput}
-                    id="message"
-                    name="message"
-                    placeholder="Interesting message here..."
-                    onblur={() => {
-                        messageChanged = true;
-                    }}
-                ></textarea>
-            </LiveCard>
-            <div class="detail-row right">
-                <span class="helper-text message-length">
-                    {messageInput?.length || 0} / {messageMaxLength}
-                </span>
-            </div>
-            <div class="detail-row left">
-                <button
+                required
+                class=""
+                bind:value={messageInput}
+                id="message"
+                name="message"
+                placeholder="Interesting message here..."
+                onblur={() => {
+                    messageChanged = true;
+                }}
+                    ></textarea>
+                </LiveCard>
+                <div class="detail-row right">
+                    <span class="helper-text message-length">
+                        {messageInput?.length || 0} / {messageMaxLength}
+                    </span>
+                </div>
+                <div class="detail-row left">
+                    <button
                     class="submit-button"
                     type="submit"
-                    disabled={!formValid}
+                    disabled={!formValid || formState === 'submitting'}
                     title={formValid
-                        ? "Send message"
-                        : "Please fill all fields"}
-                >
+                            ? "Send message"
+                            : "Please fill all fields"}
+                    >
                     <Send />
-                    Send
+                    {formState === 'submitting' ? 'Sending...' : 'Send'}
                 </button>
             </div>
         </div>
     </form>
+    {/if}
+</div>
 </PrimaryLayout>
 
 <style lang="scss">
     @use "../../../variables.scss" as *;
     @use "sass:color";
+
+    .intro {
+        color: $hint-color;
+        margin-bottom: $space-sm;
+    }
+
+    .contact-pills {
+        display: flex;
+        flex-direction: row;
+        gap: 0.75rem;
+        margin-bottom: $space-md;
+        flex-wrap: wrap;
+    }
+
+    .contact-pills a, .contact-pills :global(.social-pill-wrapper) {
+        pointer-events: all;
+        text-decoration: none;
+        user-select: none;
+    }
+
+    .social-pill {
+        box-sizing: border-box;
+        color: $text-color;
+        padding: 0.4rem 0.8rem;
+        font-size: $font-size-md;
+        border: 1px solid $text-color;
+        box-shadow: 0 0 0 0 black;
+        background-color: rgba(255, 255, 255, 0.5);
+        transition: color $transition-base, border-color $transition-base, box-shadow $transition-base;
+        font-weight: lighter;
+        cursor: pointer;
+
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+
+        &:hover {
+            background-color: $tint-color;
+            color: $background-color;
+            border-color: transparent;
+            box-shadow: 0.3rem 0.3rem 0 0.05rem black;
+        }
+
+        &.copied {
+            background-color: $positive-color;
+            color: $background-color;
+            border-color: transparent;
+        }
+
+        span {
+            margin-left: 0.3em;
+        }
+
+        &.email-pill {
+            display: grid;
+
+            .email-state {
+                grid-area: 1 / 1;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                opacity: 0;
+                transition: opacity $transition-base;
+
+                &.visible {
+                    opacity: 1;
+                }
+            }
+        }
+
+        @media screen and (max-width: $mobile-breakpoint) {
+            font-size: $font-size-sm;
+            padding: 0.35rem 0.6rem;
+        }
+    }
+
+    .result-card {
+        margin-top: $space-sm;
+
+        .result-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 0.5rem;
+            padding: $space-sm;
+
+            h2 {
+                margin: 0;
+            }
+
+            p {
+                color: $hint-color;
+                margin: 0;
+            }
+
+            &.error {
+                color: $negative-color;
+            }
+        }
+
+        .result-button {
+            margin-top: $space-xs;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: $border-radius;
+            cursor: pointer;
+            transition: background-color $transition-base;
+            @include icon-inline;
+
+            &.success-button {
+                background-color: $primary-color;
+                color: white;
+
+                &:hover {
+                    background-color: color.adjust($primary-color, $alpha: -0.2);
+                }
+            }
+
+            &.error-button {
+                background-color: $negative-color;
+                color: white;
+
+                &:hover {
+                    background-color: color.adjust($negative-color, $alpha: -0.2);
+                }
+            }
+        }
+    }
+
     form {
+        color-scheme: light;
         display: flex;
         flex-direction: column;
 
@@ -207,6 +402,12 @@
                 width: 100%;
                 padding: 0.75rem;
                 border-radius: $border-radius;
+                background-color: $background-color;
+                color: $text-color;
+
+                &::placeholder {
+                    color: $hint-color;
+                }
             }
             textarea {
                 resize: vertical;

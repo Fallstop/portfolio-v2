@@ -76,6 +76,8 @@
 
 		.article-title {
 			margin: 0;
+			overflow-wrap: break-word;
+			hyphens: auto;
 		}
 		.subtitle {
 			font-size: $font-size-lg;

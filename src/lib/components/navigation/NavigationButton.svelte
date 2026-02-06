@@ -49,7 +49,7 @@
             border: 1px solid $text-color;
             box-shadow: 0 0 0 0 black;
             background-color: rgba(255,255,255, 0.5);
-            transition: all $transition-base;
+            transition: color $transition-base, border-color $transition-base, box-shadow $transition-base;
 
             font-weight: lighter;
 
@@ -71,10 +71,12 @@
             }
 
             @media screen and (max-width: $tablet-breakpoint) {
-                font-size: $font-size-xl;
+                font-size: $font-size-lg;
+                padding: 0.6rem;
             }
             @media screen and (max-width: $mobile-breakpoint) {
                 font-size: $font-size-md;
+                padding: 0.4rem;
             }
             @media screen and (min-width: $chonk-breakpoint) {
                 padding: 1rem;

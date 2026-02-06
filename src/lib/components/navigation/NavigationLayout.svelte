@@ -2,6 +2,7 @@
     import { receive, send } from "$lib/utilities/sendTransition";
     import { flip } from "svelte/animate";
     import NavigationButton from "./NavigationButton.svelte";
+    import SocialLinks from "./SocialLinks.svelte";
     import { homePage, pages, promotedPage } from "./pages";
     import { NavigationOption } from "../layout/layoutDataStore";
 
@@ -20,16 +21,15 @@
     class:column={direction === NavigationOption.Blog}
     class:desktop-only={direction === NavigationOption.Blog || direction === NavigationOption.Midpoint}
 >
-    {#if staggeredButtons}
-        <div class="empty"></div>
-    {/if}
     {#each pages as { pageSlug, title, icon, primary } (direction+pageSlug)}
         <div class="animation-container">
             <NavigationButton {pageSlug} {title} {icon} primary={false} />
         </div>
     {/each}
-    {#if staggeredButtons}
-        <div class="empty"></div>
+    {#if staggeredButtons || direction === NavigationOption.Blog}
+        <div class="animation-container social-links-cell">
+            <SocialLinks />
+        </div>
     {/if}
 </div>
 <div class="mobile-container">
@@ -57,17 +57,16 @@
         grid-gap: $gap;
 
         &.staggered-buttons {
-            $number-of-columns: 3;
-            $column-size: calc(calc(33% - #{$gap}) + calc(#{$gap} / #{$number-of-columns}) );
             display: grid;
-            grid-template-columns: $column-size $column-size $column-size;
-            grid-template-rows: 50% 50%;
-            // padding: 2rem 0;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            align-items: center;
         }
         &.column {
             display: flex;
             flex-direction: column;
             justify-content: center;
+            gap: 2rem;
             padding: 2rem 0;
         }
         @media screen and (max-width: $tablet-breakpoint) {
@@ -75,7 +74,7 @@
 
             &.staggered-buttons {
                 grid-template-columns: 50% 50%;
-                grid-template-rows: 50% 50%;
+                grid-template-rows: 1fr 1fr;
                 padding: 2rem;
                 .empty {
                     // Not needed in column layout
@@ -86,13 +85,18 @@
             &.column {
                 flex-direction: row;
                 flex-wrap: wrap;
+                justify-content: center;
+                gap: 0.5rem;
+                padding: 1rem 0;
             }
         }
         @media screen and (max-width: $mobile-breakpoint) {
             &.staggered-buttons {
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                grid-template-rows: 1fr 1fr;
+                grid-gap: 0.5rem;
+                padding: 1rem;
                 .empty {
                     // Not needed in column layout
                     display: none;
@@ -105,6 +109,9 @@
         .animation-container {
             height: 100%;
         }
+    }
+    .social-links-cell {
+        pointer-events: all;
     }
     .mobile-container {
         display: none;

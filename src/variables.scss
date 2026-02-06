@@ -80,12 +80,12 @@ $overlay-subtle: rgba(0, 0, 0, 0.03);
 $overlay-light: rgba(0, 0, 0, 0.1);
 $overlay-medium: rgba(0, 0, 0, 0.2);
 
-$blog-size: $tablet-breakpoint;
-$blog-content-percent: 80%;
+$blog-size: 1400px;
+$blog-content-percent: 75%;
 $max-blog-space-available: calc($blog-size * ($blog-content-percent / 100%) - $layout-content-margin);
 
 // Readable line length (optimal 45-75 characters)
-$prose-max-width: 65ch;
+$prose-max-width: 75ch;
 
 $border-radius: 0.5rem;
 

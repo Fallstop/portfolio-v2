@@ -30,15 +30,25 @@ export const actions: Actions = {
             footer: { text: `IP Address ${IP}` }
         }
 
-        fetch(DISCORD_WEBHOOK, {
-            method: "POST",
-            body: JSON.stringify({
-                embeds: [messageEmbed]
-            }),
-            headers: {
-                "Content-Type": "application/json"
+        try {
+            const response = await fetch(DISCORD_WEBHOOK, {
+                method: "POST",
+                body: JSON.stringify({
+                    embeds: [messageEmbed]
+                }),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            });
+
+            if (!response.ok) {
+                console.error(`Discord webhook failed: ${response.status} ${response.statusText}`);
+                return fail(500, { error: "Failed to send message. Please try again." });
             }
-        });
+        } catch (e) {
+            console.error("Discord webhook error:", e);
+            return fail(500, { error: "Failed to send message. Please try again." });
+        }
 
         return { success: true }
     }

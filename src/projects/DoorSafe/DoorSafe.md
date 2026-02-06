@@ -2,7 +2,7 @@
 date: "2024-09-21"
 title: "DoorSafe"
 description: "A door lock workaround designed for Innovate 100G"
-highlight: true
+highlight: false
 tags: ["Software", "Hardware", "TypeScript", "C/C++", "UoA"]
 ---
 

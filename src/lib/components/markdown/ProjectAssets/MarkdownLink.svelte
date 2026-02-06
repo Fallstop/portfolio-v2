@@ -47,6 +47,8 @@
         overflow: hidden;
         max-width: 100%;
 
+        box-sizing: border-box;
+
         @include icon-inline;
 
         text-overflow: ellipsis;

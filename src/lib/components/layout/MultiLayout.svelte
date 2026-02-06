@@ -121,6 +121,7 @@
 
     @media screen and (max-width: $tablet-breakpoint) {
       grid-template-columns: 1fr;
+      grid-template-rows: 1fr auto;
       padding: 0;
       &.reverse-mobile {
         display: flex;
@@ -203,6 +204,8 @@
       @media screen and (max-width: $tablet-breakpoint) {
         height: auto;
         justify-content: start;
+        margin-top: auto;
+        padding-bottom: 2rem;
       }
     }
     @media print {

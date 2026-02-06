@@ -1,4 +1,4 @@
-import { Code2, User, Sword, Mail, Home } from "lucide-svelte";
+import { Code2, User, Sword, Home } from "lucide-svelte";
 
 
 interface AvailablePage {
@@ -36,12 +36,6 @@ export const pages: AvailablePage[] = [
         pageSlug: "/resume",
         title: "Resume",
         icon: Sword,
-        primary: false
-    },
-    {
-        pageSlug: "/contact",
-        title: "Contact",
-        icon: Mail,
         primary: false
     }
 ];

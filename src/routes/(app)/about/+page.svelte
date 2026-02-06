@@ -29,6 +29,105 @@
             console.error("Failed to fetch location", e);
         }
     });
+
+    function dragToScroll(node: HTMLElement) {
+        let isDown = false;
+        let startX = 0;
+        let scrollLeft = 0;
+        let hasDragged = false;
+        let animationId = 0;
+        let velocity = 0;
+        let lastX = 0;
+        let lastTime = 0;
+
+        function stopMomentum() {
+            if (animationId) {
+                cancelAnimationFrame(animationId);
+                animationId = 0;
+            }
+        }
+
+        function animateMomentum() {
+            const friction = 0.95;
+            velocity *= friction;
+            if (Math.abs(velocity) < 0.5) {
+                animationId = 0;
+                return;
+            }
+            node.scrollLeft -= velocity;
+            animationId = requestAnimationFrame(animateMomentum);
+        }
+
+        function onPointerDown(e: PointerEvent) {
+            if (e.button !== 0) return;
+            stopMomentum();
+            isDown = true;
+            hasDragged = false;
+            startX = e.clientX;
+            lastX = e.clientX;
+            lastTime = Date.now();
+            scrollLeft = node.scrollLeft;
+            velocity = 0;
+            node.style.cursor = "grabbing";
+        }
+
+        function onPointerMove(e: PointerEvent) {
+            if (!isDown) return;
+            const dx = e.clientX - startX;
+            if (Math.abs(dx) > 3) hasDragged = true;
+            node.scrollLeft = scrollLeft - dx;
+
+            // Track velocity from recent movement
+            const now = Date.now();
+            const dt = now - lastTime;
+            if (dt > 0) {
+                velocity = (e.clientX - lastX) / dt * 16; // normalize to ~1 frame
+            }
+            lastX = e.clientX;
+            lastTime = now;
+        }
+
+        function onPointerUp() {
+            if (!isDown) return;
+            isDown = false;
+            node.style.cursor = "";
+            if (hasDragged && Math.abs(velocity) > 1) {
+                animateMomentum();
+            }
+        }
+
+        function onClick(e: MouseEvent) {
+            if (hasDragged) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+        }
+
+        // Prevent native link/image drag from hijacking pointer events
+        function onDragStart(e: DragEvent) {
+            e.preventDefault();
+        }
+
+        node.addEventListener("pointerdown", onPointerDown);
+        // Use document-level listeners so dragging works even when pointer leaves the container
+        document.addEventListener("pointermove", onPointerMove);
+        document.addEventListener("pointerup", onPointerUp);
+        document.addEventListener("pointercancel", onPointerUp);
+        node.addEventListener("dragstart", onDragStart);
+        node.addEventListener("click", onClick, true);
+
+        return {
+            destroy() {
+                stopMomentum();
+                node.removeEventListener("pointerdown", onPointerDown);
+                document.removeEventListener("pointermove", onPointerMove);
+                document.removeEventListener("pointerup", onPointerUp);
+                document.removeEventListener("pointercancel", onPointerUp);
+                node.removeEventListener("dragstart", onDragStart);
+                node.removeEventListener("click", onClick, true);
+            },
+        };
+    }
 </script>
 
 <PrimaryLayout
@@ -109,7 +208,12 @@
 
         <h2>Highlighted Projects</h2>
         <div class="project-marquee-container">
-            <div class="project-marquee-inner large-scrollbar">
+            <div class="project-marquee-inner large-scrollbar" use:dragToScroll
+                onscroll={(e) => {
+                    const el = e.currentTarget as HTMLElement;
+                    const fade = Math.min(el.scrollLeft, 48)/48;
+                    el.parentElement?.style.setProperty('--left-fade', `${fade}`);
+                }}>
                 <ProjectThumbnails posts={data.postsHighlighted} />
                 <MoreProjectsThumbnail />
             </div>
@@ -143,19 +247,23 @@
         position: relative;
         overflow: hidden;
 
+        // Left fade grows dynamically via --left-fade (set by JS on scroll)
+        // Right fade is always present
+        $fade-size: 1rem;
+        --left-fade: 0px;
         mask-image: linear-gradient(
-            90deg,
-            rgba(255, 255, 255, 1) 0%,
-            rgba(255, 255, 255, 0) calc(0% + 1em),
-            rgba(255, 255, 255, 0) calc(100% - 1em),
-            rgba(255, 255, 255, 1) 100%
+            to right,
+            transparent 0%,
+            black calc(var(--left-fade) * $fade-size),
+            black calc(100% - $fade-size),
+            transparent 100%
         );
         -webkit-mask-image: linear-gradient(
-            90deg,
-            rgba(255, 255, 255, 0) 0%,
-            rgba(255, 255, 255, 1) calc(0% + 1em),
-            rgba(255, 255, 255, 1) calc(100% - 1em),
-            rgba(255, 255, 255, 0) 100%
+            to right,
+            transparent 0%,
+            black calc(var(--left-fade) * $fade-size),
+            black calc(100% - $fade-size),
+            transparent 100%
         );
 
         .project-marquee-inner {
@@ -171,12 +279,12 @@
 
             flex-direction: row;
             gap: $space-sm;
-            // animation: tilesMarquee 5s linear infinite forwards;
-            // width: calc(100% + 2em);
 
-            padding: $space-sm;
+            padding: $space-sm $space-sm $space-sm 0;
 
             overflow-x: scroll;
+            cursor: grab;
+            user-select: none;
         }
 
         @keyframes tilesMarquee {

@@ -50,13 +50,24 @@
         <div class="card-container">
             <LiveCard>
                 <h3 class="company-name">
-                    University of Auckland - CIE<span class="date"
-                        >2024 <ArrowRight class="arrow" /> present</span
+                    Watchful - Full Stack Software Engineer <span class="date">2025 <ArrowRight class="arrow" /> present</span
                     >
                 </h3>
                 <ul>
                     <li>
-                        Part of the Creative Technologist team at the Center of Innovation and Entrepreneurship.
+                        Returning to Watchful full-time as a permanent software engineer, working on their security camera monitoring platform.
+                    </li>
+                </ul>
+            </LiveCard>
+            <LiveCard>
+                <h3 class="company-name">
+                    University of Auckland - CIE<span class="date"
+                        >2024 <ArrowRight class="arrow" /> 2025</span
+                    >
+                </h3>
+                <ul>
+                    <li>
+                        Part-time role with the Creative Technologist team at the Center of Innovation and Entrepreneurship, where I stayed for two years.
                     </li>
                     <li>
                         Supervising the makerspace, running equipment workshops,
@@ -67,7 +78,7 @@
             </LiveCard>
             <LiveCard>
                 <h3 class="company-name">
-                    Watchful - Full Stack Software Engineer <span class="date">2024 <ArrowRight class="arrow" /> 2025</span
+                    Watchful - Software Engineering Intern <span class="date">2024 <ArrowRight class="arrow" /> 2025</span
                     >
                 </h3>
                 <ul>
