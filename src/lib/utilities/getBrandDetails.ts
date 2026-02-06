@@ -21,7 +21,7 @@ export function extractDomain(url: string) {
 interface BrandData {
     name: string;
     domain: string;
-    icon: typeof Github;
+    icon: any;
     color: string;
 }
 

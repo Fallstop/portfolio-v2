@@ -63,7 +63,7 @@
 
         if (selectedTag) {
             filteredResult = filteredResult.filter((post) => {
-                return post.tags.map(normaliseCase).includes(selectedTag);
+                return post.tags.map(normaliseCase).includes(selectedTag!);
             });
         }
 

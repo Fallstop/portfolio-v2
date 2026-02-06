@@ -19,41 +19,6 @@ export const baseVertexShader = `
     }
 `;
 
-export const blurVertexShader = `
-    precision highp float;
-
-    attribute vec2 aPosition;
-    varying vec2 vUv;
-    varying vec2 vL;
-    varying vec2 vR;
-    uniform vec2 texelSize;
-
-    void main () {
-        vUv = aPosition * 0.5 + 0.5;
-        float offset = 1.33333333;
-        vL = vUv - texelSize * offset;
-        vR = vUv + texelSize * offset;
-        gl_Position = vec4(aPosition, 0.0, 1.0);
-    }
-`;
-
-export const blurShader = `
-    precision mediump float;
-    precision mediump sampler2D;
-
-    varying vec2 vUv;
-    varying vec2 vL;
-    varying vec2 vR;
-    uniform sampler2D uTexture;
-
-    void main () {
-        vec4 sum = texture2D(uTexture, vUv) * 0.29411764;
-        sum += texture2D(uTexture, vL) * 0.35294117;
-        sum += texture2D(uTexture, vR) * 0.35294117;
-        gl_FragColor = sum;
-    }
-`;
-
 export const copyShader = `
     precision mediump float;
     precision mediump sampler2D;
@@ -89,24 +54,6 @@ export const colorShader = `
     }
 `;
 
-export const checkerboardShader = `
-    precision highp float;
-    precision highp sampler2D;
-
-    varying vec2 vUv;
-    uniform sampler2D uTexture;
-    uniform float aspectRatio;
-
-    #define SCALE 25.0
-
-    void main () {
-        vec2 uv = floor(vUv * SCALE * vec2(aspectRatio, 1.0));
-        float v = mod(uv.x + uv.y, 2.0);
-        v = v * 0.1 + 0.8;
-        gl_FragColor = vec4(vec3(v), 1.0);
-    }
-`;
-
 export const displayShader = `
     precision highp float;
     precision highp sampler2D;
@@ -117,16 +64,7 @@ export const displayShader = `
     varying vec2 vT;
     varying vec2 vB;
     uniform sampler2D uTexture;
-    uniform sampler2D uBloom;
-    uniform sampler2D uSunrays;
-    uniform sampler2D uDithering;
-    uniform vec2 ditherScale;
     uniform vec2 texelSize;
-
-    vec3 linearToGamma (vec3 color) {
-        color = max(color, vec3(0));
-        return max(1.055 * pow(color, vec3(0.416666667)) - 0.055, vec3(0));
-    }
 
     void main () {
         vec3 c = texture2D(uTexture, vUv).rgb;
@@ -147,140 +85,8 @@ export const displayShader = `
         c *= diffuse;
     #endif
 
-    #ifdef BLOOM
-        vec3 bloom = texture2D(uBloom, vUv).rgb;
-    #endif
-
-    #ifdef SUNRAYS
-        float sunrays = texture2D(uSunrays, vUv).r;
-        c *= sunrays;
-    #ifdef BLOOM
-        bloom *= sunrays;
-    #endif
-    #endif
-
-    #ifdef BLOOM
-        float noise = texture2D(uDithering, vUv * ditherScale).r;
-        noise = noise * 2.0 - 1.0;
-        bloom += noise / 255.0;
-        bloom = linearToGamma(bloom);
-        c += bloom;
-    #endif
-
         float a = max(c.r, max(c.g, c.b));
-        gl_FragColor = vec4(c, a);
-    }
-`;
-
-export const bloomPrefilterShader = `
-    precision mediump float;
-    precision mediump sampler2D;
-
-    varying vec2 vUv;
-    uniform sampler2D uTexture;
-    uniform vec3 curve;
-    uniform float threshold;
-
-    void main () {
-        vec3 c = texture2D(uTexture, vUv).rgb;
-        float br = max(c.r, max(c.g, c.b));
-        float rq = clamp(br - curve.x, 0.0, curve.y);
-        rq = curve.z * rq * rq;
-        c *= max(rq, br - threshold) / max(br, 0.0001);
-        gl_FragColor = vec4(c, 0.0);
-    }
-`;
-
-export const bloomBlurShader = `
-    precision mediump float;
-    precision mediump sampler2D;
-
-    varying vec2 vL;
-    varying vec2 vR;
-    varying vec2 vT;
-    varying vec2 vB;
-    uniform sampler2D uTexture;
-
-    void main () {
-        vec4 sum = vec4(0.0);
-        sum += texture2D(uTexture, vL);
-        sum += texture2D(uTexture, vR);
-        sum += texture2D(uTexture, vT);
-        sum += texture2D(uTexture, vB);
-        sum *= 0.25;
-        gl_FragColor = sum;
-    }
-`;
-
-export const bloomFinalShader = `
-    precision mediump float;
-    precision mediump sampler2D;
-
-    varying vec2 vL;
-    varying vec2 vR;
-    varying vec2 vT;
-    varying vec2 vB;
-    uniform sampler2D uTexture;
-    uniform float intensity;
-
-    void main () {
-        vec4 sum = vec4(0.0);
-        sum += texture2D(uTexture, vL);
-        sum += texture2D(uTexture, vR);
-        sum += texture2D(uTexture, vT);
-        sum += texture2D(uTexture, vB);
-        sum *= 0.25;
-        gl_FragColor = sum * intensity;
-    }
-`;
-
-export const sunraysMaskShader = `
-    precision highp float;
-    precision highp sampler2D;
-
-    varying vec2 vUv;
-    uniform sampler2D uTexture;
-
-    void main () {
-        vec4 c = texture2D(uTexture, vUv);
-        float br = max(c.r, max(c.g, c.b));
-        c.a = 1.0 - min(max(br * 20.0, 0.0), 0.8);
-        gl_FragColor = c;
-    }
-`;
-
-export const sunraysShader = `
-    precision highp float;
-    precision highp sampler2D;
-
-    varying vec2 vUv;
-    uniform sampler2D uTexture;
-    uniform float weight;
-
-    #define ITERATIONS 16
-
-    void main () {
-        float Density = 0.3;
-        float Decay = 0.95;
-        float Exposure = 0.7;
-
-        vec2 coord = vUv;
-        vec2 dir = vUv - 0.5;
-
-        dir *= 1.0 / float(ITERATIONS) * Density;
-        float illuminationDecay = 1.0;
-
-        float color = texture2D(uTexture, vUv).a;
-
-        for (int i = 0; i < ITERATIONS; i++)
-        {
-            coord -= dir;
-            float col = texture2D(uTexture, coord).a;
-            color += col * illuminationDecay * weight;
-            illuminationDecay *= Decay;
-        }
-
-        gl_FragColor = vec4(color * Exposure, 0.0, 0.0, 1.0);
+        gl_FragColor = vec4(c + vec3(1.0 - a), 1.0);
     }
 `;
 

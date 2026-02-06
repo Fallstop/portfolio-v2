@@ -24,8 +24,6 @@ interface PointerInfo{
     color: RGBColour;
 }
 
-type FluidTexture = Float32Array;
-
 interface RGBColour {
     r: number;
     g: number;

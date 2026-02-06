@@ -10,7 +10,7 @@ export default defineConfig({
     sveltekit(),
     galleryImportTransform({projectRoot: __dirname}),
     imagetools({
-      resolveConfigs: resolveThumbnailConfigs(),
+      resolveConfigs: resolveThumbnailConfigs() as any,
       extendDirectives: interceptDirectives(),
     }),
   ],
@@ -19,7 +19,7 @@ export default defineConfig({
       scss: {
         api: "modern",
         additionalData: '@use "/src/variables.scss" as *;',
-      },
+      } as any,
     },
   },
   ssr: {

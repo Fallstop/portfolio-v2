@@ -2,7 +2,7 @@ import sharp from 'sharp';
  
 export const IMAGE_DIR='/src/lib/assets/photos';
 
-export async function dominantColour({ source }) {
+export async function dominantColour({ source }: { source: string }) {
   try {
     const image = sharp(source);
     const { dominant } = await image.stats();
@@ -12,7 +12,7 @@ export async function dominantColour({ source }) {
   }
 }
  
-export async function lowResolutionPlaceholder({ source }) {
+export async function lowResolutionPlaceholder({ source }: { source: string }) {
   try {
     const image = sharp(source);
     const buffer = await image
@@ -33,7 +33,7 @@ export async function lowResolutionPlaceholder({ source }) {
   
 }
 
-export const dominantColourPlaceholder = async ({ source }) => {
+export const dominantColourPlaceholder = async ({ source }: { source: string }) => {
     try {
       const dominant = await dominantColour({ source });
       if (!dominant) return;

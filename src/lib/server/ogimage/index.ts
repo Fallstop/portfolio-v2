@@ -38,5 +38,5 @@ export async function generateImage({params}: RequestEvent): Promise<Response> {
     });
 
 
-    return new Response(fileBlob)
+    return new Response(new Uint8Array(fileBlob))
 }

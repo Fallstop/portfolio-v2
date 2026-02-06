@@ -52,8 +52,6 @@
             flex-direction: column;
             .more-header {
                 display: block;
-                &.headline {
-                }
             }
             border: 4px dashed $mid-tone;
             border-radius: $border-radius;

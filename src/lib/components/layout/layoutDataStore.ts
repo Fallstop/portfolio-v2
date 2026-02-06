@@ -13,11 +13,7 @@ export let FLUID_SIM_INTERACTIVE = writable(false);
 export let PERSONAL_HEADSHOT = writable(false);
 
 export interface FluidSimFunctions {
-    captureScreenshot: ()=>{},
-    multipleSplats: (amount: number)=>{},
-    randomSplats: ()=>{},
-    splatPointer: (pointer: PointerInfo)=>{},
-    splatPoint: (x: number, y: number, dx: number, dy: number, color: RGBColour | undefined)=>{},
+    splatPoint: (x: number, y: number, dx: number, dy: number, color: RGBColour | undefined) => void;
 }
 
 export let fluidSimFunctions: Writable<FluidSimFunctions | null> = writable(null);

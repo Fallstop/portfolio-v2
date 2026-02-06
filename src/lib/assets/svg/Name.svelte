@@ -1,10 +1,10 @@
 <script lang="ts">
     import { onDestroy, onMount } from "svelte";
 
-    let canvas: HTMLCanvasElement;
+    let canvas: HTMLCanvasElement = undefined as any;
     let duration = "8s";
 
-    let svgElement: SVGSVGElement = $state();
+    let svgElement: SVGSVGElement = $state() as SVGSVGElement;
     let canvasRendered = false;
 
     let backgroundBlurSize = 200;
@@ -87,7 +87,7 @@
         // We've rendered everything! We're good to remove the backup text
         canvasRendered = true;
     }
-    let renderInterval: ReturnType<typeof setInterval>;
+    let renderInterval: ReturnType<typeof setInterval> | undefined;
 
     function renderCache() {
         // Only the horizontal size of the window is important for rendering

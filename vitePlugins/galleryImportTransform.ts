@@ -1,7 +1,13 @@
 import path from "node:path";
 import galleryTemplate from "./galleryTemplate.txt?raw";
-import { normalizePath } from "vite";
-import type { ResolveIdResult, CustomPluginOptions } from "rollup"; 
+import { normalizePath, type Plugin } from "vite";
+
+type CustomPluginOptions = Record<string, any>;
+type ResolveIdResult = string | false | null | void | {
+  id: string;
+  external?: boolean;
+  moduleSideEffects?: boolean | 'no-treeshake';
+};
 
 const markdownFileRegex = /src\/projects\/.*\.md$/
 
@@ -22,7 +28,7 @@ interface ResolveOptions {
 }
 
 
-export default function galleryImportTransform({projectRoot}: {projectRoot: string}) {
+export default function galleryImportTransform({projectRoot}: {projectRoot: string}): Plugin {
   return {
     name: 'transform-file',
     enforce: 'post',

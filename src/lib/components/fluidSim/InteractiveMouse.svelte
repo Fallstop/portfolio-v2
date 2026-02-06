@@ -7,24 +7,23 @@
 </script>
 <svelte:window onmousemove={e => mousePos.set({x: e.clientX, y: e.clientY})}/>
 
-<div class="mouse-follow" style="left: {$mousePos.x}px; top: {$mousePos.y}px"></div>
+<div class="mouse-follow" style="transform: translate(calc({$mousePos.x}px - 50%), calc({$mousePos.y}px - 50%))"></div>
 
 <style lang="scss">
     @use "../../../variables.scss" as *;
 
     .mouse-follow {
         position: fixed;
+        left: 0;
+        top: 0;
         width: 5rem;
         height: 5rem;
         border-radius: 50%;
         opacity: 0.2;
         background-color: $accent-color;
         mix-blend-mode: multiply;
-        transform: translate(-50%, -50%);
         pointer-events: none;
-        z-index: 1000;
         will-change: transform;
-        transition: transform 0.1s ease-out;
         z-index: -1;
         display: block;
 
