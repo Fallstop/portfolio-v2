@@ -1,12 +1,36 @@
 import { type Actions, fail } from '@sveltejs/kit';
-import { DISCORD_WEBHOOK } from '$lib/server/env.js';
+import { DISCORD_WEBHOOK, DISCORD_SPAM_WEBHOOK } from '$lib/server/env.js';
 import { accentColor, hexColourToNumber, primaryColor } from '$lib/utilities/colour';
 
 export const actions: Actions = {
     default: async ({ request, getClientAddress, fetch }) => {
         const formData = await request.formData();
-        const { name, email, message } = Object.fromEntries(formData.entries());
+        const { name, email, message, website } = Object.fromEntries(formData.entries());
         const IP = getClientAddress();
+
+        // Honeypot: if a bot filled in the hidden "website" field, forward to spam webhook
+        if (website) {
+            if (DISCORD_SPAM_WEBHOOK) {
+                const spamEmbed = {
+                    title: 'Honeypot Triggered — Spam Blocked',
+                    fields: [
+                        { name: 'Name', value: String(name || '(empty)'), inline: true },
+                        { name: 'Email', value: String(email || '(empty)'), inline: true },
+                        { name: 'Honeypot Value', value: String(website), inline: true },
+                        { name: 'Message', value: String(message || '(empty)') }
+                    ],
+                    color: hexColourToNumber('#ff4444'),
+                    timestamp: new Date().toISOString(),
+                    footer: { text: `IP Address ${IP}` }
+                };
+                await fetch(DISCORD_SPAM_WEBHOOK, {
+                    method: 'POST',
+                    body: JSON.stringify({ embeds: [spamEmbed] }),
+                    headers: { 'Content-Type': 'application/json' }
+                }).catch(() => {});
+            }
+            return { success: true };
+        }
 
         if (!(name && email && message && typeof name === "string" && typeof message === "string" && typeof email === "string")) {
             return fail(400, { error: "Missing required fields." });

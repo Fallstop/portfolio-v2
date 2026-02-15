@@ -80,7 +80,7 @@
     <p class="intro">Have a question, want to collaborate, or just want to say hello? Drop me a message below and I'll get back to you.</p>
     
     {#if formState === 'success'}
-    <div class="result-card" transition:fly={{ y: 20 }}>
+    <div class="result-card" in:fly={{ y: 20 }}>
         <LiveCard size="large" type="none">
             <div class="result-content">
                 <CircleCheck size="2.5rem" strokeWidth="1.5" />
@@ -94,7 +94,7 @@
         </LiveCard>
     </div>
     {:else if formState === 'error'}
-    <div class="result-card" transition:fly={{ y: 20 }}>
+    <div class="result-card" in:fly={{ y: 20 }}>
         <LiveCard size="large" type="none">
             <div class="result-content error">
                 <TriangleAlert size="2.5rem" strokeWidth="1.5" />
@@ -121,6 +121,12 @@
             }
         };
     }}>
+            <!-- Honeypot field - visually hidden from users, traps bots -->
+            <div class="hp-field" aria-hidden="true">
+                <label for="website">Website</label>
+                <input type="text" id="website" name="website" tabindex="-1" autocomplete="off" />
+            </div>
+
             <div class="form-group">
                 <div class="form-inside">
                     <label for="name">Name</label>
@@ -300,6 +306,16 @@
         }
     }
 
+    .hp-field {
+        position: absolute;
+        left: -9999px;
+        top: -9999px;
+        opacity: 0;
+        height: 0;
+        width: 0;
+        overflow: hidden;
+    }
+
     form {
         color-scheme: light;
         display: flex;
@@ -369,6 +385,7 @@
                 transition: background-color $transition-base;
                 width: max-content;
                 float: right;
+                cursor: pointer;
 
                 @include icon-inline;
 
