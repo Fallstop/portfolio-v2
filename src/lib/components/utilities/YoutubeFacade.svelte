@@ -141,6 +141,12 @@
       activated = true;
       injectIFrame();
     }}
+    onauxclick={(e) => {
+      if (e.button === 1) {
+        e.preventDefault();
+        window.open(`https://www.youtube.com/watch?v=${videoId}`, "_blank");
+      }
+    }}
     onkeypress={() => {
       activated = true;
       injectIFrame();

@@ -8,10 +8,12 @@ tags: ["Software", "C#"]
 
 <script>
     import MarkdownLink from "$md/MarkdownLink.svelte";
+    import DownloadCount from "$md/DownloadCount.svelte";
 </script>
 
 <MarkdownLink href="https://haptics.jmw.nz">haptics.jmw.nz</MarkdownLink>
 <MarkdownLink href="https://github.com/Fallstop/HapticWebPlugin">Fallstop/HapticWebPlugin</MarkdownLink>
+<DownloadCount />
 
 
 ## Haptic Feedback for the Web

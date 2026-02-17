@@ -21,7 +21,7 @@
     SEOData={{
         type: "mainpage",
         description:
-            "I'm a second-year Computer Systems Engineering student at University of Auckland, and I've got a passion for making.",
+            "I'm a second-year Computer Systems Engineering student at University of Auckland, with a passion for building things at the intersection of hardware and software.",
         slug: "/resume",
         title: "Jasper M-W | Resume",
     }}
@@ -29,8 +29,8 @@
     <div class="content">
         <h1 class="page-header">Jasper Miller-Waugh</h1>
         <p>
-            I'm a second-year Computer Systems Engineering student at University of Auckland, and
-            I've got a passion for making.
+            I'm a second-year Computer Systems Engineering student at University of Auckland, with
+            a passion for building things at the intersection of hardware and software.
         </p>
         <div class="card-container">
             <LiveCard>
@@ -83,13 +83,13 @@
                 </h3>
                 <ul>
                     <li>
-                        Over the summer, I worked as a software engineer at Watchful, a security camera monitoring platform.
+                        Summer internship as a software engineer at Watchful, a security camera monitoring platform.
                     </li>
                     <li>
-                        I worked on a device-integration scripting tool, that not only allows rapid iteration on new security camera integrations, but also allows for third-party developers to potentially create their own integrations.
+                        Developed a device-integration scripting tool, enabling rapid iteration on new security camera integrations and opening the door for third-party developers to create their own.
                     </li>
                     <li>
-                        I 15x the approximate throughput of a key platform event bottleneck when the we were just starting to bump into the limitations of the old design. This gave Watchful headroom until a planned rework of the event pipeline.
+                        Increased the throughput of a key platform event bottleneck by 15x, just as the old design was hitting its limits. This gave Watchful headroom until a planned rework of the event pipeline.
                     </li>
                 </ul>
             </LiveCard>
@@ -97,7 +97,7 @@
                 <h3 class="company-name">
                     Startup Contracting <span class="date">2021<ArrowRight class="arrow" />2025</span>
                 </h3>
-                <p>I worked with a variety of NZ based early-to-mid stage startups, developing software, electronics, performing R&D, all with a product focused mindset.</p>
+                <p>Worked with a variety of NZ-based early-to-mid stage startups, developing software and electronics, performing R&D, all with a product-focused mindset.</p>
                 <div class="sub-group">
 
                     <LiveCard>
@@ -138,19 +138,19 @@
                     </h3>
                     <ul>
                         <li>
-                            Development of an interactive kiosk that runs on a
-                            Raspberry Pi, which allows users to play a simple game
-                            using a sailing Grinder
+                            Developed an interactive kiosk running on a
+                            Raspberry Pi, allowing users to play a simple game
+                            using a sailing grinder
                         </li>
                         <li>
-                            Working within a tight timeline and limited personal
+                            Worked within a tight timeline and limited personal
                             availability
                         </li>
                         <li>
-                            Integrated my solution with an existing timer system
+                            Integrated the solution with an existing timer system
                         </li>
                         <li>
-                            includes a remote management portal with many settings,
+                            Included a remote management portal with many settings,
                             multiple game modes, and persistent high scores.
                         </li>
                     </ul>
@@ -184,7 +184,7 @@
                         </h3>
                         <ul>
                         <li>
-                            Developing a new front-end for their online check-in
+                            Developed a new front-end for their online check-in
                             tool.
                         </li>
                         <li>
@@ -216,10 +216,7 @@
                         Engineering (Honours).
                     </li>
                     <li>
-                        Computer Systems Engineering is a mix of Software Engineering and Electrical Engineering. I decided to go down this route due to my love of combing well-designed hardware, with excellent software to solve real-world problems.
-                    </li>
-                    <li>
-                        Current GPA: 8.5
+                        Computer Systems Engineering is a mix of Software Engineering and Electrical Engineering. I decided to go down this route due to my love of combining well-designed hardware with excellent software to solve real-world problems.
                     </li>
                 </ul>
             </LiveCard>

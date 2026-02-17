@@ -32,27 +32,23 @@ export default function galleryImportTransform({projectRoot}: {projectRoot: stri
   return {
     name: 'transform-file',
     enforce: 'post',
-    async resolveId(source: string, importer: string | undefined, options: ResolveOptions): Promise<ResolveIdResult> {      
+    async resolveId(source: string, importer: string | undefined, options: ResolveOptions): Promise<ResolveIdResult> {
       if (importer && markdownFileRegex.test(importer) && source.endsWith("/")) {
 
         // Markdown file importing folder!
         // Hasn't resolved so far, so we can assume it's a gallery import
 
-        let galleryBaseDir = "";
+        // Resolve to an absolute filesystem path so Vite resolves imports
+        // from this virtual module relative to the correct directory (fixes Windows).
+        let fullSystemPath: string;
         if (source.startsWith("/")) {
-          galleryBaseDir = source;
+          fullSystemPath = path.resolve(projectRoot, source.slice(1));
         } else {
-          // Relative import
-          // Use path.dirname and path.resolve to handle cross-platform paths correctly
           let importDir = path.dirname(importer);
-          let fullSystemPath = path.resolve(importDir, source);
-
-          // Use path.relative to compute the project-relative path
-          // Preserve trailing slash from source (needed for import.meta.glob pattern)
-          galleryBaseDir = "/" + normalizePath(path.relative(projectRoot, fullSystemPath)) + "/";
+          fullSystemPath = path.resolve(importDir, source);
         }
         return {
-          id: galleryBaseDir+magicResolutionKey,
+          id: normalizePath(fullSystemPath) + "/" + magicResolutionKey,
           moduleSideEffects: true,
         }
       }
@@ -62,7 +58,9 @@ export default function galleryImportTransform({projectRoot}: {projectRoot: stri
     load(id: string) {
 			if (id.endsWith(magicResolutionKey)) {
 
-        let dirname = id.slice(0,-magicResolutionKey.length);
+        let absDir = id.slice(0,-magicResolutionKey.length);
+        // Convert absolute path back to root-relative for the glob pattern
+        let dirname = "/" + normalizePath(path.relative(projectRoot, absDir)) + "/";
 
 				// Replace with actual proxy
         const folderProxy = galleryTemplate.replaceAll(templateFolderKey,dirname);

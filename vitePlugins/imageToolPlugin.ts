@@ -55,7 +55,10 @@ export function imagetools(userOptions: Partial<VitePluginOptions> = {}): Plugin
         async load(id) {
             if (!filter(id)) return null
 
-            const srcURL = parseURL(id)
+            // Normalize Windows absolute paths to proper file:// URLs before parsing.
+            // Without this, parseURL interprets the drive letter (e.g. C:) as a URL scheme.
+            const normalizedId = /^[A-Za-z]:[\\/]/.test(id) ? 'file:///' + id.replace(/\\/g, '/') : id
+            const srcURL = parseURL(normalizedId)
 
             // lazy loaders so that we can load the metadata in defaultDirectives if needed
             // but if there are no directives then we can just skip loading

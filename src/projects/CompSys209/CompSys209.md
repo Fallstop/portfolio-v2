@@ -173,7 +173,7 @@ It was terrifying the first time we tried it. One wrong byte and we'd brick our 
 
 The PCB was designed in Altium Designer with full surface-mount components, ATmega328PB in TQFP package, proper ground planes for signal integrity, and headers for programming and debugging (which we used exactly once before the OTA system was live).
 
-## The Enclosure: Form Meets Function
+## The Enclosure
 
 With the electronics sorted, we needed somewhere to put them. The case went through several design iterations before we settled on a hybrid approach: 3D printed frame with clear acrylic panels.
 
@@ -181,11 +181,12 @@ With the electronics sorted, we needed somewhere to put them. The case went thro
 
 The sketches show our thinking - we wanted the display visible and angled for easy reading, ports accessible from the side, and (importantly) the ability to show off the PCB through clear panels.
 
+![:center:borderless](./MainDesign.webp)
+
 The final build used a textured black PLA frame with laser-cut acrylic on the top and bottom. The 3D printed standoffs at the corners tied everything together, and the bottom panel got the full treatment: team branding, member names, and a custom logo.
 
-![](./case_photos/CaseNames.jpg)
+![](./case_photos/)
 
-![](./case_photos/CaseComplete.jpg)
 
 ## The Competition: Datamars Judging
 
