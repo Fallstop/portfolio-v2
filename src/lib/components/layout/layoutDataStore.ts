@@ -19,3 +19,5 @@ export interface FluidSimFunctions {
 export let fluidSimFunctions: Writable<FluidSimFunctions | null> = writable(null);
 
 export let SPLASH_BACKGROUND_ON_PRINT = writable(false);
+
+export let isNavigating = writable(false);

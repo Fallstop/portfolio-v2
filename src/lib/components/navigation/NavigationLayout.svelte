@@ -100,6 +100,14 @@
         }
         .animation-container {
             height: 100%;
+
+            // Assign unique view-transition-names per button position (desktop only).
+            @media screen and (min-width: $mobile-breakpoint) {
+                &:nth-child(1) { view-transition-name: nav-btn-1; }
+                &:nth-child(2) { view-transition-name: nav-btn-2; }
+                &:nth-child(3) { view-transition-name: nav-btn-3; }
+                &.social-links-cell { view-transition-name: nav-social; }
+            }
         }
     }
     .social-links-cell {

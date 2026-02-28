@@ -6,6 +6,7 @@
   import {
     NavigationOption,
     type FluidSimFunctions,
+    isNavigating,
   } from "$lib/components/layout/layoutDataStore";
   import { browser, dev } from "$app/environment";
 
@@ -35,6 +36,12 @@
   let firstLoad = $state(false);
 
   let fluidFPS: number = $state(1);
+  let fluidPaused: boolean = $state(false);
+
+  // Pause fluid sim during navigations to prevent GPU contention with view transitions
+  $effect(() => {
+    fluidPaused = $isNavigating;
+  });
 
   let fluidCanvas: any | null = $state();
 
@@ -60,7 +67,7 @@
   class:reverse-mobile={NAVIGATION_CONFIG == NavigationOption.Midpoint ||
     NAVIGATION_CONFIG == NavigationOption.Blog}
 >
-  <div class="content-container">
+  <div class="content-container" style="view-transition-name: page-content;">
     {@render children?.()}
   </div>
   <div
@@ -93,6 +100,7 @@
         <FluidCanvas
           bind:this={fluidCanvas}
           bind:FPS={fluidFPS}
+          bind:PAUSED={fluidPaused}
           on:loaded={fluidCanvasLoaded}
           INTERACTIVE={FLUID_SIM_INTERACTIVE}
           SPLASH_ON_PRINT={SPLASH_BACKGROUND_ON_PRINT}

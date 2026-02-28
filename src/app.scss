@@ -141,6 +141,36 @@ div.fancybox__container img.fancybox-image {
 }
 
 
+// Page transitions (View Transitions API)
+@keyframes vt-fade-in {
+    from { opacity: 0; }
+}
+@keyframes vt-fade-out {
+    to { opacity: 0; }
+}
+
+::view-transition-old(page-content) {
+    animation: 120ms ease-out both vt-fade-out;
+}
+::view-transition-new(page-content) {
+    animation: 150ms ease-in 80ms both vt-fade-in;
+}
+
+// Prevent the root snapshot from animating (keeps nav/background stable)
+::view-transition-old(root),
+::view-transition-new(root) {
+    animation: none;
+}
+
+// Navigation buttons morph between layouts (position/size handled automatically)
+::view-transition-group(nav-btn-1),
+::view-transition-group(nav-btn-2),
+::view-transition-group(nav-btn-3),
+::view-transition-group(nav-social) {
+    animation-duration: 250ms;
+    animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
 .removed {
     display: none !important;
 }

@@ -4,6 +4,26 @@
 
   import posthog from "posthog-js";
   import { browser } from "$app/environment";
+  import { onNavigate } from "$app/navigation";
+  import { isNavigating } from "$lib/components/layout/layoutDataStore";
+
+  onNavigate((navigation) => {
+    if (!document.startViewTransition) return;
+
+    isNavigating.set(true);
+
+    return new Promise((resolve) => {
+      const transition = document.startViewTransition(async () => {
+        resolve();
+        await navigation.complete;
+      });
+      transition.finished.then(() => {
+        isNavigating.set(false);
+      }).catch(() => {
+        isNavigating.set(false);
+      });
+    });
+  });
   import { env } from "$env/dynamic/public";
 
   export function initTelemetry() {

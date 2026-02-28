@@ -6,7 +6,6 @@
 		hashCode,
 		scaleByPixelRatio,
 	} from "./util";
-	import { fade } from "svelte/transition";
 	import InteractiveMouse from "./InteractiveMouse.svelte";
 
 	interface Props {
@@ -573,10 +572,12 @@
 			console.log("Fluid simulation quality reduced for performance.");
 		}
 
-		if (resizeCanvas()) initFramebuffers();
-		applyInputs();
-		if (!PAUSED) step(dt);
-		render(null);
+		if (!PAUSED) {
+			if (resizeCanvas()) initFramebuffers();
+			applyInputs();
+			step(dt);
+			render(null);
+		}
 
 		if (recurse) {
 			requestAnimationFrame(() => {
@@ -1082,7 +1083,6 @@
 <canvas
 	class="canvas"
 	class:hide={generatedCanvasPrintFrames}
-	out:fade={{ duration: 500 }}
 	bind:this={canvas}
 ></canvas>
 <div class="freeze-frame-container">
