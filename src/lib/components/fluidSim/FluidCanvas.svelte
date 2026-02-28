@@ -1158,8 +1158,8 @@
 	}}
 	onmousedown={(e) => {
 		if (!INTERACTIVE) return;
-		const posX = scaleByPixelRatio(e.offsetX);
-		const posY = scaleByPixelRatio(e.offsetY);
+		const posX = scaleByPixelRatio(e.clientX);
+		const posY = scaleByPixelRatio(e.clientY);
 		let pointer = pointers.find((p) => p.id == -1);
 		if (pointer == null) pointer = createPointer();
 		updatePointerDownData(pointer, -1, posX, posY);
@@ -1169,8 +1169,8 @@
 
 		const pointer = pointers[0];
 		if (!pointer.down) return;
-		const posX = scaleByPixelRatio(e.offsetX);
-		const posY = scaleByPixelRatio(e.offsetY);
+		const posX = scaleByPixelRatio(e.clientX);
+		const posY = scaleByPixelRatio(e.clientY);
 		updatePointerMoveData(pointer, posX, posY);
 	}}
 	ontouchstart={(e) => {
