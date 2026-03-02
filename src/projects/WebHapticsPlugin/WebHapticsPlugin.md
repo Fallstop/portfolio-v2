@@ -44,7 +44,7 @@ The plugin installs into Logi Options+ and runs a local HTTPS server on port 414
 
 ### The local.jmw.nz Trick
 
-One of the trickier parts was getting HTTPS to work locally. Browsers rightfully refuse to connect to self-signed certificates, and you can't just serve HTTP from a secure context. The solution: `local.jmw.nz` resolves to `127.0.0.1`, but with a valid SSL certificate that the plugin automatically downloads from GitHub. The cert gets cached locally and refreshed every 24 hours. You read that correctly, I'm shipping a valid SSL cert for my own domain straight to the browser.
+One of the trickier parts was getting HTTPS to work locally. Browsers rightfully refuse to connect to self-signed certificates, and you can't just serve HTTP from a secure context. The solution: `local.jmw.nz` resolves to `127.0.0.1`, but with a valid SSL certificate that the plugin automatically downloads from GitHub. The cert gets cached locally and refreshed every 24 hours. You read that correctly, I'm shipping a valid SSL cert for my own domain straight to the users.
 
 ### API Options
 
@@ -88,4 +88,4 @@ The MX Master 4 provides 15 built-in waveforms across different categories:
 
 The plugin itself is built with C# using NetCoreServer for the HTTPS/WSS server. The demo website at [haptics.jmw.nz](https://haptics.jmw.nz) is a Svelte app with a playground where you can test all the waveforms if you have the mouse and plugin installed.
 
-The whole thing is open source under MIT and has been *submitted* to Logitech Marketplace for easier user installation, but I'm yet to hear back.
+The whole thing is open source under MIT and is available on the Logitech Marketplace for easy installation.
