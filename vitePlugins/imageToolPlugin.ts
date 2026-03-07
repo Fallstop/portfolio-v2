@@ -168,7 +168,20 @@ export function imagetools(userOptions: Partial<VitePluginOptions> = {}): Plugin
 
             const output = await outputFormat(outputMetadatas) as any[];
 
-            return dataToEsm(output, esmSettings)
+            // Strip heavy metadata fields (XMP, ICC, EXIF, etc.) that bloat client bundles
+            const heavyKeys = ['xmpAsString', 'icc', 'exif', 'iptc', 'tifftagPhotoshop', 'xmp',
+                'hasProfile', 'hasAlpha', 'autoOrient', 'chromaSubsampling', 'isProgressive',
+                'isPalette', 'paletteBitDepth', 'resolutionUnit', 'orientation', 'image']
+            const stripped = Array.isArray(output) ? output.map((item: any) => {
+                if (item && typeof item === 'object') {
+                    const clean = { ...item }
+                    for (const key of heavyKeys) delete clean[key]
+                    return clean
+                }
+                return item
+            }) : output
+
+            return dataToEsm(stripped, esmSettings)
         },
 
         configureServer(server) {

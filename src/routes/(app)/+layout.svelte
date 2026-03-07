@@ -6,6 +6,7 @@
   import { browser } from "$app/environment";
   import { onNavigate } from "$app/navigation";
   import { isNavigating } from "$lib/components/layout/layoutDataStore";
+  import NavigationLoadingBar from "$lib/components/layout/NavigationLoadingBar.svelte";
 
   onNavigate((navigation) => {
     if (!document.startViewTransition) return;
@@ -53,4 +54,5 @@
   }
 </script>
 
+<NavigationLoadingBar />
 {@render children?.()}
