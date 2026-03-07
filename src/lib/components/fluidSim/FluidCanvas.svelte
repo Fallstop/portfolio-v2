@@ -1055,6 +1055,9 @@
 		updateKeywords();
 		initFramebuffers();
 		multipleSplats(Math.trunc(Math.random() * 20) + 5);
+		// Paint an initial frame even when navigation has the sim paused.
+		// Without this, the browser can briefly show the canvas' default black buffer.
+		render(null);
 
 		webglInitialized = true;
 
