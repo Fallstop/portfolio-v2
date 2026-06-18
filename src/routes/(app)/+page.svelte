@@ -13,7 +13,7 @@
     personal_headshot
     SEOData={{
 		type: "mainpage",
-        description: "I'm a engineering student at the University of Auckland, and I've got a passion for making.",
+        description: "I'm a Software Engineer at Watchful and a part-time Computer Systems Engineering student at the University of Auckland, with a passion for making.",
         slug: "",
         title: "Jasper M-W",
 	}}

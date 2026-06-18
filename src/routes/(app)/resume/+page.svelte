@@ -21,7 +21,7 @@
     SEOData={{
         type: "mainpage",
         description:
-            "I'm a second-year Computer Systems Engineering student at University of Auckland, with a passion for building things at the intersection of hardware and software.",
+            "I'm a full-time Software Engineer III at Watchful, studying Computer Systems Engineering part-time at the University of Auckland, with a passion for building things at the intersection of hardware and software.",
         slug: "/resume",
         title: "Jasper M-W | Resume",
     }}
@@ -29,8 +29,9 @@
     <div class="content">
         <h1 class="page-header">Jasper Miller-Waugh</h1>
         <p>
-            I'm a second-year Computer Systems Engineering student at University of Auckland, with
-            a passion for building things at the intersection of hardware and software.
+            I'm a full-time Software Engineer III at Watchful, studying Computer Systems
+            Engineering part-time at the University of Auckland, with a passion for building
+            things at the intersection of hardware and software.
         </p>
         <div class="card-container">
             <LiveCard>
@@ -212,8 +213,9 @@
                 </h3>
                 <ul>
                     <li>
-                        Second year University of Auckland Bachelor of
-                        Engineering (Honours).
+                        Currently in Part III of a University of Auckland
+                        Bachelor of Engineering (Honours), studying part-time at
+                        two papers per semester alongside full-time work.
                     </li>
                     <li>
                         Computer Systems Engineering is a mix of Software Engineering and Electrical Engineering. I decided to go down this route due to my love of combining well-designed hardware with excellent software to solve real-world problems.

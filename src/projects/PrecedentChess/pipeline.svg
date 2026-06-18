@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 232" width="1200" height="232" font-family="'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace">
+  <defs>
+    <radialGradient id="bg" cx="78%" cy="-10%" r="95%">
+      <stop offset="0%" stop-color="#1b2922"/>
+      <stop offset="62%" stop-color="#0f1613"/>
+      <stop offset="100%" stop-color="#0f1613"/>
+    </radialGradient>
+  </defs>
+
+  <rect x="0" y="0" width="1200" height="232" rx="16" fill="url(#bg)"/>
+  <rect x="10" y="10" width="1180" height="212" rx="12" fill="none" stroke="#c9a04e" stroke-opacity="0.26"/>
+
+  <text x="40" y="44" fill="#a6af9f" font-size="13" letter-spacing="3" font-weight="600">FROM RAW GAMES TO YOUR BROWSER</text>
+
+  <!-- nodes -->
+  <g>
+    <rect x="40"  y="86" width="180" height="96" rx="14" fill="#141f18" stroke="#c9a04e" stroke-opacity="0.4" stroke-width="1.5"/>
+    <text x="130" y="130" text-anchor="middle" fill="#e8c87c" font-size="20" font-weight="600">lichess</text>
+    <text x="130" y="155" text-anchor="middle" fill="#a6af9f" font-size="13">.pgn.zst dumps</text>
+
+    <rect x="275" y="86" width="180" height="96" rx="14" fill="#141f18" stroke="#c9a04e" stroke-opacity="0.4" stroke-width="1.5"/>
+    <text x="365" y="130" text-anchor="middle" fill="#e8c87c" font-size="20" font-weight="600">kc-process</text>
+    <text x="365" y="155" text-anchor="middle" fill="#a6af9f" font-size="13">Rust ingest</text>
+
+    <rect x="510" y="86" width="180" height="96" rx="14" fill="#141f18" stroke="#c9a04e" stroke-opacity="0.4" stroke-width="1.5"/>
+    <text x="600" y="130" text-anchor="middle" fill="#e8c87c" font-size="20" font-weight="600">book.book</text>
+    <text x="600" y="155" text-anchor="middle" fill="#a6af9f" font-size="13">binary, mmap'd</text>
+
+    <rect x="745" y="86" width="180" height="96" rx="14" fill="#141f18" stroke="#c9a04e" stroke-opacity="0.4" stroke-width="1.5"/>
+    <text x="835" y="130" text-anchor="middle" fill="#e8c87c" font-size="20" font-weight="600">kc-server</text>
+    <text x="835" y="155" text-anchor="middle" fill="#a6af9f" font-size="13">Rust + axum</text>
+
+    <rect x="980" y="86" width="180" height="96" rx="14" fill="#141f18" stroke="#c9a04e" stroke-opacity="0.4" stroke-width="1.5"/>
+    <text x="1070" y="130" text-anchor="middle" fill="#e8c87c" font-size="20" font-weight="600">frontend</text>
+    <text x="1070" y="155" text-anchor="middle" fill="#a6af9f" font-size="13">SvelteKit</text>
+  </g>
+
+  <!-- arrows -->
+  <g fill="#c9a04e" stroke="#c9a04e" stroke-width="2.5">
+    <line x1="226" y1="134" x2="261" y2="134"/>
+    <polygon points="271,134 259,128 259,140" stroke="none"/>
+    <line x1="461" y1="134" x2="496" y2="134"/>
+    <polygon points="506,134 494,128 494,140" stroke="none"/>
+    <line x1="696" y1="134" x2="731" y2="134"/>
+    <polygon points="741,134 729,128 729,140" stroke="none"/>
+    <line x1="931" y1="134" x2="966" y2="134"/>
+    <polygon points="976,134 964,128 964,140" stroke="none"/>
+  </g>
+</svg>

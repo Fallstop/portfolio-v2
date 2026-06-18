@@ -1,5 +1,6 @@
 <script lang="ts">
     import { enhance } from "$app/forms";
+    import { onMount } from "svelte";
 
     import LiveCard from "$lib/components/utilities/LiveCard.svelte";
     import PrimaryLayout from "$lib/components/layout/PrimaryLayout.svelte";
@@ -8,8 +9,47 @@
     import { liveCardEffect } from "$lib/effects/liveCardEffect";
     import { Send, CircleCheck, TriangleAlert, Linkedin, Github, Mail, Check } from "lucide-svelte";
     import { fade, fly } from "svelte/transition";
+    import { computeProof, b64urlToBytes } from "$lib/foldProof";
+    import type { PageProps } from "./$types";
+
+    let { data }: PageProps = $props();
 
     const messageMaxLength = 1024;
+
+    // --- Proof-of-Render: passive bot signals, zero user-facing friction ---
+    let mountTime = 0;
+    let firstInteractionTime = 0;
+    let pasteDetected = false;
+
+    onMount(() => {
+        mountTime = Date.now();
+    });
+
+    function noteInteraction() {
+        if (!firstInteractionTime) firstInteractionTime = Date.now();
+    }
+    function notePaste() {
+        pasteDetected = true;
+        noteInteraction();
+    }
+
+    // Fold the server token together with a hash of the exact body, proving this
+    // submission came from a real browser that ran our code. Any failure here is
+    // swallowed so a JS hiccup can only ever cost a soft flag, never the message.
+    async function computeRenderProof(formData: FormData): Promise<string> {
+        const por = String(formData.get("por") ?? "");
+        const dot = por.indexOf(".");
+        if (dot <= 0) return "";
+        const payloadB64 = por.slice(0, dot);
+        const payload = JSON.parse(new TextDecoder().decode(b64urlToBytes(payloadB64)));
+        return await computeProof({
+            payloadB64,
+            name: String(formData.get("name") ?? ""),
+            email: String(formData.get("email") ?? ""),
+            message: String(formData.get("message") ?? ""),
+            r: payload.r,
+        });
+    }
 
     let nameInput: string | undefined = $state();
     let emailInput: string | undefined = $state();
@@ -107,8 +147,20 @@
         </LiveCard>
     </div>
     {:else}
-    <form method="post" use:enhance={() => {
+    <form method="post" oninput={noteInteraction} onpaste={notePaste} use:enhance={async ({ formData }) => {
         formState = 'submitting';
+
+        // Proof-of-Render: prove a real browser folded the token with this body.
+        try {
+            formData.set('por_proof', await computeRenderProof(formData));
+        } catch {
+            formData.set('por_proof', ''); // empty -> soft "no-js" path, never dropped
+        }
+        // Coarse behavioral salt (soft signal only): interaction->submit time + paste flag.
+        const base = firstInteractionTime || mountTime || Date.now();
+        const ix = Math.max(0, Math.min(600000, Date.now() - base));
+        formData.set('por_ix', (pasteDetected ? 'p' : 'n') + ix);
+
         return async ({ result }) => {
             if (result.type === 'success') {
                 formState = 'success';
@@ -121,10 +173,17 @@
             }
         };
     }}>
-            <!-- Honeypot field - visually hidden from users, traps bots -->
+            <!-- Proof-of-Render token (server-issued) + proof/salt (set by JS on submit) -->
+            <input type="hidden" name="por" value={data.porToken} />
+            <input type="hidden" name="por_proof" value="" />
+            <input type="hidden" name="por_ix" value="" />
+
+            <!-- Honeypot fields - visually hidden from users, traps bots -->
             <div class="hp-field" aria-hidden="true">
                 <label for="website">Website</label>
                 <input type="text" id="website" name="website" tabindex="-1" autocomplete="off" />
+                <label for="contact_reason">Reason for contact</label>
+                <input type="text" id="contact_reason" name="contact_reason" tabindex="-1" autocomplete="off" />
             </div>
 
             <div class="form-group">

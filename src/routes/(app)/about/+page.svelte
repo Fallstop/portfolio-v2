@@ -137,21 +137,22 @@
     SEOData={{
         type: "profile",
         title: "Jasper M-W | About Me",
-        description: `I'm a second-year Computer Systems Engineering student at University of Auckland, who's spent the last ${getYearsFrom("2019")} years building random projects in my spare time.`,
+        description: `I'm a full-time Software Engineer at Watchful, studying Computer Systems Engineering part-time at the University of Auckland, who's spent the last ${getYearsFrom("2019")} years building random projects in my spare time.`,
         slug: "/about",
     }}
 >
     <div class="content">
         <h1 class="page-header">Kia ora, I'm Jasper&nbsp;M-W.</h1>
         <h3>
-            I'm a second-year Computer Systems Engineering student at University
-            of Auckland, who's spent the last {getYearsFrom("2019")} years building
-            random projects in my spare time.
+            I'm a full-time Software Engineer at Watchful, studying Computer
+            Systems Engineering part-time at the University of Auckland. I've
+            spent the last {getYearsFrom("2019")} years building random projects
+            in my spare time.
         </h3>
         <p>
-            I work as a full-full stack developer, my projects range from
-            creating custom circuit-boards to designing bespoke websites. I like
-            to think of myself as a jack of all trades, master of <i>some</i>.
+            By day I work full stack; by night my projects range from custom
+            circuit-boards to bespoke websites. I like to think of myself as a
+            jack of all trades, master of <i>some</i>.
         </p>
 
         <div class="fact-container">
