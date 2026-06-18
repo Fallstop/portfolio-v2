@@ -2,7 +2,7 @@
 date: "2026-06-18"
 title: "Precedent Chess"
 subtitle: "Chess with exactly one extra rule: every move needs a precedent."
-description: "A chess variant where you can only play moves that have actually been played in a real game, built on Lichess's 2.5 TB open database and ingested by a coding agent I left to run the pipeline on its own."
+description: "Chess with exactly one extra rule: every move needs a precedent."
 highlight: true
 tags: ["Software", "Rust", "Svelte", "TypeScript", "Chess", "Claude Code"]
 ---
