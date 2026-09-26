@@ -1,6 +1,6 @@
 import { type Actions, fail } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
-import { DISCORD_WEBHOOK, DISCORD_SPAM_WEBHOOK } from '$lib/server/env.js';
+import { secrets } from '$lib/server/env.js';
 import { accentColor, hexColourToNumber } from '$lib/utilities/colour';
 import { issueToken, verifyPoR } from '$lib/server/por.js';
 import { scoreContent, type Signal } from '$lib/server/contentScore.js';
@@ -48,9 +48,9 @@ export const actions: Actions = {
 
         // --- silent-drop helper: bot never learns it was caught ---
         const routeToSpam = async (reason: string, extra: Record<string, unknown>[] = []) => {
-            if (DISCORD_SPAM_WEBHOOK) {
+            if (secrets.DISCORD_SPAM_WEBHOOK) {
                 await postEmbed(
-                    DISCORD_SPAM_WEBHOOK,
+                    secrets.DISCORD_SPAM_WEBHOOK,
                     {
                         title: 'Spam Blocked',
                         fields: [
@@ -89,7 +89,7 @@ export const actions: Actions = {
             return fail(400, { error: 'Missing required fields.' });
         }
 
-        if (!DISCORD_WEBHOOK) {
+        if (!secrets.DISCORD_WEBHOOK) {
             console.log('WARNING: No Discord webhook found.');
             return fail(500, { error: 'No Discord webhook found.' });
         }
@@ -122,7 +122,7 @@ export const actions: Actions = {
         };
 
         try {
-            const response = await fetch(DISCORD_WEBHOOK, {
+            const response = await fetch(secrets.DISCORD_WEBHOOK, {
                 method: 'POST',
                 body: JSON.stringify({ embeds: [messageEmbed] }),
                 headers: { 'Content-Type': 'application/json' }

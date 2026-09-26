@@ -3,7 +3,13 @@ import Discord from "$lib/components/ExtraIcons/Discord.svelte";
 import Reddit from "$lib/components/ExtraIcons/Reddit.svelte";
 import Twitch from "$lib/components/ExtraIcons/Twitch.svelte";
 
-import { Github, Twitter, Youtube, Facebook, Instagram, Linkedin, Globe, Landmark, Camera, Vibrate } from "lucide-svelte";
+import { Globe, Landmark, Camera, Vibrate } from "@lucide/svelte";
+import Github from "$lib/components/ExtraIcons/Github.svelte";
+import Twitter from "$lib/components/ExtraIcons/Twitter.svelte";
+import Youtube from "$lib/components/ExtraIcons/Youtube.svelte";
+import Facebook from "$lib/components/ExtraIcons/Facebook.svelte";
+import Instagram from "$lib/components/ExtraIcons/Instagram.svelte";
+import Linkedin from "$lib/components/ExtraIcons/Linkedin.svelte";
 import Fallstop from "$lib/components/ExtraIcons/Fallstop.svelte";
 import Provida from "$lib/components/ExtraIcons/Provida.svelte";
 import TerribleHack from "$lib/components/ExtraIcons/TerribleHack.svelte";

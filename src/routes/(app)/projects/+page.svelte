@@ -2,18 +2,16 @@
     import ProjectThumbnails from "$lib/components/projects/ProjectThumbnails.svelte";
     import PrimaryLayout from "$lib/components/layout/PrimaryLayout.svelte";
     import { NavigationOption } from "$lib/components/layout/layoutDataStore";
-    import ProjectSearch from "$lib/components/projects/ProjectSearch.svelte";
-    import type { Post } from "$lib/types";
-    import type { Readable } from "svelte/store";
-    import { receive, send } from "$lib/utilities/sendTransition";
-    import { flip } from "svelte/animate";
+    import ProjectSearch, { searchProjects } from "$lib/components/projects/ProjectSearch.svelte";
     interface Props {
         data: import("./$types").PageData;
     }
 
     let { data }: Props = $props();
 
-    let projectSearch: { searchResult: Post[]; } | undefined = $state(undefined);
+    let textSearch = $state("");
+    let selectedTag: string | null = $state(null);
+    const searchResult = $derived(searchProjects(data.posts, textSearch, selectedTag));
 </script>
 
 <PrimaryLayout
@@ -22,7 +20,7 @@
     personal_headshot
     SEOData={{
         type: "mainpage",
-        description: `${projectSearch?.searchResult?.length || "Many"} random and interesting projects that I've worked on over the years.`,
+        description: `${data.posts.length} random and interesting projects that I've worked on over the years.`,
         slug: "/projects",
         title: "Jasper M-W | Projects",
         image: "/projects/ogimage.png"
@@ -30,22 +28,15 @@
 >
     <div class="project-container">
         <h1 class="page-header">Projects</h1>
-        <ProjectSearch
-            projectList={data.posts}
-            onSearchResult={(result) => {
-                projectSearch = { searchResult: result };
-            }}
-        />
+        <ProjectSearch projectList={data.posts} bind:textSearch bind:selectedTag />
         <ul class="project-list">
-            {#if projectSearch?.searchResult}
-                {#if projectSearch.searchResult.length === 0}
-                    <div class="no-results">
-                        <p>No projects found. Want to suggest an idea?</p>
-                        <a href="/contact">Get in touch</a>
-                    </div>
-                {:else}
-                    <ProjectThumbnails posts={projectSearch.searchResult} />
-                {/if}
+            {#if searchResult.length === 0}
+                <div class="no-results">
+                    <p>No projects found. Want to suggest an idea?</p>
+                    <a href="/contact">Get in touch</a>
+                </div>
+            {:else}
+                <ProjectThumbnails posts={searchResult} />
             {/if}
         </ul>
     </div>

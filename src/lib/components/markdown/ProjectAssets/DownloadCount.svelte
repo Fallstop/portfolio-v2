@@ -1,8 +1,8 @@
 <script lang="ts">
     import { onMount } from "svelte";
-    import { Download } from "lucide-svelte";
+    import { Download } from "@lucide/svelte";
 
-    let state: "loading" | "loaded" | "failed" = $state("loading");
+    let status: "loading" | "loaded" | "failed" = $state("loading");
     let count = $state(0);
     let digits = $state(4);
 
@@ -23,19 +23,19 @@
 
         if (dataRes.status === "fulfilled" && dataRes.value.downloads != null) {
             count = dataRes.value.downloads;
-            state = "loaded";
+            status = "loaded";
         } else {
-            state = "failed";
+            status = "failed";
         }
     });
 </script>
 
-{#if state !== "failed"}
-    <a class="badge" class:shimmer={state === "loading"}
+{#if status !== "failed"}
+    <a class="badge" class:shimmer={status === "loading"}
         href="https://marketplace.logi.com/plugin/HapticWeb/en" target="_blank"
-        aria-label={state === "loaded" ? `${count.toLocaleString('en-NZ')} downloads` : "Loading download count"}>
+        aria-label={status === "loaded" ? `${count.toLocaleString('en-NZ')} downloads` : "Loading download count"}>
         <Download />
-        {#if state === "loading"}
+        {#if status === "loading"}
             <span class="placeholder">{placeholderText(digits)}</span>
         {:else}
             {count.toLocaleString("en-NZ")} downloads

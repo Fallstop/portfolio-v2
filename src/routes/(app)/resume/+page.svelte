@@ -4,7 +4,7 @@
     import { NavigationOption } from "$lib/components/layout/layoutDataStore";
     import MoreProjectsThumbnail from "$lib/components/projects/MoreProjectsThumbnail.svelte";
     import ProjectThumbnails from "$lib/components/projects/ProjectThumbnails.svelte";
-    import { ArrowRight } from "lucide-svelte";
+    import { ArrowRight } from "@lucide/svelte";
 
     interface Props {
         data: import("./$types").PageData;

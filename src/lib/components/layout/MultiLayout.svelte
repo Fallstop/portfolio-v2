@@ -1,6 +1,7 @@
 <script lang="ts">
   import { fly } from "svelte/transition";
-  import { onMount, setContext } from "svelte";
+  import { onMount } from "svelte";
+  import { MediaQuery } from "svelte/reactivity";
   import NavigationLayout from "$lib/components/navigation/NavigationLayout.svelte";
 
   import {
@@ -8,7 +9,7 @@
     type FluidSimFunctions,
     isNavigating,
   } from "$lib/components/layout/layoutDataStore";
-  import { browser, dev } from "$app/environment";
+  import { dev } from "$app/environment";
 
   import Lazy from "$lib/components/utilities/Lazy.svelte";
   import type { Writable } from "svelte/store";
@@ -45,15 +46,18 @@
 
   let fluidCanvas: any | null = $state();
 
-  // Check for prefers-reduced-motion to skip fluid sim entirely for accessibility
-  let prefersReducedMotion = $state(false);
-  if (browser) {
-    prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // Skip the fluid sim entirely for prefers-reduced-motion. Only checked after mount,
+  // since the server can't know it and reading it during hydration causes a mismatch
+  const reducedMotionQuery = new MediaQuery("prefers-reduced-motion: reduce");
+  const prefersReducedMotion = $derived(firstLoad && reducedMotionQuery.current);
+
+  function fluidCanvasLoaded(functions: FluidSimFunctions) {
+    fluidSimFunctions.set(functions);
   }
 
-  function fluidCanvasLoaded(e: CustomEvent<FluidSimFunctions>) {
-    console.log("Canvas Loaded", e);
-    fluidSimFunctions.set(e.detail);
+  function fluidCanvasUnloaded(functions: FluidSimFunctions) {
+    // During navigation the next page's canvas may already have registered itself
+    fluidSimFunctions.update((current) => (current === functions ? null : current));
   }
 
   onMount(() => {
@@ -101,7 +105,8 @@
           bind:this={fluidCanvas}
           bind:FPS={fluidFPS}
           bind:PAUSED={fluidPaused}
-          on:loaded={fluidCanvasLoaded}
+          onloaded={fluidCanvasLoaded}
+          onunloaded={fluidCanvasUnloaded}
           INTERACTIVE={FLUID_SIM_INTERACTIVE}
           SPLASH_ON_PRINT={SPLASH_BACKGROUND_ON_PRINT}
         />

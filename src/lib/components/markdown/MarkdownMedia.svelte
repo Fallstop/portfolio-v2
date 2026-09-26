@@ -13,8 +13,10 @@
     let { src, alt, ...rest }: Props = $props();
 
     let type: "image" | "video" | "gallery" | "pdf" = $derived.by(() => {
-        if (Array.isArray(src)) {
+        if (typeof src === "object" && "srcset" in src) {
             return "image";
+        } else if (typeof src === "object" && "pages" in src) {
+            return "pdf";
         } else if (typeof src === "object") {
             return "gallery";
         } else {
@@ -36,5 +38,5 @@
 {:else if type=="image"}
     <MarkdownImage {src} {alt} {...rest} />
 {:else if type=="pdf"}
-    <MarkdownPdfPreview pdf_url={src} file_name={alt} {...rest} /> 
+    <MarkdownPdfPreview pdf={src} file_name={alt || undefined} {...rest} />
 {/if}

@@ -1,4 +1,4 @@
-import { Code2, User, Sword, Home } from "lucide-svelte";
+import { Code2, User, Sword, Home } from "@lucide/svelte";
 
 
 interface AvailablePage {

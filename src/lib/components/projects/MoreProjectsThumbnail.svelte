@@ -8,7 +8,7 @@
     let { missedProjects = 0 }: Props = $props();
 
     let svg = new QRCode({
-        content: "https://jmw//projects",
+        content: "https://jmw.nz/projects",
         padding: 0,
         width: 100,
         height: 100,

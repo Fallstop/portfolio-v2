@@ -12,10 +12,6 @@ declare global {
 				KV: KVNamespace;
 			};
 		}
-		// AdobeDC
-		interface AdobeDC {
-			View: (config: any) => void;
-		}
 	}
 }
 

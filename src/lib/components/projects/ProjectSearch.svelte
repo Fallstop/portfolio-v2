@@ -1,17 +1,43 @@
-<script lang="ts">
+<script lang="ts" module>
     import type { Post } from "$lib/types";
     import Fuse from "fuse.js";
+    import { normaliseCase } from "$lib/utilities/string";
+
+    /** Pure so the page can derive results during prerendering, not just after hydration */
+    export function searchProjects(projectList: Post[], textSearch: string, selectedTag: string | null): Post[] {
+        let filteredResult = projectList;
+
+        // Start with fuzzy search
+        if (textSearch) {
+            const fuse = new Fuse(projectList, {
+                keys: ["title", "description", "date"],
+            });
+            filteredResult = fuse.search(textSearch).map((result) => result.item);
+        }
+
+        if (selectedTag) {
+            filteredResult = filteredResult.filter((post) => {
+                return post.tags.map(normaliseCase).includes(selectedTag);
+            });
+        }
+
+        return filteredResult;
+    }
+</script>
+
+<script lang="ts">
     import LiveCard from "../utilities/LiveCard.svelte";
-    import { normaliseCase, toProperCase } from "$lib/utilities/string";
+    import { toProperCase } from "$lib/utilities/string";
     import { tagCase } from "./tags";
-    import { Search } from "lucide-svelte";
+    import { Search } from "@lucide/svelte";
 
     interface Props {
         projectList: Post[];
-        onSearchResult: (result: Post[]) => void;
+        textSearch?: string;
+        selectedTag?: string | null;
     }
 
-    let { projectList, onSearchResult }: Props = $props();
+    let { projectList, textSearch = $bindable(""), selectedTag = $bindable(null) }: Props = $props();
 
     const tagNumShownMobile = 10;
 
@@ -33,8 +59,6 @@
             .map((tag) => tag[0]),
     );
 
-    let selectedTag = $state<string | null>(null);
-
     function toggleTag(tag: string) {
         if (selectedTag === tag) {
             selectedTag = null;
@@ -43,39 +67,6 @@
         }
     }
 
-    const fuse = $derived(new Fuse(projectList, {
-        keys: ["title", "description", "date"],
-    }));
-
-    let textSearch = $state("");
-
-    
-
-    const searchResult: Post[] = $derived.by(() => {
-        let filteredResult = projectList;
-
-        // Start with fuzzy search
-        if (textSearch) {
-            filteredResult = fuse
-                .search(textSearch)
-                .map((result) => result.item);
-        }
-
-        if (selectedTag) {
-            filteredResult = filteredResult.filter((post) => {
-                return post.tags.map(normaliseCase).includes(selectedTag!);
-            });
-        }
-
-        return filteredResult;
-    });
-
-    $effect(() => {
-        onSearchResult(searchResult);
-    });
-
-
-    
 </script>
 
 <div class="search-controller">

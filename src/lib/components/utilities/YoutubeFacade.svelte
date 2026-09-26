@@ -1,7 +1,7 @@
 <!-- https://kellenmace.com/blog/lite-youtube-embed-for-svelte -->
 
 <script lang="ts">
-  import { Copy, CopyCheckIcon, X } from "lucide-svelte";
+  import { Copy, CopyCheckIcon, X } from "@lucide/svelte";
   import { onDestroy } from "svelte";
   import CopyAction from "./CopyAction.svelte";
   import { fade } from "svelte/transition";

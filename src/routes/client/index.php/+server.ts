@@ -14,7 +14,17 @@
  */
 import { error, json } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
-import { ULOGGER_USER, ULOGGER_PASS } from '$env/static/private';
+import { secrets } from '$lib/server/env';
+
+/** Workers provide crypto.subtle.timingSafeEqual; Node (vite dev) doesn't, so fall back to a constant-time loop */
+function timingSafeEqual(a: Uint8Array, b: Uint8Array) {
+    const subtle = crypto.subtle as SubtleCrypto & { timingSafeEqual?: (a: Uint8Array, b: Uint8Array) => boolean };
+    if (subtle.timingSafeEqual) return subtle.timingSafeEqual(a, b);
+
+    let difference = 0;
+    for (let i = 0; i < a.byteLength; i++) difference |= a[i] ^ b[i];
+    return difference === 0;
+}
 
 export const POST: RequestHandler = async ({ request, platform, cookies }) => {
     const formData = await request.formData();
@@ -32,18 +42,17 @@ export const POST: RequestHandler = async ({ request, platform, cookies }) => {
 
         if (!user || !pass) return false;
 
-        const userMatch = user === ULOGGER_USER;
+        const userMatch = user === secrets.ULOGGER_USER;
 
-        // Use crypto.subtle.timingSafeEqual for password
         const encoder = new TextEncoder();
         const a = encoder.encode(pass);
-        const b = encoder.encode(ULOGGER_PASS);
+        const b = encoder.encode(secrets.ULOGGER_PASS ?? '');
 
         if (a.byteLength !== b.byteLength) {
             return false;
         }
 
-        const passMatch = (crypto.subtle as any).timingSafeEqual(a, b);
+        const passMatch = timingSafeEqual(a, b);
 
         return userMatch && passMatch;
     };

@@ -1,29 +1,34 @@
 import { sveltekit } from "@sveltejs/kit/vite";
 import { defineConfig } from "vite";
-import{ imagetools } from './vitePlugins/imageToolPlugin';
-import {interceptDirectives, resolveThumbnailConfigs} from "./vitePlugins/imageToolsParamTransform";
-import galleryImportTransform from "./vitePlugins/galleryImportTransform";
+import { imagetools } from "vite-imagetools";
+import { svelteSitemap } from "svelte-sitemap/vite";
+import { responsiveDefaultDirectives, responsiveOutputFormats, responsiveResolveConfigs, responsiveSvgs } from "./vitePlugins/responsiveImages.ts";
+import galleryImportTransform from "./vitePlugins/galleryImportTransform.ts";
+import pdfEmbed from "./vitePlugins/pdfEmbed.ts";
 
 
 export default defineConfig({
   plugins: [
     sveltekit(),
-    galleryImportTransform({projectRoot: __dirname}),
+    galleryImportTransform({projectRoot: import.meta.dirname}),
+    pdfEmbed(),
+    responsiveSvgs(),
     imagetools({
-      resolveConfigs: resolveThumbnailConfigs() as any,
-      extendDirectives: interceptDirectives(),
+      defaultDirectives: responsiveDefaultDirectives(),
+      resolveConfigs: responsiveResolveConfigs(),
+      extendOutputFormats: responsiveOutputFormats(),
+    }),
+    svelteSitemap({
+      domain: "https://jmw.nz",
+      outDir: ".svelte-kit/cloudflare",
     }),
   ],
   css: {
     preprocessorOptions: {
       scss: {
-        api: "modern",
         additionalData: '@use "/src/variables.scss" as *;',
-      } as any,
+      },
     },
-  },
-  ssr: {
-    noExternal: ["@fancyapps/ui"]
   },
   clearScreen: false,
   server: {

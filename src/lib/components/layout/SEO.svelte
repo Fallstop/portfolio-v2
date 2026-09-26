@@ -60,14 +60,10 @@
 
         <meta property="og:title" content={SEOData?.title} />
         <meta property="og:description" content={SEOData?.description} />
-        <meta property="og:image" content={SEOData?.image} />
         <meta property="og:url" content={`${canonicalURL}${SEOData?.slug}`} />
 
-        {#if SEOData?.image}
-            <meta property="og:image" content={`${canonicalURL}${SEOData?.image}`} />
-        {:else}
-            <meta property="og:image" content={`${canonicalURL}${SEOData?.slug}/ogimage.png`} />
-        {/if}
+        <!-- Only projects have generated images, other pages share the site-wide one -->
+        <meta property="og:image" content={`${canonicalURL}${SEOData?.image ?? "/ogimage.png"}`} />
         <meta property="og:image:width" content={`${ogImageWidth}`} />
         <meta property="og:image:height" content={`${ogImageHeight}`} />
         <meta property="og:image:type" content="image/png" />

@@ -1,6 +1,6 @@
 <script lang="ts">
     import { getBrandDetails } from "$lib/utilities/getBrandDetails";
-    import type { Globe } from "lucide-svelte";
+    import type { Globe } from "@lucide/svelte";
 
     interface Props {
         href: string;

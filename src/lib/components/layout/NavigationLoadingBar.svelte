@@ -1,29 +1,25 @@
 <script lang="ts">
-  import { navigating } from "$app/stores";
+  import { navigating } from "$app/state";
 
   let visible = $state(false);
-  let timeout: ReturnType<typeof setTimeout> | null = null;
+  const isNavigating = $derived(navigating.to !== null);
 
+  // Each timer is cleared when navigation state changes, so a hide scheduled by one
+  // navigation can't cut off the next one
   $effect(() => {
-    if ($navigating) {
+    if (isNavigating) {
       // Small delay to avoid flash on fast navigations
-      timeout = setTimeout(() => {
-        visible = true;
-      }, 150);
-    } else {
-      if (timeout) clearTimeout(timeout);
-      // Keep visible briefly to show completion animation
-      if (visible) {
-        setTimeout(() => {
-          visible = false;
-        }, 300);
-      }
+      const timeout = setTimeout(() => (visible = true), 150);
+      return () => clearTimeout(timeout);
     }
+    // Keep visible briefly to show completion animation
+    const timeout = setTimeout(() => (visible = false), 300);
+    return () => clearTimeout(timeout);
   });
 </script>
 
 {#if visible}
-  <div class="loading-bar" class:finishing={!$navigating}>
+  <div class="loading-bar" class:finishing={!isNavigating}>
     <div class="loading-bar-progress"></div>
   </div>
 {/if}

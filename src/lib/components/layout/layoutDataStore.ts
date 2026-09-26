@@ -6,18 +6,10 @@ export enum NavigationOption {
     Blog,
     Disabled
 }
-export let ENABLE_FLUID_SIM = writable(true);
-export let NAVIGATION_CONFIG = writable(NavigationOption.Home);
-export let FLUID_SIM_INTERACTIVE = writable(false);
-
-export let PERSONAL_HEADSHOT = writable(false);
-
 export interface FluidSimFunctions {
     splatPoint: (x: number, y: number, dx: number, dy: number, color: RGBColour | undefined) => void;
 }
 
 export let fluidSimFunctions: Writable<FluidSimFunctions | null> = writable(null);
-
-export let SPLASH_BACKGROUND_ON_PRINT = writable(false);
 
 export let isNavigating = writable(false);
