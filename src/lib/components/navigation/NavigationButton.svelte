@@ -1,7 +1,7 @@
 <script lang="ts">
-    import type { Icon } from "lucide-svelte";
+    import type { Icon } from "@lucide/svelte";
 
-    import { page } from "$app/stores";
+    import { page } from "$app/state";
     import { homePage, type PageSlug } from "./pages";
     import { liveCardEffect } from "$lib/effects/liveCardEffect";
     interface Props {
@@ -18,7 +18,7 @@
         primary = false
     }: Props = $props();
 
-    let activePage = $derived($page.url.pathname == pageSlug);
+    let activePage = $derived(page.url.pathname == pageSlug);
 
 
     const SvelteComponent = $derived(activePage ? homePage.icon : icon);

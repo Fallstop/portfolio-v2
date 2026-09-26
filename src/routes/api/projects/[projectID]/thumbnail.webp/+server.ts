@@ -31,7 +31,8 @@ export async function GET({ params, fetch }: RequestEvent) {
         return json({ error: "No project ID provided" }, { status: 400 });
     }
 
-    let url = Object.keys(thumbnailPaths).find((path: string) => path.includes(projectID ?? ""));
+    // Match the whole folder name, since some project IDs are prefixes of others (HCNotices / HCNoticesV2)
+    let url = Object.keys(thumbnailPaths).find((path: string) => path.endsWith(`/${projectID}/thumbnail.webp`));
     if (!url) {
         // Return redirect to default thumbnail
         throw redirect(302, DefaultThumbnail);

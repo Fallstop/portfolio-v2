@@ -7,7 +7,7 @@ tags: ["Software", "React", "TypeScript", "COVID"]
 <script>
   import MarkdownLink from "$md/MarkdownLink.svelte";
   import ProConTable from "$md/ProConTable.svelte";
-  import { FileText } from "lucide-svelte";
+  import { FileText } from "@lucide/svelte";
 </script>
 
 

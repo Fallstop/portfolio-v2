@@ -7,7 +7,9 @@
     import { NavigationOption } from "$lib/components/layout/layoutDataStore";
     import CopyAction from "$lib/components/utilities/CopyAction.svelte";
     import { liveCardEffect } from "$lib/effects/liveCardEffect";
-    import { Send, CircleCheck, TriangleAlert, Linkedin, Github, Mail, Check } from "lucide-svelte";
+    import { Send, CircleCheck, TriangleAlert, Mail, Check } from "@lucide/svelte";
+    import Linkedin from "$lib/components/ExtraIcons/Linkedin.svelte";
+    import Github from "$lib/components/ExtraIcons/Github.svelte";
     import { fade, fly } from "svelte/transition";
     import { computeProof, b64urlToBytes } from "$lib/foldProof";
     import type { PageProps } from "./$types";

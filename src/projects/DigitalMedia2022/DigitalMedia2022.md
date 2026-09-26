@@ -7,7 +7,7 @@ tags: ["Art", "Huanui College", "COVID"]
 
 <script>
     import MarkdownLink from "$md/MarkdownLink.svelte";
-    import { FileText } from "lucide-svelte";
+    import { FileText } from "@lucide/svelte";
 </script>
 
 # Supporting Studies Portfolio

@@ -21,7 +21,7 @@
  * reordering the TRANSFORMS table in foldProof.ts.
  */
 
-import { DISCORD_WEBHOOK } from '$lib/server/env.js';
+import { secrets } from '$lib/server/env.js';
 import {
 	FOLD_VERSION,
 	TRANSFORM_COUNT,
@@ -64,7 +64,7 @@ let _keyPromise: Promise<CryptoKey> | null = null;
 async function signingKey(): Promise<CryptoKey> {
 	// DISCORD_WEBHOOK is already required for the form to function and is high
 	// entropy; deriving from it avoids forcing a new secret on the operator.
-	const raw = await sha256(utf8(String(DISCORD_WEBHOOK ?? '') + '|' + KEY_SALT));
+	const raw = await sha256(utf8(String(secrets.DISCORD_WEBHOOK ?? '') + '|' + KEY_SALT));
 	return crypto.subtle.importKey('raw', raw as BufferSource, { name: 'HMAC', hash: 'SHA-256' }, false, [
 		'sign'
 	]);

@@ -33,7 +33,7 @@ export async function getProjects() {
 			// Get the thumbnail
 			let thumbnail = DefaultThumbnail;
 			for (const thumbnailPath in thumbnailPaths) {
-				if (thumbnailPath.includes(slug)) {
+				if (thumbnailPath.endsWith(`/${projectID}/thumbnail.webp`)) {
 					thumbnail = `/api/projects/${projectID}/thumbnail.webp`;
 					break;
 				}

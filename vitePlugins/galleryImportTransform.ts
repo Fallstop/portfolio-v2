@@ -1,13 +1,6 @@
 import path from "node:path";
-import galleryTemplate from "./galleryTemplate.txt?raw";
 import { normalizePath, type Plugin } from "vite";
 
-type CustomPluginOptions = Record<string, any>;
-type ResolveIdResult = string | false | null | void | {
-  id: string;
-  external?: boolean;
-  moduleSideEffects?: boolean | 'no-treeshake';
-};
 
 const markdownFileRegex = /src\/projects\/.*\.md$/
 
@@ -19,20 +12,23 @@ const magicResolutionKey = "_____GALLERY_IMPORT";
 
 const templateFolderKey = "<FOLDERNAME>";
 
+// Every image in the folder, processed with the gallery preset (see responsiveImages.ts)
+const galleryTemplate = `const galleryData = import.meta.glob("${templateFolderKey}*.{jpg,jpeg,png,webp,svg}", {
+    query: {
+        "responsive": "gallery"
+    },
+    import: "default",
+    eager: true
+});
+export default galleryData;`;
 
-interface ResolveOptions {
-  attributes: Record<string, string>;
-  custom?: CustomPluginOptions;
-  ssr?: boolean;
-  isEntry: boolean;
-}
 
 
 export default function galleryImportTransform({projectRoot}: {projectRoot: string}): Plugin {
   return {
     name: 'transform-file',
     enforce: 'post',
-    async resolveId(source: string, importer: string | undefined, options: ResolveOptions): Promise<ResolveIdResult> {
+    async resolveId(source, importer) {
       if (importer && markdownFileRegex.test(importer) && source.endsWith("/")) {
 
         // Markdown file importing folder!

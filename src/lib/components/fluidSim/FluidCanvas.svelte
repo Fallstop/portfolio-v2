@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { createEventDispatcher, onMount } from "svelte";
+	import { onMount } from "svelte";
+	import type { FluidSimFunctions } from "$lib/components/layout/layoutDataStore";
 	import * as shaders from "./fluidShader";
 	import { generateColor } from "./colourGradient";
 	import {
@@ -26,6 +27,9 @@
 		INTERACTIVE?: boolean;
 		FPS?: number;
 		SPLASH_ON_PRINT?: boolean;
+		onloaded?: (functions: FluidSimFunctions) => void;
+		/** Called on teardown with the same functions passed to onloaded, which no longer work */
+		onunloaded?: (functions: FluidSimFunctions) => void;
 	}
 
 	let {
@@ -45,14 +49,17 @@
 		PAUSED = $bindable(false),
 		INTERACTIVE = true,
 		FPS = $bindable(1),
-		SPLASH_ON_PRINT = false
+		SPLASH_ON_PRINT = false,
+		onloaded,
+		onunloaded,
 	}: Props = $props();
 
 	let generatedCanvasPrintFrames: string[] | null = $state(null);
 
 	const MAX_STEP_SIZE = 0.016666;
 
-	let eventDispatch = createEventDispatcher();
+	let animationFrame = 0;
+	let destroyed = false;
 
 	function disableInteractive(interactive: boolean) {
 		if (interactive) return;
@@ -579,10 +586,8 @@
 			render(null);
 		}
 
-		if (recurse) {
-			requestAnimationFrame(() => {
-				update((recurse = true));
-			});
+		if (recurse && !destroyed) {
+			animationFrame = requestAnimationFrame(() => update());
 		}
 	}
 
@@ -1061,12 +1066,19 @@
 
 		webglInitialized = true;
 
-		eventDispatch("loaded", {
-			splatPoint,
-		});
+		const functions: FluidSimFunctions = { splatPoint };
+		onloaded?.(functions);
 
 		lastUpdateTime = Date.now();
 		update();
+
+		return () => {
+			destroyed = true;
+			cancelAnimationFrame(animationFrame);
+			onunloaded?.(functions);
+			// Browsers cap live WebGL contexts, so free this one rather than waiting for GC
+			gl?.getExtension("WEBGL_lose_context")?.loseContext();
+		};
 	});
 	$effect.pre(() => {
 		disableInteractive(INTERACTIVE);

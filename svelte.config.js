@@ -2,7 +2,7 @@ import adapter from "@sveltejs/adapter-cloudflare";
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte'
 
 import { mdsvex } from "mdsvex";
-import relativeImages from 'mdsvex-relative-images'
+import remarkRelativeMedia from './vitePlugins/remarkRelativeMedia.js'
 import remarkExternalLinks from 'remark-external-links'
 import { join } from "path";
 
@@ -24,7 +24,7 @@ const config = {
     },
     remarkPlugins: [
       [remarkExternalLinks, { target: '_blank', rel: 'noopener' }],
-      relativeImages
+      remarkRelativeMedia
     ],
   })],
   extensions: [".svelte", ".md"],
@@ -40,6 +40,7 @@ const config = {
       }
     }),
     csrf: {
+      // Checked in src/hooks.server.ts instead, which exempts the ulogger endpoint
       trustedOrigins: [
         "*",
       ]

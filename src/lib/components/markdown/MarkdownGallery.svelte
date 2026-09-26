@@ -1,25 +1,26 @@
 <script lang="ts">
-    import { onDestroy, onMount } from "svelte";
     import MarkdownImage from "./MarkdownImage.svelte";
 
-    import type { ProcessedImageMetadata } from "imagetools-core";
+    import type { ResponsiveImage } from "$lib/types";
     import { parseSettings } from "./parseMediaSettings";
-    import { randomHash } from "$lib/utilities/math";
 
     interface Props {
-        src?: any;
+        /** Glob import of the gallery folder, see vitePlugins/galleryTemplate.txt */
+        src?: Record<string, ResponsiveImage | string>;
         alt?: string;
     }
 
     let { src = {}, alt = "" }: Props = $props();
-    const parsed = $derived(parseSettings(alt));
-    const classes = $derived(parsed.classes);
-    const altText = $derived(parsed.altText);
+    const classes = $derived(parseSettings(alt).classes);
 
-    let imagesData: [ProcessedImageMetadata, ProcessedImageMetadata][] =
-        $derived(Object.values(src).map((x: any) => x.default));
+    // Target row height in px; must match --row-height below
+    const rowHeight = $derived(classes.includes("full") ? 320 : classes.includes("small") ? 140 : 220);
 
-    let sharedKey = randomHash();
+    // Anything unprocessed (e.g. an SVG that couldn't be measured) is treated as square
+    let images = $derived(Object.values(src).map((image) => ({
+        image,
+        aspect: typeof image === "string" ? 1 : image.width / image.height,
+    })));
 </script>
 
 <div
@@ -27,8 +28,15 @@
     class="image-gallery-container"
 >
     <div class="image-gallery {classes}">
-        {#each imagesData as imageMetadata}
-            <MarkdownImage src={imageMetadata} alt=":none" {sharedKey} />
+        {#each images as { image, aspect }}
+            <div class="tile" style:--aspect={aspect}>
+                <MarkdownImage
+                    src={image}
+                    alt=":none"
+                    inGallery
+                    sizes={`min(100vw, ${Math.round(rowHeight * aspect * 1.5)}px)`}
+                />
+            </div>
         {/each}
     </div>
 </div>
@@ -39,54 +47,60 @@
         justify-content: center;
     }
 
+    // Justified rows: every tile starts at the target row height and grows in proportion
+    // to its aspect ratio, so each row fills the width while images keep their shape
     .image-gallery {
-        display: grid;
+        --row-height: 220px;
+
+        display: flex;
+        flex-wrap: wrap;
         gap: $space-sm;
         margin-bottom: $space-sm;
-        position: relative;
-        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
 
-        & > :global(a) {
-            position: relative;
-            height: 300px;
+        // Stops the last row stretching to fill the width
+        &::after {
+            content: "";
+            flex-grow: 1000000;
+        }
+
+        &.full {
+            --row-height: 320px;
+        }
+        &.small {
+            --row-height: 140px;
+        }
+        @media screen and (max-width: $mobile-breakpoint) {
+            --row-height: 160px;
+
+            &.small {
+                --row-height: 100px;
+            }
+        }
+
+        .tile {
+            flex-grow: calc(var(--aspect) * 100);
+            flex-basis: calc(var(--row-height) * var(--aspect));
+            aspect-ratio: var(--aspect);
+            max-height: calc(var(--row-height) * 1.5);
+            overflow: hidden;
             border-radius: $border-radius;
 
-            & > :global(img) {
+            & > :global(a) {
+                display: block;
+                height: 100%;
+            }
+
+            :global(img) {
+                display: block;
                 height: 100%;
                 width: 100%;
                 object-fit: cover;
-                vertical-align: middle;
-                transition: all $transition-base;
-                transform: scale(1);
+                transition: transform $transition-base;
+
                 &:hover {
                     transform: scale(1.04);
                 }
             }
         }
-        &.full {
-            @media screen and (min-width: $mobile-breakpoint) {
-                grid-template-columns: repeat(3, 1fr);
-            }
-            & > :global(a) {
-                height: auto;
-                aspect-ratio: 16/9;
-            }
-        }
-        &.small {
-            @media screen and (min-width: $mobile-breakpoint) {
-                grid-template-columns: repeat(5, 1fr);
-            }
-            & > :global(a) {
-                height: auto;
-                aspect-ratio: 1;
-            }
-        }
     }
-
-    // :global(.__customLightbox > .svelte-lightbox-body) {
-    //     // Max height is 80vh
-    //     --height-ratio: calc( var(--active-image-height) / min(var(--active-image-height), 80vh));
-    //     height: var(--active-image-height) !important;
-    //     width: calc(var(--active-image-width) * var(--height-ratio)) !important;
-    // }
 </style>

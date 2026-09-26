@@ -1,10 +1,12 @@
 <script lang="ts">
-    import { Linkedin, Github, Mail, Check, Send, Home } from "lucide-svelte";
-    import { page } from "$app/stores";
+    import { Mail, Check, Send, Home } from "@lucide/svelte";
+    import Linkedin from "$lib/components/ExtraIcons/Linkedin.svelte";
+    import Github from "$lib/components/ExtraIcons/Github.svelte";
+    import { page } from "$app/state";
     import CopyAction from "$lib/components/utilities/CopyAction.svelte";
     import { liveCardEffect } from "$lib/effects/liveCardEffect";
 
-    let onContactPage = $derived($page.url.pathname === "/contact");
+    let onContactPage = $derived(page.url.pathname === "/contact");
 </script>
 
 <div class="social-links">

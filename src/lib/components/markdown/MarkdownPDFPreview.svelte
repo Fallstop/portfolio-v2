@@ -1,117 +1,119 @@
 <script lang="ts">
     import type { PDFSlick } from "@pdfslick/core";
-    import { onMount, onDestroy } from "svelte";
+    import { onDestroy } from "svelte";
 
-    import "@pdfslick/core/dist/pdf_viewer.css";
     import LiveCard from "../utilities/LiveCard.svelte";
-    import { SquareArrowOutUpRight } from "lucide-svelte";
+    import { SquareArrowOutUpRight } from "@lucide/svelte";
+    import type { PdfEmbed } from "$lib/types";
 
     interface Props {
-        pdf_url: string;
+        pdf: PdfEmbed | string;
         file_name?: string;
     }
 
-    let { pdf_url, file_name = decodeURIComponent(pdf_url?.split("/")?.pop() || `${pdf_url.length}.pdf`) }: Props = $props();
+    let { pdf, file_name }: Props = $props();
 
+    const pdfURL = $derived(typeof pdf === "string" ? pdf : pdf.url);
+    const preview = $derived(typeof pdf === "string" ? undefined : pdf.preview);
+    const displayName = $derived(
+        file_name ?? (typeof pdf === "string" ? decodeURIComponent(pdf.split("/").pop() ?? "document.pdf") : pdf.name)
+    );
+
+    let previewContainer: HTMLDivElement | undefined = $state();
     let container: HTMLDivElement | undefined = $state();
 
-    /**
-     * Reference to the pdfSlick instance
-     */
-    let pdfSlick: PDFSlick;
+    let pdfSlick: PDFSlick | undefined;
+    let viewerReady = $state(false);
+    let unsubscribe: (() => void) | undefined;
 
-    /**
-     * Keep PDF Slick state portions we're interested in using in your app
-     */
-    let pageNumber = 1;
-    let numPages = 0;
+    async function loadViewer() {
+        // pdf.js is ~600KB, so it's only fetched once the preview is near the viewport
+        const [{ create, PDFSlick }, { GlobalWorkerOptions }, { default: workerSrc }] = await Promise.all([
+            import("@pdfslick/core"),
+            import("pdfjs-dist"),
+            import("pdfjs-dist/build/pdf.worker.min.mjs?url"),
+            import("@pdfslick/core/dist/pdf_viewer.css"),
+        ]);
+        // pdfslick bundles its own worker, which can drift from the installed pdf.js API version
+        GlobalWorkerOptions.workerSrc = workerSrc;
 
-    let unsubscribe: CallableFunction | undefined;
+        if (container === undefined) return;
 
-    onMount(async () => {
-        /**
-         * This is all happening on client side, so we'll make sure we only load it there
-         */
-        const { create, PDFSlick } = await import("@pdfslick/core");
-
-        /**
-         * Create the PDF Slick store
-         */
         const store = create();
-
-        if (container === undefined) {
-            throw new Error("PDF Container element is not defined");
-        }
-
         pdfSlick = new PDFSlick({
             container,
             store,
             options: {
                 scaleValue: "page-width",
             },
+            // Leaves the preview image in place, with the "Open PDF" link still available
+            onError: (err) => console.error(`Failed to load ${displayName}`, err),
         });
 
-        /**
-         * Load the PDF document
-         */
-        pdfSlick.loadDocument(pdf_url);
+        pdfSlick.loadDocument(pdfURL);
         store.setState({ pdfSlick });
 
-        /**
-         * Subscribe to state changes, and keep values of interest as reactive Svelte vars,
-         * (or alternatively we could hook these or entire PDF state into a Svelte store)
-         *
-         * Also keep reference of the unsubscribe function we call on component destroy
-         */
         unsubscribe = store.subscribe((s) => {
-            pageNumber = s.pageNumber;
-            numPages = s.numPages;
+            if (s.numPages > 0) viewerReady = true;
         });
+    }
+
+    $effect(() => {
+        if (!previewContainer) return;
+
+        const observer = new IntersectionObserver((entries) => {
+            if (entries.some((entry) => entry.isIntersecting)) {
+                observer.disconnect();
+                loadViewer();
+            }
+        }, { rootMargin: "400px" });
+        observer.observe(previewContainer);
+
+        return () => observer.disconnect();
     });
 
-    onDestroy(() => unsubscribe && unsubscribe());
+    onDestroy(() => {
+        unsubscribe?.();
+        pdfSlick?.document?.loadingTask.destroy();
+    });
 </script>
 
 <div class="pdf-preview-container">
     <div class="top-bar">
-        <div class="file_name">{file_name}</div>
-        <LiveCard type="link" href={pdf_url} size="small" target="_blank">
+        <div class="file_name">
+            {displayName}
+            {#if typeof pdf !== "string"}
+                <span class="pages">· {pdf.pages} {pdf.pages === 1 ? "page" : "pages"}</span>
+            {/if}
+        </div>
+        <LiveCard type="link" href={pdfURL} size="small" target="_blank">
             Open PDF <SquareArrowOutUpRight />
         </LiveCard>
     </div>
-    <div class="pdf-preview pdfSlick">
-        <div class="flex-1 relative h-full" id="container">
-            <!--
-                The important part —
-                we use the reference to this `container` when creating PDF Slick instance above
-                -->
-            <div
-                id="viewerContainer"
-                class="pdfSlickContainer"
-                bind:this={container}
-            >
-                <div id="viewer" class="pdfSlickViewer pdfViewer"></div>
+    <div class="pdf-preview pdfSlick" bind:this={previewContainer}>
+        {#if preview && !viewerReady}
+            <div class="first-page">
+                <img
+                    src={preview.src}
+                    srcset={preview.srcset}
+                    sizes="(min-width: 1200px) 850px, 100vw"
+                    width={preview.width}
+                    height={preview.height}
+                    alt="First page of {displayName}"
+                    loading="lazy"
+                    decoding="async"
+                />
             </div>
+        {/if}
+        <!-- PDF Slick renders into this container once loaded -->
+        <div
+            id="viewerContainer"
+            class="pdfSlickContainer"
+            class:hidden={!viewerReady && preview}
+            bind:this={container}
+        >
+            <div id="viewer" class="pdfSlickViewer pdfViewer"></div>
         </div>
-
-        <!-- ... -->
-
-        <!-- Use `pdfSlick`, `pageNumber` and `numPages` to create PDF pagination -->
-        <!-- <div class="flex justify-center">
-            <button
-            on:click={() => pdfSlick?.gotoPage(Math.max(pageNumber - 1, 1))}
-            disabled={pageNumber <= 1}
-            >
-            Show Previous Page
-            </button>
-            <button
-            on:click={() =>
-            pdfSlick?.gotoPage(Math.min(pageNumber + 1, numPages))}
-            disabled={pageNumber >= numPages}
-            >
-            Show Next Page
-            </button>
-            </div> -->
     </div>
 </div>
 
@@ -135,6 +137,10 @@
 
             .file_name {
                 @include mono-font;
+
+                .pages {
+                    opacity: 0.7;
+                }
             }
         }
     }
@@ -149,10 +155,29 @@
             box-shadow: 0 0 $space-sm $overlay-medium;
         }
 
+        // Mirrors the pdf.js page-width layout, so the swap to the live viewer doesn't jump
+        .first-page {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+            padding: 9px;
+
+            img {
+                display: block;
+                width: 100%;
+                height: auto;
+                box-shadow: 0 0 $space-sm $overlay-medium;
+            }
+        }
+
         .pdfSlickContainer#viewerContainer {
             position: absolute;
             inset: 0;
             overflow: scroll;
+
+            &.hidden {
+                visibility: hidden;
+            }
 
             #viewer {
                 display: flex;

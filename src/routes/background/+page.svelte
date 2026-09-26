@@ -1,21 +1,16 @@
 <script lang="ts">
 	import FluidCanvas from "$lib/components/fluidSim/FluidCanvas.svelte";
-	import { NavigationOption } from "$lib/components/layout/layoutDataStore";
-	import PrimaryLayout from "$lib/components/layout/PrimaryLayout.svelte";
-	import { onDestroy, onMount } from "svelte";
+	import { onMount } from "svelte";
 
-	let splashTimer: NodeJS.Timeout;
-
-	$: inital_splash = 1;
+	let inital_splash = $state(1);
 
 	onMount(() => {
-		splashTimer = setInterval(() => {
-			inital_splash= 0.001;
+		const splashTimer = setInterval(() => {
+			inital_splash = 0.001;
 			window.dispatchEvent(new KeyboardEvent('keydown', {'key': ' '}));
 		}, 3000);
+		return () => clearInterval(splashTimer);
 	});
-
-	onDestroy(()=>{clearInterval(splashTimer)})
 </script>
 
 <FluidCanvas
